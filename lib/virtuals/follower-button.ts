@@ -1,7 +1,7 @@
-import {lambda} from "esphome-config-ts/dist/lambda.js";
-import {VirtualComponent} from "esphome-config-ts/dist/base.js";
-import {HomeassistantSensor, HomeassistantTextSensor} from "esphome-config-ts/dist/components/homeassistant.js";
-import {MatrixKeypadBinarySensor} from "esphome-config-ts/dist/components/matrix_keypad.js";
+import {VirtualComponent} from "esphome-config-ts/lib/base";
+import {lambda} from "esphome-config-ts/lib/lambda";
+import {HomeassistantSensor, HomeassistantTextSensor} from "esphome-config-ts/lib/components/homeassistant";
+import {MatrixKeypadBinarySensor} from "esphome-config-ts/lib/components/matrix_keypad";
 
 export const KEYS = "ABCDEFGHIJKLMNOPQRSTUVWX";
 
@@ -27,7 +27,7 @@ export class FollowerButton extends VirtualComponent<{
                         range_to: this.config.button_id,
                         red: lambda('return (x == "on")?id(brightness):0;'),
                         green: lambda('return (x == "on")?id(brightness):0;'),
-                        blue: lambda('return (x == "on")-?id(brightness):0;'),
+                        blue: lambda('return (x == "on")?id(brightness):0;'),
                     }
                 }]
             }),

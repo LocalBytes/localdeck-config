@@ -1,7 +1,7 @@
-import {BaseComponent, VirtualComponent} from "esphome-config-ts/dist/base.js";
-import {Globals} from "esphome-config-ts/dist/components/globals.js";
-import {TemplateNumber} from "esphome-config-ts/dist/components/template.js";
-import {lambda} from "esphome-config-ts/dist/lambda.js";
+import {VirtualComponent} from "esphome-config-ts/lib/base";
+import {Globals} from "esphome-config-ts/lib/components/globals";
+import {TemplateNumber} from "esphome-config-ts/lib/components/template";
+import {lambda} from "esphome-config-ts/lib/lambda";
 
 export class SliderNumber extends VirtualComponent<
     {
@@ -16,7 +16,7 @@ export class SliderNumber extends VirtualComponent<
     }
 > {
 
-    synth(): Array<BaseComponent | VirtualComponent> {
+    synth() {
         return [
             new Globals({
                 id: this.config.id,

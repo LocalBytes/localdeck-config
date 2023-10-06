@@ -2,11 +2,10 @@
   "extends": "@tsconfig/recommended/tsconfig.json",
   "include": ["lib/**/*"],
   "compilerOptions": {
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+
     "declaration": true,
-    "declarationMap": true,
-    "outDir": "dist",
-    "allowSyntheticDefaultImports": true
+    "declarationMap": true
   }
 }

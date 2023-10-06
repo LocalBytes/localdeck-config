@@ -1,19 +1,19 @@
 {
   "name": "esphome-macropad",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "type": "module",
   "scripts": {
-    "generate": "node --loader ts-node/esm ./lib/esphome-macropad.ts > ./esphome-macropad.yaml",
+    "generate": "tsx ./lib/esphome-macropad-test.ts > ./esphome-macropad.yaml",
     "start": "npm run generate && esphome run ./esphome-macropad.yaml --device=macropad.local"
   },
   "author": "",
   "private": true,
   "license": "ISC",
   "dependencies": {
-    "esphome-config-ts": "file:../esphome-config-ts",
+    "esphome-config-ts": "github:LocalBytes/esphome-config-ts",
     "js-yaml": "^4.1.0",
-    "ts-node": "^10.9.1"
+    "tsx": "^3.13.0"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.3"
