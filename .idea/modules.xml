@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../esphome-config-ts/.idea/esphome-config-ts.iml" filepath="$PROJECT_DIR$/../esphome-config-ts/.idea/esphome-config-ts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/esphome-macropad-min.iml" filepath="$PROJECT_DIR$/.idea/esphome-macropad-min.iml" />
+    </modules>
+  </component>
+</project>
