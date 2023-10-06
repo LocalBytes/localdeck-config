@@ -7,26 +7,6 @@ import newConfig from "./esphome-macropad-base.js";
 
 const {config, keypad, ledstrip} = newConfig();
 
-config.addComponent(new Script({
-    id: "blip_light",
-    parameters: {led_index: 'int'},
-    mode: "restart",
-    then:
-        Array.from({length: 21}, (_, i) => i).map(i => Math.max(100 - (i * 5), 0)).flatMap(brightness => {
-            return [{
-                'light.addressable_set': {
-                    id: ledstrip.config.id,
-                    range_from: lambda('return led_index;'),
-                    range_to: lambda('return led_index;'),
-                    red: `${brightness}%`, green: `${brightness}%`, blue: `${brightness}%`, white: `${brightness}%`
-                },
-            }, {
-                'delay': '25ms'
-            }];
-        }),
-
-}));
-
 for (let i = 1; i <= 24; i++) {
     let idx = i - 1;
 

@@ -9,36 +9,6 @@ import {FollowerButton, KEYS} from "./virtuals/follower-button";
 
 const {config, ledstrip, keypad} = newConfig();
 
-config.addComponent(new SliderNumber({
-    id: "brightness",
-    name: "Brightness",
-    min: "0",
-    max: "1",
-    step: "0.01",
-    initial_value: "1",
-    type: "float"
-}))
-
-config.addComponent(new Script({
-    id: "blip_light",
-    parameters: {led_index: 'int'},
-    mode: "restart",
-    then:
-        Array.from({length: 21}, (_, i) => i)
-            .map(i => Math.max(100 - (i * 5), 0))
-            .flatMap(brightness => [{
-                'light.addressable_set': {
-                    id: ledstrip.config.id,
-                    range_from: lambda('return led_index;'),
-                    range_to: lambda('return led_index;'),
-                    red: `${brightness}%`, green: `${brightness}%`, blue: `${brightness}%`, white: `${brightness}%`
-                },
-            }, {
-                'delay': '25ms'
-            }]),
-
-}));
-
 let blipButton = (i: number) => {
     return new MatrixKeypadBinarySensor({
         id: `keypad_button_${i.toString().padStart(2, "0")}`,

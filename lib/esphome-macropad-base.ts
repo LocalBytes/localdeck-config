@@ -9,6 +9,8 @@ import {Configuration} from "esphome-config-ts/lib/config.js";
 import {lambda} from "esphome-config-ts/lib/lambda";
 
 import {KEYS} from "./virtuals/follower-button.js";
+import {Script} from "esphome-config-ts/lib/components/script";
+import {SliderNumber} from "./virtuals/slider-number";
 
 export const PINS_ROWS = [21, 20, 3, 7];
 export const PINS_COLS = [0, 1, 10, 4, 5, 6];
@@ -27,7 +29,7 @@ function newConfig() {
 
     config.addDefaults();
 
-    config.addComponent(new Esphome({
+    config.updateComponent(new Esphome({
         name: "macropad",
         build_path: "./.esphome/build",
         platformio_options: {
@@ -37,7 +39,7 @@ function newConfig() {
             {'light.turn_off': 'ledstrip'}
         ],
     }))
-        .addComponent(new Esp32({
+        .updateComponent(new Esp32({
             board: "esp32-c3-devkitm-1",
             framework: {
                 type: "esp-idf",
@@ -72,8 +74,37 @@ function newConfig() {
         pin: `GPIO${pin}`,
     })));
 
-    return {config, keypad, ledstrip};
+    const blip_light = ((new Script({
+        id: "blip_light",
+        parameters: {led_index: 'int'},
+        mode: "restart",
+        then:
+            Array.from({length: 21}, (_, i) => i).map(i => Math.max(100 - (i * 5), 0)).flatMap(brightness => {
+                return [{
+                    'light.addressable_set': {
+                        id: ledstrip.config.id,
+                        range_from: lambda('return led_index;'),
+                        range_to: lambda('return led_index;'),
+                        red: `${brightness}%`, green: `${brightness}%`, blue: `${brightness}%`, white: `${brightness}%`
+                    },
+                }, {
+                    'delay': '25ms'
+                }];
+            }),
 
+    }))).addTo(config);
+
+    const brightness = (new SliderNumber({
+        id: "brightness",
+        name: "Brightness",
+        min: "0",
+        max: "1",
+        step: "0.01",
+        initial_value: "1",
+        type: "float"
+    })).addTo(config);
+
+    return {config, keypad, ledstrip, blip_light, brightness};
 }
 
 export default newConfig;
