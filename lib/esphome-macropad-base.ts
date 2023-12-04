@@ -4,6 +4,7 @@ import {Wifi} from "esphome-config-ts/lib/components/wifi.js";
 import {Esp32RmtLedStripLight} from "esphome-config-ts/lib/components/esp32_rmt_led_strip.js";
 import {MatrixKeypad} from "esphome-config-ts/lib/components/matrix_keypad.js";
 import {GpioBinarySensor} from "esphome-config-ts/lib/components/gpio.js";
+import {Esp32Improv} from "esphome-config-ts/lib/components/esp32_improv.js";
 
 import {Configuration} from "esphome-config-ts/lib/config.js";
 import {lambda} from "esphome-config-ts/lib/lambda";
@@ -29,15 +30,16 @@ function newConfig() {
 
     config.addDefaults();
 
+    // @ts-ignore
     config.updateComponent(new Esphome({
         name: "macropad",
-        build_path: "./.esphome/build",
         platformio_options: {
             "board_build.flash_mode": "dio",
         },
+        name_add_mac_suffix: true,
         on_boot: [
             {'light.turn_off': 'ledstrip'}
-        ],
+        ]
     }))
         .updateComponent(new Esp32({
             board: "esp32-c3-devkitm-1",
@@ -48,6 +50,10 @@ function newConfig() {
         }))
 
         .updateComponent(new Wifi({ap: {ssid: "LocalBytes MacroPad"}}))
+        .updateComponent(new Esp32Improv({
+            //@ts-ignore
+            authorizer: false,
+        }))
 
     let ledstrip = (new Esp32RmtLedStripLight({
         name: "Ledstrip",
@@ -77,7 +83,7 @@ function newConfig() {
     const blip_light = ((new Script({
         id: "blip_light",
         parameters: {led_index: 'int'},
-        mode: "restart",
+        mode: "parallel",
         then:
             Array.from({length: 21}, (_, i) => i).map(i => Math.max(100 - (i * 5), 0)).flatMap(brightness => {
                 return [{
