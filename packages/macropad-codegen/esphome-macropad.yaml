@@ -1,0 +1,747 @@
+wifi:
+  ap:
+    ssid: LocalBytes MacroPad
+captive_portal: {}
+logger:
+  logs: {}
+web_server: {}
+api: {}
+ota: {}
+esphome:
+  name: macropad
+  platformio_options:
+    board_build.flash_mode: dio
+  name_add_mac_suffix: true
+  on_boot:
+    - light.turn_off: ledstrip
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: esp-idf
+    sdkconfig_options: {}
+esp32_improv:
+  authorizer: false
+light:
+  - platform: esp32_rmt_led_strip
+    name: Ledstrip
+    id: ledstrip
+    rgb_order: GRB
+    pin: GPIO8
+    rmt_channel: 0
+    num_leds: 24
+    chipset: SK6812
+    restore_mode: ALWAYS_ON
+  - platform: partition
+    id: keypad_button_01_light
+    name: 'Button 01 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 0
+        to: 0
+  - platform: partition
+    id: keypad_button_10_light
+    name: 'Button 10 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 9
+        to: 9
+  - platform: partition
+    id: keypad_button_11_light
+    name: 'Button 11 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 10
+        to: 10
+  - platform: partition
+    id: keypad_button_12_light
+    name: 'Button 12 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 11
+        to: 11
+  - platform: partition
+    id: keypad_button_13_light
+    name: 'Button 13 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 12
+        to: 12
+  - platform: partition
+    id: keypad_button_14_light
+    name: 'Button 14 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 13
+        to: 13
+  - platform: partition
+    id: keypad_button_15_light
+    name: 'Button 15 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 14
+        to: 14
+  - platform: partition
+    id: keypad_button_16_light
+    name: 'Button 16 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 15
+        to: 15
+  - platform: partition
+    id: keypad_button_17_light
+    name: 'Button 17 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 16
+        to: 16
+  - platform: partition
+    id: keypad_button_18_light
+    name: 'Button 18 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 17
+        to: 17
+  - platform: partition
+    id: keypad_button_19_light
+    name: 'Button 19 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 18
+        to: 18
+  - platform: partition
+    id: keypad_button_02_light
+    name: 'Button 02 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 1
+        to: 1
+  - platform: partition
+    id: keypad_button_20_light
+    name: 'Button 20 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 19
+        to: 19
+  - platform: partition
+    id: keypad_button_21_light
+    name: 'Button 21 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 20
+        to: 20
+  - platform: partition
+    id: keypad_button_22_light
+    name: 'Button 22 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 21
+        to: 21
+  - platform: partition
+    id: keypad_button_23_light
+    name: 'Button 23 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 22
+        to: 22
+  - platform: partition
+    id: keypad_button_24_light
+    name: 'Button 24 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 23
+        to: 23
+  - platform: partition
+    id: keypad_button_03_light
+    name: 'Button 03 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 2
+        to: 2
+  - platform: partition
+    id: keypad_button_04_light
+    name: 'Button 04 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 3
+        to: 3
+  - platform: partition
+    id: keypad_button_05_light
+    name: 'Button 05 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 4
+        to: 4
+  - platform: partition
+    id: keypad_button_06_light
+    name: 'Button 06 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 5
+        to: 5
+  - platform: partition
+    id: keypad_button_07_light
+    name: 'Button 07 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 6
+        to: 6
+  - platform: partition
+    id: keypad_button_08_light
+    name: 'Button 08 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 7
+        to: 7
+  - platform: partition
+    id: keypad_button_09_light
+    name: 'Button 09 '
+    disabled_by_default: true
+    segments:
+      - id: ledstrip
+        from: 8
+        to: 8
+matrix_keypad:
+  id: keypad
+  keys: ABCDEFGHIJKLMNOPQRSTUVWX
+  rows:
+    - pin: GPIO21
+    - pin: GPIO20
+    - pin: GPIO3
+    - pin: GPIO7
+  columns:
+    - pin: GPIO0
+    - pin: GPIO1
+    - pin: GPIO10
+    - pin: GPIO4
+    - pin: GPIO5
+    - pin: GPIO6
+binary_sensor:
+  - platform: gpio
+    id: keypad_col_00
+    pin: GPIO0
+  - platform: gpio
+    id: keypad_col_01
+    pin: GPIO1
+  - platform: gpio
+    id: keypad_col_10
+    pin: GPIO10
+  - platform: gpio
+    id: keypad_col_04
+    pin: GPIO4
+  - platform: gpio
+    id: keypad_col_05
+    pin: GPIO5
+  - platform: gpio
+    id: keypad_col_06
+    pin: GPIO6
+  - platform: gpio
+    id: keypad_col_21
+    pin: GPIO21
+  - platform: gpio
+    id: keypad_col_20
+    pin: GPIO20
+  - platform: gpio
+    id: keypad_col_03
+    pin: GPIO3
+  - platform: gpio
+    id: keypad_col_07
+    pin: GPIO7
+  - platform: matrix_keypad
+    id: keypad_button_01
+    name: 'Button 01 '
+    internal: false
+    keypad_id: keypad
+    key: A
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 0
+  - platform: matrix_keypad
+    id: keypad_button_10
+    name: 'Button 10 '
+    internal: false
+    keypad_id: keypad
+    key: J
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 9
+  - platform: matrix_keypad
+    id: keypad_button_11
+    name: 'Button 11 '
+    internal: false
+    keypad_id: keypad
+    key: K
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 10
+  - platform: matrix_keypad
+    id: keypad_button_12
+    name: 'Button 12 '
+    internal: false
+    keypad_id: keypad
+    key: L
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 11
+  - platform: matrix_keypad
+    id: keypad_button_13
+    name: 'Button 13 '
+    internal: false
+    keypad_id: keypad
+    key: M
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 12
+  - platform: matrix_keypad
+    id: keypad_button_14
+    name: 'Button 14 '
+    internal: false
+    keypad_id: keypad
+    key: 'N'
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 13
+  - platform: matrix_keypad
+    id: keypad_button_15
+    name: 'Button 15 '
+    internal: false
+    keypad_id: keypad
+    key: O
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 14
+  - platform: matrix_keypad
+    id: keypad_button_16
+    name: 'Button 16 '
+    internal: false
+    keypad_id: keypad
+    key: P
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 15
+  - platform: matrix_keypad
+    id: keypad_button_17
+    name: 'Button 17 '
+    internal: false
+    keypad_id: keypad
+    key: Q
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 16
+  - platform: matrix_keypad
+    id: keypad_button_18
+    name: 'Button 18 '
+    internal: false
+    keypad_id: keypad
+    key: R
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 17
+  - platform: matrix_keypad
+    id: keypad_button_19
+    name: 'Button 19 '
+    internal: false
+    keypad_id: keypad
+    key: S
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 18
+  - platform: matrix_keypad
+    id: keypad_button_02
+    name: 'Button 02 '
+    internal: false
+    keypad_id: keypad
+    key: B
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 1
+  - platform: matrix_keypad
+    id: keypad_button_20
+    name: 'Button 20 '
+    internal: false
+    keypad_id: keypad
+    key: T
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 19
+  - platform: matrix_keypad
+    id: keypad_button_21
+    name: 'Button 21 '
+    internal: false
+    keypad_id: keypad
+    key: U
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 20
+  - platform: matrix_keypad
+    id: keypad_button_22
+    name: 'Button 22 '
+    internal: false
+    keypad_id: keypad
+    key: V
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 21
+  - platform: matrix_keypad
+    id: keypad_button_23
+    name: 'Button 23 '
+    internal: false
+    keypad_id: keypad
+    key: W
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 22
+  - platform: matrix_keypad
+    id: keypad_button_24
+    name: 'Button 24 '
+    internal: false
+    keypad_id: keypad
+    key: X
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 23
+  - platform: matrix_keypad
+    id: keypad_button_03
+    name: 'Button 03 '
+    internal: false
+    keypad_id: keypad
+    key: C
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 2
+  - platform: matrix_keypad
+    id: keypad_button_04
+    name: 'Button 04 '
+    internal: false
+    keypad_id: keypad
+    key: D
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 3
+  - platform: matrix_keypad
+    id: keypad_button_05
+    name: 'Button 05 '
+    internal: false
+    keypad_id: keypad
+    key: E
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 4
+  - platform: matrix_keypad
+    id: keypad_button_06
+    name: 'Button 06 '
+    internal: false
+    keypad_id: keypad
+    key: F
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 5
+  - platform: matrix_keypad
+    id: keypad_button_07
+    name: 'Button 07 '
+    internal: false
+    keypad_id: keypad
+    key: G
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 6
+  - platform: matrix_keypad
+    id: keypad_button_08
+    name: 'Button 08 '
+    internal: false
+    keypad_id: keypad
+    key: H
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 7
+  - platform: matrix_keypad
+    id: keypad_button_09
+    name: 'Button 09 '
+    internal: false
+    keypad_id: keypad
+    key: I
+    disabled_by_default: true
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 8
+script:
+  id: blip_light
+  parameters:
+    led_index: int
+  mode: parallel
+  then:
+    - light.addressable_set:
+        id: ledstrip
+        range_from: !lambda return led_index;
+        range_to: !lambda return led_index;
+        red: 100%
+        green: 100%
+        blue: 100%
+        white: 100%
+    - delay: 25ms
+    - light.addressable_set:
+        id: ledstrip
+        range_from: !lambda return led_index;
+        range_to: !lambda return led_index;
+        red: 95%
+        green: 95%
+        blue: 95%
+        white: 95%
+    - delay: 25ms
+    - light.addressable_set:
+        id: ledstrip
+        range_from: !lambda return led_index;
+        range_to: !lambda return led_index;
+        red: 90%
+        green: 90%
+        blue: 90%
+        white: 90%
+    - delay: 25ms
+    - light.addressable_set:
+        id: ledstrip
+        range_from: !lambda return led_index;
+        range_to: !lambda return led_index;
+        red: 85%
+        green: 85%
+        blue: 85%
+        white: 85%
+    - delay: 25ms
+    - light.addressable_set:
+        id: ledstrip
+        range_from: !lambda return led_index;
+        range_to: !lambda return led_index;
+        red: 80%
+        green: 80%
+        blue: 80%
+        white: 80%
+    - delay: 25ms
+    - light.addressable_set:
+        id: ledstrip
+        range_from: !lambda return led_index;
+        range_to: !lambda return led_index;
+        red: 75%
+        green: 75%
+        blue: 75%
+        white: 75%
+    - delay: 25ms
+    - light.addressable_set:
+        id: ledstrip
+        range_from: !lambda return led_index;
+        range_to: !lambda return led_index;
+        red: 70%
+        green: 70%
+        blue: 70%
+        white: 70%
+    - delay: 25ms
+    - light.addressable_set:
+        id: ledstrip
+        range_from: !lambda return led_index;
+        range_to: !lambda return led_index;
+        red: 65%
+        green: 65%
+        blue: 65%
+        white: 65%
+    - delay: 25ms
+    - light.addressable_set:
+        id: ledstrip
+        range_from: !lambda return led_index;
+        range_to: !lambda return led_index;
+        red: 60%
+        green: 60%
+        blue: 60%
+        white: 60%
+    - delay: 25ms
+    - light.addressable_set:
+        id: ledstrip
+        range_from: !lambda return led_index;
+        range_to: !lambda return led_index;
+        red: 55%
+        green: 55%
+        blue: 55%
+        white: 55%
+    - delay: 25ms
+    - light.addressable_set:
+        id: ledstrip
+        range_from: !lambda return led_index;
+        range_to: !lambda return led_index;
+        red: 50%
+        green: 50%
+        blue: 50%
+        white: 50%
+    - delay: 25ms
+    - light.addressable_set:
+        id: ledstrip
+        range_from: !lambda return led_index;
+        range_to: !lambda return led_index;
+        red: 45%
+        green: 45%
+        blue: 45%
+        white: 45%
+    - delay: 25ms
+    - light.addressable_set:
+        id: ledstrip
+        range_from: !lambda return led_index;
+        range_to: !lambda return led_index;
+        red: 40%
+        green: 40%
+        blue: 40%
+        white: 40%
+    - delay: 25ms
+    - light.addressable_set:
+        id: ledstrip
+        range_from: !lambda return led_index;
+        range_to: !lambda return led_index;
+        red: 35%
+        green: 35%
+        blue: 35%
+        white: 35%
+    - delay: 25ms
+    - light.addressable_set:
+        id: ledstrip
+        range_from: !lambda return led_index;
+        range_to: !lambda return led_index;
+        red: 30%
+        green: 30%
+        blue: 30%
+        white: 30%
+    - delay: 25ms
+    - light.addressable_set:
+        id: ledstrip
+        range_from: !lambda return led_index;
+        range_to: !lambda return led_index;
+        red: 25%
+        green: 25%
+        blue: 25%
+        white: 25%
+    - delay: 25ms
+    - light.addressable_set:
+        id: ledstrip
+        range_from: !lambda return led_index;
+        range_to: !lambda return led_index;
+        red: 20%
+        green: 20%
+        blue: 20%
+        white: 20%
+    - delay: 25ms
+    - light.addressable_set:
+        id: ledstrip
+        range_from: !lambda return led_index;
+        range_to: !lambda return led_index;
+        red: 15%
+        green: 15%
+        blue: 15%
+        white: 15%
+    - delay: 25ms
+    - light.addressable_set:
+        id: ledstrip
+        range_from: !lambda return led_index;
+        range_to: !lambda return led_index;
+        red: 10%
+        green: 10%
+        blue: 10%
+        white: 10%
+    - delay: 25ms
+    - light.addressable_set:
+        id: ledstrip
+        range_from: !lambda return led_index;
+        range_to: !lambda return led_index;
+        red: 5%
+        green: 5%
+        blue: 5%
+        white: 5%
+    - delay: 25ms
+    - light.addressable_set:
+        id: ledstrip
+        range_from: !lambda return led_index;
+        range_to: !lambda return led_index;
+        red: 0%
+        green: 0%
+        blue: 0%
+        white: 0%
+    - delay: 25ms
+globals:
+  id: brightness
+  type: float
+  initial_value: '1'
+  restore_value: true
+number:
+  - platform: template
+    name: Brightness
+    set_action:
+      - globals.set:
+          id: brightness
+          value: !lambda return x;
+    max_value: '1'
+    min_value: '0'
+    step: '0.01'
+    lambda: !lambda return id(brightness);
+
