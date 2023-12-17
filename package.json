@@ -1,6 +1,0 @@
-{
-  "name": "macropad-config",
-  "workspaces": [
-    "packages/macropad-codegen"
-  ]
-}
