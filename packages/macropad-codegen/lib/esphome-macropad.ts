@@ -26,10 +26,14 @@ export const bright = (pct: number) => {
 }
 
 export interface newConfigOpts {
-    withDefaults: boolean;
+    withDefaults?: boolean;
+    stopBeforeCustom?: boolean;
 }
 
-function newConfig(opts: newConfigOpts = {withDefaults: true}) {
+function newConfig(opts: newConfigOpts = {
+    withDefaults: true,
+    stopBeforeCustom: false
+}) {
     const config = new Configuration();
 
     if (opts.withDefaults) {
@@ -61,6 +65,10 @@ function newConfig(opts: newConfigOpts = {withDefaults: true}) {
                 authorizer: false,
             }))
 
+    }
+
+    if (opts.stopBeforeCustom) {
+        return {config};
     }
 
     config.addComponent(new WifiInfoTextSensor({

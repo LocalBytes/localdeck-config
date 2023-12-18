@@ -1,12 +1,17 @@
+import rollupPluginTs from 'rollup-plugin-typescript2'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-    // @ts-ignore
     srcDir: './src',
 
     devtools: {enabled: true},
+    debug: true,
 
     runtimeConfig: {
-        filesDir: '/esphome',
+        public: {
+            baseUrl: '',
+        },
+        filesDir: '/homeassistant/esphome'
     },
 
     app: {
@@ -30,5 +35,20 @@ export default defineNuxtConfig({
                 defineModel: true,
             }
         },
+    },
+
+    nitro: {
+        rollupConfig: {
+            // @ts-ignore
+            plugins: [rollupPluginTs()]
+        }
+    },
+
+    typescript: {
+        tsConfig: {
+            compilerOptions: {
+                verbatimModuleSyntax: false //Remove when we convert esphome-ts to verbatimModuleSyntax
+            }
+        }
     },
 })

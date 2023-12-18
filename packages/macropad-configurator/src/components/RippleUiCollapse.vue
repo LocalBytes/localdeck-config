@@ -2,7 +2,7 @@
   <div class="accordion">
     <input :id="uid" v-model="isOpen" class="accordion-toggle" type="checkbox"/>
     <label :for="uid" class="accordion-title px-4 bg-transparent">
-      <slot name="title"/>
+      <slot name="title">{{ title }}</slot>
     </label>
     <div class="accordion-content">
       <div class="min-h-0">
@@ -14,9 +14,9 @@
 <script lang="ts" setup>
 import {useUid} from "~/lib/hooks";
 
-defineProps<{
-  title: false
-}>();
+defineProps({
+  title: {type: String, default: null},
+});
 
 defineSlots<{
   default(): any,

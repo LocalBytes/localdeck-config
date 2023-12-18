@@ -8,16 +8,17 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "package:publish": "pnpm publish && pnpm run deploy"
+    "postinstall": "nuxt prepare"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@shimyshack/uid": "^0.1.9",
     "@tailwindcss/typography": "^0.5.10",
     "@types/pako": "^2.0.3",
     "autoprefixer": "^10.4.16",
     "pako": "^2.1.0",
     "postcss": "^8.4.32",
+    "rollup-plugin-typescript2": "^0.36.0",
     "vue3-emoji-picker": "^1.1.8"
   },
   "dependencies": {

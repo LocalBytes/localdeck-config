@@ -1,11 +1,12 @@
-import {getCurrentInstance} from 'vue';
-
 export function useUid(prefix?: string) {
-    const instance = getCurrentInstance();
+    const uid = ref<string>();
+    onMounted(() => {
+        let instance = getCurrentInstance();
 
-    if (!instance) {
-        throw new Error('useUid can only be called inside setup() or functional components.');
-    }
-    prefix ??= instance.type.__name?.toLowerCase();
-    return `${prefix}-${instance.uid}`;
+        let p = prefix ?? instance?.type.__name;
+        let u = instance?.uid ?? Math.random().toString(36).substring(2, 9);
+
+        return uid.value = `${p}-${u}`;
+    });
+    return uid;
 }

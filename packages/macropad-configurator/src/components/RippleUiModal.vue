@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input :id="uid" v-model="isOpen" :disabled="!isDismissible" class="modal-state" type="checkbox"/>
+    <input :id="uid" :ref="uid" v-model="isOpen" :disabled="!isDismissible" class="modal-state" type="checkbox"/>
     <div class="modal">
       <label :for="uid" class="modal-overlay"></label>
       <div class="modal-content flex flex-col gap-5">

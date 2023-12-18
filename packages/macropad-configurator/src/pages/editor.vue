@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container py-5 mx-auto">
     <h1>Macropad Configurator</h1>
     <div class="form-control">
       <input v-model="editor.title"
@@ -8,7 +8,7 @@
              placeholder="Project Name"
              type="text"
       />
-      <button class="btn btn-primary" @click="saving=SavingStatus.SAVING">Save</button>
+      <button class="btn btn-primary" @click="save">Save</button>
       <button class="btn btn-secondary" @click="resetting=true">Reset</button>
     </div>
     <div class="grid grid-cols-1 xl:grid-cols-3">
@@ -29,20 +29,27 @@
         It will <b>not</b> save your changes by itself, so you will need to click the save button after resetting!
       </p>
       <div class="flex justify-end gap-2">
-        <button class="btn btn-secondary" @click="resetting=false">Cancel</button>
-        <button class="btn btn-primary" @click="reset">Reset</button>
+        <button class="btn btn-outline-error" @click="reset">Reset</button>
+        <button class="btn btn-primary" @click="resetting=false">Cancel</button>
       </div>
     </RippleUiModal>
     <RippleUiModal
-        :is-dismissible="saving==SavingStatus.SUCCESS"
+        :is-dismissible="saving==SavingStatus.DONE"
         :model-value="saving!=SavingStatus.IDLE"
         title="Saving..."
-        @update:model-value="value => saving = value ? SavingStatus.SUCCESS : SavingStatus.IDLE"
+        @update:model-value="value => saving = value ? SavingStatus.DONE : SavingStatus.IDLE"
     >
-      <p>
-        Please wait while your changes are being saved.
-        <div class="spinner-simple"></div>
-      </p>
+      <div v-if="saving==SavingStatus.SAVING">
+        <div class="spinner-simple"/>
+        <p>
+          Please wait while your changes are being saved.
+        </p>
+      </div>
+      <div v-else>
+        <p>
+          Your changes have been saved, please go to ESPHome to install!
+        </p>
+      </div>
     </RippleUiModal>
   </div>
 </template>
@@ -53,7 +60,7 @@ const route = useRoute()
 const {data, status} = await useFetch('/api/editor', {query: {filename: route.query.filename as string}});
 
 enum SavingStatus {
-  SAVING, SUCCESS, IDLE
+  SAVING, DONE, IDLE
 }
 
 const saving = ref(SavingStatus.IDLE);
@@ -64,14 +71,25 @@ const editing = ref<EditContainer>();
 
 watch(status, () => {
   if (status.value !== 'success') return;
-  if (data.value) {
-    Object.assign(editor, data.value);
+  if (data.value?.config) {
+    Object.assign(editor, data.value.config);
     isNew.value = false;
   } else {
     Object.assign(editor, newPadEditor());
     isNew.value = true;
   }
 }, {immediate: true});
+
+const save = async () => {
+  saving.value = SavingStatus.SAVING;
+  const response = await $fetch('/api/editor', {
+    method: 'POST',
+    body: {editor},
+    query: {filename: route.query.filename as string}
+  }).finally(() => saving.value = SavingStatus.DONE);
+
+  console.log(response);
+}
 
 const reset = () => {
   if (!confirm("Are you sure you want to reset?")) return;

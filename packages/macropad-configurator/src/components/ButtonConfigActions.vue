@@ -16,7 +16,7 @@
       </label>
     </div>
 
-    <Collapse title="HomeAssistant Integration">
+    <RippleUiCollapse title="HomeAssistant Integration">
       <div class="form-control">
         <label class="label cursor-pointer">
           <span class="label-text">Entity</span>
@@ -68,7 +68,7 @@
           />
         </label>
       </div>
-    </Collapse>
+    </RippleUiCollapse>
   </div>
 </template>
 <script lang="ts" setup>

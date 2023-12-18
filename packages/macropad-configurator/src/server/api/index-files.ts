@@ -8,11 +8,14 @@ export interface IndexFile {
 }
 
 export default defineEventHandler(async (event) => {
-    const {filesDir} = useRuntimeConfig(event);
+    const {filesDir} = useRuntimeConfig();
     const fileNames = await fs.readdir(filesDir)
 
     if (!fileNames) {
-        throw new Error(`No files found in ${filesDir}`);
+        throw createError({
+            statusCode: 400,
+            statusMessage: "No files found",
+        });
     }
 
     const filesPromise = fileNames
