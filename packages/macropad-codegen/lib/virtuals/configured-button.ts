@@ -4,19 +4,18 @@ import {PartitionLight} from "esphome-config-ts/lib/components/partition";
 import {HomeassistantSensor, HomeassistantTextSensor} from "esphome-config-ts/lib/components/homeassistant";
 import {lambda} from "esphome-config-ts/lib/lambda";
 
-export interface EditContainer {
-    keyNum: number;
-    component: ConfiguredButtonOpts;
-    label: Label;
-}
 
-export interface Label {
-    icon: string;
-    text: string;
-    fontSize: number;
-}
+export const KEYS = "ABCDEFGHIJKLMNOPQRSTUVWX";
+export const BUTTON_NUMBERS = [
+    19, 20, 21, 22, 23, 24,
+    13, 14, 15, 16, 17, 18,
+    7, 8, 9, 10, 11, 12,
+    1, 2, 3, 4, 5, 6,
+];
 
-export interface ConfiguredButtonOpts {
+export const lambdaBright = lambda('return (x/255) * id(brightness);');
+
+export interface ConfiguredButtonOptsComponent {
     num: number;
 
     expose: boolean;
@@ -29,8 +28,8 @@ export interface ConfiguredButtonOpts {
     follow_color: boolean;
 }
 
-type newConfiguredButtonOptsOpts = Partial<ConfiguredButtonOpts> & Pick<ConfiguredButtonOpts, 'num'>
-export const newConfiguredButtonOpts = (opts: newConfiguredButtonOptsOpts): ConfiguredButtonOpts => ({
+type newConfiguredButtonOptsOpts = Partial<ConfiguredButtonOptsComponent> & Pick<ConfiguredButtonOptsComponent, 'num'>
+export const newConfiguredButtonOpts = (opts: newConfiguredButtonOptsOpts): ConfiguredButtonOptsComponent => ({
     num: opts.num,
 
     expose: opts.expose ?? true,
@@ -43,43 +42,46 @@ export const newConfiguredButtonOpts = (opts: newConfiguredButtonOptsOpts): Conf
     follow_color: opts.follow_color ?? false
 });
 
-export const KEYS = "ABCDEFGHIJKLMNOPQRSTUVWX";
-export const BUTTON_NUMBERS = [
-    19, 20, 21, 22, 23, 24,
-    13, 14, 15, 16, 17, 18,
-    7, 8, 9, 10, 11, 12,
-    1, 2, 3, 4, 5, 6,
-];
 
-export const lambdaBright = lambda('return (x/255) * id(brightness);');
+export interface ConfigurdButtonOpts {
+    keyNum: number;
+    component: ConfiguredButtonOptsComponent;
+    label: ConfiguredButtonOptsLabel;
+}
 
-export class ConfiguredButton extends VirtualComponent<EditContainer> {
+export interface ConfiguredButtonOptsLabel {
+    text: string;
+    icon: string;
+    fontSize: number;
+}
+
+export class ConfiguredButton extends VirtualComponent<ConfigurdButtonOpts> {
     synth() {
 
         const c = this.config.component;
         const stack = [];
 
         let label = "";
-        if (this.config.label) {
+        if (this.config.label.text) {
             label = " " + this.config.label.text.replace(/[\n_]+/g, ' ');
         }
 
         let sensor = new MatrixKeypadBinarySensor({
             id: `keypad_button_${c.num.toString().padStart(2, "0")}`,
-            name: "Button " + c.num.toString().padStart(2, "0") + label,
+            name: ("Button " + c.num.toString().padStart(2, "0") + label).trim(),
             internal: !c.expose,
             keypad_id: 'keypad',
             key: KEYS[c.num - 1],
-            disabled_by_default: true,
             on_press: [],
+            on_click: [],
+            on_double_click: [],
         });
         stack.push(sensor);
 
         if (c.expose) {
             stack.push(new PartitionLight({
                 id: `keypad_button_${c.num.toString().padStart(2, "0")}_light`,
-                name: "Button " + c.num.toString().padStart(2, "0") + label,
-                disabled_by_default: true,
+                name: ("Button " + c.num.toString().padStart(2, "0") + label).trim(),
                 // @ts-ignore - Segments expects single light id for some reason
                 segments: [{
                     id: "ledstrip",
@@ -137,6 +139,22 @@ export class ConfiguredButton extends VirtualComponent<EditContainer> {
                 }]
             }));
         }
+
+        const lambdaIeee = lambda('return id(wifi_info_mac_address).state;');
+
+        sensor.config.on_click?.push({
+            "homeassistant.event": {
+                "event": "esphome.macropad_button",
+                "data": {"button": c.num.toString(), "type": "single", "ieee_address": lambdaIeee}
+            }
+        });
+
+        sensor.config.on_click?.push({
+            "homeassistant.event": {
+                "event": "esphome.macropad_button",
+                "data": {"button": c.num.toString(), "type": "double", "ieee_address": lambdaIeee}
+            }
+        });
 
         return stack;
     }

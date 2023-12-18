@@ -30,6 +30,9 @@ importers:
       '@fontsource/poppins':
         specifier: ^5.0.8
         version: 5.0.8
+      '@localbytes/macropad-codegen':
+        specifier: workspace:../macropad-codegen
+        version: link:../macropad-codegen
       '@nuxtjs/color-mode':
         specifier: ^3.3.2
         version: 3.3.2
@@ -70,6 +73,9 @@ importers:
       postcss:
         specifier: ^8.4.32
         version: 8.4.32
+      vue3-emoji-picker:
+        specifier: ^1.1.8
+        version: 1.1.8
 
 packages:
 
@@ -1382,6 +1388,10 @@ packages:
 
   /@polka/url@1.0.0-next.24:
     resolution: {integrity: sha512-2LuNTFBIO0m7kKIQvvPHN6UE63VjpmL9rnEEaOOaiSPbZK+zUOYIzBAWcED+3XYzhYsd/0mD57VdxAEqqV52CQ==}
+
+  /@popperjs/core@2.11.8:
+    resolution: { integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A== }
+    dev: true
 
   /@rollup/plugin-alias@5.1.0(rollup@4.9.1):
     resolution: {integrity: sha512-lpA3RZ9PdIG7qqhEfv79tBffNaoDuukFDrmhLqg9ifv99u/ehn+lOg30x2zmhf8AQqQUZaMk/B9fZraQ6/acDQ==}
@@ -3268,6 +3278,10 @@ packages:
     dependencies:
       safer-buffer: 2.1.2
     optional: true
+
+  /idb@7.1.1:
+    resolution: { integrity: sha512-gchesWBzyvGHRO9W8tzUWFDycow5gwjvFKfyV9FF32Y7F50yZMp7mP+T2mJIWFx49zicqyC4uefHM17o6xKIVQ== }
+    dev: true
 
   /ignore-walk@6.0.4:
     resolution: {integrity: sha512-t7sv42WkwFkyKbivUCglsQW5YWMskWtbEf4MNKX5u/CCWHKSPzN4FtBQGsQZgCLbxOzpVlcbWVK5KB3auIOjSw==}
@@ -6079,6 +6093,17 @@ packages:
     dependencies:
       '@vue/devtools-api': 6.5.1
       vue: 3.3.12
+
+  /vue3-emoji-picker@1.1.8:
+    resolution: { integrity: sha512-k9tVHeQEBVLzVCLYAkFaI1nib3FJFQwdPhWD5khJkhks3ktg3g12z5wPGOSDpIuSLNtelRGvq1qdmZuJu5khfA== }
+    engines: { node: '>=16.0.0' }
+    dependencies:
+      '@popperjs/core': 2.11.8
+      idb: 7.1.1
+      vue: 3.3.12
+    transitivePeerDependencies:
+      - typescript
+    dev: true
 
   /vue@3.3.12:
     resolution: {integrity: sha512-jYNv2QmET2OTHsFzfWHMnqgCfqL4zfo97QwofdET+GBRCHhSCHuMTTvNIgeSn0/xF3JRT5OGah6MDwUFN7MPlg==}

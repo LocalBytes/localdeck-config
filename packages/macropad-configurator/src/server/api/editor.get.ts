@@ -1,5 +1,7 @@
+}
 import * as fs from "fs/promises";
 import {decompress} from "~/lib/utils";
+import {PadEditor} from "~/lib/PadCfg";
 
 export default defineEventHandler(async (event) => {
     const {filesDir} = useRuntimeConfig(event);
@@ -10,7 +12,6 @@ export default defineEventHandler(async (event) => {
 
     return {
         configStr,
-        config: configStr ? decompress(configStr) : null,
+        config: configStr ? decompress<PadEditor>(configStr) : null,
         content
-    }
 });

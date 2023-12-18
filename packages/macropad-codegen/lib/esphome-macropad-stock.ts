@@ -1,4 +1,4 @@
-import newConfig from "./esphome-macropad-base.js";
+import newConfig from "./esphome-macropad";
 import {BUTTON_NUMBERS, ConfiguredButton, newConfiguredButtonOpts} from "./virtuals/configured-button";
 
 let {config} = newConfig();

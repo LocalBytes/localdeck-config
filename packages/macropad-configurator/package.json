@@ -1,13 +1,15 @@
 {
-  "name": "nuxt-app",
+  "name": "@localbytes/macropad-configurator",
   "private": true,
   "type": "module",
+  "version": "0.1.0",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "package:publish": "pnpm publish && pnpm run deploy"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
@@ -15,11 +17,13 @@
     "@types/pako": "^2.0.3",
     "autoprefixer": "^10.4.16",
     "pako": "^2.1.0",
-    "postcss": "^8.4.32"
+    "postcss": "^8.4.32",
+    "vue3-emoji-picker": "^1.1.8"
   },
   "dependencies": {
     "@fontsource-variable/open-sans": "^5.0.21",
     "@fontsource/poppins": "^5.0.8",
+    "@localbytes/macropad-codegen": "workspace:../macropad-codegen",
     "@nuxtjs/color-mode": "^3.3.2",
     "@nuxtjs/tailwindcss": "^6.10.1",
     "nuxt": "^3.8.2",

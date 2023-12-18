@@ -22,5 +22,13 @@ export default defineNuxtConfig({
         '@nuxtjs/color-mode',
     ],
 
-    css: ['~/assets/css/global.css']
+    css: ['~/assets/css/global.css'],
+
+    vite: {
+        vue: {
+            script: {
+                defineModel: true,
+            }
+        },
+    },
 })

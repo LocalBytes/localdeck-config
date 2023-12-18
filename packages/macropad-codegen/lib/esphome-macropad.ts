@@ -12,6 +12,7 @@ import {lambda} from "esphome-config-ts/lib/lambda";
 import {KEYS} from "./virtuals/follower-button.js";
 import {Script} from "esphome-config-ts/lib/components/script";
 import {SliderNumber} from "./virtuals/slider-number";
+import {WifiInfoTextSensor} from "esphome-config-ts/lib/components/wifi_info";
 
 export const PINS_ROWS = [21, 20, 3, 7];
 export const PINS_COLS = [0, 1, 10, 4, 5, 6];
@@ -24,36 +25,49 @@ export const bright = (pct: number) => {
     return lambda(`return ${pct} * id(brightness);`);
 }
 
+export interface newConfigOpts {
+    withDefaults: boolean;
+}
 
-function newConfig() {
+function newConfig(opts: newConfigOpts = {withDefaults: true}) {
     const config = new Configuration();
 
-    config.addDefaults();
+    if (opts.withDefaults) {
 
-    // @ts-ignore
-    config.updateComponent(new Esphome({
-        name: "macropad",
-        platformio_options: {
-            "board_build.flash_mode": "dio",
-        },
-        name_add_mac_suffix: true,
-        on_boot: [
-            {'light.turn_off': 'ledstrip'}
-        ]
-    }))
-        .updateComponent(new Esp32({
-            board: "esp32-c3-devkitm-1",
-            framework: {
-                type: "esp-idf",
-                sdkconfig_options: {}
-            }
-        }))
+        config.addDefaults();
 
-        .updateComponent(new Wifi({ap: {ssid: "LocalBytes MacroPad"}}))
-        .updateComponent(new Esp32Improv({
-            //@ts-ignore
-            authorizer: false,
+        // @ts-ignore
+        config.updateComponent(new Esphome({
+            name: "macropad",
+            platformio_options: {
+                "board_build.flash_mode": "dio",
+            },
+            name_add_mac_suffix: true,
+            on_boot: [
+                {'light.turn_off': 'ledstrip'}
+            ]
         }))
+            .updateComponent(new Esp32({
+                board: "esp32-c3-devkitm-1",
+                framework: {
+                    type: "esp-idf",
+                    sdkconfig_options: {}
+                }
+            }))
+
+            .updateComponent(new Wifi({ap: {ssid: "LocalBytes MacroPad"}}))
+            .updateComponent(new Esp32Improv({
+                //@ts-ignore
+                authorizer: false,
+            }))
+
+    }
+
+    config.addComponent(new WifiInfoTextSensor({
+        mac_address: {
+            id: "wifi_info_mac_address",
+        }
+    }));
 
     let ledstrip = (new Esp32RmtLedStripLight({
         name: "Ledstrip",
@@ -112,5 +126,6 @@ function newConfig() {
 
     return {config, keypad, ledstrip, blip_light, brightness};
 }
+
 
 export default newConfig;

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="eec04381-c7b7-4ff5-82d5-49c8f5ef61f2" name="Arcnet" url="https://arcnet.allport.dev/">
+        <fileTransfer mountedRoot="A:\macropad-configurator" accessType="MOUNT" port="0" />
+      </webServer>
+    </option>
+  </component>
+</project>
