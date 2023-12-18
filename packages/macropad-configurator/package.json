@@ -11,16 +11,21 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "nuxt": "^3.8.2",
-    "vue": "^3.3.12",
-    "vue-router": "^4.2.5"
+    "@tailwindcss/typography": "^0.5.10",
+    "@types/pako": "^2.0.3",
+    "autoprefixer": "^10.4.16",
+    "pako": "^2.1.0",
+    "postcss": "^8.4.32"
   },
   "dependencies": {
     "@fontsource-variable/open-sans": "^5.0.21",
     "@fontsource/poppins": "^5.0.8",
     "@nuxtjs/color-mode": "^3.3.2",
     "@nuxtjs/tailwindcss": "^6.10.1",
+    "nuxt": "^3.8.2",
     "rippleui": "^1.12.1",
-    "tailwindcss": "^3.3.6"
+    "tailwindcss": "^3.3.6",
+    "vue": "^3.3.12",
+    "vue-router": "^4.2.5"
   }
 }

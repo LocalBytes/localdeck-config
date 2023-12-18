@@ -1,0 +1,40 @@
+@import '@fontsource/poppins';
+@import '@fontsource-variable/open-sans';
+
+@font-face {
+    font-family: 'BabelStone Flags';
+    src: url("/fonts/BabelStoneFlags.woff2"), url("/fonts/BabelStoneFlags.woff"), url("/fonts/BabelStoneFlags.ttf");
+}
+
+@tailwind base;
+
+@layer base {
+    h1, .h1 {
+        @apply text-2xl;
+    }
+
+    h2, .h2 {
+        @apply text-xl;
+    }
+
+    h3, .h3 {
+        @apply text-lg;
+    }
+
+    a:not(.link-unstyled, h1, h1 *, h2, h2 *, h3, h3 *, h4, h4 *, h5, h5 *, h6, h6 *) {
+        @apply text-info;
+    }
+}
+
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .bg-primary-grad {
+        background: var(--local-primary-grad);
+    }
+
+    .bg-secondary-grad {
+        background: var(--local-secondary-grad);
+    }
+}

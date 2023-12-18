@@ -1,20 +1,26 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  srcDir: './src',
+    // @ts-ignore
+    srcDir: './src',
 
-  modules:[
-    '@nuxtjs/tailwindcss',
-    '@nuxtjs/color-mode',
-  ],
+    devtools: {enabled: true},
 
-  devtools: { enabled: true },
+    runtimeConfig: {
+        filesDir: '/esphome',
+    },
 
-  typescript: {
-    tsConfig: {
-      compilerOptions: {
-        verbatimModuleSyntax: false //TODO: Remove this when we update the codegen
-      }
-    }
-  },
+    app: {
+        head: {
+            link: [
+                {rel: 'icon', type: 'image/svg', href: '/favicon.svg'},
+            ]
+        }
+    },
 
+    modules: [
+        '@nuxtjs/tailwindcss',
+        '@nuxtjs/color-mode',
+    ],
+
+    css: ['~/assets/css/global.css']
 })
