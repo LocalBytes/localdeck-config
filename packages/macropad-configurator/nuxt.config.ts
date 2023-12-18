@@ -5,7 +5,6 @@ export default defineNuxtConfig({
     srcDir: './src',
 
     devtools: {enabled: true},
-    debug: true,
 
     runtimeConfig: {
         public: {
