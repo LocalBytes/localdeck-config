@@ -11,15 +11,15 @@
       <button class="btn btn-primary" @click="save">Save</button>
       <button class="btn btn-secondary" @click="resetting=true">Reset</button>
     </div>
-    <div class="grid grid-cols-1 xl:grid-cols-3">
+    <div class="flex flex-wrap justify-center gap-10">
 
-      <div class="py-2">
+      <div>
         <h2>GUI</h2>
         <Pad v-if="editor" v-model="editor" v-model:editing="editing" class="mx-auto"/>
       </div>
 
-      <ButtonConfig v-if="editing" v-model="editing" class="col-span-2"/>
-
+      <ButtonConfig v-if="editing" v-model="editing" :typeahead="entities"/>
+      <div v-else class="basis-2 grow"></div>
     </div>
 
 
@@ -58,6 +58,7 @@ import {type EditContainer, newPadEditor} from "~/lib/PadCfg";
 
 const route = useRoute()
 const {data, status} = await useFetch('/api/editor', {query: {filename: route.query.filename as string}});
+const {data: entities} = await useFetch('/api/entities', {server: false});
 
 enum SavingStatus {
   SAVING, DONE, IDLE

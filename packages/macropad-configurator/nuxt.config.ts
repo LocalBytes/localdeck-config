@@ -7,9 +7,11 @@ export default defineNuxtConfig({
     devtools: {enabled: true},
 
     runtimeConfig: {
-        public: {
-            baseUrl: '',
-        },
+        public: {baseUrl: ''},
+
+        api_token: '',
+        api_url: 'http://supervisor/core/api',
+
         filesDir: '/homeassistant/esphome'
     },
 

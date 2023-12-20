@@ -44,7 +44,7 @@ export default defineEventHandler(async (event) => {
         filecontent += "# Your changes will be lost!"
     }
 
-    filecontent += `\n# Edit: https://feature-lb-32-firmware-confi.localbytes-blog.pages.dev/tools/macropad-configurator?config=${compress(editor)}\n\n`
+    filecontent += `\n# Edit: https://feature-lb-32-firmware-confi.localbytes-blog.pages.dev/tools/macropad-configurator?config=${encodeURIComponent(compress(editor))}\n\n`
 
     let {config} = newConfig({withDefaults: false});
     editor.buttons.forEach((b) => config.addComponent(new ConfiguredButton(b)));

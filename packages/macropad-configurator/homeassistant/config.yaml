@@ -13,7 +13,6 @@ arch:
   - armv7
   - i386
 
-
 schema:
   esphome_dir: str
 
@@ -25,3 +24,5 @@ map:
 
 ingress: true
 ingress_port: 3000
+
+homeassistant_api: true

@@ -36,10 +36,10 @@ export const newConfiguredButtonOpts = (opts: newConfiguredButtonOptsOpts): Conf
     blip_on_press: opts.blip_on_press ?? true,
 
     ha_entity: opts.ha_entity ?? null,
-    toggle: opts.toggle ?? false,
-    follow_state: opts.toggle ?? false,
-    follow_brightness: opts.follow_brightness ?? false,
-    follow_color: opts.follow_color ?? false
+    toggle: opts.toggle ?? true,
+    follow_state: opts.toggle ?? true,
+    follow_brightness: opts.follow_brightness ?? true,
+    follow_color: opts.follow_color ?? true,
 });
 
 

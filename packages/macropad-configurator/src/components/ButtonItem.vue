@@ -10,8 +10,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import type {EditContainer} from "../../../../../macropad-config/packages/macropad-configurator/src/lib/PadCfg";
-import type {PropType} from "vue";
+import type {EditContainer} from "~/lib/PadCfg";
 
 const padGridItem = ref<HTMLDivElement>();
 
@@ -21,11 +20,12 @@ const props = defineProps({
   print: {type: Boolean, default: false},
 });
 
+
+const devicePixelRatio = ref(1);
+onMounted(() => devicePixelRatio.value = window.devicePixelRatio);
+
 const fontSize = computed(() => props.container?.label.fontSize ?? 14);
-const fontSizeScaled = computed(() => {
-  const dpi = ((typeof window !== "undefined" ? window?.devicePixelRatio : null) ?? 1);
-  return fontSize.value * dpi;
-});
+const fontSizeScaled = computed(() => fontSize.value * devicePixelRatio.value);
 
 </script>
 

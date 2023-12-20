@@ -1,10 +1,10 @@
 <template>
-  <div class="accordion">
+  <div :class="isOpen && 'overflow-visible'" class="accordion">
     <input :id="uid" v-model="isOpen" class="accordion-toggle" type="checkbox"/>
     <label :for="uid" class="accordion-title px-4 bg-transparent">
       <slot name="title">{{ title }}</slot>
     </label>
-    <div class="accordion-content">
+    <div :class="isOpen && 'overflow-visible'" class="accordion-content">
       <div class="min-h-0">
         <slot/>
       </div>
@@ -23,10 +23,15 @@ defineSlots<{
   title(props: { title: string }): any
 }>();
 
-const isOpen = defineModel({
+
+const model = defineModel({
   type: Boolean,
   default: false
 })
+const isOpen = ref(model.value);
+
+watch(model, v => isOpen.value = v);
+watch(isOpen, v => model.value = v);
 
 const uid = useUid();
 </script>
