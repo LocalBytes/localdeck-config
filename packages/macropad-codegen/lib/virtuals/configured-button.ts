@@ -91,9 +91,6 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
             }));
         }
 
-        if (c.blip_on_press) {
-            sensor.config.on_press?.push({'script.execute': {id: 'blip_light', led_index: c.num - 1}});
-        }
 
         if (c.ha_entity && c.toggle) {
             sensor.config.on_press?.push({
@@ -119,6 +116,8 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
                     }
                 }]
             }));
+        } else if (c.blip_on_press) {
+            sensor.config.on_press?.push({'script.execute': {id: 'blip_light', led_index: c.num - 1}});
         }
 
         if (c.ha_entity && c.follow_brightness) {
@@ -149,7 +148,7 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
             }
         });
 
-        sensor.config.on_click?.push({
+        sensor.config.on_double_click?.push({
             "homeassistant.event": {
                 "event": "esphome.macropad_button",
                 "data": {"button": c.num.toString(), "type": "double", "ieee_address": lambdaIeee}

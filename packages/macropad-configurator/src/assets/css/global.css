@@ -1,7 +1,12 @@
 #__nuxt {
-    background: linear-gradient(225deg, #111728 0%, #162B3C 100%);
     min-height: 100vh;
     min-width: 100vw;
+}
+
+@media (prefers-color-scheme: dark ) {
+    #__nuxt {
+        background: linear-gradient(225deg, #111728 0%, #162B3C 100%);
+    }
 }
 
 body {

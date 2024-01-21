@@ -8,7 +8,10 @@
     </label>
 
     <label class="flex gap-2">
-      <input v-model="modelValue.component.blip_on_press" class="checkbox" type="checkbox"/>
+      <input v-model="modelValue.component.blip_on_press"
+             :disabled="modelValue.component.ha_entity && modelValue.component.follow_state"
+             class="checkbox" type="checkbox"
+      />
       <span>Flash LED on press</span>
     </label>
 

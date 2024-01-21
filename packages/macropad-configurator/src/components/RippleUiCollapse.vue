@@ -1,5 +1,5 @@
 <template>
-  <div :class="isOpen && 'overflow-visible'" class="accordion">
+  <div :class="isOpen && 'overflow-visible'" class="accordion shadow ">
     <input :id="uid" v-model="isOpen" class="accordion-toggle" type="checkbox"/>
     <label :for="uid" class="accordion-title px-4 bg-transparent">
       <slot name="title">{{ title }}</slot>
