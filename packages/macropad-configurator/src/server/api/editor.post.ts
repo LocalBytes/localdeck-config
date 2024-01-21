@@ -1,7 +1,7 @@
 import * as fs from "fs/promises";
 import newConfig from "@localbytes/macropad-codegen/lib/esphome-macropad";
 import {type PadEditor} from "~/lib/PadCfg";
-import {compress} from "~/lib/utils";
+import {getEditorUrl} from "~/lib/utils";
 import {ConfiguredButton} from "@localbytes/macropad-codegen/lib/virtuals/configured-button";
 
 export default defineEventHandler(async (event) => {
@@ -44,7 +44,7 @@ export default defineEventHandler(async (event) => {
         filecontent += "# Your changes will be lost!"
     }
 
-    filecontent += `\n# Edit: https://feature-lb-32-firmware-confi.localbytes-blog.pages.dev/tools/macropad-configurator?config=${encodeURIComponent(compress(editor))}\n\n`
+    filecontent += `\n# Edit: ${getEditorUrl(editor)}\n\n`
 
     let {config} = newConfig({withDefaults: false});
     editor.buttons.forEach((b) => config.addComponent(new ConfiguredButton(b)));

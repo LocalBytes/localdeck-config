@@ -1,4 +1,5 @@
 import pako from "pako";
+import type {PadEditor} from "~/lib/PadCfg";
 
 export function encode(uint8array: Uint8Array) {
     const output = [];
@@ -23,4 +24,8 @@ export function decompress<T extends {}>(chars: string) {
     const deflated = decode(chars);
     const inflated = pako.inflate(deflated, {to: 'string'});
     return JSON.parse(inflated) as T;
+}
+
+export function getEditorUrl(editor: PadEditor, printmode: boolean = false) {
+    return `https://feature-lb-32-firmware-confi.localbytes-blog.pages.dev/tools/macropad-configurator${printmode ? '-print' : ''}?config=${encodeURIComponent(compress(editor))}`
 }
