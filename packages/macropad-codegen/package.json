@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "generate": "tsx ./lib/esphome-macropad-stock.ts > ./esphome-macropad.yaml",
-    "start": "npm run generate && esphome run ./esphome-macropad.yaml --device=macropad.local"
+    "start": "npm run generate && esphome run ./esphome-macropad.yaml",
+    "compile": "npm run generate && esphome compile ./esphome-macropad.yaml"
   },
   "author": "",
   "private": true,
@@ -13,10 +14,10 @@
   "dependencies": {
     "esphome-config-ts": "github:LocalBytes/esphome-config-ts",
     "js-yaml": "^4.1.0",
-    "tsx": "^3.13.0"
+    "tsx": "^3.14.0"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.3",
-    "@types/js-yaml": "^4.0.5"
+    "@types/js-yaml": "^4.0.9"
   }
 }

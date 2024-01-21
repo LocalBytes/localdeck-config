@@ -2,7 +2,7 @@ import {VirtualComponent} from "esphome-config-ts/lib/base";
 import {MatrixKeypadBinarySensor} from "esphome-config-ts/lib/components/matrix_keypad";
 import {PartitionLight} from "esphome-config-ts/lib/components/partition";
 import {HomeassistantSensor, HomeassistantTextSensor} from "esphome-config-ts/lib/components/homeassistant";
-import {lambda} from "esphome-config-ts/lib/lambda";
+import {lambda} from "esphome-config-ts/lib/yaml/lambda";
 
 
 export const KEYS = "ABCDEFGHIJKLMNOPQRSTUVWX";

@@ -1,7 +1,7 @@
 import {VirtualComponent} from "esphome-config-ts/lib/base";
 import {Globals} from "esphome-config-ts/lib/components/globals";
 import {TemplateNumber} from "esphome-config-ts/lib/components/template";
-import {lambda} from "esphome-config-ts/lib/lambda";
+import {lambda} from "esphome-config-ts/lib/yaml/lambda";
 
 export class SliderNumber extends VirtualComponent<
     {

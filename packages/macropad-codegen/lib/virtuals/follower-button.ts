@@ -1,5 +1,5 @@
 import {VirtualComponent} from "esphome-config-ts/lib/base";
-import {lambda} from "esphome-config-ts/lib/lambda";
+import {lambda} from "esphome-config-ts/lib/yaml/lambda";
 import {HomeassistantSensor, HomeassistantTextSensor} from "esphome-config-ts/lib/components/homeassistant";
 import {MatrixKeypadBinarySensor} from "esphome-config-ts/lib/components/matrix_keypad";
 
@@ -14,8 +14,7 @@ export class FollowerButton extends VirtualComponent<{
 }> {
     synth() {
         let lambdaBright = lambda('return (x/255) * id(brightness);');
-
-
+        
         return [
             new HomeassistantTextSensor({
                 id: `${this.config.id}_hass`,

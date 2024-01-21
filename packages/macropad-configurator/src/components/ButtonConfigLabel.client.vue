@@ -1,28 +1,34 @@
 <template>
-  <div class="rounded p-2 shadow">
-    <p>Label</p>
+  <div class="rounded p-2 shadow grow flex flex-col gap-2 ">
+    <h3 class="pb-2">Label</h3>
 
-    <details class="dropdown">
-      <summary ref="contentEl" class="btn btn-primary">{{ modelValue.label.icon || "Emoji" }}</summary>
-      <div class="dropdown-content pt-2">
+    <div class="flex">
+      <div class="dropdown-container">
+        <div class="dropdown">
+          <label
+              ref="dropdownButton"
+              class="btn btn-solid-primary"
+              tabindex="0"
+          >{{ modelValue.label.icon || "+ Emoji" }}</label>
+          <EmojiPicker
+              :native="true"
+              :theme="colorMode.value as ('light'|'dark')"
+              class="dropdown-menu dropdown-menu-bottom-center"
+              @select="onSelectEmoji"/>
+        </div>
 
-        <EmojiPicker
-            :native="true"
-            :theme="colorMode.value as ('light'|'dark')"
-            class="dropdown-content"
-            @select="onSelectEmoji"/>
       </div>
-    </details>
-
-    <div class="form-control">
-      <!--      <label class="label">-->
-      <!--        <span class="label-text">Label</span>-->
-      <!--      </label>-->
-      <textarea
-          v-model="modelValue.label.text"
-          class="input input-bordered" placeholder="Type here" type="text"
-      />
+      <button v-if="modelValue.label.icon" class="btn btn-outline-danger" type="button"
+              @click="modelValue.label.icon=null">
+        X
+      </button>
     </div>
+    <textarea
+        v-model="modelValue.label.text"
+        class="textarea" placeholder="Type here"
+        rows="3"
+        type="text"
+    />
 
 
     <!--    <div class="form-control">-->
@@ -39,32 +45,35 @@
     <!--      </label>-->
     <!--    </div>-->
 
-    <div class="form-control">
-      <label class="size">
-        <span class="label-text">Size</span>
+    <label>
+      Size
+      <span class="flex gap-2">
+      <input v-model="modelValue.label.fontSize" :disabled="!modelValue.label.text"
+             class="input"
+             max="20"
+             min="4"
+             type="range"/>
+      <input v-model="modelValue.label.fontSize" :disabled="!modelValue.label.text"
+             class="input w-[5rem]" max="20" min="4"
 
-      </label>
-      <div class="join join-horizontal">
-        <input v-model="modelValue.label.fontSize" class="input" max="20" min="4" type="range"/>
-        <input v-model="modelValue.label.fontSize" class="input" max="20" min="4" type="number"/>
-      </div>
-    </div>
+             type="number"
+      />
+        </span>
+    </label>
 
   </div>
 </template>
 <script lang="ts" setup>
-import type {EditContainer} from "../../../../../macropad-config/packages/macropad-configurator/src/lib/PadCfg";
+
 import type {EmojiExt} from 'vue3-emoji-picker';
 import EmojiPicker from 'vue3-emoji-picker';
 import 'vue3-emoji-picker/css';
+import type {EditContainer} from "~/lib/PadCfg";
 
 const colorMode = useColorMode();
-const contentEl = ref<HTMLDetailsElement>();
 const modelValue = defineModel<EditContainer>({required: true});
 
-const onSelectEmoji = (emoji: EmojiExt) => {
-  console.log(emoji);
-  modelValue.value.label.icon = emoji.i;
-  contentEl.value?.click();
-}
+const dropdownButton = ref<HTMLDivElement>();
+
+const onSelectEmoji = (emoji: EmojiExt) => modelValue.value.label.icon = emoji.i
 </script>

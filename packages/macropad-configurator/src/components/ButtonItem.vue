@@ -68,9 +68,11 @@ const fontSizeScaled = computed(() => fontSize.value * devicePixelRatio.value);
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
-  height: 1.2em;
+  bottom: 2px;
   content: attr(data-font-size);
+
+  white-space: pre-wrap;
+  text-wrap: balance;
 }
 
 </style>

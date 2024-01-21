@@ -7,12 +7,13 @@ import {GpioBinarySensor} from "esphome-config-ts/lib/components/gpio.js";
 import {Esp32Improv} from "esphome-config-ts/lib/components/esp32_improv.js";
 
 import {Configuration} from "esphome-config-ts/lib/config.js";
-import {lambda} from "esphome-config-ts/lib/lambda";
 
 import {KEYS} from "./virtuals/follower-button.js";
 import {Script} from "esphome-config-ts/lib/components/script";
 import {SliderNumber} from "./virtuals/slider-number";
 import {WifiInfoTextSensor} from "esphome-config-ts/lib/components/wifi_info";
+import {secret} from "esphome-config-ts/lib/yaml/secret.js";
+import {lambda} from "esphome-config-ts/lib/yaml/lambda.js";
 
 export const PINS_ROWS = [21, 20, 3, 7];
 export const PINS_COLS = [0, 1, 10, 4, 5, 6];
@@ -28,6 +29,19 @@ export const bright = (pct: number) => {
 export interface newConfigOpts {
     withDefaults?: boolean;
     stopBeforeCustom?: boolean;
+}
+
+function makePin(pin: number) {
+    return {
+        pin: {
+            number: `GPIO${pin}`,
+            allow_other_uses: true,
+            // mode: {
+            //     input: true,
+            //     pullup: true,
+            // },
+        },
+    }
 }
 
 function newConfig(opts: newConfigOpts = {
@@ -46,7 +60,6 @@ function newConfig(opts: newConfigOpts = {
             platformio_options: {
                 "board_build.flash_mode": "dio",
             },
-            name_add_mac_suffix: true,
             on_boot: [
                 {'light.turn_off': 'ledstrip'}
             ]
@@ -59,7 +72,11 @@ function newConfig(opts: newConfigOpts = {
                 }
             }))
 
-            .updateComponent(new Wifi({ap: {ssid: "LocalBytes MacroPad"}}))
+            .updateComponent(new Wifi({
+                ssid: secret("wifi_ssid"),
+                password: secret("wifi_password"),
+                ap: {ssid: "LocalBytes MacroPad"}
+            }))
             .updateComponent(new Esp32Improv({
                 //@ts-ignore
                 authorizer: false,
@@ -86,20 +103,29 @@ function newConfig(opts: newConfigOpts = {
         rmt_channel: 0,
         num_leds: 24,
         chipset: "SK6812",
-        restore_mode: "ALWAYS_ON",
+        restore_mode: "RESTORE_AND_OFF",
         effects: undefined,
     })).addTo(config);
 
     let keypad = (new MatrixKeypad({
         id: "keypad",
         keys: KEYS,
-        rows: PINS_ROWS.map(pin => ({pin: `GPIO${pin}`})),
-        columns: PINS_COLS.map(pin => ({pin: `GPIO${pin}`})),
+        //@ts-ignore
+        rows: PINS_ROWS.map(pin => makePin(pin)),
+        //@ts-ignore
+        columns: PINS_COLS.map(pin => makePin(pin)),
     })).addTo(config);
 
-    config.addComponent([...PINS_COLS, ...PINS_ROWS].map((pin) => new GpioBinarySensor({
+    config.addComponent([
+        ...PINS_COLS,
+        ...PINS_ROWS
+    ].map((pin) => new GpioBinarySensor({
         id: `keypad_col_${pin.toString().padStart(2, "0")}`,
-        pin: `GPIO${pin}`,
+        // @ts-ignore
+        pin: {
+            number: `GPIO${pin}`,
+            allow_other_uses: true
+        },
     })));
 
     const blip_light = ((new Script({

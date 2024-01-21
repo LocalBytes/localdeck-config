@@ -1,4 +1,6 @@
 wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
   ap:
     ssid: LocalBytes MacroPad
 captive_portal: {}
@@ -11,7 +13,6 @@ esphome:
   name: macropad
   platformio_options:
     board_build.flash_mode: dio
-  name_add_mac_suffix: true
   on_boot:
     - light.turn_off: ledstrip
 esp32:
@@ -21,6 +22,10 @@ esp32:
     sdkconfig_options: {}
 esp32_improv:
   authorizer: false
+text_sensor:
+  - platform: wifi_info
+    mac_address:
+      id: wifi_info_mac_address
 light:
   - platform: esp32_rmt_led_strip
     name: Ledstrip
@@ -30,195 +35,171 @@ light:
     rmt_channel: 0
     num_leds: 24
     chipset: SK6812
-    restore_mode: ALWAYS_ON
+    restore_mode: RESTORE_AND_OFF
   - platform: partition
     id: keypad_button_01_light
-    name: 'Button 01 '
-    disabled_by_default: true
+    name: Button 01
     segments:
       - id: ledstrip
         from: 0
         to: 0
   - platform: partition
     id: keypad_button_10_light
-    name: 'Button 10 '
-    disabled_by_default: true
+    name: Button 10
     segments:
       - id: ledstrip
         from: 9
         to: 9
   - platform: partition
     id: keypad_button_11_light
-    name: 'Button 11 '
-    disabled_by_default: true
+    name: Button 11
     segments:
       - id: ledstrip
         from: 10
         to: 10
   - platform: partition
     id: keypad_button_12_light
-    name: 'Button 12 '
-    disabled_by_default: true
+    name: Button 12
     segments:
       - id: ledstrip
         from: 11
         to: 11
   - platform: partition
     id: keypad_button_13_light
-    name: 'Button 13 '
-    disabled_by_default: true
+    name: Button 13
     segments:
       - id: ledstrip
         from: 12
         to: 12
   - platform: partition
     id: keypad_button_14_light
-    name: 'Button 14 '
-    disabled_by_default: true
+    name: Button 14
     segments:
       - id: ledstrip
         from: 13
         to: 13
   - platform: partition
     id: keypad_button_15_light
-    name: 'Button 15 '
-    disabled_by_default: true
+    name: Button 15
     segments:
       - id: ledstrip
         from: 14
         to: 14
   - platform: partition
     id: keypad_button_16_light
-    name: 'Button 16 '
-    disabled_by_default: true
+    name: Button 16
     segments:
       - id: ledstrip
         from: 15
         to: 15
   - platform: partition
     id: keypad_button_17_light
-    name: 'Button 17 '
-    disabled_by_default: true
+    name: Button 17
     segments:
       - id: ledstrip
         from: 16
         to: 16
   - platform: partition
     id: keypad_button_18_light
-    name: 'Button 18 '
-    disabled_by_default: true
+    name: Button 18
     segments:
       - id: ledstrip
         from: 17
         to: 17
   - platform: partition
     id: keypad_button_19_light
-    name: 'Button 19 '
-    disabled_by_default: true
+    name: Button 19
     segments:
       - id: ledstrip
         from: 18
         to: 18
   - platform: partition
     id: keypad_button_02_light
-    name: 'Button 02 '
-    disabled_by_default: true
+    name: Button 02
     segments:
       - id: ledstrip
         from: 1
         to: 1
   - platform: partition
     id: keypad_button_20_light
-    name: 'Button 20 '
-    disabled_by_default: true
+    name: Button 20
     segments:
       - id: ledstrip
         from: 19
         to: 19
   - platform: partition
     id: keypad_button_21_light
-    name: 'Button 21 '
-    disabled_by_default: true
+    name: Button 21
     segments:
       - id: ledstrip
         from: 20
         to: 20
   - platform: partition
     id: keypad_button_22_light
-    name: 'Button 22 '
-    disabled_by_default: true
+    name: Button 22
     segments:
       - id: ledstrip
         from: 21
         to: 21
   - platform: partition
     id: keypad_button_23_light
-    name: 'Button 23 '
-    disabled_by_default: true
+    name: Button 23
     segments:
       - id: ledstrip
         from: 22
         to: 22
   - platform: partition
     id: keypad_button_24_light
-    name: 'Button 24 '
-    disabled_by_default: true
+    name: Button 24
     segments:
       - id: ledstrip
         from: 23
         to: 23
   - platform: partition
     id: keypad_button_03_light
-    name: 'Button 03 '
-    disabled_by_default: true
+    name: Button 03
     segments:
       - id: ledstrip
         from: 2
         to: 2
   - platform: partition
     id: keypad_button_04_light
-    name: 'Button 04 '
-    disabled_by_default: true
+    name: Button 04
     segments:
       - id: ledstrip
         from: 3
         to: 3
   - platform: partition
     id: keypad_button_05_light
-    name: 'Button 05 '
-    disabled_by_default: true
+    name: Button 05
     segments:
       - id: ledstrip
         from: 4
         to: 4
   - platform: partition
     id: keypad_button_06_light
-    name: 'Button 06 '
-    disabled_by_default: true
+    name: Button 06
     segments:
       - id: ledstrip
         from: 5
         to: 5
   - platform: partition
     id: keypad_button_07_light
-    name: 'Button 07 '
-    disabled_by_default: true
+    name: Button 07
     segments:
       - id: ledstrip
         from: 6
         to: 6
   - platform: partition
     id: keypad_button_08_light
-    name: 'Button 08 '
-    disabled_by_default: true
+    name: Button 08
     segments:
       - id: ledstrip
         from: 7
         to: 7
   - platform: partition
     id: keypad_button_09_light
-    name: 'Button 09 '
-    disabled_by_default: true
+    name: Button 09
     segments:
       - id: ledstrip
         from: 8
@@ -227,312 +208,664 @@ matrix_keypad:
   id: keypad
   keys: ABCDEFGHIJKLMNOPQRSTUVWX
   rows:
-    - pin: GPIO21
-    - pin: GPIO20
-    - pin: GPIO3
-    - pin: GPIO7
+    - pin:
+        number: GPIO21
+        allow_other_uses: true
+    - pin:
+        number: GPIO20
+        allow_other_uses: true
+    - pin:
+        number: GPIO3
+        allow_other_uses: true
+    - pin:
+        number: GPIO7
+        allow_other_uses: true
   columns:
-    - pin: GPIO0
-    - pin: GPIO1
-    - pin: GPIO10
-    - pin: GPIO4
-    - pin: GPIO5
-    - pin: GPIO6
+    - pin:
+        number: GPIO0
+        allow_other_uses: true
+    - pin:
+        number: GPIO1
+        allow_other_uses: true
+    - pin:
+        number: GPIO10
+        allow_other_uses: true
+    - pin:
+        number: GPIO4
+        allow_other_uses: true
+    - pin:
+        number: GPIO5
+        allow_other_uses: true
+    - pin:
+        number: GPIO6
+        allow_other_uses: true
 binary_sensor:
   - platform: gpio
     id: keypad_col_00
-    pin: GPIO0
+    pin:
+      number: GPIO0
+      allow_other_uses: true
   - platform: gpio
     id: keypad_col_01
-    pin: GPIO1
+    pin:
+      number: GPIO1
+      allow_other_uses: true
   - platform: gpio
     id: keypad_col_10
-    pin: GPIO10
+    pin:
+      number: GPIO10
+      allow_other_uses: true
   - platform: gpio
     id: keypad_col_04
-    pin: GPIO4
+    pin:
+      number: GPIO4
+      allow_other_uses: true
   - platform: gpio
     id: keypad_col_05
-    pin: GPIO5
+    pin:
+      number: GPIO5
+      allow_other_uses: true
   - platform: gpio
     id: keypad_col_06
-    pin: GPIO6
+    pin:
+      number: GPIO6
+      allow_other_uses: true
   - platform: gpio
     id: keypad_col_21
-    pin: GPIO21
+    pin:
+      number: GPIO21
+      allow_other_uses: true
   - platform: gpio
     id: keypad_col_20
-    pin: GPIO20
+    pin:
+      number: GPIO20
+      allow_other_uses: true
   - platform: gpio
     id: keypad_col_03
-    pin: GPIO3
+    pin:
+      number: GPIO3
+      allow_other_uses: true
   - platform: gpio
     id: keypad_col_07
-    pin: GPIO7
+    pin:
+      number: GPIO7
+      allow_other_uses: true
   - platform: matrix_keypad
     id: keypad_button_01
-    name: 'Button 01 '
+    name: Button 01
     internal: false
     keypad_id: keypad
     key: A
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 0
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '1'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '1'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
   - platform: matrix_keypad
     id: keypad_button_10
-    name: 'Button 10 '
+    name: Button 10
     internal: false
     keypad_id: keypad
     key: J
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 9
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '10'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '10'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
   - platform: matrix_keypad
     id: keypad_button_11
-    name: 'Button 11 '
+    name: Button 11
     internal: false
     keypad_id: keypad
     key: K
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 10
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '11'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '11'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
   - platform: matrix_keypad
     id: keypad_button_12
-    name: 'Button 12 '
+    name: Button 12
     internal: false
     keypad_id: keypad
     key: L
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 11
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '12'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '12'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
   - platform: matrix_keypad
     id: keypad_button_13
-    name: 'Button 13 '
+    name: Button 13
     internal: false
     keypad_id: keypad
     key: M
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 12
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '13'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '13'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
   - platform: matrix_keypad
     id: keypad_button_14
-    name: 'Button 14 '
+    name: Button 14
     internal: false
     keypad_id: keypad
     key: 'N'
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 13
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '14'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '14'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
   - platform: matrix_keypad
     id: keypad_button_15
-    name: 'Button 15 '
+    name: Button 15
     internal: false
     keypad_id: keypad
     key: O
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 14
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '15'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '15'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
   - platform: matrix_keypad
     id: keypad_button_16
-    name: 'Button 16 '
+    name: Button 16
     internal: false
     keypad_id: keypad
     key: P
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 15
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '16'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '16'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
   - platform: matrix_keypad
     id: keypad_button_17
-    name: 'Button 17 '
+    name: Button 17
     internal: false
     keypad_id: keypad
     key: Q
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 16
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '17'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '17'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
   - platform: matrix_keypad
     id: keypad_button_18
-    name: 'Button 18 '
+    name: Button 18
     internal: false
     keypad_id: keypad
     key: R
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 17
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '18'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '18'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
   - platform: matrix_keypad
     id: keypad_button_19
-    name: 'Button 19 '
+    name: Button 19
     internal: false
     keypad_id: keypad
     key: S
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 18
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '19'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '19'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
   - platform: matrix_keypad
     id: keypad_button_02
-    name: 'Button 02 '
+    name: Button 02
     internal: false
     keypad_id: keypad
     key: B
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 1
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '2'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '2'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
   - platform: matrix_keypad
     id: keypad_button_20
-    name: 'Button 20 '
+    name: Button 20
     internal: false
     keypad_id: keypad
     key: T
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 19
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '20'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '20'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
   - platform: matrix_keypad
     id: keypad_button_21
-    name: 'Button 21 '
+    name: Button 21
     internal: false
     keypad_id: keypad
     key: U
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 20
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '21'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '21'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
   - platform: matrix_keypad
     id: keypad_button_22
-    name: 'Button 22 '
+    name: Button 22
     internal: false
     keypad_id: keypad
     key: V
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 21
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '22'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '22'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
   - platform: matrix_keypad
     id: keypad_button_23
-    name: 'Button 23 '
+    name: Button 23
     internal: false
     keypad_id: keypad
     key: W
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 22
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '23'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '23'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
   - platform: matrix_keypad
     id: keypad_button_24
-    name: 'Button 24 '
+    name: Button 24
     internal: false
     keypad_id: keypad
     key: X
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 23
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '24'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '24'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
   - platform: matrix_keypad
     id: keypad_button_03
-    name: 'Button 03 '
+    name: Button 03
     internal: false
     keypad_id: keypad
     key: C
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 2
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '3'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '3'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
   - platform: matrix_keypad
     id: keypad_button_04
-    name: 'Button 04 '
+    name: Button 04
     internal: false
     keypad_id: keypad
     key: D
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 3
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '4'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '4'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
   - platform: matrix_keypad
     id: keypad_button_05
-    name: 'Button 05 '
+    name: Button 05
     internal: false
     keypad_id: keypad
     key: E
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 4
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '5'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '5'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
   - platform: matrix_keypad
     id: keypad_button_06
-    name: 'Button 06 '
+    name: Button 06
     internal: false
     keypad_id: keypad
     key: F
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 5
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '6'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '6'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
   - platform: matrix_keypad
     id: keypad_button_07
-    name: 'Button 07 '
+    name: Button 07
     internal: false
     keypad_id: keypad
     key: G
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 6
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '7'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '7'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
   - platform: matrix_keypad
     id: keypad_button_08
-    name: 'Button 08 '
+    name: Button 08
     internal: false
     keypad_id: keypad
     key: H
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 7
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '8'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '8'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
   - platform: matrix_keypad
     id: keypad_button_09
-    name: 'Button 09 '
+    name: Button 09
     internal: false
     keypad_id: keypad
     key: I
-    disabled_by_default: true
     on_press:
       - script.execute:
           id: blip_light
           led_index: 8
+    on_click:
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '9'
+            type: single
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+      - homeassistant.event:
+          event: esphome.macropad_button
+          data:
+            button: '9'
+            type: double
+            ieee_address: !lambda return id(wifi_info_mac_address).state;
+    on_double_click: [ ]
 script:
   id: blip_light
   parameters:
