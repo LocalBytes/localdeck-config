@@ -43,7 +43,7 @@ export const newConfiguredButtonOpts = (opts: newConfiguredButtonOptsOpts): Conf
 });
 
 
-export interface ConfigurdButtonOpts {
+export interface ConfiguredButtonOpts {
     keyNum: number;
     component: ConfiguredButtonOptsComponent;
     label: ConfiguredButtonOptsLabel;
@@ -55,7 +55,7 @@ export interface ConfiguredButtonOptsLabel {
     fontSize: number;
 }
 
-export class ConfiguredButton extends VirtualComponent<ConfigurdButtonOpts> {
+export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
     synth() {
 
         const c = this.config.component;

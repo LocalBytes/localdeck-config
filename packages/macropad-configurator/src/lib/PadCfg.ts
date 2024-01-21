@@ -1,15 +1,15 @@
 import {
     BUTTON_NUMBERS,
-    type ConfigurdButtonOpts,
+    type ConfiguredButtonOpts,
     newConfiguredButtonOpts
 } from "@localbytes/macropad-codegen/lib/virtuals/configured-button";
 
 export interface PadEditor {
     title: string;
-    buttons: ConfigurdButtonOpts[];
+    buttons: ConfiguredButtonOpts[];
 }
 
-export type EditContainer = ConfigurdButtonOpts;
+export type EditContainer = ConfiguredButtonOpts;
 
 export const newPadEditor = (): PadEditor => ({
     title: "Macropad",
