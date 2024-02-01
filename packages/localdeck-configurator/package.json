@@ -1,5 +1,5 @@
 {
-  "name": "@localbytes/macropad-configurator",
+  "name": "@localbytes/localdeck-configurator",
   "private": true,
   "type": "module",
   "version": "0.1.0",
@@ -24,7 +24,7 @@
   "dependencies": {
     "@fontsource-variable/open-sans": "^5.0.21",
     "@fontsource/poppins": "^5.0.8",
-    "@localbytes/macropad-codegen": "workspace:../macropad-codegen",
+    "@localbytes/localdeck-codegen": "workspace:../localdeck-codegen",
     "@nuxtjs/color-mode": "^3.3.2",
     "@nuxtjs/tailwindcss": "^6.10.1",
     "maska": "^2.1.10",

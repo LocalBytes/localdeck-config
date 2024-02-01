@@ -1,14 +1,14 @@
 {
-  "name": "macropad-config",
+  "name": "localdeck-config",
   "private": true,
   "scripts": {
-    "build:configurator": "pnpm --filter=macropad-configurator build",
-    "deploy:configurator": "shx mkdir -p ./dist/macropad_configurator && shx cp -r ./packages/macropad-configurator/{.output,homeassistant}/* ./dist/macropad_configurator",
+    "build:configurator": "pnpm --filter=localdeck-configurator build",
+    "deploy:configurator": "shx mkdir -p ./dist/localdeck_configurator && shx cp -r ./packages/localdeck-configurator/{.output,homeassistant}/* ./dist/localdeck_configurator",
     "configurator": "pnpm run build:configurator && pnpm run deploy:configurator"
   },
   "workspaces": [
-    "packages/macropad-config",
-    "packages/macropad-configurator"
+    "packages/localdeck-config",
+    "packages/localdeck-configurator"
   ],
   "devDependencies": {
     "shx": "^0.3.4"

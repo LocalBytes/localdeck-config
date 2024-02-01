@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/macropad-config.iml" filepath="$PROJECT_DIR$/.idea/macropad-config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/localdeck-config.iml" filepath="$PROJECT_DIR$/.idea/localdeck-config.iml" />
     </modules>
   </component>
 </project>

@@ -143,14 +143,14 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
 
         sensor.config.on_click?.push({
             "homeassistant.event": {
-                "event": "esphome.macropad_button",
+                "event": "esphome.localdeck_button",
                 "data": {"button": c.num.toString(), "type": "single", "ieee_address": lambdaIeee}
             }
         });
 
         sensor.config.on_double_click?.push({
             "homeassistant.event": {
-                "event": "esphome.macropad_button",
+                "event": "esphome.localdeck_button",
                 "data": {"button": c.num.toString(), "type": "double", "ieee_address": lambdaIeee}
             }
         });

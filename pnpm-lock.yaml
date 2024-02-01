@@ -12,7 +12,7 @@ importers:
         specifier: ^0.3.4
         version: 0.3.4
 
-  packages/macropad-codegen:
+  packages/localdeck-codegen:
     dependencies:
       esphome-config-ts:
         specifier: github:LocalBytes/esphome-config-ts
@@ -31,7 +31,7 @@ importers:
         specifier: ^4.0.9
         version: 4.0.9
 
-  packages/macropad-configurator:
+  packages/localdeck-configurator:
     dependencies:
       '@fontsource-variable/open-sans':
         specifier: ^5.0.21
@@ -39,9 +39,9 @@ importers:
       '@fontsource/poppins':
         specifier: ^5.0.8
         version: 5.0.8
-      '@localbytes/macropad-codegen':
-        specifier: workspace:../macropad-codegen
-        version: link:../macropad-codegen
+      '@localbytes/localdeck-codegen':
+        specifier: workspace:../localdeck-codegen
+        version: link:../localdeck-codegen
       '@nuxtjs/color-mode':
         specifier: ^3.3.2
         version: 3.3.2(rollup@4.9.1)

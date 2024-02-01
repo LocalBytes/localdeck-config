@@ -13,7 +13,7 @@
 <script lang="ts" setup>
 
 import type {EditContainer, PadEditor} from "~/lib/PadCfg";
-import {BUTTON_NUMBERS} from "@localbytes/macropad-codegen/lib/virtuals/configured-button";
+import {BUTTON_NUMBERS} from "@localbytes/localdeck-codegen/lib/virtuals/configured-button";
 
 const editor = defineModel<PadEditor>({type: Object, required: true});
 const editing = defineModel<EditContainer>("editing", {type: Object});

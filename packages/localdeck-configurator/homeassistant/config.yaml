@@ -1,7 +1,7 @@
-name: "Macropad Configurator"
-description: "Configure your LocalBytes Macropad with ease!"
+name: "localdeck Configurator"
+description: "Configure your LocalBytes localdeck with ease!"
 version: "1.0.0"
-slug: "macropad-configurator"
+slug: "localdeck-configurator"
 init: false
 
 panel_icon: "mdi:dialpad"

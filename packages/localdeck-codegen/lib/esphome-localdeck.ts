@@ -56,7 +56,7 @@ function newConfig(opts: newConfigOpts = {
 
         // @ts-ignore
         config.updateComponent(new Esphome({
-            name: "macropad",
+            name: "localdeck",
             platformio_options: {
                 "board_build.flash_mode": "dio",
             },
@@ -75,7 +75,7 @@ function newConfig(opts: newConfigOpts = {
             .updateComponent(new Wifi({
                 ssid: secret("wifi_ssid"),
                 password: secret("wifi_password"),
-                ap: {ssid: "LocalBytes MacroPad"}
+                ap: {ssid: "LocalBytes localdeck"}
             }))
             .updateComponent(new Esp32Improv({
                 //@ts-ignore

@@ -1,12 +1,12 @@
 {
-  "name": "@localbytes/macropad-codegen",
+  "name": "@localbytes/localdeck-codegen",
   "version": "0.1.0",
   "description": "",
   "type": "module",
   "scripts": {
-    "generate": "tsx ./lib/esphome-macropad-stock.ts > ./esphome-macropad.yaml",
-    "start": "npm run generate && esphome run ./esphome-macropad.yaml",
-    "compile": "npm run generate && esphome compile ./esphome-macropad.yaml"
+    "generate": "tsx ./lib/esphome-localdeck-stock.ts > ./esphome-localdeck.yaml",
+    "start": "npm run generate && esphome run ./esphome-localdeck.yaml",
+    "compile": "npm run generate && esphome compile ./esphome-localdeck.yaml"
   },
   "author": "",
   "private": true,

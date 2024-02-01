@@ -4,7 +4,7 @@ import * as fs from "fs/promises";
 export interface IndexFile {
     path: string,
     filename: string,
-    isMacropad: boolean,
+    islocaldeck: boolean,
 }
 
 export default defineEventHandler(async (event) => {
@@ -23,15 +23,15 @@ export default defineEventHandler(async (event) => {
         .map(async (filename) => {
             const path = `${filesDir}/${filename}`;
             const content = await fs.readFile(path, "utf8");
-            const isMacropad = content.includes("Macropad Configurator");
+            const islocaldeck = content.includes("localdeck Configurator");
 
-            return {path, filename: filename, isMacropad} satisfies IndexFile;
+            return {path, filename: filename, islocaldeck} satisfies IndexFile;
         });
 
     const files = (await Promise.all(filesPromise))
         .sort((a, b) =>
-            a.isMacropad !== b.isMacropad
-                ? (a.isMacropad ? -1 : 1)
+            a.islocaldeck !== b.islocaldeck
+                ? (a.islocaldeck ? -1 : 1)
                 : a.filename.localeCompare(b.filename));
 
     return {files};

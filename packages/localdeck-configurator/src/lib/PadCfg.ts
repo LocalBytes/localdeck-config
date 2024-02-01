@@ -2,7 +2,7 @@ import {
     BUTTON_NUMBERS,
     type ConfiguredButtonOpts,
     newConfiguredButtonOpts
-} from "@localbytes/macropad-codegen/lib/virtuals/configured-button";
+} from "@localbytes/localdeck-codegen/lib/virtuals/configured-button";
 
 export interface PadEditor {
     title: string;
@@ -12,7 +12,7 @@ export interface PadEditor {
 export type EditContainer = ConfiguredButtonOpts;
 
 export const newPadEditor = (): PadEditor => ({
-    title: "Macropad",
+    title: "localdeck",
     buttons: BUTTON_NUMBERS.map(num => ({
         keyNum: num,
         component: newConfiguredButtonOpts({num}),
