@@ -12,7 +12,7 @@ export interface PadEditor {
 export type EditContainer = ConfiguredButtonOpts;
 
 export const newPadEditor = (): PadEditor => ({
-    title: "localdeck",
+    title: "LocalDeck",
     buttons: BUTTON_NUMBERS.map(num => ({
         keyNum: num,
         component: newConfiguredButtonOpts({num}),

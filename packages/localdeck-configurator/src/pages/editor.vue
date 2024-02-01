@@ -1,6 +1,6 @@
 <template>
   <div class="container py-5 mx-auto">
-    <h1>localdeck Configurator</h1>
+    <h1>LocalDeck Configurator</h1>
     <div class="form-control">
       <input v-model="editor.title"
              class="input border-secondary inline-block"

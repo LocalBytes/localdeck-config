@@ -1,10 +1,8 @@
 import * as fs from "fs/promises";
-
-
 export interface IndexFile {
     path: string,
     filename: string,
-    islocaldeck: boolean,
+    isLocalDeck: boolean,
 }
 
 export default defineEventHandler(async (event) => {
@@ -23,15 +21,15 @@ export default defineEventHandler(async (event) => {
         .map(async (filename) => {
             const path = `${filesDir}/${filename}`;
             const content = await fs.readFile(path, "utf8");
-            const islocaldeck = content.includes("localdeck Configurator");
+            const isLocalDeck = content.includes("LocalDeck Configurator");
 
-            return {path, filename: filename, islocaldeck} satisfies IndexFile;
+            return {path, filename: filename, isLocalDeck} satisfies IndexFile;
         });
 
     const files = (await Promise.all(filesPromise))
         .sort((a, b) =>
-            a.islocaldeck !== b.islocaldeck
-                ? (a.islocaldeck ? -1 : 1)
+            a.isLocalDeck !== b.isLocalDeck
+                ? (a.isLocalDeck ? -1 : 1)
                 : a.filename.localeCompare(b.filename));
 
     return {files};

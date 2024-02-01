@@ -1,5 +1,5 @@
-name: "localdeck Configurator"
-description: "Configure your LocalBytes localdeck with ease!"
+name: "LocalDeck Configurator"
+description: "Configure your LocalBytes LocalDeck with ease!"
 version: "1.0.0"
 slug: "localdeck-configurator"
 init: false
