@@ -68,7 +68,7 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
 
         let sensor = new MatrixKeypadBinarySensor({
             id: `keypad_button_${c.num.toString().padStart(2, "0")}`,
-            name: ("Button " + c.num.toString().padStart(2, "0") + label).trim(),
+            name: `Button ${c.num.toString().padStart(2, "0")}`,
             internal: !c.expose,
             keypad_id: 'keypad',
             key: KEYS[c.num - 1],
@@ -81,7 +81,7 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
         if (c.expose) {
             stack.push(new PartitionLight({
                 id: `keypad_button_${c.num.toString().padStart(2, "0")}_light`,
-                name: ("Button " + c.num.toString().padStart(2, "0") + label).trim(),
+                name: `Button ${c.num.toString().padStart(2, "0")} Light`,
                 // @ts-ignore - Segments expects single light id for some reason
                 segments: [{
                     id: "ledstrip",
@@ -141,17 +141,23 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
 
         const lambdaIeee = lambda('return id(wifi_info_mac_address).state;');
 
+        const eventData = {
+            "button": c.num.toString(),
+            "ieee_address": lambdaIeee,
+            "label": this.config.label.text,
+        };
+
         sensor.config.on_click?.push({
             "homeassistant.event": {
                 "event": "esphome.LocalDeck_button",
-                "data": {"button": c.num.toString(), "type": "single", "ieee_address": lambdaIeee}
+                "data": {...eventData, "type": "single"}
             }
         });
 
         sensor.config.on_double_click?.push({
             "homeassistant.event": {
                 "event": "esphome.localdeck_button",
-                "data": {"button": c.num.toString(), "type": "double", "ieee_address": lambdaIeee}
+                "data": {...eventData, "type": "double"},
             }
         });
 
