@@ -4,6 +4,8 @@ import {mount} from "@vue/test-utils";
 import {newButton} from "~/lib/PadCfg";
 import {isPrintingSymbol} from "~/lib/hooks";
 
+const CLASS_PRINTMODE = "printmode";
+
 describe('Button Item', () => {
     it("Shows relevant labels", async () => {
         const wrapper = mount(ButtonItem, {
@@ -11,7 +13,8 @@ describe('Button Item', () => {
         });
 
         expect(wrapper.text()).toContain("1");
-        expect(wrapper.text()).toContain("Button")
+        expect(wrapper.element.classList).not.toContain(CLASS_PRINTMODE);
+        expect(wrapper.text()).toContain("Button");
     });
 
     it("Hides label in print mode", async () => {
@@ -21,6 +24,7 @@ describe('Button Item', () => {
         });
 
         expect(wrapper.text()).not.toContain("1");
-        expect(wrapper.text()).toContain("Button")
+        expect(wrapper.element.classList).toContain(CLASS_PRINTMODE);
+        expect(wrapper.text()).toContain("Button");
     });
 });
