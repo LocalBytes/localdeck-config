@@ -27,5 +27,5 @@ export function decompress<T extends {}>(chars: string) {
 }
 
 export function getEditorUrl(editor: PadEditor, printmode: boolean = false) {
-    return `https://feature-lb-32-firmware-confi.localbytes-blog.pages.dev/tools/localdeck-configurator${printmode ? '-print' : ''}?config=${encodeURIComponent(compress(editor))}`
+    return `https://feature-lb-32-firmware-confi.localbytes-blog.pages.dev/tools/macropad-configurator${printmode ? '-print' : ''}?config=${encodeURIComponent(compress(editor))}`
 }

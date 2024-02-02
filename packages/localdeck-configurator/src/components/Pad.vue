@@ -1,5 +1,5 @@
 <template>
-  <div class="pad-grid">
+  <div :class="{'printmode':isPrinting}" class="pad-grid">
     <ButtonItem
         v-for="container in orderedButtons"
         :key="container.keyNum"
@@ -14,9 +14,12 @@
 
 import type {EditContainer, PadEditor} from "~/lib/PadCfg";
 import {BUTTON_NUMBERS} from "@localbytes/localdeck-codegen/lib/virtuals/configured-button";
+import {useIsPrinting} from "~/lib/hooks";
 
 const editor = defineModel<PadEditor>({type: Object, required: true});
 const editing = defineModel<EditContainer>("editing", {type: Object});
+
+const isPrinting = useIsPrinting();
 
 if (!editor.value) throw new Error("Pad model is required");
 
@@ -38,6 +41,18 @@ const click = (container: EditContainer | null) => {
   grid-template-columns: repeat(6, 4rem);
   grid-template-rows: repeat(4, 4rem);
   gap: 1rem;
+}
+
+.printmode.pad-grid {
+  grid-template-columns: repeat(6, min-content);
+  grid-template-rows: repeat(4, min-content);
+  gap: 0.25mm;
+}
+
+.printmode.pad-grid-item {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+
+  border-radius: 0;
 }
 
 .pad-grid-item {

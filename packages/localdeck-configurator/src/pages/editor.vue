@@ -10,7 +10,7 @@
       />
       <button class="btn btn-primary" @click="save">Save</button>
       <button class="btn btn-secondary" @click="resetting=true">Reset</button>
-      <a :href="printUrl" class="btn btn-outline-primary">Print</a>
+      <button class="btn btn-outline-primary" @click="print">Print</button>
     </div>
     <div class="flex flex-wrap justify-center gap-10">
 
@@ -57,8 +57,7 @@
 <script lang="ts" setup>
 import {type EditContainer, newPadEditor} from "~/lib/PadCfg";
 
-import {getEditorUrl} from "~/lib/utils";
-
+const router = useRouter();
 const route = useRoute()
 const {data, status} = await useFetch('/api/editor', {query: {filename: route.query.filename as string}});
 const {data: entities} = await useFetch('/api/entities', {server: false});
@@ -95,7 +94,11 @@ const save = async () => {
   console.log(response);
 }
 
-const printUrl = computed(() => getEditorUrl(editor, true));
+const print = async () => {
+  await save();
+  saving.value = SavingStatus.IDLE;
+  await router.push({name: 'print', query: {filename: route.query.filename as string}});
+}
 
 const reset = () => {
   if (!confirm("Are you sure you want to reset?")) return;
