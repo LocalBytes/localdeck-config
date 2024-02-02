@@ -11,27 +11,34 @@
 </template>
 <script lang="ts" setup>
 import type {EditContainer} from "~/lib/PadCfg";
+import {useIsPrinting} from "~/lib/hooks";
 
 const padGridItem = ref<HTMLDivElement>();
+const print = useIsPrinting();
 
 const props = defineProps({
   container: {required: true, type: Object as PropType<EditContainer>},
   editing: {type: Boolean, default: false},
-  print: {type: Boolean, default: false},
 });
-
 
 const devicePixelRatio = ref(1);
 onMounted(() => devicePixelRatio.value = window.devicePixelRatio);
 
 const fontSize = computed(() => props.container?.label.fontSize ?? 14);
-const fontSizeScaled = computed(() => fontSize.value * devicePixelRatio.value);
+const fontSizeScaled = computed(() => {
+  const targetButtonSize = (96 / 25.4) * devicePixelRatio.value * 11;
+  const scaleFactor = targetButtonSize / 64;
+  return fontSize.value * scaleFactor;
+});
 
 </script>
 
 <style scoped>
 .printmode {
   margin: 0;
+
+  height: 13mm;
+  width: 13mm;
 
   .icon {
   }
