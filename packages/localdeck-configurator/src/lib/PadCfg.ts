@@ -7,7 +7,7 @@ import {DeepPartial} from "~/lib/types";
 
 export interface PadEditor {
     title: string;
-    buttons: ConfiguredButtonOpts[];
+    buttons: Record<number, ConfiguredButtonOpts>
 }
 
 export type EditContainer = ConfiguredButtonOpts;
@@ -23,5 +23,9 @@ export const newButton = (
 
 export const newPadEditor = (): PadEditor => ({
     title: "LocalDeck",
-    buttons: BUTTON_NUMBERS.map(num => newButton(num))
+    buttons: BUTTON_NUMBERS.reduce((acc, num) => {
+            acc[num] = newButton(num);
+            return acc;
+        }, {} as Record<number, ConfiguredButtonOpts>
+    )
 });
