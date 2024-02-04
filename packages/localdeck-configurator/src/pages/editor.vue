@@ -55,7 +55,8 @@
   </div>
 </template>
 <script lang="ts" setup>
-import {type EditContainer, newPadEditor} from "~/lib/PadCfg";
+import {type EditContainer} from "~/lib/PadCfg";
+import ConfigUtil from "~/lib/config-util";
 
 const router = useRouter();
 const route = useRoute()
@@ -66,20 +67,19 @@ enum SavingStatus {
   SAVING, DONE, IDLE
 }
 
+const config = new ConfigUtil();
+
 const saving = ref(SavingStatus.IDLE);
 const resetting = ref(false);
-const editor = reactive(newPadEditor());
-const isNew = ref(false);
+const editor = ref(config.editor());
 const editing = ref<EditContainer>();
+
+config.notify = () => triggerRef(editor);
 
 watch(status, () => {
   if (status.value !== 'success') return;
   if (data.value?.config) {
-    Object.assign(editor, data.value.config);
-    isNew.value = false;
-  } else {
-    Object.assign(editor, newPadEditor());
-    isNew.value = true;
+    config.setChanges(data.value.config);
   }
 }, {immediate: true});
 
@@ -87,7 +87,7 @@ const save = async () => {
   saving.value = SavingStatus.SAVING;
   const response = await $fetch('/api/editor', {
     method: 'POST',
-    body: {editor},
+    body: {editor: config.getChanges()},
     query: {filename: route.query.filename as string}
   }).finally(() => saving.value = SavingStatus.DONE);
 
@@ -102,8 +102,7 @@ const print = async () => {
 
 const reset = () => {
   if (!confirm("Are you sure you want to reset?")) return;
-  Object.assign(editor, newPadEditor());
-  isNew.value = true;
+  config.resetChanges();
   resetting.value = false;
 }
 </script>
