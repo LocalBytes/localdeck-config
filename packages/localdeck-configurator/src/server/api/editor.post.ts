@@ -3,12 +3,18 @@ import newConfig from "@localbytes/localdeck-codegen/lib/esphome-localdeck";
 import {type PadEditor} from "~/lib/PadCfg";
 import {getEditorUrl} from "~/lib/utils";
 import {ConfiguredButton} from "@localbytes/localdeck-codegen/lib/virtuals/configured-button";
+import ConfigUtil from "~/lib/config-util";
+import {DeepPartial} from "~/lib/types";
 
 export default defineEventHandler(async (event) => {
     const {filesDir} = useRuntimeConfig();
     const {filename} = getQuery(event)
-    const body = await readBody(event) satisfies { editor: PadEditor };
-    const editor: PadEditor = body?.editor;
+    const body = await readBody(event) satisfies { editor: DeepPartial<PadEditor> };
+
+    const configUtil = new ConfigUtil();
+    configUtil.setChanges(body.editor);
+
+    const editor: PadEditor = configUtil.editor();
 
     if (!editor) {
         throw createError({
@@ -44,10 +50,12 @@ export default defineEventHandler(async (event) => {
         filecontent += "# Your changes will be lost!"
     }
 
-    filecontent += `\n# Edit: ${getEditorUrl(editor)}\n\n`
+    filecontent += `\n# Edit: ${getEditorUrl(configUtil.getChanges())}\n\n`
+
+    console.log("editor", JSON.stringify(editor, null, 2));
 
     let {config} = newConfig({withDefaults: false});
-    editor.buttons.forEach((b) => config.addComponent(new ConfiguredButton(b)));
+    Object.entries(editor.buttons).forEach(([num, b]) => config.addComponent(new ConfiguredButton(b)));
     filecontent += config.synthYaml();
 
     await fs.writeFile(path, filecontent, "utf8");
