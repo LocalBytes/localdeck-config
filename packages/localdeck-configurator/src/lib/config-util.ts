@@ -56,7 +56,6 @@ const proxyHandler = (
     },
 
     set(target, key, value) {
-        console.log("set", [...path, key], value);
         ObjectUtil.set(configUtil.changes, [...path, key], value);
         notify(path);
         return true;

@@ -132,9 +132,7 @@ describe("ConfigUtil", () => {
 
         expect(util.getChanges()).toEqual({buttons: {1: {label: {text: "test"}}}});
 
-        console.log(JSON.stringify(util.getChanges(), null, 2));
         editor.buttons[1].component.ha_entity = "foobar";
-        console.log(JSON.stringify(util.getChanges(), null, 2));
 
         expect(util.getChanges()).toEqual({
             buttons: {

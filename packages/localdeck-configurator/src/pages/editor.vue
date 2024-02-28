@@ -90,8 +90,6 @@ const save = async () => {
     body: {editor: config.getChanges()},
     query: {filename: route.query.filename as string}
   }).finally(() => saving.value = SavingStatus.DONE);
-
-  console.log(response);
 }
 
 const print = async () => {

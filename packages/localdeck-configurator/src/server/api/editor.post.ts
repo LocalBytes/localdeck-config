@@ -52,8 +52,6 @@ export default defineEventHandler(async (event) => {
 
     filecontent += `\n# Edit: ${getEditorUrl(configUtil.getChanges())}\n\n`
 
-    console.log("editor", JSON.stringify(editor, null, 2));
-
     let {config} = newConfig({withDefaults: false});
     Object.entries(editor.buttons).forEach(([num, b]) => config.addComponent(new ConfiguredButton(b)));
     filecontent += config.synthYaml();
