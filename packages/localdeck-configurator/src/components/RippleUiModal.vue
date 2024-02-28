@@ -1,10 +1,10 @@
 <template>
   <div>
-    <input :id="uid" :ref="uid" v-model="isOpen" :disabled="!isDismissible" class="modal-state" type="checkbox"/>
+    <input :id="id" :ref="id" v-model="isOpen" :disabled="!isDismissible" class="modal-state" type="checkbox"/>
     <div class="modal">
-      <label :for="uid" class="modal-overlay"></label>
+      <label :for="id" class="modal-overlay"></label>
       <div class="modal-content flex flex-col gap-5">
-        <label v-if="isDismissible" :for="uid" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
+        <label v-if="isDismissible" :for="id" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
         <slot name="title">
           <h2 class="text-xl">{{ title }}</h2>
         </slot>
@@ -14,7 +14,6 @@
   </div>
 </template>
 <script lang="ts" setup>
-import {useUid} from "~/lib/hooks";
 
 defineProps({
   title: {type: String, default: null},
@@ -31,5 +30,5 @@ const isOpen = defineModel({
   default: true
 })
 
-const uid = useUid();
+const id = useId();
 </script>

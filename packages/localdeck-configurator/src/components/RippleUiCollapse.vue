@@ -1,7 +1,7 @@
 <template>
   <div :class="isOpen && 'overflow-visible'" class="accordion shadow ">
-    <input :id="uid" v-model="isOpen" class="accordion-toggle" type="checkbox"/>
-    <label :for="uid" class="accordion-title px-4 bg-transparent">
+    <input :id="id" v-model="isOpen" class="accordion-toggle" type="checkbox"/>
+    <label :for="id" class="accordion-title px-4 bg-transparent">
       <slot name="title">{{ title }}</slot>
     </label>
     <div :class="isOpen && 'overflow-visible'" class="accordion-content">
@@ -12,7 +12,6 @@
   </div>
 </template>
 <script lang="ts" setup>
-import {useUid} from "~/lib/hooks";
 
 defineProps({
   title: {type: String, default: null},
@@ -33,5 +32,5 @@ const isOpen = ref(model.value);
 watch(model, v => isOpen.value = v);
 watch(isOpen, v => model.value = v);
 
-const uid = useUid();
+const id = useId();
 </script>
