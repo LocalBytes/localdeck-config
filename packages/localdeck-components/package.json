@@ -1,0 +1,26 @@
+{
+  "name": "@localbytes/localdeck-components",
+  "type": "module",
+  "version": "0.0.1",
+  "main": "./nuxt.config.ts",
+  "scripts": {
+    "dev": "nuxi dev .playground",
+    "build": "nuxt build .playground",
+    "generate": "nuxt generate .playground",
+    "preview": "nuxt preview .playground",
+    "lint": "eslint .",
+    "postinstall": "nuxt prepare .playground"
+  },
+  "devDependencies": {
+    "@nuxt/eslint-config": "^0.1.1",
+    "@nuxt/test-utils": "^3.12.0",
+    "@vue/test-utils": "^2.4.5",
+    "eslint": "^8.57.0",
+    "nuxt": "^3.11.1",
+    "typescript": "^5.4.3",
+    "vitest": "^1.4.0"
+  },
+  "dependencies": {
+    "@localbytes/localdeck-codegen": "workspace:^"
+  }
+}

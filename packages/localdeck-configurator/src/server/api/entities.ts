@@ -1,3 +1,5 @@
+import type {HassEntity} from "@localbytes/localdeck-components/utils/types";
+
 const example = [
     {entity_id: "light.livingroom_bulb", attributes: {friendly_name: "Livingroom Bulb"}},
     {entity_id: "light.bedroom_light", attributes: {friendly_name: "Bedroom Bulb"}},
@@ -18,12 +20,6 @@ const example = [
     {entity_id: "scene.evening_warm", attributes: {friendly_name: "Orange Glow"}},
     {entity_id: "scene.warm_glow", attributes: {}},
 ]
-
-export interface HassEntity {
-    name: string;
-    id: string;
-}
-
 export default defineEventHandler(async (event) => {
     const {api_url, api_token} = useRuntimeConfig();
     let response: typeof example;

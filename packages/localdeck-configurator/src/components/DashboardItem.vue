@@ -9,8 +9,6 @@
   </div>
 </template>
 <script lang="ts" setup>
-import type {IndexFile} from "~/server/api/index-files";
-
 const props = defineProps<{
   file: IndexFile
 }>()

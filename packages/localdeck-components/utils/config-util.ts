@@ -1,5 +1,5 @@
-import {newPadEditor, PadEditor} from "~/lib/PadCfg";
-import {DeepPartial} from "~/lib/types";
+import {newPadEditor, type PadEditor} from "./PadCfg";
+import type {DeepPartial} from "./types";
 
 export const configUtilSymbol = Symbol("configUtil");
 

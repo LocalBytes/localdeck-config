@@ -21,7 +21,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import type {HassEntity} from "~/server/api/entities";
+import type {HassEntity} from "../utils/types";
 
 const props = defineProps<{
   typeahead: HassEntity[]

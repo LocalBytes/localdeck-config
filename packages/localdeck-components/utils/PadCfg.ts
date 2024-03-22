@@ -3,7 +3,8 @@ import {
     type ConfiguredButtonOpts,
     newConfiguredButtonOpts
 } from "@localbytes/localdeck-codegen/lib/virtuals/configured-button";
-import {DeepPartial} from "~/lib/types";
+import type {DeepPartial} from "./types";
+
 
 export interface PadEditor {
     title: string;

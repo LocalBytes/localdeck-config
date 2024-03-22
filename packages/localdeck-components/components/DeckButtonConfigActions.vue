@@ -19,7 +19,7 @@
       <div class="flex flex-col gap-2">
         <label class="form-field">
           <span class="label-text">Entity</span>
-          <ButtonConfigTypeahead
+          <DeckButtonConfigTypeahead
               v-if="typeahead" v-model="modelValue.component.ha_entity" :typeahead="typeahead"
           />
           <input v-else v-model="modelValue.component.ha_entity"
@@ -33,7 +33,7 @@
         <label class="flex gap-2">
           <input v-model="modelValue.component.toggle"
                  :disabled="!modelValue.component.ha_entity"
-                 checked="checked" class="checkbox" type="checkbox"
+                 :checked="true" class="checkbox" type="checkbox"
           />
           <span>Toggle Entity</span>
         </label>
@@ -41,7 +41,7 @@
         <label class="flex gap-2">
           <input v-model="modelValue.component.follow_state"
                  :disabled="!modelValue.component.ha_entity"
-                 checked="checked" class="checkbox" type="checkbox"
+                 :checked="true" class="checkbox" type="checkbox"
           />
           <span>Follow State (On/Off)</span>
         </label>
@@ -49,7 +49,7 @@
         <label class="flex gap-2">
           <input v-model="modelValue.component.follow_brightness"
                  :disabled="!modelValue.component.ha_entity || !modelValue.component.follow_state"
-                 checked="checked" class="checkbox" type="checkbox"
+                 :checked="true" class="checkbox" type="checkbox"
           />
           <span>Follow Brightness</span>
         </label>
@@ -57,7 +57,7 @@
         <label class="flex gap-2">
           <input v-model="modelValue.component.follow_color"
                  :disabled="!modelValue.component.ha_entity || !modelValue.component.follow_state"
-                 checked="checked" class="checkbox" type="checkbox"
+                 :checked="true" class="checkbox" type="checkbox"
           />
           <span>Follow Color <span class="italic">(Coming Soon)</span></span>
         </label>
@@ -66,8 +66,12 @@
   </div>
 </template>
 <script lang="ts" setup>
-import type {EditContainer} from "~/lib/PadCfg";
-import type {HassEntity} from "~/server/api/entities";
+import type {EditContainer} from "../utils/PadCfg";
+import type {HassEntity} from "../utils/types";
+
+defineModel<EditContainer>({
+  required: true,
+});
 
 defineProps({
   typeahead: {
@@ -78,5 +82,4 @@ defineProps({
 
 const hassOpen = ref(true);
 
-const modelValue = defineModel<EditContainer>({required: true});
 </script>

@@ -1,10 +1,10 @@
 import * as fs from "fs/promises";
-import newConfig from "@localbytes/localdeck-codegen/lib/esphome-localdeck";
-import {type PadEditor} from "~/lib/PadCfg";
-import {getEditorUrl} from "~/lib/utils";
+import {type PadEditor} from "@localbytes/localdeck-components/utils/PadCfg";
+import {getEditorUrl} from "@localbytes/localdeck-components/utils/utils";
+import ConfigUtil from "@localbytes/localdeck-components/utils/config-util";
+import {type DeepPartial} from "@localbytes/localdeck-components/utils/types";
 import {ConfiguredButton} from "@localbytes/localdeck-codegen/lib/virtuals/configured-button";
-import ConfigUtil from "~/lib/config-util";
-import {DeepPartial} from "~/lib/types";
+import newConfig from "@localbytes/localdeck-codegen/lib/esphome-localdeck";
 
 export default defineEventHandler(async (event) => {
     const {filesDir} = useRuntimeConfig();

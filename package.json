@@ -8,6 +8,7 @@
   },
   "workspaces": [
     "packages/localdeck-config",
+    "packages/localdeck-components",
     "packages/localdeck-configurator"
   ],
   "devDependencies": {

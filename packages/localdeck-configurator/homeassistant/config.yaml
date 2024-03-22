@@ -1,6 +1,6 @@
 name: "LocalDeck Configurator"
 description: "Configure your LocalBytes LocalDeck with ease!"
-version: "1.0.0"
+version: "0.1.0"
 slug: "localdeck-configurator"
 init: false
 

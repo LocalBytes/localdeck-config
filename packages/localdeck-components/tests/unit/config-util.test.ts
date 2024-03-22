@@ -1,7 +1,7 @@
-import {describe, expect, it} from "vitest";
-import ConfigUtil, {ObjectUtil} from "~/lib/config-util";
-import {newPadEditor} from "~/lib/PadCfg";
-import {DeepPartial} from "~/lib/types";
+import {describe, expect, it} from 'vitest';
+import ConfigUtil, {ObjectUtil} from "../../utils/config-util";
+import type {DeepPartial} from "../../utils/types";
+import {newPadEditor} from "../../utils/PadCfg";
 
 describe("ObjectUtil", () => {
 

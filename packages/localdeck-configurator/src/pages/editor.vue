@@ -8,18 +8,18 @@
              placeholder="Project Name"
              type="text"
       />
-      <button class="btn btn-primary" @click="save">Save</button>
-      <button class="btn btn-secondary" @click="resetting=true">Reset</button>
-      <button class="btn btn-outline-primary" @click="print">Print</button>
+      <button class="btn btn-primary" type="button" @click="save">Save</button>
+      <button class="btn btn-secondary" type="button" @click="resetting=true">Reset</button>
+      <button class="btn btn-outline-primary" type="button" @click="print">Print</button>
     </div>
     <div class="flex flex-wrap justify-center gap-10">
 
       <div>
         <h2>GUI</h2>
-        <Pad v-if="editor" v-model="editor" v-model:editing="editing" class="mx-auto"/>
+        <DeckPad v-if="editor" v-model="editor" v-model:editing="editing" class="mx-auto"/>
       </div>
 
-      <ButtonConfig v-if="editing" v-model="editing" :typeahead="entities"/>
+      <DeckButtonConfig v-if="editing" v-model="editing" :typeahead="entities"/>
       <div v-else class="basis-2 grow"></div>
     </div>
 
@@ -38,7 +38,7 @@
         :is-dismissible="saving==SavingStatus.DONE"
         :model-value="saving!=SavingStatus.IDLE"
         title="Saving..."
-        @update:model-value="value => saving = value ? SavingStatus.DONE : SavingStatus.IDLE"
+        @update:model-value="(value: boolean) => saving = value ? SavingStatus.DONE : SavingStatus.IDLE"
     >
       <div v-if="saving==SavingStatus.SAVING">
         <div class="spinner-simple"/>
@@ -55,8 +55,8 @@
   </div>
 </template>
 <script lang="ts" setup>
-import {type EditContainer} from "~/lib/PadCfg";
-import ConfigUtil from "~/lib/config-util";
+import {type EditContainer} from "@localbytes/localdeck-components/utils/PadCfg";
+import ConfigUtil from "@localbytes/localdeck-components/utils/config-util";
 
 const router = useRouter();
 const route = useRoute()

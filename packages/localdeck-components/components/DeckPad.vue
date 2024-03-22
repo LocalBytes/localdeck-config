@@ -1,20 +1,18 @@
 <template>
   <div :class="{'printmode':isPrinting}" class="pad-grid">
-    <ButtonItem
+    <DeckButtonItem
         v-for="container in orderedButtons"
         :key="container.keyNum"
         :container="container"
         :editing="editing?.keyNum === container.keyNum"
         class="pad-grid-item"
         @click="click(container)">
-    </ButtonItem>
+    </DeckButtonItem>
   </div>
 </template>
 <script lang="ts" setup>
-
-import type {EditContainer, PadEditor} from "~/lib/PadCfg";
 import {BUTTON_NUMBERS} from "@localbytes/localdeck-codegen/lib/virtuals/configured-button";
-import {useIsPrinting} from "~/lib/hooks";
+import type {EditContainer, PadEditor} from "../utils/PadCfg";
 
 const editor = defineModel<PadEditor>({type: Object, required: true});
 const editing = defineModel<EditContainer>("editing", {type: Object});

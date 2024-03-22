@@ -2,6 +2,8 @@ import rollupPluginTs from 'rollup-plugin-typescript2'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+    extends: ["@localbytes/localdeck-components"],
+
     srcDir: './src',
 
     devtools: {enabled: true},
@@ -46,11 +48,4 @@ export default defineNuxtConfig({
         }
     },
 
-    typescript: {
-        tsConfig: {
-            compilerOptions: {
-                verbatimModuleSyntax: false //Remove when we convert esphome-ts to verbatimModuleSyntax
-            }
-        }
-    },
 })

@@ -10,8 +10,8 @@
   </div>
 </template>
 <script lang="ts" setup>
-import type {EditContainer} from "~/lib/PadCfg";
-import {useIsPrinting} from "~/lib/hooks";
+import {useIsPrinting} from "../utils/hooks";
+import type {EditContainer} from "../utils/PadCfg";
 
 const padGridItem = ref<HTMLDivElement>();
 const print = useIsPrinting();

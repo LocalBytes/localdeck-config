@@ -1,4 +1,5 @@
 import * as fs from "fs/promises";
+
 export interface IndexFile {
     path: string,
     filename: string,
@@ -6,7 +7,7 @@ export interface IndexFile {
 }
 
 export default defineEventHandler(async (event) => {
-    const {filesDir} = useRuntimeConfig();
+    const {filesDir} = useRuntimeConfig(event) as unknown as { filesDir: string };
     const fileNames = await fs.readdir(filesDir)
 
     if (!fileNames) {

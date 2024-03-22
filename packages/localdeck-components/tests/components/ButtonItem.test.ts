@@ -1,14 +1,15 @@
 import {describe, expect, it} from 'vitest'
-import ButtonItem from "~/components/ButtonItem.vue";
 import {mount} from "@vue/test-utils";
-import {newButton} from "~/lib/PadCfg";
-import {isPrintingSymbol} from "~/lib/hooks";
+
+import {newButton} from "../../utils/PadCfg";
+import {isPrintingSymbol} from "../../utils/hooks";
+import DeckButtonItem from "../../components/DeckButtonItem.vue";
 
 const CLASS_PRINTMODE = "printmode";
 
 describe('Button Item', () => {
     it("Shows relevant labels", async () => {
-        const wrapper = mount(ButtonItem, {
+        const wrapper = mount(DeckButtonItem, {
             props: {container: newButton(1, {label: {text: "Button"}})}
         });
 
@@ -18,7 +19,7 @@ describe('Button Item', () => {
     });
 
     it("Hides label in print mode", async () => {
-        const wrapper = mount(ButtonItem, {
+        const wrapper = mount(DeckButtonItem, {
             global: {provide: {[isPrintingSymbol]: true}},
             props: {container: newButton(1, {label: {text: "Button"}})}
         });

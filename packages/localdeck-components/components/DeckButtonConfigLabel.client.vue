@@ -64,11 +64,10 @@
   </div>
 </template>
 <script lang="ts" setup>
-
 import type {EmojiExt} from 'vue3-emoji-picker';
 import EmojiPicker from 'vue3-emoji-picker';
 import 'vue3-emoji-picker/css';
-import type {EditContainer} from "~/lib/PadCfg";
+import type {EditContainer} from "../utils/PadCfg";
 
 const colorMode = useColorMode();
 const modelValue = defineModel<EditContainer>({required: true});

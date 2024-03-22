@@ -4,13 +4,10 @@
     <h2>{{ editor.title }} - Printable Version</h2>
 
 
-    <Pad v-model="editor"></Pad>
+    <DeckPad v-model="editor"></DeckPad>
   </div>
 </template>
 <script lang="ts" setup>
-
-import {newPadEditor} from "~/lib/PadCfg";
-import {isPrintingSymbol} from "~/lib/hooks";
 
 const router = useRouter();
 const route = useRoute()
@@ -26,7 +23,7 @@ watch(status, () => {
 
 
   Object.assign(editor, data.value.config);
-  if (process.client) window.print();
+  if (process.client) setTimeout(() => window.print(), 1000);
 }, {immediate: true});
 
 </script>
