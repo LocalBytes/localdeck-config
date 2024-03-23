@@ -1,9 +1,9 @@
 import {describe, expect, it} from 'vitest'
 import {mount} from "@vue/test-utils";
 
-import {newButton} from "../../utils/PadCfg";
-import {isPrintingSymbol} from "../../utils/hooks";
-import DeckButtonItem from "../../components/DeckButtonItem.vue";
+import {newButton} from "../../src/utils/PadCfg";
+import {isPrintingSymbol} from "../../src/utils/hooks";
+import DeckButtonItem from "../../src/components/DeckButtonItem.vue";
 
 const CLASS_PRINTMODE = "printmode";
 

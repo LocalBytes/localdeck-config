@@ -1,4 +1,4 @@
-import type {HassEntity} from "@localbytes/localdeck-components/utils/types";
+import type {HassEntity} from "@localbytes/localdeck-components/src/utils/types";
 
 const example = [
     {entity_id: "light.livingroom_bulb", attributes: {friendly_name: "Livingroom Bulb"}},

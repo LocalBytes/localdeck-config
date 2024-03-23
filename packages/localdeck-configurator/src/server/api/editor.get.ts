@@ -1,6 +1,6 @@
 import * as fs from "fs/promises";
-import {decompress} from "@localbytes/localdeck-components/utils/utils";
-import type {PadEditor} from "@localbytes/localdeck-components/utils/PadCfg";
+import {decompress} from "@localbytes/localdeck-components/src/utils/utils";
+import type {PadEditor} from "@localbytes/localdeck-components/src/utils/PadCfg";
 
 export default defineEventHandler(async (event) => {
     const {filesDir} = useRuntimeConfig();
