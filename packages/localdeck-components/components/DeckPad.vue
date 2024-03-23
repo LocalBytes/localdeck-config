@@ -4,7 +4,7 @@
         v-for="container in orderedButtons"
         :key="container.keyNum"
         :container="container"
-        :editing="editing?.keyNum === container.keyNum"
+        :editing="editing?.keyNum === container.keyNum && !isPrinting"
         class="pad-grid-item"
         @click="click(container)">
     </DeckButtonItem>

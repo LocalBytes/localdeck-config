@@ -1,8 +1,15 @@
 <template>
   <div class="container py-5 mx-auto printmode">
+    <div class="my-2 text-sm">
+      <nuxt-link to="/">Configurator</nuxt-link> &rarr;
+      <nuxt-link :to="{name: 'editor', query: {filename: route.query.filename as string}}">
+        {{ route.query.filename }}
+      </nuxt-link> &rarr;
+      Print
+    </div>
     <h1>LocalDeck Configurator</h1>
     <h2>{{ editor.title }} - Printable Version</h2>
-
+    <a href="/" @click.prevent="router.go(-1)">Back</a>
 
     <DeckPad v-model="editor"></DeckPad>
   </div>

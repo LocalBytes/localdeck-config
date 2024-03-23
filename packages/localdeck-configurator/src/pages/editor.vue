@@ -1,7 +1,11 @@
 <template>
   <div class="container py-5 mx-auto">
-    <h1>LocalDeck Configurator</h1>
-    <div class="form-control">
+    <div class="my-2 text-sm">
+      <nuxt-link to="/">Configurator</nuxt-link> &rarr; {{ route.query.filename }}
+    </div>
+
+    <h1 class="mb-2">LocalDeck Configurator</h1>
+    <div class="form-control my-2">
       <input v-model="editor.title"
              class="input border-secondary inline-block"
              pattern="[a-zA-Z0-9]+"
@@ -12,7 +16,7 @@
       <button class="btn btn-secondary" type="button" @click="resetting=true">Reset</button>
       <button class="btn btn-outline-primary" type="button" @click="print">Print</button>
     </div>
-    <div class="flex flex-wrap justify-center gap-10">
+    <div class="flex flex-wrap justify-center gap-10 py-2">
 
       <div>
         <h2>GUI</h2>
