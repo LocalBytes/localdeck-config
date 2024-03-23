@@ -6,8 +6,6 @@ export default defineNuxtConfig({
 
     srcDir: './src',
 
-    devtools: {enabled: true},
-
     runtimeConfig: {
         public: {baseUrl: ''},
 
@@ -32,14 +30,6 @@ export default defineNuxtConfig({
     ],
 
     css: ['~/assets/css/global.css'],
-
-    vite: {
-        vue: {
-            script: {
-                defineModel: true,
-            }
-        },
-    },
 
     nitro: {
         rollupConfig: {

@@ -82,9 +82,7 @@ config.notify = () => triggerRef(editor);
 
 watch(status, () => {
   if (status.value !== 'success') return;
-  if (data.value?.config) {
-    config.setChanges(data.value.config);
-  }
+  if (data.value?.config) config.setChanges(data.value.config);
 }, {immediate: true});
 
 const save = async () => {
