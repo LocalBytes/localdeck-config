@@ -152,18 +152,35 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
             "label": this.config.label.text,
         };
 
-        sensor.config.on_click?.push({
-            "homeassistant.event": {
-                "event": "esphome.LocalDeck_button",
-                "data": {...eventData, "type": "single"}
-            }
+        sensor.config.on_multi_click ??= [];
+        sensor.config.on_multi_click.push({
+            timing: [
+                "ON for at most 1s",
+                "OFF for at least 0.5s"
+            ],
+            then: [
+                {
+                    "homeassistant.event": {
+                        "event": "esphome.localdeck_button",
+                        "data": {...eventData, "type": "single"},
+                    }
+                }
+            ]
         });
-
-        sensor.config.on_double_click?.push({
-            "homeassistant.event": {
-                "event": "esphome.localdeck_button",
-                "data": {...eventData, "type": "double"},
-            }
+        sensor.config.on_multi_click.push({
+            timing: [
+                "ON for at most 1s",
+                "OFF for at most 0.5s",
+                "ON for at most 1s",
+            ],
+            then: [
+                {
+                    "homeassistant.event": {
+                        "event": "esphome.localdeck_button",
+                        "data": {...eventData, "type": "double"},
+                    }
+                }
+            ]
         });
 
         return stack;
