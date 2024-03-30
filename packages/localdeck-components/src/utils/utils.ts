@@ -26,5 +26,5 @@ export function decompress<T extends {}>(chars: string) {
 }
 
 export function getEditorUrl(editor: object, printmode: boolean = false) {
-    return `https://blog.mylocalbytes.com/tools/localdeck-configurator${printmode ? '-print' : ''}?config=${encodeURIComponent(compress(editor))}`
+    return `https://blog.mylocalbytes.com/tools/localdeck-configurator?config=${encodeURIComponent(compress(editor))}${printmode ? '&print=1' : ''}`
 }
