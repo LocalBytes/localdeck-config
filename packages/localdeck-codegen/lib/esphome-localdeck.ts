@@ -12,8 +12,9 @@ import {KEYS} from "./virtuals/follower-button.js";
 import {Script} from "esphome-config-ts/lib/components/script";
 import {SliderNumber} from "./virtuals/slider-number";
 import {WifiInfoTextSensor} from "esphome-config-ts/lib/components/wifi_info";
-import {secret} from "esphome-config-ts/lib/yaml/secret.js";
 import {lambda} from "esphome-config-ts/lib/yaml/lambda.js";
+import {ImprovSerial} from "esphome-config-ts/lib/components/improv_serial";
+import {Substitutions} from "./virtuals/substitutions";
 
 export const PINS_ROWS = [21, 20, 3, 7];
 export const PINS_COLS = [0, 1, 10, 4, 5, 6];
@@ -32,16 +33,7 @@ export interface newConfigOpts {
 }
 
 function makePin(pin: number) {
-    return {
-        pin: {
-            number: `GPIO${pin}`,
-            allow_other_uses: true,
-            // mode: {
-            //     input: true,
-            //     pullup: true,
-            // },
-        },
-    }
+    return {pin: {number: `GPIO${pin}`, allow_other_uses: true,}};
 }
 
 function newConfig(opts: newConfigOpts = {
@@ -53,10 +45,15 @@ function newConfig(opts: newConfigOpts = {
     if (opts.withDefaults) {
 
         config.addDefaults();
+        config.updateComponent(new Substitutions({
+            name: "LocalDeck",
+            friendly_name: "LocalBytes LocalDeck",
+        }));
 
         // @ts-ignore
         config.updateComponent(new Esphome({
-            name: "LocalDeck",
+            name: "${name}",
+            friendly_name: "${friendly_name}",
             platformio_options: {
                 "board_build.flash_mode": "dio",
             },
@@ -71,16 +68,14 @@ function newConfig(opts: newConfigOpts = {
                     sdkconfig_options: {}
                 }
             }))
-
             .updateComponent(new Wifi({
-                ssid: secret("wifi_ssid"),
-                password: secret("wifi_password"),
-                ap: {ssid: "LocalBytes LocalDeck"}
+                ap: {ssid: "${friendly_name}"}
             }))
             .updateComponent(new Esp32Improv({
                 //@ts-ignore
                 authorizer: false,
             }))
+            .updateComponent(new ImprovSerial({}));
 
     }
 
