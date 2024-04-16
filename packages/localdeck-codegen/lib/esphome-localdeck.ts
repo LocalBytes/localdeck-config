@@ -3,6 +3,7 @@ import {Esp32} from "esphome-config-ts/lib/components/esp32.js";
 import {Wifi} from "esphome-config-ts/lib/components/wifi.js";
 import {Esp32RmtLedStripLight} from "esphome-config-ts/lib/components/esp32_rmt_led_strip.js";
 import {MatrixKeypad} from "esphome-config-ts/lib/components/matrix_keypad.js";
+import {TemplateOutput} from "esphome-config-ts/lib/components/template.js";
 import {GpioBinarySensor} from "esphome-config-ts/lib/components/gpio.js";
 import {Esp32Improv} from "esphome-config-ts/lib/components/esp32_improv.js";
 
@@ -46,7 +47,7 @@ function newConfig(opts: newConfigOpts = {
 
         config.addDefaults();
         config.updateComponent(new Substitutions({
-            name: "LocalDeck",
+            name: "localdeck",
             friendly_name: "LocalBytes LocalDeck",
         }));
 
@@ -54,6 +55,10 @@ function newConfig(opts: newConfigOpts = {
         config.updateComponent(new Esphome({
             name: "${name}",
             friendly_name: "${friendly_name}",
+            project: {
+                name: "localbytes.localdeck",
+                version: "0.0.1",
+            },
             platformio_options: {
                 "board_build.flash_mode": "dio",
             },
@@ -71,9 +76,21 @@ function newConfig(opts: newConfigOpts = {
             .updateComponent(new Wifi({
                 ap: {ssid: "${friendly_name}"}
             }))
+            .updateComponent(new TemplateOutput({
+                id: "improv_status",
+                type: "binary",
+                write_action: [
+                    {
+                        'light.control': {
+                            id: 'keypad_button_01_light',
+                            state: lambda('return state;')
+                        }
+                    }
+                ]
+            }))
             .updateComponent(new Esp32Improv({
-                //@ts-ignore
-                authorizer: false,
+                status_indicator: "improv_status",
+                authorizer: "keypad_button_01",
             }))
             .updateComponent(new ImprovSerial({}));
 
