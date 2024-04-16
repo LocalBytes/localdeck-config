@@ -1,10 +1,7 @@
 import * as fs from "fs/promises";
+import _ from "lodash";
+import {FileType, type IndexFile} from "~/utilities/types";
 
-export interface IndexFile {
-    path: string,
-    filename: string,
-    isLocalDeck: boolean,
-}
 
 export default defineEventHandler(async (event) => {
     const {filesDir} = useRuntimeConfig(event) as unknown as { filesDir: string };
@@ -22,16 +19,32 @@ export default defineEventHandler(async (event) => {
         .map(async (filename) => {
             const path = `${filesDir}/${filename}`;
             const content = await fs.readFile(path, "utf8");
-            const isLocalDeck = content.includes("LocalDeck Configurator");
+            let name = filename
+                .replace(".yaml", "")
+                .replace(".yml", "");
 
-            return {path, filename: filename, isLocalDeck} satisfies IndexFile;
+            let type = FileType.Other;
+
+            if (
+                content.includes("packages:")
+                && content.includes("localbytes.localdeck")
+            ) type = FileType.Import;
+            if (content.includes("localdeck-configurator?config=")) type = FileType.LocalDeck;
+
+            const matchName = content.match(/name: (.*)/);
+            if (matchName) name = matchName[1];
+            const matchFriendly = content.match(/friendly_name: (.*)/);
+            if (matchFriendly) name = matchFriendly[1];
+
+            return {path, filename, type, name} satisfies IndexFile;
         });
 
-    const files = (await Promise.all(filesPromise))
-        .sort((a, b) =>
-            a.isLocalDeck !== b.isLocalDeck
-                ? (a.isLocalDeck ? -1 : 1)
-                : a.filename.localeCompare(b.filename));
 
-    return {files};
+    return {
+        files: _(await Promise.all(filesPromise))
+            .sortBy("type")
+            .groupBy("type"),
+    }
+
 });
+

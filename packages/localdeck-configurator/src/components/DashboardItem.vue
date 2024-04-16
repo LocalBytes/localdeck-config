@@ -1,17 +1,23 @@
 <template>
-  <div class="card border">
-    <div class="card-body">
-      <h2 class="card-header">{{ file.filename }}</h2>
-      <div class="card-footer text-right">
-        <NuxtLink :to="link" class="btn btn-primary">Edit</NuxtLink>
+  <div class="card border h-full text-start">
+    <div class="text-start card-body cursor-pointer" role="link" @click="router.push(link)">
+      <div class="card-header">
+        {{ file.name }}
       </div>
+
+      <p>{{ file.filename }}</p>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
+
+import type {IndexFile} from "~/utilities/types";
+
 const props = defineProps<{
   file: IndexFile
 }>()
+
+const router = useRouter();
 
 const link = computed(() => ({
   name: 'editor',
