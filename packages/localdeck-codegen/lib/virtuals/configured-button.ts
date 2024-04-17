@@ -51,7 +51,7 @@ export interface ConfiguredButtonOpts {
 
 export interface ConfiguredButtonOptsLabel {
     text: string;
-    icon: string;
+    icon: string | null;
     fontSize: number;
 }
 
