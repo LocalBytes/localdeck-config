@@ -9,9 +9,7 @@
       </div>
 
       <div class="grid md:grid-cols-3 lg:grid-cols-5 gap-2">
-
         <DashboardItem v-for="file in files" v-if="data" :key="file.filename" :file="file"/>
-
       </div>
     </div>
     <div>

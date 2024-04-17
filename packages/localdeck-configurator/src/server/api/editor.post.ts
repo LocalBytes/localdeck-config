@@ -50,6 +50,8 @@ export default defineEventHandler(async (event) => {
         fileContent += "# Your changes will be lost!"
     }
 
+    fileContent = fileContent.replace(/friendly_name: (.*)/, `friendly_name: ${editor.title}`)
+
     fileContent += `\n# Edit: ${getEditorUrl(configUtil.getChanges())}\n\n`
 
     let {config} = newConfig({withDefaults: false});
