@@ -2,6 +2,7 @@
   "name": "localdeck-config",
   "private": true,
   "scripts": {
+    "build": "pnpm run -r build",
     "build:configurator": "pnpm --filter=localdeck-configurator build",
     "deploy:configurator": "shx mkdir -p ./dist/localdeck_configurator && shx cp -r ./packages/localdeck-configurator/{.output,homeassistant}/* ./dist/localdeck_configurator",
     "configurator": "pnpm run build:configurator && pnpm run deploy:configurator"

@@ -36,6 +36,9 @@ importers:
       '@localbytes/localdeck-codegen':
         specifier: workspace:^
         version: link:../localdeck-codegen
+      '@material-symbols/metadata':
+        specifier: ^0.17.2
+        version: 0.17.2
     devDependencies:
       '@nuxt/eslint-config':
         specifier: ^0.1.1
@@ -1253,6 +1256,10 @@ packages:
     transitivePeerDependencies:
       - encoding
       - supports-color
+
+  /@material-symbols/metadata@0.17.2:
+    resolution: {integrity: sha512-4FSoMXY8qoSGPo+Z5nwvl3aNM8yrwI+Y75ZAZcoLWfO2ZC5HQT9J42FtCRtdSyggdOY/XZTfTw7EflVXIYHJLg==}
+    dev: false
 
   /@netlify/functions@2.6.0:
     resolution: {integrity: sha512-vU20tij0fb4nRGACqb+5SQvKd50JYyTyEhQetCMHdakcJFzjLDivvRR16u1G2Oy4A7xNAtGJF1uz8reeOtTVcQ==}
