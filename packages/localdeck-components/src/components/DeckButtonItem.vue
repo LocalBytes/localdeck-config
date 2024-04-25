@@ -1,7 +1,9 @@
 <template>
   <div ref="padGridItem" :class="{'shadow-lg shadow-yellow-300':editing, 'printmode':print}" class="pad-grid-item">
     <p v-if="!print" class="position-fixed keynum">{{ container.keyNum }}</p>
-    <p v-if="container.label.icon" class="text-center icon">{{ container.label.icon }}</p>
+    <p v-if="container.label.icon" :class="{'material-symbols-outlined':container.label.icon.startsWith('mdi:')}"
+       class="text-center icon">
+      {{ container.label.icon.replace("mdi:", "") }}</p>
     <p
         ref="labelRef"
         :style="{fontSize: (print?fontSize:fontSizeScaled) + 'px'}"
