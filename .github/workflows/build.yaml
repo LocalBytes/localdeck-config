@@ -42,14 +42,19 @@ jobs:
 
       - name: Build
         run: |
+          sed -i "s/VERSION/${{ env.version }}/g" ./packages/localdeck-configurator/homeassistant/config.yaml
           pnpm --filter=localdeck-configurator build
           mkdir -p .temp
           cp -r ./packages/localdeck-configurator/{.output,homeassistant}/* ./.temp
-          sed -i "s/VERSION/${{ env.version }}/g" ./.temp/config.yaml
       - uses: actions/upload-artifact@v4
         with:
           name: localdeck-configurator
           path: .temp
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: localdeck-configurator-hass
+          path: ./packages/localdeck-configurator/homeassistant
 
   publish:
     needs: build
@@ -59,12 +64,6 @@ jobs:
       packages: write
       id-token: write
     steps:
-
-      #      - name: Set up QEMU
-      #        uses: docker/setup-qemu-action@v3
-      #      - name: Set up Docker Buildx
-      #        uses: docker/setup-buildx-action@v3
-
       - name: GHCR User
         run: echo "ghcr_user=${GITHUB_REPOSITORY_OWNER@L}" >> "${GITHUB_ENV}"
 
@@ -87,3 +86,28 @@ jobs:
             --all \
             --target localdeck-configurator \
             --docker-hub "ghcr.io/${{ env.ghcr_user }}"
+
+  publish-subtree:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: localdeck-configurator-hass
+          path: localdeck-configurator
+
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_LOCALBYTES_HELLO }}
+        with:
+          source-directory: 'localdeck-configurator'
+          target-directory: 'localdeck-configurator'
+
+          destination-github-username: '${{ github.repository_owner }}'
+          destination-repository-name: 'hass-addons'
+
+          user-name: "LocalBytes Bot"
+          user-email: "hello@mylocalbytes.com"
+          target-branch: main
