@@ -70,12 +70,10 @@ jobs:
           name: localdeck-configurator
           path: localdeck-configurator
 
-      - run: "ls -al"
-
       - name: Publish
         uses: home-assistant/builder@master
         with:
           args: |
             --all \
             --target localdeck-configurator
-            --load
+            --docker-hub ghcr.io
