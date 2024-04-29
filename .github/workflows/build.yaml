@@ -81,7 +81,7 @@ jobs:
         uses: home-assistant/builder@master
         with:
           args: |
-            --test \
             --all \
             --target localdeck-configurator \
-            --docker-hub ghcr.io/${{ env.ghcr_user }}
+            --docker-hub ghcr.io/${{ env.ghcr_user }} \
+            --image localdeck-configurator
