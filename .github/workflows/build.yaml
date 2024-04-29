@@ -71,6 +71,6 @@ jobs:
           path: localdeck-configurator
 
       - name: Publish
-        uses: home-assistant/builder@master
+        uses: localbytes/home-assistant-builder@master
         with:
-          args: --test --all --target localdeck-configurator
+          args: --all --target localdeck-configurator
