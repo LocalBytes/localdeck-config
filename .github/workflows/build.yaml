@@ -77,4 +77,8 @@ jobs:
       - name: Publish
         uses: home-assistant/builder@master
         with:
-          args: --all --target localdeck-configurator --docker-hub ghcr.io/${{ github.repository_owner }}
+          args: |
+            --test \
+            --all \
+            --target localdeck-configurator \
+            --docker-hub ghcr.io/${{ github.repository_owner }}
