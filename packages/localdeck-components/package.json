@@ -13,17 +13,18 @@
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^0.1.1",
-    "@nuxt/test-utils": "^3.12.0",
+    "@nuxt/test-utils": "^3.12.1",
     "@vue/test-utils": "^2.4.5",
     "eslint": "^8.57.0",
-    "nuxt": "^3.11.1",
+    "nuxt": "^3.11.2",
     "sass": "^1.75.0",
-    "typescript": "^5.4.3",
-    "vitest": "^1.4.0"
+    "typescript": "^5.4.5",
+    "vitest": "^1.5.2"
   },
   "dependencies": {
     "@localbytes/localdeck-codegen": "workspace:^",
-    "material-symbols": "^0.17.2",
-    "@material-symbols/metadata": "^0.17.2"
+    "@material-symbols/metadata": "^0.17.3",
+    "material-symbols": "^0.17.3",
+    "pako": "^2.1.0"
   }
 }
