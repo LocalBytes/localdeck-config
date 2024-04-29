@@ -52,6 +52,9 @@ importers:
       '@nuxt/test-utils':
         specifier: ^3.12.1
         version: 3.12.1(@vue/test-utils@2.4.5)(h3@1.11.1)(vite@5.2.10)(vitest@1.5.2)(vue-router@4.3.2)(vue@3.4.26)
+      '@types/pako':
+        specifier: ^2.0.3
+        version: 2.0.3
       '@vue/test-utils':
         specifier: ^2.4.5
         version: 2.4.5
