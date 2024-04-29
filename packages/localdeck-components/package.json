@@ -14,18 +14,20 @@
   "devDependencies": {
     "@nuxt/eslint-config": "^0.1.1",
     "@nuxt/test-utils": "^3.12.1",
+    "@types/pako": "^2.0.3",
     "@vue/test-utils": "^2.4.5",
     "eslint": "^8.57.0",
+    "maska": "^2.1.11",
     "nuxt": "^3.11.2",
+    "pako": "^2.1.0",
     "sass": "^1.75.0",
     "typescript": "^5.4.5",
     "vitest": "^1.5.2",
-    "@types/pako": "^2.0.3"
+    "vue3-emoji-picker": "^1.1.8"
   },
   "dependencies": {
     "@localbytes/localdeck-codegen": "workspace:^",
     "@material-symbols/metadata": "^0.17.3",
-    "material-symbols": "^0.17.3",
-    "pako": "^2.1.0"
+    "material-symbols": "^0.17.3"
   }
 }

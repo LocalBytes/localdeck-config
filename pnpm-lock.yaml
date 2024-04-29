@@ -42,9 +42,6 @@ importers:
       material-symbols:
         specifier: ^0.17.3
         version: 0.17.3
-      pako:
-        specifier: ^2.1.0
-        version: 2.1.0
     devDependencies:
       '@nuxt/eslint-config':
         specifier: ^0.1.1
@@ -61,9 +58,15 @@ importers:
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
+      maska:
+        specifier: ^2.1.11
+        version: 2.1.11
       nuxt:
         specifier: ^3.11.2
         version: 3.11.2(@unocss/reset@0.59.4)(eslint@8.57.0)(floating-vue@5.2.2)(sass@1.75.0)(typescript@5.4.5)(unocss@0.59.4)(vite@5.2.10)
+      pako:
+        specifier: ^2.1.0
+        version: 2.1.0
       sass:
         specifier: ^1.75.0
         version: 1.75.0
@@ -73,6 +76,9 @@ importers:
       vitest:
         specifier: ^1.5.2
         version: 1.5.2(sass@1.75.0)
+      vue3-emoji-picker:
+        specifier: ^1.1.8
+        version: 1.1.8(typescript@5.4.5)
 
   packages/localdeck-configurator:
     dependencies:
@@ -97,9 +103,6 @@ importers:
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
-      maska:
-        specifier: ^2.1.11
-        version: 2.1.11
       nuxt:
         specifier: ^3.11.2
         version: 3.11.2(@unocss/reset@0.59.4)(floating-vue@5.2.2)(rollup@4.17.1)(typescript@5.4.5)(unocss@0.59.4)(vite@5.2.10)
@@ -143,9 +146,6 @@ importers:
       happy-dom:
         specifier: ^13.10.1
         version: 13.10.1
-      pako:
-        specifier: ^2.1.0
-        version: 2.1.0
       playwright-core:
         specifier: ^1.43.1
         version: 1.43.1
@@ -161,9 +161,6 @@ importers:
       vitest:
         specifier: ^1.5.2
         version: 1.5.2(@vitest/ui@1.5.2)(happy-dom@13.10.1)
-      vue3-emoji-picker:
-        specifier: ^1.1.8
-        version: 1.1.8(typescript@5.4.5)
 
 packages:
 
@@ -1221,8 +1218,8 @@ packages:
     resolution: {integrity: sha512-PfnWuOkQgu7gCbnSsAisaX7hKOdZ4wSAhAzH3/ph5dSGau52kCRrMMGbiSQLwyTZpgldkZ49b0brkOr1AzGBHQ==}
     engines: {node: ^16.14.0 || >=18.0.0}
 
-  /@npmcli/run-script@8.0.0:
-    resolution: {integrity: sha512-5noc+eCQmX1W9nlFUe65n5MIteikd3vOA2sEPdXtlUv68KWyHNFZnT/LDRXu/E4nZ5yxjciP30pADr/GQ97W1w==}
+  /@npmcli/run-script@8.1.0:
+    resolution: {integrity: sha512-y7efHHwghQfk28G2z3tlZ67pLG0XdfYbcVG26r7YIXALRsrVQcTq4/tdenSmdOrEsNahIYA/eh8aEVROWGFUDg==}
     engines: {node: ^16.14.0 || >=18.0.0}
     dependencies:
       '@npmcli/node-gyp': 3.0.0
@@ -5434,7 +5431,7 @@ packages:
 
   /maska@2.1.11:
     resolution: {integrity: sha512-IGqWjBnKxMYcVa06pb4mPfag9sJjnR2T15CdGfQ2llR3gajiSd4AxXCvNqHMEq9W3UBhjjTazgWumsP3sWrUSg==}
-    dev: false
+    dev: true
 
   /material-symbols@0.17.3:
     resolution: {integrity: sha512-eXEbpha1sy7OmkcBvP9FS3wQX+A4VEbUV5IqClh+mkRU+59l0xsiKjoQcnYMAttVQHELoTc/x2WUvbj60GJgig==}
@@ -6331,7 +6328,7 @@ packages:
       '@npmcli/installed-package-contents': 2.1.0
       '@npmcli/package-json': 5.1.0
       '@npmcli/promise-spawn': 7.0.1
-      '@npmcli/run-script': 8.0.0
+      '@npmcli/run-script': 8.1.0
       cacache: 18.0.2
       fs-minipass: 3.0.3
       minipass: 7.0.4
@@ -6350,6 +6347,7 @@ packages:
 
   /pako@2.1.0:
     resolution: {integrity: sha512-w+eufiZ1WuJYgPXbV/PO3NCMEc3xqylkKHzp8bxp1uW4qaSNQUkwmLLEc3kKsfz8lpV1F8Ht3U1Cm+9Srog2ug==}
+    dev: true
 
   /parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}

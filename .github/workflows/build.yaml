@@ -39,8 +39,8 @@ jobs:
       - name: Build
         run: |
           pnpm --filter=localdeck-configurator build
-          mkdir .temp
-          cp -r ./packages/localdeck-configurator/{.output,homeassistant}/* ./temp
+          mkdir -p .temp
+          cp -r ./packages/localdeck-configurator/{.output,homeassistant}/* ./.temp
       - uses: actions/upload-artifact@v4
         with:
           name: localdeck-configurator
