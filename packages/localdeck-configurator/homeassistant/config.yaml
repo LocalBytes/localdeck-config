@@ -2,7 +2,8 @@ name: "LocalDeck Configurator"
 description: "Configure your LocalBytes LocalDeck with ease!"
 slug: "localdeck-configurator"
 
-image: ghcr.io/localbytes/hass-localdeck-configurator
+version: VERSION
+image: ghcr.io/localbytes/hass-localdeck-configurator@VERSION-{arch}
 
 init: false
 

@@ -36,11 +36,16 @@ jobs:
       - name: Install dependencies
         run: pnpm install -r
 
+      - name: Get version
+        id: version
+        run: echo version=$(node -p -e "require('./packages/localdeck-configurator/package.json').version") >> $GITHUB_ENV
+
       - name: Build
         run: |
           pnpm --filter=localdeck-configurator build
           mkdir -p .temp
           cp -r ./packages/localdeck-configurator/{.output,homeassistant}/* ./.temp
+          sed -i "s/VERSION/${{ env.version }}/g" ./.temp/config.yaml
       - uses: actions/upload-artifact@v4
         with:
           name: localdeck-configurator
