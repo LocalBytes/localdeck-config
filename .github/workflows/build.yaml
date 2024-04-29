@@ -68,14 +68,17 @@ jobs:
       - name: GHCR User
         run: echo "ghcr_user=${GITHUB_REPOSITORY_OWNER@L}" >> "${GITHUB_ENV}"
 
-      - name: Docker login
-        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login -u ${{ env.ghcr_user }} --password-stdin ghcr.io
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ env.ghcr_user }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/download-artifact@v4
         with:
           name: localdeck-configurator
           path: localdeck-configurator
-
 
       - name: Publish
         uses: home-assistant/builder@master
@@ -83,4 +86,4 @@ jobs:
           args: |
             --all \
             --target localdeck-configurator \
-            --docker-hub ghcr.io/${{ env.ghcr_user }}
+            --docker-hub "ghcr.io/${{ env.ghcr_user }}"
