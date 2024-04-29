@@ -73,7 +73,4 @@ jobs:
       - name: Publish
         uses: home-assistant/builder@master
         with:
-          args: |
-            --test
-            --all \
-            --target localdeck-configurator
+          args: --test --all --target localdeck-configurator
