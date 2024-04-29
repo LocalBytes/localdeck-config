@@ -4,6 +4,10 @@ import rollupPluginTs from 'rollup-plugin-typescript2'
 export default defineNuxtConfig({
     extends: ["@localbytes/localdeck-components"],
 
+    devtools: {
+        enabled: false, // Conflicts with devtools for chrome
+    },
+
     srcDir: './src',
 
     runtimeConfig: {

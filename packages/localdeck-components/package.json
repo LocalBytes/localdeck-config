@@ -17,10 +17,13 @@
     "@vue/test-utils": "^2.4.5",
     "eslint": "^8.57.0",
     "nuxt": "^3.11.1",
+    "sass": "^1.75.0",
     "typescript": "^5.4.3",
     "vitest": "^1.4.0"
   },
   "dependencies": {
-    "@localbytes/localdeck-codegen": "workspace:^"
+    "@localbytes/localdeck-codegen": "workspace:^",
+    "material-symbols": "^0.17.2",
+    "@material-symbols/metadata": "^0.17.2"
   }
 }

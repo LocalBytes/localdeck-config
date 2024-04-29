@@ -3,7 +3,7 @@
 
 @font-face {
     font-family: 'BabelStone Flags';
-    src: url("/fonts/BabelStoneFlags.woff2"), url("/fonts/BabelStoneFlags.woff"), url("/fonts/BabelStoneFlags.ttf");
+    src: url("~/assets/fonts/BabelStoneFlags.woff2"), url("~/assets/fonts/BabelStoneFlags.woff"), url("~/assets/fonts/BabelStoneFlags.ttf");
 }
 
 @tailwind base;
