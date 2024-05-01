@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'printmode':isPrinting}" class="pad-grid">
+  <div ref="gridRef" :class="{'printmode':isPrinting}" class="pad-grid">
     <DeckButtonItem
         v-for="container in orderedButtons"
         :key="container.keyNum"
@@ -13,6 +13,10 @@
 <script lang="ts" setup>
 import {BUTTON_NUMBERS} from "@localbytes/localdeck-codegen/lib/virtuals/configured-button";
 import type {EditContainer, PadEditor} from "../utils/PadCfg";
+import {useResizeObserver} from "@vueuse/core";
+import {fontSizesSymbol} from "../utils/hooks";
+
+const gridRef = ref<HTMLDivElement>();
 
 const editor = defineModel<PadEditor>({type: Object, required: true});
 const editing = defineModel<EditContainer>("editing", {type: Object});
@@ -31,6 +35,18 @@ const click = (container: EditContainer | null) => {
   if (!container || editing.value?.keyNum === container.keyNum) return editing.value = undefined;
   editing.value = container;
 }
+
+const sizes = reactive({
+  devicePixelRatio: 1,
+  rootFontSize: 14,
+});
+
+useResizeObserver(gridRef, () => {
+  sizes.devicePixelRatio = window?.devicePixelRatio ?? 1;
+  sizes.rootFontSize = Number(window?.getComputedStyle(document.body).getPropertyValue('font-size').replace('px', '')) ?? 14;
+});
+provide(fontSizesSymbol, sizes);
+
 
 </script>
 <style scoped>
