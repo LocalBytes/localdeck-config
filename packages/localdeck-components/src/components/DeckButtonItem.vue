@@ -12,7 +12,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import {useIsPrinting} from "../utils/hooks";
+import {useFontSizes, useIsPrinting} from "../utils/hooks";
 import type {EditContainer} from "../utils/PadCfg";
 
 const padGridItem = ref<HTMLDivElement>();
@@ -23,13 +23,17 @@ const props = defineProps({
   editing: {type: Boolean, default: false},
 });
 
-const devicePixelRatio = ref(1);
-onMounted(() => devicePixelRatio.value = window.devicePixelRatio);
+const sizes = useFontSizes();
 
 const fontSize = computed(() => props.container?.label.fontSize ?? 14);
 const fontSizeScaled = computed(() => {
-  const targetButtonSize = (96 / 25.4) * devicePixelRatio.value * 11;
-  const scaleFactor = targetButtonSize / 64;
+  // Calculate the target button size in pixels.
+  // This is based on 4rem (where 1 rem is rootFontSize)
+  const targetButtonSize = 4 * sizes.rootFontSize;
+  const mmToPixels = sizes.devicePixelRatio * (96 / 25.4);
+
+  // Calculate the scale factor to increase the font size
+  const scaleFactor = (14 * mmToPixels) / targetButtonSize;
   return fontSize.value * scaleFactor;
 });
 
@@ -39,8 +43,8 @@ const fontSizeScaled = computed(() => {
 .printmode {
   margin: 0;
 
-  height: 13mm;
-  width: 13mm;
+  height: 14mm;
+  width: 14mm;
 
   .icon {
   }
