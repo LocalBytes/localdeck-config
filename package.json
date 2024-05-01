@@ -14,7 +14,7 @@
   ],
   "devDependencies": {
     "@vue/language-server": "^2.0.16",
-    "shx": "^0.3.4",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "shx": "^0.3.4"
   }
 }

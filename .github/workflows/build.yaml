@@ -5,6 +5,10 @@ on:
 
 name: "Build and Publish"
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -63,9 +67,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     permissions:
-      contents: read
       packages: write
-      id-token: write
     steps:
       - name: GHCR User
         run: echo "ghcr_user=${GITHUB_REPOSITORY_OWNER@L}" >> "${GITHUB_ENV}"

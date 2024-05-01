@@ -14,7 +14,7 @@
 import {BUTTON_NUMBERS} from "@localbytes/localdeck-codegen/lib/virtuals/configured-button";
 import type {EditContainer, PadEditor} from "../utils/PadCfg";
 import {useResizeObserver} from "@vueuse/core";
-import {fontSizesSymbol} from "../utils/hooks";
+import {type FontSizes, fontSizesSymbol} from "../utils/hooks";
 
 const gridRef = ref<HTMLDivElement>();
 
@@ -39,14 +39,13 @@ const click = (container: EditContainer | null) => {
 const sizes = reactive({
   devicePixelRatio: 1,
   rootFontSize: 14,
-});
+}) as FontSizes;
 
 useResizeObserver(gridRef, () => {
   sizes.devicePixelRatio = window?.devicePixelRatio ?? 1;
   sizes.rootFontSize = Number(window?.getComputedStyle(document.body).getPropertyValue('font-size').replace('px', '')) ?? 14;
 });
 provide(fontSizesSymbol, sizes);
-
 
 </script>
 <style scoped>
