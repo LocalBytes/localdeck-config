@@ -48,6 +48,9 @@ importers:
       material-symbols:
         specifier: ^0.17.2
         version: 0.17.2
+      pako:
+        specifier: ^2.1.0
+        version: 2.1.0
       vue3-emoji-picker:
         specifier: ^1.1.8
         version: 1.1.8(typescript@5.4.5)
@@ -7654,6 +7657,10 @@ packages:
     transitivePeerDependencies:
       - bluebird
       - supports-color
+
+  /pako@2.1.0:
+    resolution: {integrity: sha512-w+eufiZ1WuJYgPXbV/PO3NCMEc3xqylkKHzp8bxp1uW4qaSNQUkwmLLEc3kKsfz8lpV1F8Ht3U1Cm+9Srog2ug==}
+    dev: false
 
   /parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
