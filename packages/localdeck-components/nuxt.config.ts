@@ -1,3 +1,6 @@
 export default defineNuxtConfig({
-    srcDir: "src"
+    srcDir: "src",
+    modules: [
+        '@vueuse/nuxt',
+    ],
 })
