@@ -1,7 +1,4 @@
-on:
-  push:
-    branches:
-      - main
+on: [ push, pull_request ]
 
 name: "Build and Publish"
 
@@ -64,6 +61,7 @@ jobs:
           path: ./packages/localdeck-configurator/homeassistant
 
   publish:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     permissions:
