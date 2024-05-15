@@ -4,6 +4,7 @@
         v-for="container in orderedButtons"
         :key="container.keyNum"
         :container="container"
+        :data-keynum="container.keyNum"
         :editing="editing?.keyNum === container.keyNum && !isPrinting"
         class="pad-grid-item"
         @click="click(container)">
@@ -39,11 +40,13 @@ const click = (container: EditContainer | null) => {
 const sizes = reactive({
   devicePixelRatio: 1,
   rootFontSize: 14,
+  scaleFactor: 1,
 }) as FontSizes;
 
 useResizeObserver(gridRef, () => {
   sizes.devicePixelRatio = window?.devicePixelRatio ?? 1;
   sizes.rootFontSize = Number(window?.getComputedStyle(document.body).getPropertyValue('font-size').replace('px', '')) ?? 14;
+  sizes.scaleFactor = (14 * sizes.devicePixelRatio * (96 / 25.4)) / (4 * sizes.rootFontSize);
 });
 provide(fontSizesSymbol, sizes);
 

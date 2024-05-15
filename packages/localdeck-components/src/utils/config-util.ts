@@ -83,6 +83,7 @@ export default class ConfigUtil {
 
     setChanges(changes: typeof this.changes) {
         this.changes = changes;
+        this.notify([]);
     }
 
     resetChanges(path = "") {
