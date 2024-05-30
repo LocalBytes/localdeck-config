@@ -14,7 +14,7 @@
   "dependencies": {
     "esphome-config-ts": "github:LocalBytes/esphome-config-ts",
     "js-yaml": "^4.1.0",
-    "tsx": "^4.10.2"
+    "tsx": "^4.11.0"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.6",
