@@ -55,10 +55,6 @@ function newConfig(opts: newConfigOpts = {
         config.updateComponent(new Esphome({
             name: "${name}",
             friendly_name: "${friendly_name}",
-            project: {
-                name: "localbytes.localdeck",
-                version: "0.0.1",
-            },
             platformio_options: {
                 "board_build.flash_mode": "dio",
             },
