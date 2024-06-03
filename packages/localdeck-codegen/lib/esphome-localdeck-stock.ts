@@ -10,7 +10,7 @@ config.updateComponent(new DashboardImport({
 }));
 
 
-let esphomeComponent = config.components.filter((c) => c.key === "esphome")[0];
+let esphomeComponent = config.components.filter((c) => c.componentName === "esphome")[0];
 esphomeComponent.config = _.merge(esphomeComponent.config, {
     project: {
         name: "localbytes.localdeck",
