@@ -2,7 +2,6 @@ import {VirtualComponent} from "esphome-config-ts/dist/lib/index.js";
 import {Globals, TemplateNumber} from "esphome-config-ts/dist/components/index.js";
 import {lambda} from "esphome-config-ts/dist/yaml/index.js";
 
-
 type SliderNumberOpts = {
     id: string,
     min: string,

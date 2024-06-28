@@ -12,7 +12,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import {BUTTON_NUMBERS} from "@localbytes/localdeck-codegen/lib/virtuals/configured-button";
+import {BUTTON_NUMBERS} from "@localbytes/localdeck-codegen/dist/virtuals";
 import type {EditContainer, PadEditor} from "../utils/PadCfg";
 import {useResizeObserver} from "@vueuse/core";
 import {type FontSizes, fontSizesSymbol} from "../utils/hooks";

@@ -21,9 +21,9 @@
 import type {EmojiExt} from 'vue3-emoji-picker';
 import EmojiPicker from 'vue3-emoji-picker';
 import 'vue3-emoji-picker/css';
-import type {ConfiguredButtonOptsLabel} from "@localbytes/localdeck-codegen/lib/virtuals/configured-button";
 import {mdIconsGroups} from "../utils/material";
 import "~/assets/material.scss";
+import {ConfiguredButtonOptsLabel} from "@localbytes/localdeck-codegen/dist/virtuals";
 
 const modelValue = defineModel<ConfiguredButtonOptsLabel>({required: true});
 const colorMode = useColorMode();

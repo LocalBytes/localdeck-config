@@ -5,7 +5,7 @@ import * as fs from "node:fs/promises";
 
 import {describe, expect, test} from 'vitest'
 import {createPage, setup} from '@nuxt/test-utils/e2e'
-import espHomeYaml from "esphome-config-ts/lib/yaml";
+import espHomeYaml from "esphome-config-ts/dist/yaml";
 
 const preImportExample = `
 substitutions:

@@ -2,7 +2,7 @@ import {
     BUTTON_NUMBERS,
     type ConfiguredButtonOpts,
     newConfiguredButtonOpts
-} from "@localbytes/localdeck-codegen/lib/virtuals/configured-button";
+} from "@localbytes/localdeck-codegen/dist/virtuals";
 import type {DeepPartial} from "./types";
 
 

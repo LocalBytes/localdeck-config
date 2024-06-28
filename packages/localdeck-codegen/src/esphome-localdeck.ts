@@ -1,5 +1,5 @@
-import {lambda} from "esphome-config-ts/dist/yaml/index.js";
 import {Configuration} from "esphome-config-ts/dist/lib/index.js";
+import {lambda} from "esphome-config-ts/dist/yaml/index.js";
 import {KEYS, SliderNumber, Substitutions} from "@/virtuals/index.js";
 import {
     Esp32,

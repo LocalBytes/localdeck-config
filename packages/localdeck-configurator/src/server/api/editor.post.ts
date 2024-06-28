@@ -5,9 +5,9 @@ import {type PadEditor} from "@localbytes/localdeck-components/src/utils/PadCfg"
 import {getEditorUrl} from "@localbytes/localdeck-components/src/utils/utils";
 import ConfigUtil from "@localbytes/localdeck-components/src/utils/config-util";
 import {type DeepPartial} from "@localbytes/localdeck-components/src/utils/types";
-import {ConfiguredButton} from "@localbytes/localdeck-codegen/lib/virtuals/configured-button";
-import newConfig from "@localbytes/localdeck-codegen/lib/esphome-localdeck";
-import espHomeYaml from "@localbytes/esphome-config-ts/lib/yaml";
+import {ConfiguredButton} from "@localbytes/localdeck-codegen/dist/virtuals";
+import newConfig from "@localbytes/localdeck-codegen/dist/esphome-localdeck";
+import espHomeYaml from "@localbytes/esphome-config-ts/dist/yaml";
 import _ from "lodash";
 
 function smartlyMerge(newCfg: any, originalContent: string): any {
