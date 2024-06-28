@@ -29,6 +29,7 @@ export default defineEventHandler(async (event) => {
                 content.includes("packages:")
                 && content.includes("localbytes.localdeck")
             ) type = FileType.Import;
+
             if (content.includes("localdeck-configurator?config=")) type = FileType.LocalDeck;
 
             const matchName = content.match(/name: (.*)/);

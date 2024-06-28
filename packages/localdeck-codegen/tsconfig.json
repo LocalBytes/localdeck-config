@@ -1,12 +1,32 @@
 {
-  "extends": "@tsconfig/recommended/tsconfig.json",
-  "include": ["lib/**/*"],
+  "extends": "@tsconfig/node-lts/tsconfig.json",
+  "include": [
+    "./src/**/*"
+  ],
   "compilerOptions": {
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "target": "ESNext",
-
     "declaration": true,
-    "declarationMap": true
+    "declarationMap": true,
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "plugins": [
+      {
+        "transform": "typescript-transform-paths"
+      },
+      {
+        "transform": "typescript-transform-paths",
+        "afterDeclarations": true
+      }
+    ]
+  },
+  "ts-node": {
+    "transpileOnly": true,
+    "require": [
+      "typescript-transform-paths/register"
+    ]
   }
 }

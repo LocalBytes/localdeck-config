@@ -4,20 +4,26 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "generate": "tsx ./lib/esphome-localdeck-stock.ts > ./esphome-localdeck.yaml",
+    "prepare": "ts-patch install && tsc",
+    "generate": "node --loader ts-node/esm ./src/esphome-localdeck-stock.ts > ./esphome-localdeck.yaml",
     "start": "npm run generate && esphome run ./esphome-localdeck.yaml",
     "compile": "npm run generate && esphome compile ./esphome-localdeck.yaml"
   },
   "author": "",
   "private": true,
-  "license": "ISC",
   "dependencies": {
     "esphome-config-ts": "github:LocalBytes/esphome-config-ts",
     "js-yaml": "^4.1.0",
-    "tsx": "^4.11.2"
+    "lodash": "^4.17.21",
+    "typescript": "5.4.5"
   },
   "devDependencies": {
+    "@tsconfig/node-lts": "^20.1.3",
     "@tsconfig/recommended": "^1.0.6",
-    "@types/js-yaml": "^4.0.9"
+    "@types/js-yaml": "^4.0.9",
+    "@types/lodash": "^4.17.5",
+    "ts-node": "^10.9.2",
+    "ts-patch": "^3.2.0",
+    "typescript-transform-paths": "^3.4.7"
   }
 }

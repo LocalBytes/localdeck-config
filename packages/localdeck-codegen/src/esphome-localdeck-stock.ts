@@ -1,6 +1,6 @@
-import newConfig from "./esphome-localdeck";
-import {BUTTON_NUMBERS, ConfiguredButton, newConfiguredButtonOpts} from "./virtuals/configured-button";
-import {DashboardImport} from "esphome-config-ts/lib/components/dashboard_import";
+import newConfig from "@/esphome-localdeck.js";
+import {DashboardImport} from "esphome-config-ts/dist/components/index.js";
+import {BUTTON_NUMBERS, ConfiguredButton, newConfiguredButtonOpts} from "@/virtuals/index.js";
 import _ from "lodash";
 
 let {config} = newConfig();
@@ -9,9 +9,9 @@ config.updateComponent(new DashboardImport({
     package_import_url: "github://LocalBytes/localdeck-config/packages/localdeck-codegen/esphome-localdeck.yaml"
 }));
 
-
 let esphomeComponent = config.components.filter((c) => c.componentName === "esphome")[0];
 esphomeComponent.config = _.merge(esphomeComponent.config, {
+    name_add_mac_suffix: true,
     project: {
         name: "localbytes.localdeck",
         version: "0.0.1",

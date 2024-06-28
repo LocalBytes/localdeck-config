@@ -1,21 +1,19 @@
-import {Esphome} from "esphome-config-ts/lib/components/esphome.js";
-import {Esp32} from "esphome-config-ts/lib/components/esp32.js";
-import {Wifi} from "esphome-config-ts/lib/components/wifi.js";
-import {Esp32RmtLedStripLight} from "esphome-config-ts/lib/components/esp32_rmt_led_strip.js";
-import {MatrixKeypad} from "esphome-config-ts/lib/components/matrix_keypad.js";
-import {TemplateOutput} from "esphome-config-ts/lib/components/template.js";
-import {GpioBinarySensor} from "esphome-config-ts/lib/components/gpio.js";
-import {Esp32Improv} from "esphome-config-ts/lib/components/esp32_improv.js";
-
-import {Configuration} from "esphome-config-ts/lib/config.js";
-
-import {KEYS} from "./virtuals/follower-button.js";
-import {Script} from "esphome-config-ts/lib/components/script";
-import {SliderNumber} from "./virtuals/slider-number";
-import {WifiInfoTextSensor} from "esphome-config-ts/lib/components/wifi_info";
-import {lambda} from "esphome-config-ts/lib/yaml/lambda.js";
-import {ImprovSerial} from "esphome-config-ts/lib/components/improv_serial";
-import {Substitutions} from "./virtuals/substitutions";
+import {lambda} from "esphome-config-ts/dist/yaml/index.js";
+import {Configuration} from "esphome-config-ts/dist/lib/index.js";
+import {KEYS, SliderNumber, Substitutions} from "@/virtuals/index.js";
+import {
+    Esp32,
+    Esp32Improv,
+    Esp32RmtLedStripLight,
+    Esphome,
+    GpioBinarySensor,
+    ImprovSerial,
+    MatrixKeypad,
+    Script,
+    TemplateOutput,
+    Wifi,
+    WifiInfoTextSensor
+} from "esphome-config-ts/dist/components/index.js";
 
 export const PINS_ROWS = [21, 20, 3, 7];
 export const PINS_COLS = [0, 1, 10, 4, 5, 6];
@@ -55,11 +53,20 @@ function newConfig(opts: newConfigOpts = {
         config.updateComponent(new Esphome({
             name: "${name}",
             friendly_name: "${friendly_name}",
+            name_add_mac_suffix: true,
             platformio_options: {
                 "board_build.flash_mode": "dio",
             },
             on_boot: [
-                {'light.turn_off': 'ledstrip'}
+                {
+                    'light.turn_on': {
+                        id: 'ledstrip',
+                        brightness: '25%',
+                        effect: 'Addressable Rainbow'
+                    }
+                },
+                {'delay': '5s'},
+                {'light.turn_off': {id: 'ledstrip'}}
             ]
         }))
             .updateComponent(new Esp32({
@@ -141,19 +148,47 @@ function newConfig(opts: newConfigOpts = {
         parameters: {led_index: 'int'},
         mode: "parallel",
         then:
-            Array.from({length: 21}, (_, i) => i).map(i => Math.max(100 - (i * 5), 0)).flatMap(brightness => {
-                return [{
+            Array.from({length: 20}, (_, i) => i)
+                .map(i => Math.max(100 - (i * 5), 0))
+                .flatMap(brightness => [{
                     'light.addressable_set': {
                         id: ledstrip.config.id,
                         range_from: lambda('return led_index;'),
                         range_to: lambda('return led_index;'),
-                        red: `${brightness}%`, green: `${brightness}%`, blue: `${brightness}%`, white: `${brightness}%`
+                        red: `${brightness}%`,
+                        green: `${brightness}%`,
+                        blue: `${brightness}%`,
+                        white: `${brightness}%`
                     },
                 }, {
                     'delay': '25ms'
-                }];
-            }),
+                }])
+    }))).addTo(config);
 
+    ((new Script({
+        id: "set_led_rgb",
+        parameters: {led_index: 'int', color: 'string'},
+        mode: "queued",
+        then: [{
+            lambda: `ESP_LOGD("set_led_rgb", "Index %d, Input: %s", led_index, color.c_str());
+
+int firstComma = color.find(',');
+int secondComma = color.find(',', firstComma + 1);
+
+ESP_LOGD("set_led_rgb", "Commas are: %d, %d", firstComma, secondComma);
+
+auto rs = color.substr(1, firstComma);
+auto gs = color.substr(firstComma + 1, secondComma);
+auto bs = color.substr(secondComma + 1, color.length() - 1);
+
+ESP_LOGD("set_led_rgb", "%s-%s-%s", rs.c_str(), gs.c_str(), bs.c_str());
+ESP_LOGD("set_led_rgb", "%d, %d, %d", stoi(rs), stoi(gs), stoi(bs));
+
+auto light = ((AddressableLight*)id(ledstrip).get_output());
+light->get(led_index).set(Color(stoi(rs), stoi(gs), stoi(bs)));
+light->schedule_show();
+`
+        }]
     }))).addTo(config);
 
     const brightness = (new SliderNumber({

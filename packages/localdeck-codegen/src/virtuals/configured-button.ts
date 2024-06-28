@@ -1,9 +1,11 @@
-import {VirtualComponent} from "esphome-config-ts/lib/base";
-import {MatrixKeypadBinarySensor} from "esphome-config-ts/lib/components/matrix_keypad";
-import {PartitionLight} from "esphome-config-ts/lib/components/partition";
-import {HomeassistantSensor, HomeassistantTextSensor} from "esphome-config-ts/lib/components/homeassistant";
-import {lambda} from "esphome-config-ts/lib/yaml/lambda";
-
+import {VirtualComponent} from "esphome-config-ts/dist/lib/index.js";
+import {
+    HomeassistantSensor,
+    HomeassistantTextSensor,
+    MatrixKeypadBinarySensor,
+    PartitionLight
+} from "esphome-config-ts/dist/components/index.js";
+import {lambda} from "esphome-config-ts/dist/yaml/index.js";
 
 export const KEYS = "ABCDEFGHIJKLMNOPQRSTUVWX";
 export const BUTTON_NUMBERS = [
@@ -12,8 +14,6 @@ export const BUTTON_NUMBERS = [
     7, 8, 9, 10, 11, 12,
     1, 2, 3, 4, 5, 6,
 ];
-
-export const lambdaBright = lambda('return (x/255) * id(brightness);');
 
 export interface ConfiguredButtonOptsComponent {
     num: number;
@@ -78,18 +78,18 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
         });
         stack.push(sensor);
 
-        if (c.expose) {
-            stack.push(new PartitionLight({
-                id: `keypad_button_${c.num.toString().padStart(2, "0")}_light`,
-                name: `Button ${c.num.toString().padStart(2, "0")} Light`,
-                // @ts-ignore - Segments expects single light id for some reason
-                segments: [{
-                    id: "ledstrip",
-                    from: c.num - 1,
-                    to: c.num - 1,
-                }],
-            }));
-        }
+        let lightId = `keypad_button_${c.num.toString().padStart(2, "0")}_light`;
+        stack.push(new PartitionLight({
+            id: lightId,
+            name: `Button ${c.num.toString().padStart(2, "0")} Light`,
+            internal: !c.expose,
+            // @ts-ignore - Segments expects single light id for some reason
+            segments: [{
+                id: "ledstrip",
+                from: c.num - 1,
+                to: c.num - 1,
+            }],
+        }));
 
 
         if (c.ha_entity && c.toggle) {
@@ -110,10 +110,8 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
                 id: `keypad_button_${c.num}_hass`,
                 entity_id: c.ha_entity,
                 on_value: [{
-                    "light.addressable_set": {
-                        id: "ledstrip",
-                        range_from: c.num - 1,
-                        range_to: c.num - 1,
+                    "light.turn_on": {
+                        id: lightId,
                         red: lambda('return (x == "on")?id(brightness):0;'),
                         green: lambda('return (x == "on")?id(brightness):0;'),
                         blue: lambda('return (x == "on")?id(brightness):0;'),
@@ -126,19 +124,33 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
         }
 
         if (c.ha_entity && c.follow_brightness) {
+            const lambdaBright = lambda('return (x/255) * id(brightness);');
             stack.push(new HomeassistantSensor({
                 id: `keypad_button_${c.num}_hass_brightness`,
                 entity_id: c.ha_entity,
                 attribute: "brightness",
                 on_value: [{
-                    "light.addressable_set": {
-                        id: "ledstrip",
-                        range_from: c.num - 1,
-                        range_to: c.num - 1,
+                    "light.turn_on": {
+                        id: lightId,
                         red: lambdaBright,
                         green: lambdaBright,
                         blue: lambdaBright,
                         white: lambdaBright,
+                    }
+                }]
+            }));
+        }
+
+        if (c.ha_entity && c.follow_color) {
+            stack.push(new HomeassistantSensor({
+                id: `keypad_button_${c.num}_hass_color`,
+                entity_id: c.ha_entity,
+                attribute: "rgb_color",
+                on_value: [{
+                    "script.execute": {
+                        id: "set_led_rgb",
+                        led_index: c.num - 1,
+                        color: lambda('return x;'),
                     }
                 }]
             }));

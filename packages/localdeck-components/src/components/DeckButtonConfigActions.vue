@@ -59,7 +59,7 @@
                  :disabled="!modelValue.component.ha_entity || !modelValue.component.follow_state"
                  :checked="true" class="checkbox" type="checkbox"
           />
-          <span>Follow Color <span class="italic">(Coming Soon)</span></span>
+          <span>Follow Color</span>
         </label>
       </div>
     </RippleUiCollapse>

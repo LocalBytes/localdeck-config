@@ -1,20 +1,20 @@
-import {VirtualComponent} from "esphome-config-ts/lib/base";
-import {Globals} from "esphome-config-ts/lib/components/globals";
-import {TemplateNumber} from "esphome-config-ts/lib/components/template";
-import {lambda} from "esphome-config-ts/lib/yaml/lambda";
+import {VirtualComponent} from "esphome-config-ts/dist/lib/index.js";
+import {Globals, TemplateNumber} from "esphome-config-ts/dist/components/index.js";
+import {lambda} from "esphome-config-ts/dist/yaml/index.js";
 
-export class SliderNumber extends VirtualComponent<
-    {
-        id: string,
-        min: string,
-        max: string,
-        step: string,
-        initial_value: string,
-        name: string,
-        type: string,
-        restore_value?: boolean;
-    }
-> {
+
+type SliderNumberOpts = {
+    id: string,
+    min: string,
+    max: string,
+    step: string,
+    initial_value: string,
+    name: string,
+    type: string,
+    restore_value?: boolean;
+};
+
+export class SliderNumber extends VirtualComponent<SliderNumberOpts> {
 
     synth() {
         return [
