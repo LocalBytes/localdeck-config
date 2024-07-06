@@ -4,7 +4,17 @@ import subprocess
 import time
 from datetime import datetime
 
-FLASHLOGS_DIR = './flashlogs'
+# Dictionary to store 2 bin files, and respective log dirs.
+files = {
+    'prod': {
+        'bin': './../.esphome/build/localdeck/.pioenvs/localdeck/firmware.factory.bin',
+        'log': './flashlogs'
+    },
+    'factory': {
+        'bin': './../.esphome/build/localdeck-test/.pioenvs/localdeck-test/firmware.factory.bin',
+        'log': None
+    }
+}
 
 
 def esptool_read_mac():
@@ -23,34 +33,40 @@ def esptool_read_mac():
 
 def writePrint(output, text: str):
     print(text, end='')
-    output.write(text)
+    if output is not None:
+        output.write(text)
 
 
 def esptool_flash(output):
-    with open(output, 'a+') as log_file:
+    log_file = open(output, 'a+') if output is not None else None
+
+    if log_file:
         log_file.write(f"---- {datetime.now()} ----\n")
         log_file.write("Flashing LocalDeck\n")
         log_file.write(f"Serial number: {sn}\n")
         log_file.write(f"MAC address:  {mac}\n")
         log_file.write("----\n")
-        while True:
 
-            # Run esptool to flash the ESP32
-            process = subprocess.Popen(
-                ['esptool', 'write_flash', '0x0',
-                    './../.esphome/build/localdeck/.pioenvs/localdeck/firmware.factory.bin'],
-                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
-            )
-            for line in process.stdout:
-                writePrint(log_file,line)
+    while True:
+        # Run esptool to flash the ESP32
+        process = subprocess.Popen(
+            ['esptool', 'write_flash', '0x0', fileInfo['bin']],
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
+        )
 
-            code = process.wait()
-            if code == 0:
-                break
-            else:
-                writePrint(log_file, f"Error code: {code}\n")
-                writePrint(log_file, f"Retrying...\n")
-                time.sleep(1)
+        for line in process.stdout:
+            writePrint(log_file, line)
+
+        code = process.wait()
+        if code == 0:
+            break
+        else:
+            writePrint(log_file, f"Error code: {code}\n")
+            writePrint(log_file, f"Retrying...\n")
+            time.sleep(1)
+
+    if log_file:
+        log_file.close()
 
 
 def mac_safe(mac_address: str) -> str:
@@ -61,7 +77,10 @@ def get_next_sn(mac_address: str) -> int:
     # Check if the mac address is already in the log directory
     safe_mac = mac_safe(mac_address)
 
-    dir_list = os.listdir(FLASHLOGS_DIR)
+    if not fileInfo['log']:
+        return 0
+
+    dir_list = os.listdir(fileInfo['log'])
     for file in dir_list:
         if safe_mac in file:
             sn = int(file.split('-')[0])
@@ -78,9 +97,14 @@ def get_next_sn(mac_address: str) -> int:
     return max([int(file.split('-')[0]) for file in dir_list], default=0) + 1
 
 
+isProd = input("Flash production firmware: [Y/n] ")
+fileInfo = files['prod'] if isProd.lower() != 'n' else files['factory']
+print(f"Flashing {fileInfo['bin']}")
+print(f"Log directory: {fileInfo['log']}")
+
 # Create dir if not exits
-if not os.path.exists(FLASHLOGS_DIR):
-    os.makedirs(FLASHLOGS_DIR)
+if fileInfo['log'] and not os.path.exists(fileInfo['log']):
+    os.makedirs(fileInfo['log'])
 
 # Wrap this in a loop to keep it running forever (until keyboard interrupt)
 while True:
@@ -100,7 +124,7 @@ while True:
         continue
 
     # Construct the new filename for the log file
-    filename = f"{FLASHLOGS_DIR}/{sn:04}-{mac_safe(mac)}.log"
+    filename = f"{fileInfo['log']}/{sn:04}-{mac_safe(mac)}.log"
 
     # Set the terminal title to the device being flashed
     print(f"\033]0;Flash - {sn:04} - {mac}\007")
@@ -109,10 +133,10 @@ while True:
     print(f"Serial number: {sn:04}")
     print(f"MAC address: {mac}")
 
-    esptool_flash(filename)
+    esptool_flash(filename if fileInfo['log'] else None)
     print(f"Device {sn:04} flashed successfully!")
     print(f"Log saved to {filename}")
     input("Press Enter to continue...")
 
-    #clear the terminal title
+    # clear the terminal title
     time.sleep(1)
