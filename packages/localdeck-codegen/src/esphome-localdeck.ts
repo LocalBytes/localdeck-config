@@ -114,33 +114,30 @@ function newConfig(opts: newConfigOpts = {
         id: "ledstrip",
         rgb_order: "GRB",
         pin: "GPIO8",
-        // @ts-ignore
+        //@ts-ignore
         rmt_channel: 0,
         num_leds: 24,
         chipset: "SK6812",
         restore_mode: "RESTORE_AND_OFF",
-        effects: undefined,
+        effects: [
+            {'addressable_rainbow': {name: "Addressable Rainbow"}},
+        ]
     })).addTo(config);
 
     let keypad = (new MatrixKeypad({
         id: "keypad",
         keys: KEYS,
         //@ts-ignore
-        rows: PINS_ROWS.map(pin => makePin(pin)),
-        //@ts-ignore
-        columns: PINS_COLS.map(pin => makePin(pin)),
+        rows: PINS_ROWS.map(pin => ({pin: {number: `GPIO${pin}`, allow_other_uses: true}})),
+        columns: PINS_COLS.map(pin => ({pin: `GPIO${pin}`})),
     })).addTo(config);
 
     config.addComponent([
-        ...PINS_COLS,
         ...PINS_ROWS
     ].map((pin) => new GpioBinarySensor({
-        id: `keypad_col_${pin.toString().padStart(2, "0")}`,
-        // @ts-ignore
-        pin: {
-            number: `GPIO${pin}`,
-            allow_other_uses: true
-        },
+        id: `keypad_row_${pin.toString().padStart(2, "0")}`,
+        //@ts-ignore
+        pin: {number: `GPIO${pin}`, allow_other_uses: true,},
     })));
 
     const blip_light = ((new Script({

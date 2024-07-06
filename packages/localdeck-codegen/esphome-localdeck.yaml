@@ -59,6 +59,9 @@ light:
     num_leds: 24
     chipset: SK6812
     restore_mode: RESTORE_AND_OFF
+    effects:
+      - addressable_rainbow:
+          name: Addressable Rainbow
   - platform: partition
     id: keypad_button_01_light
     name: Button 01 Light
@@ -268,72 +271,30 @@ matrix_keypad:
         number: GPIO7
         allow_other_uses: true
   columns:
-    - pin:
-        number: GPIO0
-        allow_other_uses: true
-    - pin:
-        number: GPIO1
-        allow_other_uses: true
-    - pin:
-        number: GPIO10
-        allow_other_uses: true
-    - pin:
-        number: GPIO4
-        allow_other_uses: true
-    - pin:
-        number: GPIO5
-        allow_other_uses: true
-    - pin:
-        number: GPIO6
-        allow_other_uses: true
+    - pin: GPIO0
+    - pin: GPIO1
+    - pin: GPIO10
+    - pin: GPIO4
+    - pin: GPIO5
+    - pin: GPIO6
 binary_sensor:
   - platform: gpio
-    id: keypad_col_00
-    pin:
-      number: GPIO0
-      allow_other_uses: true
-  - platform: gpio
-    id: keypad_col_01
-    pin:
-      number: GPIO1
-      allow_other_uses: true
-  - platform: gpio
-    id: keypad_col_10
-    pin:
-      number: GPIO10
-      allow_other_uses: true
-  - platform: gpio
-    id: keypad_col_04
-    pin:
-      number: GPIO4
-      allow_other_uses: true
-  - platform: gpio
-    id: keypad_col_05
-    pin:
-      number: GPIO5
-      allow_other_uses: true
-  - platform: gpio
-    id: keypad_col_06
-    pin:
-      number: GPIO6
-      allow_other_uses: true
-  - platform: gpio
-    id: keypad_col_21
+    id: keypad_row_21
     pin:
       number: GPIO21
       allow_other_uses: true
   - platform: gpio
-    id: keypad_col_20
+    id: keypad_row_20
     pin:
       number: GPIO20
       allow_other_uses: true
   - platform: gpio
-    id: keypad_col_03
+    id: keypad_row_03
     pin:
       number: GPIO3
       allow_other_uses: true
   - platform: gpio
-    id: keypad_col_07
+    id: keypad_row_07
     pin:
       number: GPIO7
       allow_other_uses: true

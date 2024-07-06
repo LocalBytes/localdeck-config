@@ -1,6 +1,7 @@
 import newConfig from "@/esphome-localdeck.js";
-import {DashboardImport} from "esphome-config-ts/dist/components/index.js";
 import {BUTTON_NUMBERS, ConfiguredButton, newConfiguredButtonOpts} from "@/virtuals/index.js";
+import {DashboardImport} from "esphome-config-ts/dist/components/index.js";
+
 import _ from "lodash";
 
 let {config} = newConfig();
@@ -16,6 +17,9 @@ esphomeComponent.config = _.merge(esphomeComponent.config, {
         name: "localbytes.localdeck",
         version: "0.0.1",
     },
+    on_boot: [
+        {'light.turn_on': {id: 'ledstrip', brightness: '25%', effect: 'Addressable Rainbow'}}
+    ]
 });
 
 BUTTON_NUMBERS.sort().forEach((num) => {
