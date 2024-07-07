@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "prepare": "ts-patch install && tsc",
-    "build": "run-s prepare build:*",
+    "esphome": "run-s prepare build:*",
     "prod": "run-s prepare build:yaml:prod build:bin:prod run:prod",
     "build:yaml": "run-p build:yaml:*",
     "build:yaml:prod": "node --loader ts-node/esm ./src/esphome-localdeck-stock.ts > ./esphome-localdeck.yaml",
