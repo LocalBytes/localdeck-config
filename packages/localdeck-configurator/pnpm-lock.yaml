@@ -14,7 +14,7 @@ importers:
       '@fontsource/poppins':
         specifier: ^5.0.14
         version: 5.0.14
-      '@localbytes/esphome-config-ts':
+      'esphome-config-ts':
         specifier: github:localbytes/esphome-config-ts
         version: esphome-config-ts@https://codeload.github.com/localbytes/esphome-config-ts/tar.gz/74985ef93d56e03010ead3ce0533f9e563853a45
       '@localbytes/localdeck-codegen':

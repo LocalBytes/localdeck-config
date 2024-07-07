@@ -127,9 +127,6 @@ importers:
       '@fontsource/poppins':
         specifier: ^5.0.14
         version: 5.0.14
-      '@localbytes/esphome-config-ts':
-        specifier: github:localbytes/esphome-config-ts
-        version: esphome-config-ts@https://codeload.github.com/localbytes/esphome-config-ts/tar.gz/0dfaa636efb6894a5b6b424aa127c56198e82690
       '@localbytes/localdeck-codegen':
         specifier: workspace:^
         version: link:../localdeck-codegen
@@ -142,6 +139,9 @@ importers:
       '@nuxtjs/tailwindcss':
         specifier: ^6.12.0
         version: 6.12.0(magicast@0.3.4)(rollup@4.18.0)(ts-node@10.9.2(@types/node@20.14.10)(typescript@5.5.3))
+      esphome-config-ts:
+        specifier: github:localbytes/esphome-config-ts
+        version: https://codeload.github.com/localbytes/esphome-config-ts/tar.gz/0dfaa636efb6894a5b6b424aa127c56198e82690
       lodash:
         specifier: ^4.17.21
         version: 4.17.21

@@ -29,7 +29,7 @@
   "dependencies": {
     "@fontsource-variable/open-sans": "^5.0.29",
     "@fontsource/poppins": "^5.0.14",
-    "@localbytes/esphome-config-ts": "github:localbytes/esphome-config-ts",
+    "esphome-config-ts": "github:localbytes/esphome-config-ts",
     "@localbytes/localdeck-codegen": "workspace:^",
     "@localbytes/localdeck-components": "workspace:^",
     "@nuxtjs/color-mode": "^3.4.2",
