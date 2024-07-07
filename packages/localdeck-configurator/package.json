@@ -2,7 +2,7 @@
   "name": "@localbytes/localdeck-configurator",
   "private": true,
   "type": "module",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
