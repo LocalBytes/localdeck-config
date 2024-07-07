@@ -7,7 +7,7 @@ import ConfigUtil from "@localbytes/localdeck-components/src/utils/config-util";
 import {type DeepPartial} from "@localbytes/localdeck-components/src/utils/types";
 import {ConfiguredButton} from "@localbytes/localdeck-codegen/dist/virtuals";
 import newConfig from "@localbytes/localdeck-codegen/dist/esphome-localdeck";
-import espHomeYaml from "@localbytes/esphome-config-ts/dist/yaml";
+import espHomeYaml from "esphome-config-ts/dist/yaml";
 import _ from "lodash";
 
 function smartlyMerge(newCfg: any, originalContent: string): any {
