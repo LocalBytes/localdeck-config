@@ -22,7 +22,7 @@ importers:
     dependencies:
       esphome-config-ts:
         specifier: github:LocalBytes/esphome-config-ts
-        version: https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/ba664c96fa83f825c83eb09eff87060d3d540130
+        version: https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/0dfaa636efb6894a5b6b424aa127c56198e82690
       js-yaml:
         specifier: ^4.1.0
         version: 4.1.0
@@ -45,6 +45,9 @@ importers:
       '@types/lodash':
         specifier: ^4.17.6
         version: 4.17.6
+      '@types/node':
+        specifier: ^20.14.10
+        version: 20.14.10
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
@@ -126,7 +129,7 @@ importers:
         version: 5.0.14
       '@localbytes/esphome-config-ts':
         specifier: github:localbytes/esphome-config-ts
-        version: esphome-config-ts@https://codeload.github.com/localbytes/esphome-config-ts/tar.gz/ba664c96fa83f825c83eb09eff87060d3d540130
+        version: esphome-config-ts@https://codeload.github.com/localbytes/esphome-config-ts/tar.gz/0dfaa636efb6894a5b6b424aa127c56198e82690
       '@localbytes/localdeck-codegen':
         specifier: workspace:^
         version: link:../localdeck-codegen
@@ -2416,12 +2419,12 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     hasBin: true
 
-  esphome-config-ts@https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/ba664c96fa83f825c83eb09eff87060d3d540130:
-    resolution: {tarball: https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/ba664c96fa83f825c83eb09eff87060d3d540130}
+  esphome-config-ts@https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/0dfaa636efb6894a5b6b424aa127c56198e82690:
+    resolution: {tarball: https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/0dfaa636efb6894a5b6b424aa127c56198e82690}
     version: 0.1.0
 
-  esphome-config-ts@https://codeload.github.com/localbytes/esphome-config-ts/tar.gz/ba664c96fa83f825c83eb09eff87060d3d540130:
-    resolution: {tarball: https://codeload.github.com/localbytes/esphome-config-ts/tar.gz/ba664c96fa83f825c83eb09eff87060d3d540130}
+  esphome-config-ts@https://codeload.github.com/localbytes/esphome-config-ts/tar.gz/0dfaa636efb6894a5b6b424aa127c56198e82690:
+    resolution: {tarball: https://codeload.github.com/localbytes/esphome-config-ts/tar.gz/0dfaa636efb6894a5b6b424aa127c56198e82690}
     version: 0.1.0
 
   espree@9.6.1:
@@ -7532,11 +7535,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  esphome-config-ts@https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/ba664c96fa83f825c83eb09eff87060d3d540130:
+  esphome-config-ts@https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/0dfaa636efb6894a5b6b424aa127c56198e82690:
     dependencies:
       js-yaml: 4.1.0
 
-  esphome-config-ts@https://codeload.github.com/localbytes/esphome-config-ts/tar.gz/ba664c96fa83f825c83eb09eff87060d3d540130:
+  esphome-config-ts@https://codeload.github.com/localbytes/esphome-config-ts/tar.gz/0dfaa636efb6894a5b6b424aa127c56198e82690:
     dependencies:
       js-yaml: 4.1.0
 
