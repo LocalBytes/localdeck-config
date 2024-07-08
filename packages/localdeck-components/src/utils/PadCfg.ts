@@ -3,7 +3,7 @@ import {
     BUTTON_NUMBERS,
     ConfiguredButtonOpts,
     newConfiguredButtonOpts
-} from "@localbytes/localdeck-codegen/dist/virtuals";
+} from "@localbytes/localdeck-codegen/dist/virtuals/index.js";
 
 export interface PadEditor {
     title: string;
