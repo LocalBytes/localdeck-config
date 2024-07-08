@@ -5,7 +5,6 @@ import {
 } from "@localbytes/localdeck-codegen/dist/virtuals";
 import type {DeepPartial} from "./types";
 
-
 export interface PadEditor {
     title: string;
     buttons: Record<number, ConfiguredButtonOpts>
