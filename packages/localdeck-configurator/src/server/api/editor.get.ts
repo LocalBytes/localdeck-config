@@ -1,6 +1,4 @@
 import * as fs from "fs/promises";
-import {decompress} from "@localbytes/localdeck-components/src/utils/utils";
-import {newPadEditor, type PadEditor} from "@localbytes/localdeck-components/src/utils/PadCfg";
 import _ from "lodash";
 
 export default defineEventHandler(async (event) => {

@@ -59,7 +59,6 @@
   </div>
 </template>
 <script lang="ts" setup>
-import {type EditContainer} from "@localbytes/localdeck-components/src/utils/PadCfg";
 import ConfigUtil from "@localbytes/localdeck-components/src/utils/config-util";
 
 const router = useRouter();
