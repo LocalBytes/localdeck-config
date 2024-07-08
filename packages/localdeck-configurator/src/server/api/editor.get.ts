@@ -1,6 +1,9 @@
 import * as fs from "fs/promises";
 import _ from "lodash";
 
+import {decompress} from "@localbytes/localdeck-components/src/utils/compression";
+import {PadEditor} from "@localbytes/localdeck-components/src/utils/PadCfg";
+
 export default defineEventHandler(async (event) => {
     const {filesDir} = useRuntimeConfig();
     const {filename} = getQuery(event)

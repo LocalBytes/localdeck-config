@@ -4,6 +4,8 @@ import _ from "lodash";
 import {ConfiguredButton} from "@localbytes/localdeck-codegen/dist/virtuals";
 import espHomeYaml from "esphome-config-ts/dist/yaml/index.js";
 
+import {PadEditor} from "@localbytes/localdeck-components/src/utils/PadCfg";
+
 function smartlyMerge(newCfg: any, originalContent: string): any {
     const allowlist = ["substitutions", "wifi", "captive_portal", "logger", "web_server", "api", "ota"];
 
