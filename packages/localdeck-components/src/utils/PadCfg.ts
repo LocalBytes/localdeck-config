@@ -1,9 +1,9 @@
 import type {DeepPartial} from "./types";
 import {
     BUTTON_NUMBERS,
-    ConfiguredButtonOpts,
+    type ConfiguredButtonOpts,
     newConfiguredButtonOpts
-} from "@localbytes/localdeck-codegen/dist/virtuals/index.js";
+} from "@localbytes/localdeck-codegen/dist/virtuals";
 
 export interface PadEditor {
     title: string;

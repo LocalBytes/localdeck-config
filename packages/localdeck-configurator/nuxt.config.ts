@@ -1,5 +1,3 @@
-import rollupPluginTs from 'rollup-plugin-typescript2'
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     extends: ["@localbytes/localdeck-components"],
@@ -34,12 +32,4 @@ export default defineNuxtConfig({
     ],
 
     css: ['~/assets/css/global.css'],
-
-    nitro: {
-        rollupConfig: {
-            // @ts-ignore
-            plugins: [rollupPluginTs()]
-        }
-    },
-
 })
