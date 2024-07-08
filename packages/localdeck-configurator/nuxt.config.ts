@@ -25,6 +25,9 @@ export default defineNuxtConfig({
         }
     },
 
+    // https://github.com/nuxt/nuxt/discussions/26739
+    nitro: {experimental: {legacyExternals: true}},
+
     modules: [
         '@nuxt/test-utils/module',
         '@nuxtjs/tailwindcss',

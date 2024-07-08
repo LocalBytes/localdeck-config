@@ -1,14 +1,13 @@
 import * as fs from "fs/promises";
+import _ from "lodash";
 
-
-import {type PadEditor} from "@localbytes/localdeck-components/src/utils/PadCfg";
-import {getEditorUrl} from "@localbytes/localdeck-components/src/utils/utils";
-import ConfigUtil from "@localbytes/localdeck-components/src/utils/config-util";
-import {type DeepPartial} from "@localbytes/localdeck-components/src/utils/types";
 import {ConfiguredButton} from "@localbytes/localdeck-codegen/dist/virtuals";
 import newConfig from "@localbytes/localdeck-codegen/dist/esphome-localdeck";
-import espHomeYaml from "@localbytes/esphome-config-ts/dist/yaml";
-import _ from "lodash";
+import espHomeYaml from "esphome-config-ts/dist/yaml/index.js";
+
+import {PadEditor} from "@localbytes/localdeck-components/src/utils/PadCfg";
+import {ConfigUtil} from "@localbytes/localdeck-components/src/utils/config-util";
+import {getEditorUrl} from "@localbytes/localdeck-components/src/utils/compression";
 
 function smartlyMerge(newCfg: any, originalContent: string): any {
     const allowlist = ["substitutions", "wifi", "captive_portal", "logger", "web_server", "api", "ota"];
