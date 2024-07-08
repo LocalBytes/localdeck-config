@@ -82,7 +82,8 @@ jobs:
             --docker-hub "ghcr.io/${{ env.ghcr_user }}"
 
   publish-subtree:
-    needs: [ build, publish ]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [ build ]
     runs-on: ubuntu-latest
     steps:
 
