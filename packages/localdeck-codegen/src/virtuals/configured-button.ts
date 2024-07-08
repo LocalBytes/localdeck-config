@@ -142,7 +142,7 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
         }
 
         if (c.ha_entity && c.follow_color) {
-            stack.push(new HomeassistantSensor({
+            stack.push(new HomeassistantTextSensor({
                 id: `keypad_button_${c.num}_hass_color`,
                 entity_id: c.ha_entity,
                 attribute: "rgb_color",
