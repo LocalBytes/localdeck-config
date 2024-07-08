@@ -59,8 +59,6 @@
   </div>
 </template>
 <script lang="ts" setup>
-import ConfigUtil from "@localbytes/localdeck-components/src/utils/config-util";
-
 const router = useRouter();
 const route = useRoute()
 const {data, status} = await useFetch('/api/editor', {query: {filename: route.query.filename as string}});

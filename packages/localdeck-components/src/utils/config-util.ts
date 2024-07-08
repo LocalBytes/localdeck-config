@@ -65,7 +65,7 @@ const proxyHandler = (
 
 export const useConfigUtil = () => inject(configUtilSymbol) as ConfigUtil;
 
-export default class ConfigUtil {
+export class ConfigUtil {
     changes: DeepPartial<PadEditor> = {};
     private defaultConfig = newPadEditor();
 
