@@ -1,4 +1,4 @@
-import {EsphomeComponent} from "esphome-config-ts/dist/lib";
+import {EsphomeComponent} from "esphome-config-ts/dist/lib/index.js";
 
 //TODO: Move to core
 

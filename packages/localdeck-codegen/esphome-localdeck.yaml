@@ -6,7 +6,8 @@ logger:
   logs: {}
 web_server: {}
 api: {}
-ota: { }
+ota:
+  - platform: esphome
 substitutions:
   name: localdeck
   friendly_name: LocalBytes LocalDeck
@@ -14,13 +15,19 @@ esphome:
   name: ${name}
   friendly_name: ${friendly_name}
   name_add_mac_suffix: true
-  project:
-    name: localbytes.localdeck
-    version: 0.0.1
   platformio_options:
     board_build.flash_mode: dio
   on_boot:
-    - light.turn_off: ledstrip
+    - light.turn_on:
+        id: ledstrip
+        brightness: 25%
+        effect: Addressable Rainbow
+    - delay: 5s
+    - light.turn_off:
+        id: ledstrip
+  project:
+    name: localbytes.localdeck
+    version: 0.0.1
 esp32:
   board: esp32-c3-devkitm-1
   framework:
@@ -52,9 +59,13 @@ light:
     num_leds: 24
     chipset: SK6812
     restore_mode: RESTORE_AND_OFF
+    effects:
+      - addressable_rainbow:
+          name: Addressable Rainbow
   - platform: partition
     id: keypad_button_01_light
     name: Button 01 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 0
@@ -62,6 +73,7 @@ light:
   - platform: partition
     id: keypad_button_10_light
     name: Button 10 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 9
@@ -69,6 +81,7 @@ light:
   - platform: partition
     id: keypad_button_11_light
     name: Button 11 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 10
@@ -76,6 +89,7 @@ light:
   - platform: partition
     id: keypad_button_12_light
     name: Button 12 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 11
@@ -83,6 +97,7 @@ light:
   - platform: partition
     id: keypad_button_13_light
     name: Button 13 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 12
@@ -90,6 +105,7 @@ light:
   - platform: partition
     id: keypad_button_14_light
     name: Button 14 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 13
@@ -97,6 +113,7 @@ light:
   - platform: partition
     id: keypad_button_15_light
     name: Button 15 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 14
@@ -104,6 +121,7 @@ light:
   - platform: partition
     id: keypad_button_16_light
     name: Button 16 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 15
@@ -111,6 +129,7 @@ light:
   - platform: partition
     id: keypad_button_17_light
     name: Button 17 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 16
@@ -118,6 +137,7 @@ light:
   - platform: partition
     id: keypad_button_18_light
     name: Button 18 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 17
@@ -125,6 +145,7 @@ light:
   - platform: partition
     id: keypad_button_19_light
     name: Button 19 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 18
@@ -132,6 +153,7 @@ light:
   - platform: partition
     id: keypad_button_02_light
     name: Button 02 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 1
@@ -139,6 +161,7 @@ light:
   - platform: partition
     id: keypad_button_20_light
     name: Button 20 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 19
@@ -146,6 +169,7 @@ light:
   - platform: partition
     id: keypad_button_21_light
     name: Button 21 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 20
@@ -153,6 +177,7 @@ light:
   - platform: partition
     id: keypad_button_22_light
     name: Button 22 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 21
@@ -160,6 +185,7 @@ light:
   - platform: partition
     id: keypad_button_23_light
     name: Button 23 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 22
@@ -167,6 +193,7 @@ light:
   - platform: partition
     id: keypad_button_24_light
     name: Button 24 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 23
@@ -174,6 +201,7 @@ light:
   - platform: partition
     id: keypad_button_03_light
     name: Button 03 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 2
@@ -181,6 +209,7 @@ light:
   - platform: partition
     id: keypad_button_04_light
     name: Button 04 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 3
@@ -188,6 +217,7 @@ light:
   - platform: partition
     id: keypad_button_05_light
     name: Button 05 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 4
@@ -195,6 +225,7 @@ light:
   - platform: partition
     id: keypad_button_06_light
     name: Button 06 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 5
@@ -202,6 +233,7 @@ light:
   - platform: partition
     id: keypad_button_07_light
     name: Button 07 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 6
@@ -209,6 +241,7 @@ light:
   - platform: partition
     id: keypad_button_08_light
     name: Button 08 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 7
@@ -216,6 +249,7 @@ light:
   - platform: partition
     id: keypad_button_09_light
     name: Button 09 Light
+    internal: false
     segments:
       - id: ledstrip
         from: 8
@@ -237,72 +271,30 @@ matrix_keypad:
         number: GPIO7
         allow_other_uses: true
   columns:
-    - pin:
-        number: GPIO0
-        allow_other_uses: true
-    - pin:
-        number: GPIO1
-        allow_other_uses: true
-    - pin:
-        number: GPIO10
-        allow_other_uses: true
-    - pin:
-        number: GPIO4
-        allow_other_uses: true
-    - pin:
-        number: GPIO5
-        allow_other_uses: true
-    - pin:
-        number: GPIO6
-        allow_other_uses: true
+    - pin: GPIO0
+    - pin: GPIO1
+    - pin: GPIO10
+    - pin: GPIO4
+    - pin: GPIO5
+    - pin: GPIO6
 binary_sensor:
   - platform: gpio
-    id: keypad_col_00
-    pin:
-      number: GPIO0
-      allow_other_uses: true
-  - platform: gpio
-    id: keypad_col_01
-    pin:
-      number: GPIO1
-      allow_other_uses: true
-  - platform: gpio
-    id: keypad_col_10
-    pin:
-      number: GPIO10
-      allow_other_uses: true
-  - platform: gpio
-    id: keypad_col_04
-    pin:
-      number: GPIO4
-      allow_other_uses: true
-  - platform: gpio
-    id: keypad_col_05
-    pin:
-      number: GPIO5
-      allow_other_uses: true
-  - platform: gpio
-    id: keypad_col_06
-    pin:
-      number: GPIO6
-      allow_other_uses: true
-  - platform: gpio
-    id: keypad_col_21
+    id: keypad_row_21
     pin:
       number: GPIO21
       allow_other_uses: true
   - platform: gpio
-    id: keypad_col_20
+    id: keypad_row_20
     pin:
       number: GPIO20
       allow_other_uses: true
   - platform: gpio
-    id: keypad_col_03
+    id: keypad_row_03
     pin:
       number: GPIO3
       allow_other_uses: true
   - platform: gpio
-    id: keypad_col_07
+    id: keypad_row_07
     pin:
       number: GPIO7
       allow_other_uses: true
@@ -1171,200 +1163,229 @@ binary_sensor:
                 label: ''
                 type: double
 script:
-  id: blip_light
-  parameters:
-    led_index: int
-  mode: parallel
-  then:
-    - light.addressable_set:
-        id: ledstrip
-        range_from: !lambda return led_index;
-        range_to: !lambda return led_index;
-        red: 100%
-        green: 100%
-        blue: 100%
-        white: 100%
-    - delay: 25ms
-    - light.addressable_set:
-        id: ledstrip
-        range_from: !lambda return led_index;
-        range_to: !lambda return led_index;
-        red: 95%
-        green: 95%
-        blue: 95%
-        white: 95%
-    - delay: 25ms
-    - light.addressable_set:
-        id: ledstrip
-        range_from: !lambda return led_index;
-        range_to: !lambda return led_index;
-        red: 90%
-        green: 90%
-        blue: 90%
-        white: 90%
-    - delay: 25ms
-    - light.addressable_set:
-        id: ledstrip
-        range_from: !lambda return led_index;
-        range_to: !lambda return led_index;
-        red: 85%
-        green: 85%
-        blue: 85%
-        white: 85%
-    - delay: 25ms
-    - light.addressable_set:
-        id: ledstrip
-        range_from: !lambda return led_index;
-        range_to: !lambda return led_index;
-        red: 80%
-        green: 80%
-        blue: 80%
-        white: 80%
-    - delay: 25ms
-    - light.addressable_set:
-        id: ledstrip
-        range_from: !lambda return led_index;
-        range_to: !lambda return led_index;
-        red: 75%
-        green: 75%
-        blue: 75%
-        white: 75%
-    - delay: 25ms
-    - light.addressable_set:
-        id: ledstrip
-        range_from: !lambda return led_index;
-        range_to: !lambda return led_index;
-        red: 70%
-        green: 70%
-        blue: 70%
-        white: 70%
-    - delay: 25ms
-    - light.addressable_set:
-        id: ledstrip
-        range_from: !lambda return led_index;
-        range_to: !lambda return led_index;
-        red: 65%
-        green: 65%
-        blue: 65%
-        white: 65%
-    - delay: 25ms
-    - light.addressable_set:
-        id: ledstrip
-        range_from: !lambda return led_index;
-        range_to: !lambda return led_index;
-        red: 60%
-        green: 60%
-        blue: 60%
-        white: 60%
-    - delay: 25ms
-    - light.addressable_set:
-        id: ledstrip
-        range_from: !lambda return led_index;
-        range_to: !lambda return led_index;
-        red: 55%
-        green: 55%
-        blue: 55%
-        white: 55%
-    - delay: 25ms
-    - light.addressable_set:
-        id: ledstrip
-        range_from: !lambda return led_index;
-        range_to: !lambda return led_index;
-        red: 50%
-        green: 50%
-        blue: 50%
-        white: 50%
-    - delay: 25ms
-    - light.addressable_set:
-        id: ledstrip
-        range_from: !lambda return led_index;
-        range_to: !lambda return led_index;
-        red: 45%
-        green: 45%
-        blue: 45%
-        white: 45%
-    - delay: 25ms
-    - light.addressable_set:
-        id: ledstrip
-        range_from: !lambda return led_index;
-        range_to: !lambda return led_index;
-        red: 40%
-        green: 40%
-        blue: 40%
-        white: 40%
-    - delay: 25ms
-    - light.addressable_set:
-        id: ledstrip
-        range_from: !lambda return led_index;
-        range_to: !lambda return led_index;
-        red: 35%
-        green: 35%
-        blue: 35%
-        white: 35%
-    - delay: 25ms
-    - light.addressable_set:
-        id: ledstrip
-        range_from: !lambda return led_index;
-        range_to: !lambda return led_index;
-        red: 30%
-        green: 30%
-        blue: 30%
-        white: 30%
-    - delay: 25ms
-    - light.addressable_set:
-        id: ledstrip
-        range_from: !lambda return led_index;
-        range_to: !lambda return led_index;
-        red: 25%
-        green: 25%
-        blue: 25%
-        white: 25%
-    - delay: 25ms
-    - light.addressable_set:
-        id: ledstrip
-        range_from: !lambda return led_index;
-        range_to: !lambda return led_index;
-        red: 20%
-        green: 20%
-        blue: 20%
-        white: 20%
-    - delay: 25ms
-    - light.addressable_set:
-        id: ledstrip
-        range_from: !lambda return led_index;
-        range_to: !lambda return led_index;
-        red: 15%
-        green: 15%
-        blue: 15%
-        white: 15%
-    - delay: 25ms
-    - light.addressable_set:
-        id: ledstrip
-        range_from: !lambda return led_index;
-        range_to: !lambda return led_index;
-        red: 10%
-        green: 10%
-        blue: 10%
-        white: 10%
-    - delay: 25ms
-    - light.addressable_set:
-        id: ledstrip
-        range_from: !lambda return led_index;
-        range_to: !lambda return led_index;
-        red: 5%
-        green: 5%
-        blue: 5%
-        white: 5%
-    - delay: 25ms
-    - light.addressable_set:
-        id: ledstrip
-        range_from: !lambda return led_index;
-        range_to: !lambda return led_index;
-        red: 0%
-        green: 0%
-        blue: 0%
-        white: 0%
-    - delay: 25ms
+  - id: blip_light
+    parameters:
+      led_index: int
+    mode: parallel
+    then:
+      - light.addressable_set:
+          id: ledstrip
+          range_from: !lambda return led_index;
+          range_to: !lambda return led_index;
+          red: 100%
+          green: 100%
+          blue: 100%
+          white: 100%
+      - delay: 25ms
+      - light.addressable_set:
+          id: ledstrip
+          range_from: !lambda return led_index;
+          range_to: !lambda return led_index;
+          red: 95%
+          green: 95%
+          blue: 95%
+          white: 95%
+      - delay: 25ms
+      - light.addressable_set:
+          id: ledstrip
+          range_from: !lambda return led_index;
+          range_to: !lambda return led_index;
+          red: 90%
+          green: 90%
+          blue: 90%
+          white: 90%
+      - delay: 25ms
+      - light.addressable_set:
+          id: ledstrip
+          range_from: !lambda return led_index;
+          range_to: !lambda return led_index;
+          red: 85%
+          green: 85%
+          blue: 85%
+          white: 85%
+      - delay: 25ms
+      - light.addressable_set:
+          id: ledstrip
+          range_from: !lambda return led_index;
+          range_to: !lambda return led_index;
+          red: 80%
+          green: 80%
+          blue: 80%
+          white: 80%
+      - delay: 25ms
+      - light.addressable_set:
+          id: ledstrip
+          range_from: !lambda return led_index;
+          range_to: !lambda return led_index;
+          red: 75%
+          green: 75%
+          blue: 75%
+          white: 75%
+      - delay: 25ms
+      - light.addressable_set:
+          id: ledstrip
+          range_from: !lambda return led_index;
+          range_to: !lambda return led_index;
+          red: 70%
+          green: 70%
+          blue: 70%
+          white: 70%
+      - delay: 25ms
+      - light.addressable_set:
+          id: ledstrip
+          range_from: !lambda return led_index;
+          range_to: !lambda return led_index;
+          red: 65%
+          green: 65%
+          blue: 65%
+          white: 65%
+      - delay: 25ms
+      - light.addressable_set:
+          id: ledstrip
+          range_from: !lambda return led_index;
+          range_to: !lambda return led_index;
+          red: 60%
+          green: 60%
+          blue: 60%
+          white: 60%
+      - delay: 25ms
+      - light.addressable_set:
+          id: ledstrip
+          range_from: !lambda return led_index;
+          range_to: !lambda return led_index;
+          red: 55%
+          green: 55%
+          blue: 55%
+          white: 55%
+      - delay: 25ms
+      - light.addressable_set:
+          id: ledstrip
+          range_from: !lambda return led_index;
+          range_to: !lambda return led_index;
+          red: 50%
+          green: 50%
+          blue: 50%
+          white: 50%
+      - delay: 25ms
+      - light.addressable_set:
+          id: ledstrip
+          range_from: !lambda return led_index;
+          range_to: !lambda return led_index;
+          red: 45%
+          green: 45%
+          blue: 45%
+          white: 45%
+      - delay: 25ms
+      - light.addressable_set:
+          id: ledstrip
+          range_from: !lambda return led_index;
+          range_to: !lambda return led_index;
+          red: 40%
+          green: 40%
+          blue: 40%
+          white: 40%
+      - delay: 25ms
+      - light.addressable_set:
+          id: ledstrip
+          range_from: !lambda return led_index;
+          range_to: !lambda return led_index;
+          red: 35%
+          green: 35%
+          blue: 35%
+          white: 35%
+      - delay: 25ms
+      - light.addressable_set:
+          id: ledstrip
+          range_from: !lambda return led_index;
+          range_to: !lambda return led_index;
+          red: 30%
+          green: 30%
+          blue: 30%
+          white: 30%
+      - delay: 25ms
+      - light.addressable_set:
+          id: ledstrip
+          range_from: !lambda return led_index;
+          range_to: !lambda return led_index;
+          red: 25%
+          green: 25%
+          blue: 25%
+          white: 25%
+      - delay: 25ms
+      - light.addressable_set:
+          id: ledstrip
+          range_from: !lambda return led_index;
+          range_to: !lambda return led_index;
+          red: 20%
+          green: 20%
+          blue: 20%
+          white: 20%
+      - delay: 25ms
+      - light.addressable_set:
+          id: ledstrip
+          range_from: !lambda return led_index;
+          range_to: !lambda return led_index;
+          red: 15%
+          green: 15%
+          blue: 15%
+          white: 15%
+      - delay: 25ms
+      - light.addressable_set:
+          id: ledstrip
+          range_from: !lambda return led_index;
+          range_to: !lambda return led_index;
+          red: 10%
+          green: 10%
+          blue: 10%
+          white: 10%
+      - delay: 25ms
+      - light.addressable_set:
+          id: ledstrip
+          range_from: !lambda return led_index;
+          range_to: !lambda return led_index;
+          red: 5%
+          green: 5%
+          blue: 5%
+          white: 5%
+      - delay: 25ms
+  - id: set_led_rgb
+    parameters:
+      led_index: int
+      color: string
+    mode: queued
+    then:
+      - lambda: >
+          ESP_LOGD("set_led_rgb", "Index %d, Input: %s", led_index,
+          color.c_str());
+
+
+          int firstComma = color.find(',');
+
+          int secondComma = color.find(',', firstComma + 1);
+
+
+          ESP_LOGD("set_led_rgb", "Commas are: %d, %d", firstComma,
+          secondComma);
+
+
+          auto rs = color.substr(1, firstComma);
+
+          auto gs = color.substr(firstComma + 1, secondComma);
+
+          auto bs = color.substr(secondComma + 1, color.length() - 1);
+
+
+          ESP_LOGD("set_led_rgb", "%s-%s-%s", rs.c_str(), gs.c_str(),
+          bs.c_str());
+
+          ESP_LOGD("set_led_rgb", "%d, %d, %d", stoi(rs), stoi(gs), stoi(bs));
+
+
+          auto light = ((AddressableLight*)id(ledstrip).get_output());
+
+          light->get(led_index).set(Color(stoi(rs), stoi(gs), stoi(bs)));
+
+          light->schedule_show();
 globals:
   id: brightness
   type: float
