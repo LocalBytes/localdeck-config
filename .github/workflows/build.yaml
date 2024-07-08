@@ -51,58 +51,58 @@ jobs:
           name: localdeck-configurator-hass
           path: ./packages/localdeck-configurator/homeassistant
 
-  publish:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      packages: write
-    steps:
-      - name: GHCR User
-        run: echo "ghcr_user=${GITHUB_REPOSITORY_OWNER@L}" >> "${GITHUB_ENV}"
+#  publish:
+#    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+#    needs: build
+#    runs-on: ubuntu-latest
+#    permissions:
+#      packages: write
+#    steps:
+#      - name: GHCR User
+#        run: echo "ghcr_user=${GITHUB_REPOSITORY_OWNER@L}" >> "${GITHUB_ENV}"
+#
+#      - name: Log in to the Container registry
+#        uses: docker/login-action@v3
+#        with:
+#          registry: ghcr.io
+#          username: ${{ env.ghcr_user }}
+#          password: ${{ secrets.GITHUB_TOKEN }}
+#
+#      - uses: actions/download-artifact@v4
+#        with:
+#          name: localdeck-configurator
+#          path: localdeck-configurator
+#
+#      - name: Publish
+#        uses: home-assistant/builder@master
+#        with:
+#          args: |
+#            --all \
+#            --target localdeck-configurator \
+#            --docker-hub "ghcr.io/${{ env.ghcr_user }}"
 
-      - name: Log in to the Container registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ env.ghcr_user }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - uses: actions/download-artifact@v4
-        with:
-          name: localdeck-configurator
-          path: localdeck-configurator
-
-      - name: Publish
-        uses: home-assistant/builder@master
-        with:
-          args: |
-            --all \
-            --target localdeck-configurator \
-            --docker-hub "ghcr.io/${{ env.ghcr_user }}"
-
-  publish-subtree:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: [ build ]
-    runs-on: ubuntu-latest
-    steps:
-
-      - uses: actions/download-artifact@v4
-        with:
-          name: localdeck-configurator
-          path: localdeck-configurator
-
-      - name: Pushes to another repository
-        uses: cpina/github-action-push-to-another-repository@main
-        env:
-          SSH_DEPLOY_KEY: ${{ secrets.SSH_LOCALBYTES_HELLO }}
-        with:
-          source-directory: 'localdeck-configurator'
-          target-directory: 'localdeck-configurator'
-
-          destination-github-username: '${{ github.repository_owner }}'
-          destination-repository-name: 'hass-addons'
-
-          user-name: "LocalBytes Bot"
-          user-email: "hello@mylocalbytes.com"
-          target-branch: main
+#  publish-subtree:
+#    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+#    needs: [ build ]
+#    runs-on: ubuntu-latest
+#    steps:
+#
+#      - uses: actions/download-artifact@v4
+#        with:
+#          name: localdeck-configurator
+#          path: localdeck-configurator
+#
+#      - name: Pushes to another repository
+#        uses: cpina/github-action-push-to-another-repository@main
+#        env:
+#          SSH_DEPLOY_KEY: ${{ secrets.SSH_LOCALBYTES_HELLO }}
+#        with:
+#          source-directory: 'localdeck-configurator'
+#          target-directory: 'localdeck-configurator'
+#
+#          destination-github-username: '${{ github.repository_owner }}'
+#          destination-repository-name: 'hass-addons'
+#
+#          user-name: "LocalBytes Bot"
+#          user-email: "hello@mylocalbytes.com"
+#          target-branch: main
