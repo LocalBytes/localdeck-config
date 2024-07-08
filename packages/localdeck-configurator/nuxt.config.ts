@@ -2,6 +2,13 @@
 export default defineNuxtConfig({
     extends: ["@localbytes/localdeck-components"],
 
+    ssr: false,
+    router: {
+        options: {
+            hashMode: true
+        }
+    },
+
     devtools: {
         enabled: false, // Conflicts with devtools for chrome
     },
