@@ -19,7 +19,7 @@ export default defineNuxtConfig({
         public: {baseUrl: ''},
 
         api_token: '',
-        api_url: 'http://supervisor/core/api',
+        api_url: '', //Allow this to be overridden by env
 
         filesDir: '/homeassistant/esphome'
     },

@@ -7,4 +7,6 @@ export NUXT_APP_BUILD_ASSETS_DIR="$(bashio::addon.ingress_entry)/_nuxt"
 
 export NUXT_API_TOKEN=${SUPERVISOR_TOKEN}
 
+export NUXT_API_URL="http://supervisor/core/api"
+
 node ./server/index.mjs
