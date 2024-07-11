@@ -75,7 +75,7 @@ jobs:
 
     env:
       version: ${{ needs.build-js.outputs.version }}
-      platforms: armhf, aarch64, amd64, i386
+      platforms: aarch64, amd64, armhf, armv7, i386
 
     permissions:
       packages: write
