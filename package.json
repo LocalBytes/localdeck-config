@@ -4,7 +4,7 @@
   "scripts": {
     "build": "pnpm run -r build",
     "build:configurator": "pnpm --filter=localdeck-configurator build",
-    "deploy:configurator": "shx rm -rf ./dist/localdeck_configurator && shx mkdir ./dist/localdeck_configurator && shx cp -r ./packages/localdeck-configurator/{.output,homeassistant}/* ./dist/localdeck_configurator",
+    "deploy:configurator": "shx rm -rf ./dist/localdeck-configurator && shx mkdir ./dist/localdeck-configurator && shx cp -r ./packages/localdeck-configurator/{.output,homeassistant}/* ./dist/localdeck-configurator",
     "configurator": "pnpm run build:configurator && pnpm run deploy:configurator"
   },
   "workspaces": [
