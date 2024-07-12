@@ -76,11 +76,10 @@ jobs:
     permissions:
       contents: read
       packages: write
-      id-token: read
+      id-token: write
 
     env:
       version: ${{ needs.build-js.outputs.version }}
-      describe: ${{ needs.build-js.outputs.describe }}
 
     steps:
       - name: Setup Env
