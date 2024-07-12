@@ -7,10 +7,6 @@ on:
 
 name: "Build and Publish"
 
-permissions:
-  contents: read
-  id-token: write
-
 jobs:
   build-js:
     name: Build JS
@@ -41,15 +37,13 @@ jobs:
         run: pnpm install -r
 
       - name: Get version
-        id: version
         run: |
           version=$(git describe --tags | sed 's/^v//')
-          
-          if [ "${GITHUB_REF}" == "refs/heads/main" ]; then
+          if [ "${GITHUB_EVENT_NAME}" = "release" ]; then
             version=$(node -p -e 'require("./packages/localdeck-configurator/package.json").version')
           fi
-          
           echo "version=${version}" >> "${GITHUB_ENV}"
+
       - name: Build
         run: |
           sed -i "s/VERSION/${{ env.version }}/g" ./packages/localdeck-configurator/homeassistant/config.yaml
@@ -74,6 +68,7 @@ jobs:
 
     permissions:
       contents: read
+      id-token: write
       packages: write
 
     env:
@@ -81,24 +76,28 @@ jobs:
 
     steps:
       - name: Setup Env
-        id: setup-env
         run: echo "ghcr_user=${GITHUB_REPOSITORY_OWNER@L}" >> "${GITHUB_ENV}"
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3.2.0
+        with:
+          registry: ghcr.io
+          username: ${{ env.ghcr_user }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/download-artifact@v4
         with:
           name: localdeck-configurator
           path: localdeck-configurator
 
-      - uses: home-assistant/builder@master
+      - uses: home-assistant/builder@2024.03.5
         with:
           args: |
             --all \
             --target localdeck-configurator \
-            --no-latest \
+            --docker-hub "ghcr.io/${{ env.ghcr_user }}" \
             --cosign \
-            ${{ github.event_name == 'pull_request' && github.event.action == 'synchronize' && ' --test' || '' }}
+            ${{ github.event_name == 'pull_request' && github.event.action == 'synchronize' && '--test' || '--no-latest' }}
+
   publish:
     name: Publish
     if: github.event_name == 'push' || github.event_name == 'release'
@@ -112,12 +111,13 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: localdeck-configurator-hass
+          path: localdeck-configurator
 
       - name: Update config
         if: github.event_name != 'release'
         run: |
-          sed -i 's/"LocalDeck Configurator"/"[Dev] LocalDeck Configurator"/g' ./dist/localdeck-configurator/config.yaml
-          sed -i 's/"localdeck-configurator"/"localdeck-configurator-dev"/g' ./dist/localdeck-configurator/config.yaml
+          sed -i 's/"LocalDeck Configurator"/"[Dev] LocalDeck Configurator"/g' ./localdeck-configurator/config.yaml
+          sed -i 's/"localdeck-configurator"/"localdeck-configurator-dev"/g' ./localdeck-configurator/config.yaml
 
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@main
