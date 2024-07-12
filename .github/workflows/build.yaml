@@ -77,12 +77,6 @@ jobs:
       version: ${{ needs.build-js.outputs.version }}
 
     steps:
-      - name: Setup Env
-        id: setup-env
-        run: |
-          ghcr_user=${GITHUB_REPOSITORY_OWNER@L}
-          echo "ghcr_user=${ghcr_user}" >> "${GITHUB_ENV}"
-          echo "tag=ghcr.io/${ghcr_user}/hass-localdeck-configurator-{arch}:${{ env.version }}" >> "${GITHUB_OUTPUT}"
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -96,12 +90,14 @@ jobs:
           args: |
             --all \
             --target localdeck-configurator \
-            --docker-hub "ghcr.io/${{ env.ghcr_user }}" \
+            --docker-hub "ghcr.io/${GITHUB_REPOSITORY_OWNER@L}" \
             --version ${{ env.version }} \
             --no-latest \
-            ${{ github.event_name == 'pull_request' && github.event.action == 'synchronize' && ' --test' || '' }} \
             --cosign
+#            ${{ github.event_name == 'pull_request' && github.event.action == 'synchronize' && ' --test' || '' }} \
+
   publish:
+    name: Publish
     if: github.event_name == 'push' || github.event_name == 'release'
     needs: [ build-docker ]
     runs-on: ubuntu-latest
