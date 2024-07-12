@@ -2,7 +2,7 @@ on:
   push:
     branches:
       - main
-      - fix/build
+      - fix/build-overhaul
   release:
 #  pull_request:
 
@@ -68,7 +68,6 @@ jobs:
           name: localdeck-configurator-hass
           path: ./packages/localdeck-configurator/homeassistant
 
-
   build-docker:
     name: Build Docker
     needs: [ build-js ]
@@ -77,6 +76,7 @@ jobs:
     permissions:
       contents: read
       packages: write
+      id-token: write
 
     env:
       version: ${{ needs.build-js.outputs.version }}
@@ -88,7 +88,6 @@ jobs:
           ghcr_user=${GITHUB_REPOSITORY_OWNER@L}
           echo "ghcr_user=${ghcr_user}" >> "${GITHUB_ENV}"
           echo "tag=ghcr.io/${ghcr_user}/hass-localdeck-configurator-{arch}:${{ env.version }}" >> "${GITHUB_OUTPUT}"
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -103,10 +102,10 @@ jobs:
             --all \
             --target localdeck-configurator \
             --docker-hub "ghcr.io/${{ env.ghcr_user }}" \
+            --version ${{ env.version }} \
             --no-latest \
             ${{ github.event_name == 'pull_request' && github.event.action == 'synchronize' && ' --test' || '' }} \
             --cosign
-
   publish:
     if: github.event_name == 'push' || github.event_name == 'release'
     needs: [ build-docker ]
