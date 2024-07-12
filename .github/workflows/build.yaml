@@ -8,6 +8,10 @@ on:
 
 name: "Build and Publish"
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   build-js:
     name: Build JS
