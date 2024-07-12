@@ -76,6 +76,7 @@ jobs:
     permissions:
       contents: read
       packages: write
+      id-token: read
 
     env:
       version: ${{ needs.build-js.outputs.version }}
