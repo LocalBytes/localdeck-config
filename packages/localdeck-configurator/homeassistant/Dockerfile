@@ -1,4 +1,6 @@
-ARG BUILD_FROM
+ARG ARCH=amd64
+ARG BUILD_FROM=homeassistant/${ARCH}-base:latest
+
 FROM $BUILD_FROM
 
 RUN apk add --no-cache nodejs
