@@ -8,10 +8,6 @@ on:
 
 name: "Build and Publish"
 
-permissions:
-  contents: read
-  id-token: write
-
 jobs:
   build-js:
     name: Build JS
@@ -76,7 +72,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-      id-token: write
 
     env:
       version: ${{ needs.build-js.outputs.version }}
