@@ -40,7 +40,7 @@ jobs:
       - name: Get version
         id: version
         run: |
-          version=$(git describe --tags | sed 's/^v//')
+          version=$(git describe --tags | sed 's/^v//' | sed 's/-.*//')
           
           if [ "${GITHUB_EVENT_NAME}" == "release" ]; then
             version=$(node -p -e 'require(\"./packages/localdeck-configurator/package.json\").version')
