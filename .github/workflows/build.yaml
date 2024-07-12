@@ -96,7 +96,8 @@ jobs:
             --target localdeck-configurator \
             --docker-hub "ghcr.io/${{ env.ghcr_user }}" \
             --cosign \
-            ${{ github.event_name == 'pull_request' && github.event.action == 'synchronize' && '--test' || '--no-latest' }}
+            ${{ github.event_name == 'pull_request' && github.event.action == 'synchronize' && '--test' || '' }} \
+            ${{ github.event_name != 'release' && '--no-latest' || '' }}
 
   publish:
     name: Publish
