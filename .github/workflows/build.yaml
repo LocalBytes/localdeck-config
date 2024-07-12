@@ -2,8 +2,9 @@ on:
   push:
     branches:
       - main
-  pull_request:
+      - fix/build
   release:
+#  pull_request:
 
 name: "Build and Publish"
 
@@ -102,11 +103,9 @@ jobs:
             --all \
             --target localdeck-configurator \
             --docker-hub "ghcr.io/${{ env.ghcr_user }}" \
-                  --version ${{ env.version }} \
             --no-latest \
-            #           TODO: Uncomment this line when ready to merge
-            #            ${{ github.event_name == 'pull_request' && github.event.action == 'synchronize' && ' --test' || '' }} \
-                  --cosign
+            ${{ github.event_name == 'pull_request' && github.event.action == 'synchronize' && ' --test' || '' }} \
+            --cosign
 
   publish:
     if: github.event_name == 'push' || github.event_name == 'release'
