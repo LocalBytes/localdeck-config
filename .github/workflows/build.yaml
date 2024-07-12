@@ -18,7 +18,6 @@ jobs:
 
     outputs:
       version: ${{ env.version }}
-      describe: ${{ env.describe }}
 
     steps:
       - name: Checkout
@@ -44,19 +43,17 @@ jobs:
       - name: Get version
         id: version
         run: |
-          describe=$(git describe --tags | sed 's/^v//')
-          version=${describe}
+          version=$(git describe --tags | sed 's/^v//')
           
           if [ "${GITHUB_REF}" == "refs/heads/main" ]; then
             version=$(node -p -e 'require(\"./packages/localdeck-configurator/package.json\").version')
           fi
           
-          echo "describe=${describe}" >> "${GITHUB_ENV}"
           echo "version=${version}" >> "${GITHUB_ENV}"
       - name: Build
         run: |
           sed -i "s/VERSION/${{ env.version }}/g" ./packages/localdeck-configurator/homeassistant/config.yaml
-          sed -i "s/:latest/:${{ env.describe }}/g" ./packages/localdeck-configurator/homeassistant/config.yaml
+          sed -i "s/:latest/:${{ env.version }}/g" ./packages/localdeck-configurator/homeassistant/config.yaml
           pnpm build
           mkdir -p .temp
           cp -r ./packages/localdeck-configurator/{.output,homeassistant}/* ./.temp
@@ -82,7 +79,6 @@ jobs:
 
     env:
       version: ${{ needs.build-js.outputs.version }}
-      describe: ${{ needs.build-js.outputs.describe }}
 
     steps:
       - name: Setup Env
@@ -90,7 +86,7 @@ jobs:
         run: |
           ghcr_user=${GITHUB_REPOSITORY_OWNER@L}
           echo "ghcr_user=${ghcr_user}" >> "${GITHUB_ENV}"
-          echo "tag=ghcr.io/${ghcr_user}/hass-localdeck-configurator-{arch}:${{ env.describe }}" >> "${GITHUB_OUTPUT}"
+          echo "tag=ghcr.io/${ghcr_user}/hass-localdeck-configurator-{arch}:${{ env.version }}" >> "${GITHUB_OUTPUT}"
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -105,7 +101,7 @@ jobs:
             --all \
             --target localdeck-configurator \
             --docker-hub "ghcr.io/${{ env.ghcr_user }}" \
-            --version ${{ env.describe }} \
+            --version ${{ env.version }} \
             --no-latest \
             ${{ github.event_name == 'pull_request' && github.event.action == 'synchronize' && ' --test' || '' }} \
             --cosign
