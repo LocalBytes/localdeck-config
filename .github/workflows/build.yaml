@@ -2,11 +2,14 @@ on:
   push:
     branches:
       - main
-      - fix/build-overhaul
+  pull_request:
   release:
-#  pull_request:
 
 name: "Build and Publish"
+
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
   build-js:
@@ -15,6 +18,7 @@ jobs:
 
     outputs:
       version: ${{ env.version }}
+      describe: ${{ env.describe }}
 
     steps:
       - name: Checkout
@@ -40,17 +44,19 @@ jobs:
       - name: Get version
         id: version
         run: |
-          version=$(git describe --tags | sed 's/^v//' | sed 's/-.*//')
+          describe=$(git describe --tags | sed 's/^v//')
+          version=${describe}
           
-          if [ "${GITHUB_EVENT_NAME}" == "release" ]; then
+          if [ "${GITHUB_REF}" == "refs/heads/main" ]; then
             version=$(node -p -e 'require(\"./packages/localdeck-configurator/package.json\").version')
           fi
           
+          echo "describe=${describe}" >> "${GITHUB_ENV}"
           echo "version=${version}" >> "${GITHUB_ENV}"
       - name: Build
         run: |
           sed -i "s/VERSION/${{ env.version }}/g" ./packages/localdeck-configurator/homeassistant/config.yaml
-          sed -i "s/:latest/:${{ env.version }}/g" ./packages/localdeck-configurator/homeassistant/config.yaml
+          sed -i "s/:latest/:${{ env.describe }}/g" ./packages/localdeck-configurator/homeassistant/config.yaml
           pnpm build
           mkdir -p .temp
           cp -r ./packages/localdeck-configurator/{.output,homeassistant}/* ./.temp
@@ -64,6 +70,7 @@ jobs:
           name: localdeck-configurator-hass
           path: ./packages/localdeck-configurator/homeassistant
 
+
   build-docker:
     name: Build Docker
     needs: [ build-js ]
@@ -75,8 +82,15 @@ jobs:
 
     env:
       version: ${{ needs.build-js.outputs.version }}
+      describe: ${{ needs.build-js.outputs.describe }}
 
     steps:
+      - name: Setup Env
+        id: setup-env
+        run: |
+          ghcr_user=${GITHUB_REPOSITORY_OWNER@L}
+          echo "ghcr_user=${ghcr_user}" >> "${GITHUB_ENV}"
+          echo "tag=ghcr.io/${ghcr_user}/hass-localdeck-configurator-{arch}:${{ env.describe }}" >> "${GITHUB_OUTPUT}"
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -90,12 +104,11 @@ jobs:
           args: |
             --all \
             --target localdeck-configurator \
-            --docker-hub "ghcr.io/${GITHUB_REPOSITORY_OWNER@L}" \
-            --version ${{ env.version }} \
+            --docker-hub "ghcr.io/${{ env.ghcr_user }}" \
+            --version ${{ env.describe }} \
             --no-latest \
+            ${{ github.event_name == 'pull_request' && github.event.action == 'synchronize' && ' --test' || '' }} \
             --cosign
-#            ${{ github.event_name == 'pull_request' && github.event.action == 'synchronize' && ' --test' || '' }} \
-
   publish:
     name: Publish
     if: github.event_name == 'push' || github.event_name == 'release'
