@@ -9,11 +9,11 @@ import {
     GpioBinarySensor,
     ImprovSerial,
     MatrixKeypad,
-    Script,
     TemplateOutput,
     Wifi,
     WifiInfoTextSensor
 } from "esphome-config-ts/dist/components/index.js";
+import {scriptBlipLight, scriptSetLedRgb} from "@/scripts/index.js";
 
 export const PINS_ROWS = [21, 20, 3, 7];
 export const PINS_COLS = [0, 1, 10, 4, 5, 6];
@@ -140,53 +140,10 @@ function newConfig(opts: newConfigOpts = {
         pin: {number: `GPIO${pin}`, allow_other_uses: true,},
     })));
 
-    const blip_light = ((new Script({
-        id: "blip_light",
-        parameters: {led_index: 'int'},
-        mode: "parallel",
-        then:
-            Array.from({length: 20}, (_, i) => i)
-                .map(i => Math.max(100 - (i * 5), 0))
-                .flatMap(brightness => [{
-                    'light.addressable_set': {
-                        id: ledstrip.config.id,
-                        range_from: lambda('return led_index;'),
-                        range_to: lambda('return led_index;'),
-                        red: `${brightness}%`,
-                        green: `${brightness}%`,
-                        blue: `${brightness}%`,
-                        white: `${brightness}%`
-                    },
-                }, {
-                    'delay': '25ms'
-                }])
-    }))).addTo(config);
-
-    ((new Script({
-        id: "set_led_rgb",
-        parameters: {led_index: 'int', color: 'string'},
-        mode: "queued",
-        then: [{
-            lambda: `ESP_LOGD("set_led_rgb", "Index %d, Input: %s", led_index, color.c_str());
-
-int firstComma = color.find(',');
-int secondComma = color.find(',', firstComma + 1);
-
-ESP_LOGD("set_led_rgb", "Commas are: %d, %d", firstComma, secondComma);
-
-auto rs = color.substr(1, firstComma);
-auto gs = color.substr(firstComma + 1, secondComma);
-auto bs = color.substr(secondComma + 1, color.length() - 1);
-
-ESP_LOGD("set_led_rgb", "%s-%s-%s", rs.c_str(), gs.c_str(), bs.c_str());
-ESP_LOGD("set_led_rgb", "%d, %d, %d", stoi(rs), stoi(gs), stoi(bs));
-
-auto light = ((AddressableLight*)id(ledstrip).get_output());
-light->get(led_index).set(Color(stoi(rs), stoi(gs), stoi(bs)));
-light->schedule_show();
-`
-        }]
-    }))).addTo(config);
+    config.addComponent([
+        scriptBlipLight,
+        scriptSetLedRgb
+    ])
 
     const brightness = (new SliderNumber({
         id: "brightness",
@@ -198,7 +155,7 @@ light->schedule_show();
         type: "float"
     })).addTo(config);
 
-    return {config, keypad, ledstrip, blip_light, brightness};
+    return {config, keypad, ledstrip, brightness};
 }
 
 
