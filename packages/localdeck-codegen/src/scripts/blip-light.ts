@@ -5,7 +5,7 @@ const fadeOut = Array.from({length: 20}, (_, i) => i)
     .map(i => Math.max(100 - (i * 5), 0))
     .flatMap(brightness => [{
         'light.addressable_set': {
-            id: ledstrip.config.id,
+            id: "ledstrip",
             range_from: lambda('return led_index;'),
             range_to: lambda('return led_index;'),
             red: `${brightness}%`,

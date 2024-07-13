@@ -1,28 +1,35 @@
 import {Script} from "esphome-config-ts/dist/components/index.js";
 
 const LAMBDA = `
-ESP_LOGD("set_led_rgb", "Index %d, Input: %s", led_index, color.c_str());
+ESP_LOGD("set_led_rgb", "Entity %s, Input: %s", entity.c_str(), color.c_str());
+
+if (color.length() < 7) return;
 
 int firstComma = color.find(',');
 int secondComma = color.find(',', firstComma + 1);
 
-ESP_LOGD("set_led_rgb", "Commas are: %d, %d", firstComma, secondComma);
+ESP_LOGV("set_led_rgb", "Commas are: %d, %d", firstComma, secondComma);
 
-auto rs = color.substr(1, firstComma);
-auto gs = color.substr(firstComma + 1, secondComma);
-auto bs = color.substr(secondComma + 1, color.length() - 1);
+float r = stoi(color.substr(1, firstComma));
+float g = stoi(color.substr(firstComma + 1, secondComma));
+float b = stoi(color.substr(secondComma + 1, color.length() - 1));
 
-ESP_LOGD("set_led_rgb", "%s-%s-%s", rs.c_str(), gs.c_str(), bs.c_str());
-ESP_LOGD("set_led_rgb", "%d, %d, %d", stoi(rs), stoi(gs), stoi(bs));
+ESP_LOGD("set_led_rgb", "%d, %d, %d", r,g,b);
 
-auto light = ((AddressableLight*)id(ledstrip).get_output());
-light->get(led_index).set(Color(stoi(rs), stoi(gs), stoi(bs)));
-light->schedule_show();
+for (auto *light : App.get_lights()){
+  ESP_LOGV("set_led_rgb", "Checking light %s", light->get_object_id().c_str());
+  if (light->get_object_id().c_str() == entity){
+      ESP_LOGD("set_led_rgb", "Setting light %s", light->get_object_id().c_str());
+      auto call = light->make_call();
+      call.set_rgb(r/255, g/255, b/255);
+      call.perform();
+  }
+}
 `.trim();
 
 export const scriptSetLedRgb = new Script({
     id: "set_led_rgb",
-    parameters: {led_index: 'int', color: 'string'},
+    parameters: {color: 'string', entity: 'string'},
     mode: "queued",
     then: [{
         lambda: LAMBDA
