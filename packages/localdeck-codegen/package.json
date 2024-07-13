@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "prepare": "ts-patch install && tsc",
+    "prepare:watch": "ts-patch install && tsc -w",
     "make": "pnpm run prepare && pnpm run make:test && pnpm run make:prod",
     "make:prod": "node ./dist/esphome-localdeck-stock.js > ./esphome-localdeck.yaml && esphome compile ./esphome-localdeck.yaml",
     "make:test": "node ./dist/esphome-localdeck-test.js > ./esphome-localdeck-test.yaml && esphome compile ./esphome-localdeck-test.yaml",
