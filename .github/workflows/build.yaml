@@ -117,8 +117,8 @@ jobs:
       - name: Update config
         if: github.event_name != 'release'
         run: |
-          sed -i 's/"LocalDeck Configurator"/"[Dev] LocalDeck Configurator"/g' ./localdeck-configurator/config.yaml
-          sed -i 's/"localdeck-configurator"/"localdeck-configurator-dev"/g' ./localdeck-configurator/config.yaml
+          sed -i 's/"LocalDeck Configurator"/"LocalDeck Configurator (Dev)"/' ./localdeck-configurator/config.yaml
+          sed -i 's/"localdeck-configurator"/"localdeck-configurator-dev"/' ./localdeck-configurator/config.yaml
 
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@main
