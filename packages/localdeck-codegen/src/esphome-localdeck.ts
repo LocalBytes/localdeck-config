@@ -53,7 +53,7 @@ function newConfig(opts: newConfigOpts = {
         config.updateComponent(new Esphome({
             name: "${name}",
             friendly_name: "${friendly_name}",
-            name_add_mac_suffix: true,
+            name_add_mac_suffix: false,
             platformio_options: {
                 "board_build.flash_mode": "dio",
             },
