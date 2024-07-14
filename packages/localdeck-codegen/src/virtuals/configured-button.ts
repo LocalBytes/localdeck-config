@@ -57,14 +57,8 @@ export interface ConfiguredButtonOptsLabel {
 
 export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
     synth() {
-
         const c = this.config.component;
         const stack = [];
-
-        let label = "";
-        if (this.config.label.text) {
-            label = " " + this.config.label.text.replace(/[\n_]+/g, ' ');
-        }
 
         let sensor = new MatrixKeypadBinarySensor({
             id: `keypad_button_${c.num.toString().padStart(2, "0")}`,
@@ -79,9 +73,10 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
         stack.push(sensor);
 
         let lightId = `keypad_button_${c.num.toString().padStart(2, "0")}_light`;
+        let lightName = `Button ${c.num.toString().padStart(2, "0")} Light`;
         stack.push(new PartitionLight({
             id: lightId,
-            name: `Button ${c.num.toString().padStart(2, "0")} Light`,
+            name: lightName,
             internal: !c.expose,
             // @ts-ignore - Segments expects single light id for some reason
             segments: [{
@@ -110,12 +105,9 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
                 id: `keypad_button_${c.num}_hass`,
                 entity_id: c.ha_entity,
                 on_value: [{
-                    "light.turn_on": {
+                    "light.control": {
                         id: lightId,
-                        red: lambda('return (x == "on")?id(brightness):0;'),
-                        green: lambda('return (x == "on")?id(brightness):0;'),
-                        blue: lambda('return (x == "on")?id(brightness):0;'),
-                        white: lambda('return (x == "on")?id(brightness):0;'),
+                        state: lambda('return x == "on";'),
                     }
                 }]
             }));
@@ -124,18 +116,14 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
         }
 
         if (c.ha_entity && c.follow_brightness) {
-            const lambdaBright = lambda('return (x/255) * id(brightness);');
             stack.push(new HomeassistantSensor({
                 id: `keypad_button_${c.num}_hass_brightness`,
                 entity_id: c.ha_entity,
                 attribute: "brightness",
                 on_value: [{
-                    "light.turn_on": {
+                    "light.control": {
                         id: lightId,
-                        red: lambdaBright,
-                        green: lambdaBright,
-                        blue: lambdaBright,
-                        white: lambdaBright,
+                        brightness: lambda('if (x>=0) return (x/255) * id(brightness); else return 0;'),
                     }
                 }]
             }));
@@ -149,8 +137,8 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
                 on_value: [{
                     "script.execute": {
                         id: "set_led_rgb",
-                        led_index: c.num - 1,
                         color: lambda('return x;'),
+                        entity: lightName.split(" ").join("_").toLowerCase(),
                     }
                 }]
             }));
@@ -170,14 +158,12 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
                 "ON for at most 1s",
                 "OFF for at least 0.5s"
             ],
-            then: [
-                {
-                    "homeassistant.event": {
-                        "event": "esphome.localdeck_button",
-                        "data": {...eventData, "type": "single"},
-                    }
+            then: [{
+                "homeassistant.event": {
+                    "event": "esphome.localdeck_button",
+                    "data": {...eventData, "type": "single"},
                 }
-            ]
+            }]
         });
         sensor.config.on_multi_click.push({
             timing: [
@@ -185,14 +171,12 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
                 "OFF for at most 0.5s",
                 "ON for at most 1s",
             ],
-            then: [
-                {
-                    "homeassistant.event": {
-                        "event": "esphome.localdeck_button",
-                        "data": {...eventData, "type": "double"},
-                    }
+            then: [{
+                "homeassistant.event": {
+                    "event": "esphome.localdeck_button",
+                    "data": {...eventData, "type": "double"},
                 }
-            ]
+            }]
         });
 
         return stack;
