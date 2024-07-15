@@ -13,6 +13,8 @@ export default defineNuxtConfig({
     enabled: false, // Conflicts with devtools for chrome
   },
 
+  eslint: { config: { stylistic: { semi: true } } },
+
   srcDir: './src',
 
   runtimeConfig: {
@@ -44,4 +46,4 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/global.css'],
   compatibilityDate: '2024-07-13',
-})
+});

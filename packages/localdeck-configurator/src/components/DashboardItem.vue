@@ -15,18 +15,18 @@
 </template>
 
 <script lang="ts" setup>
-import type { IndexFile } from '~/utilities/types'
+import type { IndexFile } from '~/utilities/types';
 
 const props = defineProps<{
-  file: IndexFile
-}>()
+  file: IndexFile;
+}>();
 
-const router = useRouter()
+const router = useRouter();
 
 const link = computed(() => ({
   name: 'editor',
   query: {
     filename: props.file.filename,
   },
-}))
+}));
 </script>

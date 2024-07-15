@@ -106,47 +106,47 @@
 </template>
 
 <script lang="ts" setup>
-const router = useRouter()
-const route = useRoute()
-const { data, status } = await useFetch('/api/editor', { query: { filename: route.query.filename as string } })
-const { data: entities } = await useFetch('/api/entities', { server: false })
+const router = useRouter();
+const route = useRoute();
+const { data, status } = await useFetch('/api/editor', { query: { filename: route.query.filename as string } });
+const { data: entities } = await useFetch('/api/entities', { server: false });
 
 enum SavingStatus {
   SAVING, DONE, IDLE,
 }
 
-const config = new ConfigUtil()
+const config = new ConfigUtil();
 
-const saving = ref(SavingStatus.IDLE)
-const resetting = ref(false)
-const editor = ref(config.editor())
-const editing = ref<EditContainer>()
+const saving = ref(SavingStatus.IDLE);
+const resetting = ref(false);
+const editor = ref(config.editor());
+const editing = ref<EditContainer>();
 
-config.notify = () => triggerRef(editor)
+config.notify = () => triggerRef(editor);
 
 watch(status, () => {
-  if (status.value !== 'success') return
-  if (data.value?.config) config.setChanges(data.value.config)
-}, { immediate: true })
+  if (status.value !== 'success') return;
+  if (data.value?.config) config.setChanges(data.value.config);
+}, { immediate: true });
 
 const save = async () => {
-  saving.value = SavingStatus.SAVING
+  saving.value = SavingStatus.SAVING;
   const response = await $fetch('/api/editor', {
     method: 'POST',
     body: { editor: config.getChanges() },
     query: { filename: route.query.filename as string },
-  }).finally(() => saving.value = SavingStatus.DONE)
-}
+  }).finally(() => saving.value = SavingStatus.DONE);
+};
 
 const print = async () => {
-  await save()
-  saving.value = SavingStatus.IDLE
-  await router.push({ name: 'print', query: { filename: route.query.filename as string } })
-}
+  await save();
+  saving.value = SavingStatus.IDLE;
+  await router.push({ name: 'print', query: { filename: route.query.filename as string } });
+};
 
 const reset = () => {
-  if (!confirm('Are you sure you want to reset?')) return
-  config.resetChanges()
-  resetting.value = false
-}
+  if (!confirm('Are you sure you want to reset?')) return;
+  config.resetChanges();
+  resetting.value = false;
+};
 </script>

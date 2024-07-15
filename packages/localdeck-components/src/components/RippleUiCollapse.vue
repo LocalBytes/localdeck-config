@@ -29,21 +29,21 @@
 <script lang="ts" setup>
 defineProps({
   title: { type: String, default: null },
-})
+});
 
 defineSlots<{
-  default(): any
-  title(props: { title: string }): any
-}>()
+  default(): any;
+  title(props: { title: string }): any;
+}>();
 
 const model = defineModel({
   type: Boolean,
   default: false,
-})
-const isOpen = ref(model.value)
+});
+const isOpen = ref(model.value);
 
-watch(model, v => isOpen.value = v)
-watch(isOpen, v => model.value = v)
+watch(model, v => isOpen.value = v);
+watch(isOpen, v => model.value = v);
 
-const id = useId()
+const id = useId();
 </script>

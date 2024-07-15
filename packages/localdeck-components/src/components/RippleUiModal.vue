@@ -34,17 +34,17 @@
 defineProps({
   title: { type: String, default: null },
   isDismissible: { type: Boolean, default: true },
-})
+});
 
 defineSlots<{
-  default(): any
-  title(props: { title: string }): any
-}>()
+  default(): any;
+  title(props: { title: string }): any;
+}>();
 
 const isOpen = defineModel({
   type: Boolean,
   default: true,
-})
+});
 
-const id = useId()
+const id = useId();
 </script>

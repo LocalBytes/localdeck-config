@@ -21,19 +21,19 @@
 </template>
 
 <script lang="ts" setup>
-const router = useRouter()
-const route = useRoute()
-const { data, status } = await useFetch('/api/editor', { query: { filename: route.query.filename as string } })
+const router = useRouter();
+const route = useRoute();
+const { data, status } = await useFetch('/api/editor', { query: { filename: route.query.filename as string } });
 
-const editor = reactive(newPadEditor())
+const editor = reactive(newPadEditor());
 
-provide(isPrintingSymbol, true)
+provide(isPrintingSymbol, true);
 
 watch(status, () => {
-  if (status.value !== 'success') return
-  if (!data.value?.config) return
+  if (status.value !== 'success') return;
+  if (!data.value?.config) return;
 
-  Object.assign(editor, data.value.config)
-  if (import.meta.client) setTimeout(() => window.print(), 1000)
-}, { immediate: true })
+  Object.assign(editor, data.value.config);
+  if (import.meta.client) setTimeout(() => window.print(), 1000);
+}, { immediate: true });
 </script>

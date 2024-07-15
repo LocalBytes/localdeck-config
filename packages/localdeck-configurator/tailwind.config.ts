@@ -2,7 +2,7 @@ const colors = {
   primary: '#152637',
   secondary: '#0090CD',
   info: '#3DBBAA',
-}
+};
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -21,4 +21,4 @@ export default {
       body: ['"Open Sans"', 'sans-serif', '"BabelStone Flags"'],
     },
   },
-}
+};

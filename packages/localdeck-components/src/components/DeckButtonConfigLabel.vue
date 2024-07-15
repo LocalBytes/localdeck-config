@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { EditContainer } from '../utils/PadCfg'
+import type { EditContainer } from '../utils/PadCfg';
 
-const modelValue = defineModel<EditContainer>({ required: true })
+const modelValue = defineModel<EditContainer>({ required: true });
 </script>

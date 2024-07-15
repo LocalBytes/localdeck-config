@@ -19,18 +19,18 @@
 </template>
 
 <script lang="ts" setup>
-import type { EmojiExt } from 'vue3-emoji-picker'
-import EmojiPicker from 'vue3-emoji-picker'
-import 'vue3-emoji-picker/css'
-import { mdIconsGroups } from '../utils/material'
-import '~/assets/material.scss'
-import type { ConfiguredButtonOptsLabel } from '@localbytes/localdeck-codegen/dist/virtuals'
+import type { EmojiExt } from 'vue3-emoji-picker';
+import EmojiPicker from 'vue3-emoji-picker';
+import 'vue3-emoji-picker/css';
+import { mdIconsGroups } from '../utils/material';
+import '~/assets/material.scss';
+import type { ConfiguredButtonOptsLabel } from '@localbytes/localdeck-codegen/dist/virtuals';
 
-const modelValue = defineModel<ConfiguredButtonOptsLabel>({ required: true })
-const colorMode = useColorMode()
+const modelValue = defineModel<ConfiguredButtonOptsLabel>({ required: true });
+const colorMode = useColorMode();
 
 const onSelectEmoji = (emoji: EmojiExt) => {
-  const MdIcon = emoji.n.find(s => s.startsWith('mdi:'))
-  return modelValue.value.icon = MdIcon ?? emoji.i
-}
+  const MdIcon = emoji.n.find(s => s.startsWith('mdi:'));
+  return modelValue.value.icon = MdIcon ?? emoji.i;
+};
 </script>

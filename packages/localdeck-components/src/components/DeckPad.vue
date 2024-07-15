@@ -17,43 +17,43 @@
 </template>
 
 <script lang="ts" setup>
-import { BUTTON_NUMBERS } from '@localbytes/localdeck-codegen/dist/virtuals'
-import { useResizeObserver } from '@vueuse/core'
-import type { EditContainer, PadEditor } from '../utils/PadCfg'
-import { type FontSizes, fontSizesSymbol } from '../utils/hooks'
+import { BUTTON_NUMBERS } from '@localbytes/localdeck-codegen/dist/virtuals';
+import { useResizeObserver } from '@vueuse/core';
+import type { EditContainer, PadEditor } from '../utils/PadCfg';
+import { type FontSizes, fontSizesSymbol } from '../utils/hooks';
 
-const gridRef = ref<HTMLDivElement>()
+const gridRef = ref<HTMLDivElement>();
 
-const editor = defineModel<PadEditor>({ type: Object, required: true })
-const editing = defineModel<EditContainer>('editing', { type: Object })
+const editor = defineModel<PadEditor>({ type: Object, required: true });
+const editing = defineModel<EditContainer>('editing', { type: Object });
 
-const isPrinting = useIsPrinting()
+const isPrinting = useIsPrinting();
 
-if (!editor.value) throw new Error('Pad model is required')
+if (!editor.value) throw new Error('Pad model is required');
 
 const orderedButtons = computed(() => {
-  const buttons = Object.values(editor.value.buttons)
-  buttons.sort((a, b) => BUTTON_NUMBERS.indexOf(a.keyNum) - BUTTON_NUMBERS.indexOf(b.keyNum))
-  return buttons
-})
+  const buttons = Object.values(editor.value.buttons);
+  buttons.sort((a, b) => BUTTON_NUMBERS.indexOf(a.keyNum) - BUTTON_NUMBERS.indexOf(b.keyNum));
+  return buttons;
+});
 
 const click = (container: EditContainer | null) => {
-  if (!container || editing.value?.keyNum === container.keyNum) return editing.value = undefined
-  editing.value = container
-}
+  if (!container || editing.value?.keyNum === container.keyNum) return editing.value = undefined;
+  editing.value = container;
+};
 
 const sizes = reactive({
   devicePixelRatio: 1,
   rootFontSize: 14,
   scaleFactor: 1,
-}) as FontSizes
+}) as FontSizes;
 
 useResizeObserver(gridRef, () => {
-  sizes.devicePixelRatio = window?.devicePixelRatio ?? 1
-  sizes.rootFontSize = Number(window?.getComputedStyle(document.body).getPropertyValue('font-size').replace('px', '')) ?? 14
-  sizes.scaleFactor = (14 * sizes.devicePixelRatio * (96 / 25.4)) / (4 * sizes.rootFontSize)
-})
-provide(fontSizesSymbol, sizes)
+  sizes.devicePixelRatio = window?.devicePixelRatio ?? 1;
+  sizes.rootFontSize = Number(window?.getComputedStyle(document.body).getPropertyValue('font-size').replace('px', '')) ?? 14;
+  sizes.scaleFactor = (14 * sizes.devicePixelRatio * (96 / 25.4)) / (4 * sizes.rootFontSize);
+});
+provide(fontSizesSymbol, sizes);
 </script>
 
 <style scoped>

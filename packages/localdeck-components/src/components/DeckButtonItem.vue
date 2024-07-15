@@ -28,21 +28,21 @@
 </template>
 
 <script lang="ts" setup>
-import { useFontSizes, useIsPrinting } from '../utils/hooks'
-import type { EditContainer } from '../utils/PadCfg'
+import { useFontSizes, useIsPrinting } from '../utils/hooks';
+import type { EditContainer } from '../utils/PadCfg';
 
-const padGridItem = ref<HTMLDivElement>()
-const print = useIsPrinting()
+const padGridItem = ref<HTMLDivElement>();
+const print = useIsPrinting();
 
 const props = defineProps({
   container: { required: true, type: Object as PropType<EditContainer> },
   editing: { type: Boolean, default: false },
-})
+});
 
-const sizes = useFontSizes()
+const sizes = useFontSizes();
 
-const fontSize = computed(() => props.container?.label.fontSize ?? 14)
-const fontSizeScaled = computed(() => fontSize.value * sizes.scaleFactor)
+const fontSize = computed(() => props.container?.label.fontSize ?? 14);
+const fontSizeScaled = computed(() => fontSize.value * sizes.scaleFactor);
 </script>
 
 <style scoped>

@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts" setup>
-import { FileType } from '~/utilities/types'
+import { FileType } from '~/utilities/types';
 
-const { data, error } = await useFetch('/api/index-files')
+const { data, error } = await useFetch('/api/index-files');
 </script>

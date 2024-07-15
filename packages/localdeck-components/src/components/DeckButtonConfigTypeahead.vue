@@ -36,25 +36,25 @@
 </template>
 
 <script lang="ts" setup>
-import type { HassEntity } from '../utils/types'
+import type { HassEntity } from '../utils/types';
 
 const props = defineProps<{
-  typeahead: HassEntity[]
-}>()
+  typeahead: HassEntity[];
+}>();
 
-const inputRef = ref()
-const isOpen = ref(false)
-const modelValue = defineModel<string>()
+const inputRef = ref();
+const isOpen = ref(false);
+const modelValue = defineModel<string>();
 
 const filtered = computed(() => props.typeahead?.filter(e =>
   e.id.includes(modelValue.value ?? '')
   || e.name.includes(modelValue.value ?? ''),
-))
+));
 
 const select = (item: HassEntity) => {
-  modelValue.value = item.id
-  isOpen.value = false
-}
+  modelValue.value = item.id;
+  isOpen.value = false;
+};
 
 const renderString = (item: string, query: string) => {
   const text = item?.replace(/[&<>"']/g, m => ({
@@ -63,16 +63,16 @@ const renderString = (item: string, query: string) => {
     '>': '&gt;',
     '"': '&quot;',
     '\'': '&#39;',
-  })[m] ?? m)
+  })[m] ?? m);
 
-  if (!text || !query) return text
+  if (!text || !query) return text;
 
-  const index = text.toLowerCase().indexOf(query?.toLowerCase())
-  if (index < 0) return text
+  const index = text.toLowerCase().indexOf(query?.toLowerCase());
+  if (index < 0) return text;
   return text.substring(0, index)
     + '<span class="font-extrabold">'
     + text.substring(index, index + query.length)
     + '</span>'
-    + text.substring(index + query.length)
-}
+    + text.substring(index + query.length);
+};
 </script>
