@@ -30,7 +30,7 @@
     "@types/js-yaml": "^4.0.9",
     "@types/lodash": "^4.17.6",
     "@types/node": "^20.14.10",
-    "eslint": "9.x",
+    "eslint": "~9.7.0",
     "globals": "^15.8.0",
     "ts-node": "^10.9.2",
     "ts-patch": "^3.2.1",
