@@ -13,12 +13,12 @@ export function decode(encoded: string) {
   return Uint8Array.from(chars, c => c.charCodeAt(0));
 }
 
-export function compress<T extends {}>(editor: T) {
+export function compress<T extends object>(editor: T) {
   const deflated = pako.deflate(JSON.stringify(editor));
   return encode(deflated);
 }
 
-export function decompress<T extends {}>(chars: string) {
+export function decompress<T extends object>(chars: string) {
   const deflated = decode(chars);
   const inflated = pako.inflate(deflated, { to: 'string' });
   return JSON.parse(inflated) as T;

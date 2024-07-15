@@ -19,11 +19,11 @@
         class="dropdown-item"
         @click="select(item)"
       >
-        <span
+        <component
+          :is="renderString(item.name, modelValue)"
           class="text-lg"
-          v-html="renderString(item.name, modelValue)"
         />
-        <span v-html="renderString(item.id, modelValue)" />
+        <component :is="renderString(item.id, modelValue)" />
       </div>
       <div
         v-if="filtered.length==0"
@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { HassEntity } from '../utils/types';
+import type { HassEntity } from '~/utils/types';
 
 const props = defineProps<{
   typeahead: HassEntity[];
@@ -69,10 +69,11 @@ const renderString = (item: string, query: string) => {
 
   const index = text.toLowerCase().indexOf(query?.toLowerCase());
   if (index < 0) return text;
-  return text.substring(0, index)
-    + '<span class="font-extrabold">'
-    + text.substring(index, index + query.length)
-    + '</span>'
-    + text.substring(index + query.length);
+
+  return h('div', [
+    text.substring(0, index),
+    h('span', { class: 'font-extrabold' }, text.substring(index, index + query.length)),
+    text.substring(index + query.length),
+  ]);
 };
 </script>
