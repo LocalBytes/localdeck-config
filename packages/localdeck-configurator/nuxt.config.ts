@@ -39,6 +39,7 @@ export default defineNuxtConfig({
       '@nuxt/test-utils/module',
       '@nuxtjs/tailwindcss',
       '@nuxtjs/color-mode',
+      "@nuxt/eslint"
   ],
 
   css: ['~/assets/css/global.css'],

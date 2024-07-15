@@ -149,6 +149,9 @@ importers:
         specifier: ^3.4.4
         version: 3.4.4(ts-node@10.9.2(@types/node@20.14.10)(typescript@5.5.3))
     devDependencies:
+      '@nuxt/eslint':
+        specifier: ^0.3.13
+        version: 0.3.13(eslint@9.7.0)(magicast@0.3.4)(rollup@4.18.1)(typescript@5.5.3)(vite@5.3.3(@types/node@20.14.10)(sass@1.77.8)(terser@5.31.2))
       '@nuxt/test-utils':
         specifier: ^3.13.1
         version: 3.13.1(@vitest/ui@1.6.0(vitest@1.6.0))(@vue/test-utils@2.4.6)(h3@1.12.0)(happy-dom@13.10.1)(magicast@0.3.4)(nitropack@2.9.7(encoding@0.1.13)(magicast@0.3.4))(playwright-core@1.45.1)(rollup@4.18.1)(vite@5.3.3(@types/node@20.14.10)(sass@1.77.8)(terser@5.31.2))(vitest@1.6.0(@types/node@20.14.10)(@vitest/ui@1.6.0)(happy-dom@13.10.1)(sass@1.77.8)(terser@5.31.2))(vue-router@4.4.0(vue@3.4.31(typescript@5.5.3)))(vue@3.4.31(typescript@5.5.3))
