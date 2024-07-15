@@ -1,33 +1,48 @@
 <template>
-  <div ref="padGridItem" :class="{'shadow-lg shadow-yellow-300':editing, 'printmode':print}" class="pad-grid-item">
-    <p v-if="!print" class="position-fixed keynum">{{ container.keyNum }}</p>
-    <p v-if="container.label.icon" :class="{'material-symbols-outlined':container.label.icon.startsWith('mdi:')}"
-       class="text-center icon">
-      {{ container.label.icon.replace("mdi:", "") }}</p>
+  <div
+    ref="padGridItem"
+    :class="{ 'shadow-lg shadow-yellow-300': editing, 'printmode': print }"
+    class="pad-grid-item"
+  >
     <p
-        ref="labelRef"
-        :style="{fontSize: (print?fontSize:fontSizeScaled) + 'px'}"
-        class="label-bottom"
-    >{{ container.label.text }}</p>
+      v-if="!print"
+      class="position-fixed keynum"
+    >
+      {{ container.keyNum }}
+    </p>
+    <p
+      v-if="container.label.icon"
+      :class="{ 'material-symbols-outlined': container.label.icon.startsWith('mdi:') }"
+      class="text-center icon"
+    >
+      {{ container.label.icon.replace("mdi:", "") }}
+    </p>
+    <p
+      ref="labelRef"
+      :style="{ fontSize: (print?fontSize:fontSizeScaled) + 'px' }"
+      class="label-bottom"
+    >
+      {{ container.label.text }}
+    </p>
   </div>
 </template>
+
 <script lang="ts" setup>
-import {useFontSizes, useIsPrinting} from "../utils/hooks";
-import type {EditContainer} from "../utils/PadCfg";
+import { useFontSizes, useIsPrinting } from '../utils/hooks';
+import type { EditContainer } from '../utils/PadCfg';
 
 const padGridItem = ref<HTMLDivElement>();
 const print = useIsPrinting();
 
 const props = defineProps({
-  container: {required: true, type: Object as PropType<EditContainer>},
-  editing: {type: Boolean, default: false},
+  container: { required: true, type: Object as PropType<EditContainer> },
+  editing: { type: Boolean, default: false },
 });
 
 const sizes = useFontSizes();
 
 const fontSize = computed(() => props.container?.label.fontSize ?? 14);
 const fontSizeScaled = computed(() => fontSize.value * sizes.scaleFactor);
-
 </script>
 
 <style scoped>
@@ -77,5 +92,4 @@ const fontSizeScaled = computed(() => fontSize.value * sizes.scaleFactor);
   white-space: pre-wrap;
   text-wrap: balance;
 }
-
 </style>

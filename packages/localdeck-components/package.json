@@ -4,20 +4,20 @@
   "version": "0.0.1",
   "main": "./nuxt.config.ts",
   "scripts": {
-    "dev": "nuxi dev .playground",
-    "build": "nuxt build .playground",
-    "generate": "nuxt generate .playground",
-    "preview": "nuxt preview .playground",
-    "lint": "eslint .",
-    "postinstall": "nuxt prepare .playground"
+    "dev": "nuxi dev ",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^0.1.1",
+    "@nuxt/eslint": "^0.3.13",
     "@nuxt/test-utils": "^3.13.1",
     "@types/pako": "^2.0.3",
     "@vueuse/core": "^10.11.0",
     "@vueuse/nuxt": "^10.11.0",
-    "eslint": "^8.57.0",
     "maska": "^2.1.11",
     "nuxt": "^3.12.3",
     "sass": "^1.77.8",

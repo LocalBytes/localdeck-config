@@ -1,46 +1,49 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  extends: ["@localbytes/localdeck-components"],
+  extends: ['@localbytes/localdeck-components'],
   ssr: false,
 
   router: {
-      options: {
-          hashMode: true
-      }
+    options: {
+      hashMode: true,
+    },
   },
 
   devtools: {
-      enabled: false, // Conflicts with devtools for chrome
+    enabled: false, // Conflicts with devtools for chrome
   },
+
+  eslint: { config: { stylistic: { semi: true } } },
 
   srcDir: './src',
 
   runtimeConfig: {
-      public: {baseUrl: ''},
+    public: { baseUrl: '' },
 
-      api_token: '',
-      api_url: '', //Allow this to be overridden by env
+    api_token: '',
+    api_url: '', // Allow this to be overridden by env
 
-      filesDir: '/homeassistant/esphome'
+    filesDir: '/homeassistant/esphome',
   },
 
   app: {
-      head: {
-          link: [
-              {rel: 'icon', type: 'image/svg', href: '/favicon.svg'},
-          ]
-      }
+    head: {
+      link: [
+        { rel: 'icon', type: 'image/svg', href: '/favicon.svg' },
+      ],
+    },
   },
 
   // https://github.com/nuxt/nuxt/discussions/26739
-  nitro: {experimental: {legacyExternals: true}},
+  nitro: { experimental: { legacyExternals: true } },
 
   modules: [
-      '@nuxt/test-utils/module',
-      '@nuxtjs/tailwindcss',
-      '@nuxtjs/color-mode',
+    '@nuxt/test-utils/module',
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/color-mode',
+    '@nuxt/eslint',
   ],
 
   css: ['~/assets/css/global.css'],
   compatibilityDate: '2024-07-13',
-})
+});

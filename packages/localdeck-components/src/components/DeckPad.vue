@@ -1,30 +1,35 @@
 <template>
-  <div ref="gridRef" :class="{'printmode':isPrinting}" class="pad-grid">
+  <div
+    ref="gridRef"
+    :class="{ printmode: isPrinting }"
+    class="pad-grid"
+  >
     <DeckButtonItem
-        v-for="container in orderedButtons"
-        :key="container.keyNum"
-        :container="container"
-        :data-keynum="container.keyNum"
-        :editing="editing?.keyNum === container.keyNum && !isPrinting"
-        class="pad-grid-item"
-        @click="click(container)">
-    </DeckButtonItem>
+      v-for="container in orderedButtons"
+      :key="container.keyNum"
+      :container="container"
+      :data-keynum="container.keyNum"
+      :editing="editing?.keyNum === container.keyNum && !isPrinting"
+      class="pad-grid-item"
+      @click="click(container)"
+    />
   </div>
 </template>
+
 <script lang="ts" setup>
-import {BUTTON_NUMBERS} from "@localbytes/localdeck-codegen/dist/virtuals";
-import type {EditContainer, PadEditor} from "../utils/PadCfg";
-import {useResizeObserver} from "@vueuse/core";
-import {type FontSizes, fontSizesSymbol} from "../utils/hooks";
+import { BUTTON_NUMBERS } from '@localbytes/localdeck-codegen/dist/virtuals';
+import { useResizeObserver } from '@vueuse/core';
+import type { EditContainer, PadEditor } from '../utils/PadCfg';
+import { type FontSizes, fontSizesSymbol } from '../utils/hooks';
 
 const gridRef = ref<HTMLDivElement>();
 
-const editor = defineModel<PadEditor>({type: Object, required: true});
-const editing = defineModel<EditContainer>("editing", {type: Object});
+const editor = defineModel<PadEditor>({ type: Object, required: true });
+const editing = defineModel<EditContainer>('editing', { type: Object });
 
 const isPrinting = useIsPrinting();
 
-if (!editor.value) throw new Error("Pad model is required");
+if (!editor.value) throw new Error('Pad model is required');
 
 const orderedButtons = computed(() => {
   const buttons = Object.values(editor.value.buttons);
@@ -35,7 +40,7 @@ const orderedButtons = computed(() => {
 const click = (container: EditContainer | null) => {
   if (!container || editing.value?.keyNum === container.keyNum) return editing.value = undefined;
   editing.value = container;
-}
+};
 
 const sizes = reactive({
   devicePixelRatio: 1,
@@ -49,8 +54,8 @@ useResizeObserver(gridRef, () => {
   sizes.scaleFactor = (14 * sizes.devicePixelRatio * (96 / 25.4)) / (4 * sizes.rootFontSize);
 });
 provide(fontSizesSymbol, sizes);
-
 </script>
+
 <style scoped>
 .pad-grid {
   display: grid;

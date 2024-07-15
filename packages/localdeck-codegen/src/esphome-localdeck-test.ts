@@ -17,7 +17,7 @@ config.updateComponent(new Esp32({
     }
 }));
 
-//@ts-ignore
+//@ts-expect-error - Build Path is claiming to be required but it is not
 config.updateComponent(new Esphome({
     name: "${name}",
     friendly_name: "${friendly_name}",
@@ -41,7 +41,7 @@ config.addComponent(new Esp32RmtLedStripLight({
     id: "ledstrip",
     rgb_order: "GRB",
     pin: "GPIO8",
-    //@ts-ignore
+    //@ts-expect-error - RMT channel is a string according to the schema
     rmt_channel: 0,
     num_leds: 24,
     chipset: "SK6812",

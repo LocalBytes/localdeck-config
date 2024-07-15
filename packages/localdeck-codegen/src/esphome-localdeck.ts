@@ -18,22 +18,11 @@ import {scriptBlipLight, scriptSetLedRgb} from "@/scripts/index.js";
 export const PINS_ROWS = [21, 20, 3, 7];
 export const PINS_COLS = [0, 1, 10, 4, 5, 6];
 
-export function rgb(r: any, g: any, b: any, w: any = 0) {
-    return {red: r, green: g, blue: b, white: w};
-}
-
-export const bright = (pct: number) => {
-    return lambda(`return ${pct} * id(brightness);`);
-}
-
 export interface newConfigOpts {
     withDefaults?: boolean;
     stopBeforeCustom?: boolean;
 }
 
-function makePin(pin: number) {
-    return {pin: {number: `GPIO${pin}`, allow_other_uses: true,}};
-}
 
 function newConfig(opts: newConfigOpts = {
     withDefaults: true,
@@ -49,7 +38,7 @@ function newConfig(opts: newConfigOpts = {
             friendly_name: "LocalBytes LocalDeck",
         }));
 
-        // @ts-ignore
+        //@ts-expect-error - Build Path is claiming to be required, but it is not
         config.updateComponent(new Esphome({
             name: "${name}",
             friendly_name: "${friendly_name}",
@@ -109,12 +98,12 @@ function newConfig(opts: newConfigOpts = {
         }
     }));
 
-    let ledstrip = (new Esp32RmtLedStripLight({
+    const ledstrip = (new Esp32RmtLedStripLight({
         name: "Ledstrip",
         id: "ledstrip",
         rgb_order: "GRB",
         pin: "GPIO8",
-        //@ts-ignore
+        //@ts-expect-error - RMT channel is a string according to the schema
         rmt_channel: 0,
         num_leds: 24,
         chipset: "SK6812",
@@ -124,10 +113,10 @@ function newConfig(opts: newConfigOpts = {
         ]
     })).addTo(config);
 
-    let keypad = (new MatrixKeypad({
+    const keypad = (new MatrixKeypad({
         id: "keypad",
         keys: KEYS,
-        //@ts-ignore
+        // @ts-expect-error - Pin doesn't allow object yet
         rows: PINS_ROWS.map(pin => ({pin: {number: `GPIO${pin}`, allow_other_uses: true}})),
         columns: PINS_COLS.map(pin => ({pin: `GPIO${pin}`})),
     })).addTo(config);
@@ -136,8 +125,8 @@ function newConfig(opts: newConfigOpts = {
         ...PINS_ROWS
     ].map((pin) => new GpioBinarySensor({
         id: `keypad_row_${pin.toString().padStart(2, "0")}`,
-        //@ts-ignore
-        pin: {number: `GPIO${pin}`, allow_other_uses: true,},
+        //@ts-expect-error - pin is a string according to the schema
+        pin: {number: `GPIO${pin}`, allow_other_uses: true},
     })));
 
     config.addComponent([
