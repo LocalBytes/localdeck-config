@@ -38,6 +38,7 @@ function newConfig(opts: newConfigOpts = {
             friendly_name: "LocalBytes LocalDeck",
         }));
 
+        //@ts-expect-error - Build Path is claiming to be required, but it is not
         config.updateComponent(new Esphome({
             name: "${name}",
             friendly_name: "${friendly_name}",
@@ -115,6 +116,7 @@ function newConfig(opts: newConfigOpts = {
     const keypad = (new MatrixKeypad({
         id: "keypad",
         keys: KEYS,
+        // @ts-expect-error - Pin doesn't allow object yet
         rows: PINS_ROWS.map(pin => ({pin: {number: `GPIO${pin}`, allow_other_uses: true}})),
         columns: PINS_COLS.map(pin => ({pin: `GPIO${pin}`})),
     })).addTo(config);
@@ -123,6 +125,7 @@ function newConfig(opts: newConfigOpts = {
         ...PINS_ROWS
     ].map((pin) => new GpioBinarySensor({
         id: `keypad_row_${pin.toString().padStart(2, "0")}`,
+        //@ts-expect-error - pin is a string according to the schema
         pin: {number: `GPIO${pin}`, allow_other_uses: true},
     })));
 

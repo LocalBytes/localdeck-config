@@ -17,6 +17,7 @@ config.updateComponent(new Esp32({
     }
 }));
 
+//@ts-expect-error - Build Path is claiming to be required but it is not
 config.updateComponent(new Esphome({
     name: "${name}",
     friendly_name: "${friendly_name}",
