@@ -11,7 +11,9 @@
     "make:test": "node ./dist/esphome-localdeck-test.js > ./esphome-localdeck-test.yaml && esphome compile ./esphome-localdeck-test.yaml",
     "generate": "tsx ./lib/esphome-localdeck-stock.ts > ./esphome-localdeck.yaml",
     "start": "npm run generate && esphome run ./esphome-localdeck.yaml",
-    "compile": "npm run generate && esphome compile ./esphome-localdeck.yaml"
+    "compile": "npm run generate && esphome compile ./esphome-localdeck.yaml",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix"
   },
   "author": "",
   "private": true,
@@ -22,12 +24,17 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
+    "@eslint/js": "^9.7.0",
+    "@stylistic/eslint-plugin": "^2.3.0",
     "@tsconfig/node-lts": "^20.1.3",
     "@types/js-yaml": "^4.0.9",
     "@types/lodash": "^4.17.6",
     "@types/node": "^20.14.10",
+    "eslint": "9.x",
+    "globals": "^15.8.0",
     "ts-node": "^10.9.2",
     "ts-patch": "^3.2.1",
+    "typescript-eslint": "^7.16.0",
     "typescript-transform-paths": "^3.4.7"
   }
 }
