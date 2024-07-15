@@ -4,13 +4,13 @@ import {DashboardImport} from "esphome-config-ts/dist/components/index.js";
 
 import _ from "lodash";
 
-let {config} = newConfig();
+const {config} = newConfig();
 
 config.updateComponent(new DashboardImport({
     package_import_url: "github://LocalBytes/localdeck-config/packages/localdeck-codegen/esphome-localdeck.yaml"
 }));
 
-let esphomeComponent = config.components.filter((c) => c.componentName === "esphome")[0];
+const esphomeComponent = config.components.filter((c) => c.componentName === "esphome")[0];
 esphomeComponent.config = _.merge(esphomeComponent.config, {
     name_add_mac_suffix: true,
     project: {

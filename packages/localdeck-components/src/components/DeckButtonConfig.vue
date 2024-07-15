@@ -1,26 +1,29 @@
 <template>
-
   <div class="grow">
-    <h3 class="pb-2">Editing button {{ modelValue.keyNum }}</h3>
-    <DeckButtonConfigActions v-model="input" :typeahead="typeahead"/>
-
+    <h3 class="pb-2">
+      Editing button {{ modelValue.keyNum }}
+    </h3>
+    <DeckButtonConfigActions
+      v-model="input"
+      :typeahead="typeahead"
+    />
   </div>
 
-  <DeckButtonConfigLabel v-model="input"/>
-
+  <DeckButtonConfigLabel v-model="input" />
 </template>
+
 <script lang="ts" setup>
-import type {HassEntity} from "../utils/types";
-import type {EditContainer} from "../utils/PadCfg";
+import type { HassEntity } from '../utils/types'
+import type { EditContainer } from '../utils/PadCfg'
 
 const input = defineModel<EditContainer>({
-  required: true
-});
+  required: true,
+})
 
 defineProps({
   typeahead: {
     type: Array as PropType<HassEntity[]>,
-    default: null
+    default: null,
   },
 })
 </script>

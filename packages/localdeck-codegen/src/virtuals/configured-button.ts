@@ -60,7 +60,7 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
         const c = this.config.component;
         const stack = [];
 
-        let sensor = new MatrixKeypadBinarySensor({
+        const sensor = new MatrixKeypadBinarySensor({
             id: `keypad_button_${c.num.toString().padStart(2, "0")}`,
             name: `Button ${c.num.toString().padStart(2, "0")}`,
             internal: !c.expose,
@@ -72,13 +72,13 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
         });
         stack.push(sensor);
 
-        let lightId = `keypad_button_${c.num.toString().padStart(2, "0")}_light`;
-        let lightName = `Button ${c.num.toString().padStart(2, "0")} Light`;
+        const lightId = `keypad_button_${c.num.toString().padStart(2, "0")}_light`;
+        const lightName = `Button ${c.num.toString().padStart(2, "0")} Light`;
         stack.push(new PartitionLight({
             id: lightId,
             name: lightName,
             internal: !c.expose,
-            // @ts-ignore - Segments expects single light id for some reason
+            // @ts-expect-error - Segments expects single light id for some reason
             segments: [{
                 id: "ledstrip",
                 from: c.num - 1,
