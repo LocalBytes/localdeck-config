@@ -65,10 +65,10 @@ const renderString = (item: string, query: string) => {
     '\'': '&#39;',
   })[m] ?? m);
 
-  if (!text || !query) return h('div', text);
+  if (!text || !query) return () => text;
 
   const index = text.toLowerCase().indexOf(query?.toLowerCase());
-  if (index < 0) return h('div', text);
+  if (index < 0) return () => text;
 
   return h('div', [
     h('span', text.substring(0, index)),
