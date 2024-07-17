@@ -1,33 +1,33 @@
 <template>
   <div
-      ref="inputRef"
-      :class="{ 'dropdown dropdown-open': isOpen }"
-      class="w-full"
-      @focusout="isOpen=false"
-      @focusin.once="isOpen=true"
+    ref="inputRef"
+    :class="{ 'dropdown dropdown-open': isOpen }"
+    class="w-full"
+    @focusout="isOpen=false"
+    @focusin.once="isOpen=true"
   >
     <input
-        v-model="modelValue"
-        class="input w-full"
-        type="text"
-        @input="isOpen=true"
+      v-model="modelValue"
+      class="input w-full"
+      type="text"
+      @input="isOpen=true"
     >
     <div class="dropdown-menu dropdown-menu-bottom-right gap-1 w-auto max-h-[400px] overflow-y-auto">
       <div
-          v-for="item in filtered"
-          :key="item.id"
-          class="dropdown-item"
-          @click="select(item)"
+        v-for="item in filtered"
+        :key="item.id"
+        class="dropdown-item"
+        @click="select(item)"
       >
         <component
-            :is="renderString(item.name, modelValue)"
-            class="text-lg"
+          :is="renderString(item.name, modelValue)"
+          class="text-lg"
         />
-        <component :is="renderString(item.id, modelValue)"/>
+        <component :is="renderString(item.id, modelValue)" />
       </div>
       <div
-          v-if="filtered.length==0"
-          class="dropdown-item disabled"
+        v-if="filtered.length==0"
+        class="dropdown-item disabled"
       >
         <span class="text-lg">No results</span>
       </div>
@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts" setup>
-import type {HassEntity} from '~/utils/types';
+import type { HassEntity } from '~/utils/types';
 
 const props = defineProps<{
   typeahead: HassEntity[];
@@ -47,8 +47,8 @@ const isOpen = ref(false);
 const modelValue = defineModel<string>();
 
 const filtered = computed(() => props.typeahead?.filter(e =>
-    e.id.includes(modelValue.value ?? '')
-    || e.name.includes(modelValue.value ?? ''),
+  e.id.includes(modelValue.value ?? '')
+  || e.name.includes(modelValue.value ?? ''),
 ));
 
 const select = (item: HassEntity) => {
@@ -72,7 +72,7 @@ const renderString = (item: string, query: string) => {
 
   return h('div', [
     h('span', text.substring(0, index)),
-    h('span', {class: 'font-extrabold'}, text.substring(index, index + query.length)),
+    h('span', { class: 'font-extrabold' }, text.substring(index, index + query.length)),
     h('span', text.substring(index + query.length)),
   ]);
 };
