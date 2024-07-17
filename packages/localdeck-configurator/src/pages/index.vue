@@ -3,6 +3,7 @@
     <h1>LocalDeck Files</h1>
     <div
       v-for="(files, group) in data?.files"
+      :key="group"
       class="my-5"
     >
       <div class="my-1">
@@ -17,10 +18,12 @@
         </h2>
       </div>
 
-      <div class="grid md:grid-cols-3 lg:grid-cols-5 gap-2">
+      <div
+        v-if="data"
+        class="grid md:grid-cols-3 lg:grid-cols-5 gap-2"
+      >
         <DashboardItem
           v-for="file in files"
-          v-if="data"
           :key="file.filename"
           :file="file"
         />

@@ -9,10 +9,10 @@ import type { PadEditor } from '@localbytes/localdeck-components/src/utils/PadCf
 import { ConfigUtil } from '@localbytes/localdeck-components/src/utils/config-util';
 import { getEditorUrl } from '@localbytes/localdeck-components/src/utils/compression';
 
-function smartlyMerge(newCfg: any, originalContent: string): any {
+function smartlyMerge<TNew extends object, TOrig extends object>(newCfg: TNew, originalContent: string): (TNew & TOrig) {
   const allowlist = ['substitutions', 'wifi', 'captive_portal', 'logger', 'web_server', 'api', 'ota'];
 
-  const content = espHomeYaml.parse(originalContent) as any;
+  const content = espHomeYaml.parse(originalContent) as TOrig;
 
   for (const [key, value] of Object.entries(content)) {
     if (allowlist.includes(key)) {
@@ -77,7 +77,7 @@ export default defineEventHandler(async (event) => {
   fileContent += `\n# Edit: ${getEditorUrl(configUtil.getChanges())}\n\n`;
 
   const { config } = newConfig({ withDefaults: false });
-  Object.entries(editor.buttons).forEach(([num, b]) => config.addComponent(new ConfiguredButton(b)));
+  Object.entries(editor.buttons).forEach(([_, b]) => config.addComponent(new ConfiguredButton(b)));
   fileContent += config.synthYaml();
 
   await fs.writeFile(path, fileContent, 'utf8');

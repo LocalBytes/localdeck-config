@@ -131,7 +131,7 @@ watch(status, () => {
 
 const save = async () => {
   saving.value = SavingStatus.SAVING;
-  const response = await $fetch('/api/editor', {
+  await $fetch('/api/editor', {
     method: 'POST',
     body: { editor: config.getChanges() },
     query: { filename: route.query.filename as string },

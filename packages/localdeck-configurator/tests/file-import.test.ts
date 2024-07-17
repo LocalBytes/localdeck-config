@@ -29,7 +29,7 @@ describe('Import Workflow', async () => {
   await setup({});
 
   test('Parse the original file', async () => {
-    const content = espHomeYaml.parse(preImportExample) as any;
+    const content = espHomeYaml.parse(preImportExample) as object;
     expect(content).toBeDefined();
   });
 

@@ -20,7 +20,7 @@ const example = [
   { entity_id: 'scene.evening_warm', attributes: { friendly_name: 'Orange Glow' } },
   { entity_id: 'scene.warm_glow', attributes: {} },
 ];
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async () => {
   const { api_url, api_token } = useRuntimeConfig();
   let response: typeof example;
 
