@@ -32,8 +32,8 @@ defineProps({
 });
 
 defineSlots<{
-  default(): any;
-  title(props: { title: string }): any;
+  default(): unknown;
+  title(props: { title: string }): unknown;
 }>();
 
 const model = defineModel({

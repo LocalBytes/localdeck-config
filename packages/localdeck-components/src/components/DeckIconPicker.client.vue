@@ -21,10 +21,10 @@
 <script lang="ts" setup>
 import type { EmojiExt } from 'vue3-emoji-picker';
 import EmojiPicker from 'vue3-emoji-picker';
-import 'vue3-emoji-picker/css';
-import { mdIconsGroups } from '../utils/material';
-import '~/assets/material.scss';
 import type { ConfiguredButtonOptsLabel } from '@localbytes/localdeck-codegen/dist/virtuals';
+import 'vue3-emoji-picker/css';
+import { mdIconsGroups } from '~/utils/material';
+import '~/assets/material.scss';
 
 const modelValue = defineModel<ConfiguredButtonOptsLabel>({ required: true });
 const colorMode = useColorMode();

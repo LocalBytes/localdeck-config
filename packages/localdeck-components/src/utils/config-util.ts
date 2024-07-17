@@ -4,7 +4,7 @@ import type { DeepPartial } from './types';
 export const configUtilSymbol = Symbol('configUtil');
 
 export const ObjectUtil = {
-  get: (obj: any, path: (string | symbol)[]) => {
+  get: (obj: object, path: (string | symbol)[]) => {
     let val = obj;
     for (const p of path) {
       val = val[p];
@@ -13,7 +13,7 @@ export const ObjectUtil = {
     return val;
   },
 
-  set: (obj: any, path: (string | symbol)[], value: any) => {
+  set: (obj: object, path: (string | symbol)[], value: unknown) => {
     let val = obj;
     for (const p of path.slice(0, -1)) {
       if (typeof val[p] == 'undefined' || val[p] == null) val[p] = {};
@@ -22,13 +22,15 @@ export const ObjectUtil = {
     val[path[path.length - 1]] = value;
   },
 
-  unset: (obj: any, path: (string | symbol)[]) => {
+  unset: (obj: object, path: (string | symbol)[]) => {
     const key = path[0];
     if (path.length === 1) {
+      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
       delete obj[key];
     }
     else {
       ObjectUtil.unset(obj[key], path.slice(1));
+      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
       if (Object.keys(obj[key]).length === 0) delete obj[key];
     }
   },
@@ -61,7 +63,7 @@ const proxyHandler = (
     notify(path);
     return true;
   },
-} as ProxyHandler<any>);
+} as ProxyHandler<object>);
 
 export const useConfigUtil = () => inject(configUtilSymbol) as ConfigUtil;
 
