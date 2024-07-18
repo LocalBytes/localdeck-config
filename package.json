@@ -7,7 +7,8 @@
     "deploy:configurator": "shx rm -rf ./dist/localdeck-configurator && shx mkdir ./dist/localdeck-configurator && shx cp -r ./packages/localdeck-configurator/{.output,homeassistant}/* ./dist/localdeck-configurator",
     "configurator": "pnpm run build:configurator && pnpm run deploy:configurator",
     "lint": "pnpm run --no-bail -r lint",
-    "lint:fix": "pnpm run --no-bail -r lint:fix"
+    "lint:fix": "pnpm run --no-bail -r lint:fix",
+    "test": "pnpm run --no-bail --parallel -r  test"
   },
   "workspaces": [
     "packages/localdeck-config",

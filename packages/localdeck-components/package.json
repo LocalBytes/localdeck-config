@@ -10,7 +10,8 @@
     "preview": "nuxt preview",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "test": "vitest --run"
   },
   "devDependencies": {
     "@nuxt/eslint": "^0.3.13",
