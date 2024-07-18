@@ -11,6 +11,10 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+
+    env:
+      NUXT_FILES_DIR: ${{runner.temp}}/esphome
+
     steps:
 
       - uses: actions/checkout@v4
@@ -32,8 +36,12 @@ jobs:
           pnpm install -r
           pnpx playwright install --with-deps
 
+      - name: Make temporary directory
+        run: mkdir -p ${{env.NUXT_FILES_DIR}}
+
       - name: Run linter
         run: pnpm run lint
+
 
       - name: Run tests
         run: pnpm run test
