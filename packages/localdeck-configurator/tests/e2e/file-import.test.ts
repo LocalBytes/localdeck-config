@@ -4,8 +4,9 @@ import * as path from 'node:path';
 import * as fs from 'node:fs/promises';
 
 import { describe, expect, test } from 'vitest';
-import { createPage, setup } from '@nuxt/test-utils/e2e';
+import { createPage } from '@nuxt/test-utils/e2e';
 import espHomeYaml from 'esphome-config-ts/dist/yaml';
+import { setupNuxt } from '~~/tests/utils';
 
 const preImportExample = `
 substitutions:
@@ -25,8 +26,10 @@ wifi:
   password: !secret wifi_password
 `;
 
+const FILENAME = 'test-import.yaml';
+
 describe('Import Workflow', async () => {
-  await setup({});
+  await setupNuxt({});
 
   test('Parse the original file', async () => {
     const content = espHomeYaml.parse(preImportExample) as object;
@@ -37,12 +40,13 @@ describe('Import Workflow', async () => {
     // Create New File
     console.log('Creating New File');
     const runtimeConfig = useRuntimeConfig();
-    const filePath = path.join(runtimeConfig.filesDir, `test-import.yaml`);
+    const filePath = path.join(runtimeConfig.filesDir, FILENAME);
     await fs.writeFile(filePath, preImportExample);
 
     // Load the page
     console.log('Loading Page');
-    const page = await createPage('/editor?filename=test-import.yaml');
+    const page = (await createPage('/'));
+    await page.getByText(FILENAME).click();
 
     // Update the friendly name
     console.log('Updating Friendly Name');
@@ -52,7 +56,7 @@ describe('Import Workflow', async () => {
     console.log('Saving File');
     await page.getByRole('button', { name: 'Save' }).click();
 
-    await page.waitForTimeout(1000);
+    await page.getByText('Your changes have been saved').waitFor('visible');
 
     // Check the output file
     console.log('Checking Output File');

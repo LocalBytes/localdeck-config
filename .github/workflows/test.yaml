@@ -1,0 +1,47 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+
+name: "Test"
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    env:
+      NUXT_FILES_DIR: /tmp/esphome
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
+      - name: Install Node.js & Cache Dependencies
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: |
+          pnpm install -r
+          pnpx playwright install --with-deps
+
+      - name: Make temporary directory
+        run: mkdir -p ${{env.NUXT_FILES_DIR}}
+
+      - name: Run linter
+        run: pnpm run lint
+
+
+      - name: Run tests
+        run: pnpm run test
