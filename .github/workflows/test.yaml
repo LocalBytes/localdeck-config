@@ -33,4 +33,4 @@ jobs:
           pnpx playwright install --with-deps
 
       - name: Run tests
-        run: pnpm run tests
+        run: pnpm run test
