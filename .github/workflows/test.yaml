@@ -32,5 +32,8 @@ jobs:
           pnpm install -r
           pnpx playwright install --with-deps
 
+      - name: Run linter
+        run: pnpm run lint
+
       - name: Run tests
         run: pnpm run test
