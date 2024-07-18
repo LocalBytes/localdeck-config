@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      NUXT_FILES_DIR: ${{runner.temp}}/esphome
+      NUXT_FILES_DIR: /tmp/esphome
 
     steps:
 
