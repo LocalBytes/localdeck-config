@@ -1,6 +1,7 @@
 import * as fs from 'fs/promises';
 
 import { decompress } from '@localbytes/localdeck-components/src/utils/compression';
+import { zPadEditor } from '@localbytes/localdeck-components/src/utils/PadCfg';
 
 export default defineEventHandler(async (event) => {
   const { filesDir } = useRuntimeConfig();
