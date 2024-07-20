@@ -30,6 +30,7 @@
     "@material-symbols/metadata": "^0.22.0",
     "material-symbols": "^0.22.0",
     "pako": "^2.1.0",
-    "vue3-emoji-picker": "^1.1.8"
+    "vue3-emoji-picker": "^1.1.8",
+    "zod": "^3.23.8"
   }
 }
