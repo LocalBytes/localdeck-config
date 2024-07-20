@@ -117,8 +117,19 @@ function newConfig(opts: newConfigOpts = {
         id: "keypad",
         keys: KEYS,
         // @ts-expect-error - Pin doesn't allow object yet
-        rows: PINS_ROWS.map(pin => ({pin: {number: `GPIO${pin}`, allow_other_uses: true}})),
-        columns: PINS_COLS.map(pin => ({pin: `GPIO${pin}`})),
+        rows: PINS_ROWS.map(pin => ({
+            pin: {
+                number: `GPIO${pin}`,
+                allow_other_uses: true
+            }
+        })),
+        // @ts-expect-error - Pin doesn't allow object yet
+        columns: PINS_COLS.map(pin => ({
+            pin: {
+                number: `GPIO${pin}`,
+                drive_strength: "5mA",
+            }
+        })),
     })).addTo(config);
 
     config.addComponent([
