@@ -6,6 +6,7 @@ import {
     PartitionLight
 } from "esphome-config-ts/dist/components/index.js";
 import {lambda} from "esphome-config-ts/dist/yaml/index.js";
+import {z} from "zod";
 
 export const KEYS = "ABCDEFGHIJKLMNOPQRSTUVWX";
 export const BUTTON_NUMBERS = [
@@ -15,18 +16,18 @@ export const BUTTON_NUMBERS = [
     1, 2, 3, 4, 5, 6,
 ];
 
-export interface ConfiguredButtonOptsComponent {
-    num: number;
+export const zConfiguredButtonOptsComponent = z.object({
+    num: z.number().positive().lte(Math.max(BUTTON_NUMBERS)),
+    expose: z.boolean(),
+    blip_on_press: z.boolean(),
+    ha_entity: z.string(),
+    toggle: z.boolean(),
+    follow_state: z.boolean(),
+    follow_brightness: z.boolean(),
+    follow_color: z.boolean(),
+});
 
-    expose: boolean;
-    blip_on_press: boolean;
-
-    ha_entity: string | null;
-    toggle: boolean;
-    follow_state: boolean;
-    follow_brightness: boolean;
-    follow_color: boolean;
-}
+export type ConfiguredButtonOptsComponent = z.infer<typeof zConfiguredButtonOptsComponent>;
 
 type newConfiguredButtonOptsOpts = Partial<ConfiguredButtonOptsComponent> & Pick<ConfiguredButtonOptsComponent, 'num'>
 export const newConfiguredButtonOpts = (opts: newConfiguredButtonOptsOpts): ConfiguredButtonOptsComponent => ({
@@ -43,17 +44,21 @@ export const newConfiguredButtonOpts = (opts: newConfiguredButtonOptsOpts): Conf
 });
 
 
-export interface ConfiguredButtonOpts {
-    keyNum: number;
-    component: ConfiguredButtonOptsComponent;
-    label: ConfiguredButtonOptsLabel;
-}
+export const zConfiguredButtonOptsLabel = z.object({
+    text: z.string(),
+    icon: z.string().nullable(),
+    fontSize: z.number(),
+});
 
-export interface ConfiguredButtonOptsLabel {
-    text: string;
-    icon: string | null;
-    fontSize: number;
-}
+export type ConfiguredButtonOptsLabel = z.infer<typeof zConfiguredButtonOptsLabel>;
+
+export const zConfiguredButtonOpts = z.object({
+    keyNum: z.number().positive().lte(Math.max(BUTTON_NUMBERS)),
+    component: zConfiguredButtonOptsComponent,
+    label: zConfiguredButtonOptsLabel,
+});
+
+export type ConfiguredButtonOpts = z.infer<typeof zConfiguredButtonOpts>;
 
 export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
     synth() {
