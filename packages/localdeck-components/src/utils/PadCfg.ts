@@ -2,6 +2,7 @@ import {
   BUTTON_NUMBERS,
   type ConfiguredButtonOpts,
   newConfiguredButtonOpts,
+  zButtonNumber,
   zConfiguredButtonOpts,
 } from '@localbytes/localdeck-codegen/dist/virtuals';
 import { z } from 'zod';
@@ -9,7 +10,7 @@ import type { DeepPartial } from './types';
 
 export const zPadEditor = z.object({
   title: z.string(),
-  buttons: z.record(z.number().positive().lte(Math.max(BUTTON_NUMBERS)), zConfiguredButtonOpts),
+  buttons: z.record(zButtonNumber, zConfiguredButtonOpts.deepPartial()),
 });
 
 export type PadEditor = z.infer<typeof zPadEditor>;

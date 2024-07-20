@@ -1,4 +1,5 @@
 import pako from 'pako';
+import type { z } from 'zod';
 
 export function encode(uint8array: Uint8Array) {
   const output = [];
