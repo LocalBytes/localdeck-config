@@ -123,6 +123,7 @@ function newConfig(opts: newConfigOpts = {
                 allow_other_uses: true
             }
         })),
+        // @ts-expect-error - Pin doesn't allow object yet
         columns: PINS_COLS.map(pin => ({
             pin: {
                 number: `GPIO${pin}`,
