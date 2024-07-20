@@ -16,11 +16,13 @@ export const BUTTON_NUMBERS = [
     1, 2, 3, 4, 5, 6,
 ];
 
+export const zButtonNumber = z.coerce.number().min(1).max(24);
+
 export const zConfiguredButtonOptsComponent = z.object({
-    num: z.number().positive().lte(Math.max(BUTTON_NUMBERS)),
+    num: zButtonNumber,
     expose: z.boolean(),
     blip_on_press: z.boolean(),
-    ha_entity: z.string(),
+    ha_entity: z.string().nullable(),
     toggle: z.boolean(),
     follow_state: z.boolean(),
     follow_brightness: z.boolean(),
@@ -47,13 +49,13 @@ export const newConfiguredButtonOpts = (opts: newConfiguredButtonOptsOpts): Conf
 export const zConfiguredButtonOptsLabel = z.object({
     text: z.string(),
     icon: z.string().nullable(),
-    fontSize: z.number(),
+    fontSize: z.coerce.number(),
 });
 
 export type ConfiguredButtonOptsLabel = z.infer<typeof zConfiguredButtonOptsLabel>;
 
 export const zConfiguredButtonOpts = z.object({
-    keyNum: z.number().positive().lte(Math.max(BUTTON_NUMBERS)),
+    keyNum: zButtonNumber,
     component: zConfiguredButtonOptsComponent,
     label: zConfiguredButtonOptsLabel,
 });
