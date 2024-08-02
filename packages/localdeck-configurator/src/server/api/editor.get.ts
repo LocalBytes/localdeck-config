@@ -20,10 +20,5 @@ export default defineEventHandler(async (event) => {
   const matchFriendly = content.match(/friendly_name: (.*)/);
   if (matchFriendly) config.title = matchFriendly[1];
 
-  config.buttons = _(config.buttons)
-    .sortBy('keyNum')
-    .keyBy('keyNum')
-    .value();
-
   return { configStr, config, content };
 });
