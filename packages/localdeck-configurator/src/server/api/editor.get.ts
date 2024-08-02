@@ -1,9 +1,7 @@
 import * as fs from 'fs/promises';
-import _ from 'lodash';
 
 import { decompress } from '@localbytes/localdeck-components/src/utils/compression';
 import type { PadEditor } from '@localbytes/localdeck-components/src/utils/PadCfg';
-import { newPadEditor } from '@localbytes/localdeck-components/src/utils/PadCfg';
 
 export default defineEventHandler(async (event) => {
   const { filesDir } = useRuntimeConfig();
@@ -19,6 +17,8 @@ export default defineEventHandler(async (event) => {
 
   const matchFriendly = content.match(/friendly_name: (.*)/);
   if (matchFriendly) config.title = matchFriendly[1];
+
+  config.buttons ??= {};
 
   return { configStr, config, content };
 });
