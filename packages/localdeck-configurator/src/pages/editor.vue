@@ -145,7 +145,6 @@ const print = async () => {
 };
 
 const reset = () => {
-  if (!confirm('Are you sure you want to reset?')) return;
   config.resetChanges();
   resetting.value = false;
 };
