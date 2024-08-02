@@ -1,9 +1,10 @@
+import type { TestOptions } from '@nuxt/test-utils/e2e';
 import { setup } from '@nuxt/test-utils/e2e';
-import type { TestOptions } from '@nuxt/test-utils';
 
 export const setupNuxt = (options?: Partial<TestOptions>) => {
   if (process.env.CI) return setup();
   else return setup({
+    host: 'http://localhost:3000',
     build: false,
     buildDir: '.output',
     nuxtConfig: {
@@ -13,6 +14,6 @@ export const setupNuxt = (options?: Partial<TestOptions>) => {
         },
       },
     },
-    ...options,
+    ...(options ?? {}),
   });
 };
