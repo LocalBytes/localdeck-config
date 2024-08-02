@@ -49,6 +49,6 @@ describe('Resetting Workflow', async () => {
     const response = page.waitForResponse(r => r.url().includes('/api/editor'));
     await page.reload();
     const responseJson = await response.then(r => r.json());
-    expect(responseJson.config).toMatchObject({ buttons: {} });
+    expect(responseJson.config).toMatchObject({ title: 'LocalDeck', buttons: {} });
   });
 });

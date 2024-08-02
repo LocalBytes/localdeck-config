@@ -34,32 +34,44 @@ describe('Hail Mary', async () => {
     await page.getByText(FILENAME).click();
 
     console.log('Setting Buttons');
-    await setButton(page, 1, { name: 'Livingroom Bulb', entity: 'light.livingroom_bulb' });
-    await setButton(page, 2, { name: 'Kitchen Bulb', entity: 'light.kitchen_bulb' });
-    await setButton(page, 3, { name: 'Bedroom Bulb', entity: 'light.bedroom_bulb' });
-    await setButton(page, 4, { name: 'Bathroom Bulb', entity: 'light.bathroom_bulb' });
-    await setButton(page, 5, { name: 'Hallway Bulb', entity: 'light.hallway_bulb' });
-    await setButton(page, 6, { name: 'Porch Bulb', entity: 'light.porch_bulb' });
-    await setButton(page, 7, { name: 'Garage Bulb', entity: 'light.garage_bulb' });
-    await setButton(page, 8, { name: 'Backyard Bulb', entity: 'light.backyard_bulb' });
-    await setButton(page, 9, { name: 'Frontyard Bulb', entity: 'light.frontyard_bulb' });
-    await setButton(page, 10, { name: 'Basement Bulb', entity: 'light.basement_bulb' });
-    await setButton(page, 11, { name: 'Attic Bulb', entity: 'light.attic_bulb' });
-    await setButton(page, 12, { name: 'Office Bulb', entity: 'light.office_bulb' });
-    await setButton(page, 13, { name: 'Library Bulb', entity: 'light.library_bulb' });
-    await setButton(page, 14, { name: 'Study Bulb', entity: 'light.study_bulb' });
-    await setButton(page, 15, { name: 'Lab Bulb', entity: 'light.lab_bulb' });
-    await setButton(page, 16, { name: 'Classroom Bulb', entity: 'light.classroom_bulb' });
-    await setButton(page, 17, { name: 'Gym Bulb', entity: 'light.gym_bulb' });
-    await setButton(page, 18, { name: 'Pool Bulb', entity: 'light.pool_bulb' });
-    await setButton(page, 19, { name: 'Spa Bulb', entity: 'light.spa_bulb' });
-    await setButton(page, 20, { name: 'Sauna Bulb', entity: 'light.sauna_bulb' });
-    await setButton(page, 21, { name: 'Cinema Bulb', entity: 'light.cinema_bulb' });
-    await setButton(page, 22, { name: 'Bar Bulb', entity: 'light.bar_bulb' });
-    await setButton(page, 23, { name: 'Kitchenette Bulb', entity: 'light.kitchenette_bulb' });
-    await setButton(page, 24, { name: 'Diningroom Bulb', entity: 'light.diningroom_bulb' });
+    const buttons = [
+      { keynum: 1, name: 'Livingroom Bulb', entity: 'light.livingroom_bulb' },
+      { keynum: 2, name: 'Kitchen Bulb', entity: 'light.kitchen_bulb' },
+      { keynum: 3, name: 'Bedroom Bulb', entity: 'light.bedroom_bulb' },
+      { keynum: 4, name: 'Bathroom Bulb', entity: 'light.bathroom_bulb' },
+      { keynum: 5, name: 'Hallway Bulb', entity: 'light.hallway_bulb' },
+      { keynum: 6, name: 'Porch Bulb', entity: 'light.porch_bulb' },
+      { keynum: 7, name: 'Garage Bulb', entity: 'light.garage_bulb' },
+      { keynum: 8, name: 'Backyard Bulb', entity: 'light.backyard_bulb' },
+      { keynum: 9, name: 'Frontyard Bulb', entity: 'light.frontyard_bulb' },
+      { keynum: 10, name: 'Basement Bulb', entity: 'light.basement_bulb' },
+      { keynum: 11, name: 'Attic Bulb', entity: 'light.attic_bulb' },
+      { keynum: 12, name: 'Office Bulb', entity: 'light.office_bulb' },
+      { keynum: 13, name: 'Library Bulb', entity: 'light.library_bulb' },
+      { keynum: 14, name: 'Study Bulb', entity: 'light.study_bulb' },
+      { keynum: 15, name: 'Lab Bulb', entity: 'light.lab_bulb' },
+      { keynum: 16, name: 'Classroom Bulb', entity: 'light.classroom_bulb' },
+      { keynum: 17, name: 'Gym Bulb', entity: 'light.gym_bulb' },
+      { keynum: 18, name: 'Pool Bulb', entity: 'light.pool_bulb' },
+      { keynum: 19, name: 'Spa Bulb', entity: 'light.spa_bulb' },
+      { keynum: 20, name: 'Sauna Bulb', entity: 'light.sauna_bulb' },
+      { keynum: 21, name: 'Cinema Bulb', entity: 'light.cinema_bulb' },
+      { keynum: 22, name: 'Bar Bulb', entity: 'light.bar_bulb' },
+      { keynum: 23, name: 'Kitchenette Bulb', entity: 'light.kitchenette_bulb' },
+      { keynum: 24, name: 'Diningroom Bulb', entity: 'light.diningroom_bulb' },
+    ];
+
+    for (const button of buttons) {
+      await setButton(page, button.keynum, { name: button.name, entity: button.entity });
+    }
 
     console.log('Saving');
     await page.getByRole('button', { name: 'Save' }).click();
+    await page.reload();
+
+    console.log('Checking');
+    for (const button of buttons) {
+      await page.getByText(button.name).isVisible();
+    }
   });
 });
