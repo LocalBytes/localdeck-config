@@ -46,7 +46,15 @@ describe('Import Workflow', async () => {
     // Load the page
     console.log('Loading Page');
     const page = (await createPage('/'));
+
+    const responsePromise = page.waitForResponse(r => r.url().includes('/api/editor'));
+
+    console.log('Clicking');
     await page.getByText(FILENAME).click();
+
+    const response = await responsePromise.then(r => r.json());
+    expect(response.configStr).toBeNull();
+    expect(response.config).toMatchObject({ title: 'LocalBytes LocalDeck 9751c4', buttons: {} });
 
     // Update the friendly name
     console.log('Updating Friendly Name');
