@@ -16,8 +16,8 @@
     "packages/localdeck-configurator"
   ],
   "devDependencies": {
-    "@vue/language-server": "^2.0.26",
+    "@vue/language-server": "^2.0.29",
     "shx": "^0.3.4",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.4"
   }
 }
