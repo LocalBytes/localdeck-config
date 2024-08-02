@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
   const configMatch = content.match(/configurator\?config=(.*)/);
   const configStr = configMatch ? decodeURIComponent(configMatch[1]) : null;
 
-  const config = configStr ? decompress<PadEditor>(configStr) : newPadEditor();
+  const config = configStr ? decompress<PadEditor>(configStr) : { title: 'LocalDeck', buttons: {} };
 
   const matchName = content.match(/name: (.*)/);
   if (matchName) config.title = matchName[1];
