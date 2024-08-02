@@ -29,7 +29,7 @@ wifi:
 const FILENAME = 'test-import.yaml';
 
 describe('Import Workflow', async () => {
-  await setupNuxt({});
+  await setupNuxt();
 
   test('Parse the original file', async () => {
     const content = espHomeYaml.parse(preImportExample) as object;

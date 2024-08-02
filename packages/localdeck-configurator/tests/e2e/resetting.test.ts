@@ -10,7 +10,7 @@ import { setupNuxt } from '~~/tests/utils';
 const FILENAME = 'test-resetting.yaml';
 
 describe('Resetting Workflow', async () => {
-  await setupNuxt({});
+  await setupNuxt();
 
   test('Resetting the configuration', async () => {
     const runtimeConfig = useRuntimeConfig();
