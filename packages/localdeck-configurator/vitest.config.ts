@@ -5,5 +5,6 @@ export default defineVitestConfig({
 // As such, we keep running into timout issues
   test: {
     testTimeout: 60_000,
+    environment: 'nuxt',
   },
 });

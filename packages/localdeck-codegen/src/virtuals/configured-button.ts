@@ -84,6 +84,26 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
                 from: c.num - 1,
                 to: c.num - 1,
             }],
+            effects: [
+                {pulse: {}},
+                {
+                    pulse: {
+                        name: "Fast Pulse",
+                        transition_length: "0.5s",
+                        update_interval: "0.5s",
+                        min_brightness: 0,
+                        max_brightness: 1,
+                    }
+                }, {
+                    pulse: {
+                        name: "Slow Pulse",
+                        update_interval: "2s",
+                    }
+                },
+                {random: {}},
+                {flicker: {}},
+
+            ],
         }));
 
 
