@@ -89,15 +89,15 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
                 {
                     pulse: {
                         name: "Fast Pulse",
-                        transition_length: 0.5,
-                        update_interval: 0.5,
+                        transition_length: "0.5s",
+                        update_interval: "0.5s",
                         min_brightness: 0,
-                        max_brightness: 100,
+                        max_brightness: 1,
                     }
                 }, {
                     pulse: {
                         name: "Slow Pulse",
-                        update_interval: 2,
+                        update_interval: "2s",
                     }
                 },
                 {random: {}},
