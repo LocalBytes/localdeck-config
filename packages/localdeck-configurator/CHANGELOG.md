@@ -2,6 +2,9 @@
 
 ## [Unreleased](https://github.com/LocalBytes/localdeck-config/compare/v0.5...main)
 
+### Added
+- Change log for the configurator in #37
+
 ### Fixed
 
 - Entity spacing when no input to the entity box in 2a30c92
