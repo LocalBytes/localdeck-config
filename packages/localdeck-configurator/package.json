@@ -16,8 +16,8 @@
   },
   "devDependencies": {
     "@nuxt/eslint": "^0.4.0",
-    "@nuxt/test-utils": "^3.14.0",
-    "@tailwindcss/typography": "^0.5.13",
+    "@nuxt/test-utils": "^3.14.1",
+    "@tailwindcss/typography": "^0.5.14",
     "@testing-library/vue": "^8.1.0",
     "@types/lodash": "^4.17.7",
     "@types/pako": "^2.0.3",
@@ -25,12 +25,12 @@
     "@vitest/browser": "^2.0.5",
     "@vitest/ui": "^2.0.5",
     "@vue/test-utils": "^2.4.6",
-    "autoprefixer": "^10.4.19",
+    "autoprefixer": "^10.4.20",
     "happy-dom": "^14.12.3",
     "nuxt": "^3.12.4",
-    "playwright": "^1.45.3",
-    "playwright-core": "^1.45.3",
-    "postcss": "^8.4.40",
+    "playwright": "^1.46.0",
+    "playwright-core": "^1.46.0",
+    "postcss": "^8.4.41",
     "typescript": "^5.5.4",
     "vitest": "^2.0.5"
   },
@@ -44,6 +44,6 @@
     "esphome-config-ts": "github:localbytes/esphome-config-ts",
     "lodash": "^4.17.21",
     "rippleui": "^1.12.1",
-    "tailwindcss": "^3.4.7"
+    "tailwindcss": "^3.4.9"
   }
 }
