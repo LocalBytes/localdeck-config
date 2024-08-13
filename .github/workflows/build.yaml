@@ -47,12 +47,13 @@ jobs:
 
       - name: Build
         run: |
+          cp ./packages/localdeck-configurator/CHANGELOG.md ./packages/localdeck-configurator/homeassistant/
+          
           sed -i "s/VERSION/${{ env.version }}/g" ./packages/localdeck-configurator/homeassistant/config.yaml
           pnpm build
+          
           mkdir -p .temp
-          cp ./packages/localdeck-configurator/CHANGELOG.md ./.temp
           cp -r ./packages/localdeck-configurator/{.output,homeassistant}/* ./.temp
-
       - uses: actions/upload-artifact@v4
         with:
           name: localdeck-configurator
