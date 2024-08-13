@@ -65,7 +65,7 @@ const renderString = (item: string, query: string) => {
     '\'': '&#39;',
   })[m] ?? m);
 
-  if (!text || !query) return () => text;
+  if (!text || !query) return h('div', [text]);
 
   const index = text.toLowerCase().indexOf(query?.toLowerCase());
   if (index < 0) return () => text;
