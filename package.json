@@ -8,7 +8,10 @@
     "configurator": "pnpm run build:configurator && pnpm run deploy:configurator",
     "lint": "pnpm run --no-bail -r lint",
     "lint:fix": "pnpm run --no-bail -r lint:fix",
-    "test": "pnpm run --no-bail --parallel -r  test"
+    "test": "pnpm run --no-bail --parallel -r test",
+    "dev": "pnpm run --parallel -w \"/^dev:.*/\"",
+    "dev:configurator": "pnpm --filter=localdeck-configurator dev",
+    "dev:codegen": "pnpm --filter=localdeck-codegen prepare:watch"
   },
   "workspaces": [
     "packages/localdeck-config",
