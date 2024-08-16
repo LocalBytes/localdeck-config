@@ -22,7 +22,7 @@ export const zConfiguredButtonOptsComponent = z.object({
     num: zButtonNumber,
     expose: z.boolean().default(true),
     blip_on_press: z.boolean().default(true),
-    ha_entity: z.string().nullish(),
+    ha_entity: z.string().nullish().default(""),
     toggle: z.boolean().default(true),
     follow_state: z.boolean().default(true),
     follow_brightness: z.boolean().default(true),
@@ -30,8 +30,8 @@ export const zConfiguredButtonOptsComponent = z.object({
 });
 
 export const zConfiguredButtonOptsLabel = z.object({
-    text: z.string().default(""),
-    icon: z.string().default(""),
+    text: z.string().nullish().default(""),
+    icon: z.string().nullish().default(""),
     fontSize: z.coerce.number().default(12),
 });
 
