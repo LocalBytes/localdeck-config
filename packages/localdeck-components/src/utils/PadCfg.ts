@@ -8,9 +8,12 @@ import {
 import { z } from 'zod';
 import type { DeepPartial } from './types';
 
+// Zod has deprecated the deepPartial method, with not replacement
+// GH: https://github.com/colinhacks/zod/issues/2854
+// noinspection JSDeprecatedSymbols
 export const zPadEditor = z.object({
-  title: z.string(),
-  buttons: z.record(zButtonNumber, zConfiguredButtonOpts.deepPartial()),
+  title: z.string().default('LocalDeck'),
+  buttons: z.record(zButtonNumber, zConfiguredButtonOpts.deepPartial()).default({}),
 });
 
 export type PadEditor = z.infer<typeof zPadEditor>;

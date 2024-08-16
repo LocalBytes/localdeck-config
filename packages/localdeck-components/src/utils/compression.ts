@@ -19,12 +19,13 @@ export function compress<T extends object>(editor: T) {
   return encode(deflated);
 }
 
-export function decompress<T extends z.ZodTypeAny | undefined>(
+export function decompress<T extends z.ZodTypeAny>(
   chars: string, schema?: T,
 ): T extends z.ZodTypeAny ? z.infer<T> : object {
   const deflated = decode(chars);
   const inflated = pako.inflate(deflated, { to: 'string' });
   const parsed = JSON.parse(inflated);
+  console.log({ parsed });
   return schema ? schema.parse(parsed) as z.infer<T> : parsed;
 }
 

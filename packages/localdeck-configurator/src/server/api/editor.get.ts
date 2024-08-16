@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
 
   const config = configStr
     ? decompress(configStr, zPadEditor)
-    : { title: 'LocalDeck', buttons: {} };
+    : zPadEditor.parse({});
 
   const matchName = content.match(/name: (.*)/);
   if (matchName) config.title = matchName[1];
