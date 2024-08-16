@@ -29,6 +29,9 @@ importers:
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
     devDependencies:
       '@eslint/js':
         specifier: ^9.9.0
@@ -84,6 +87,9 @@ importers:
       vue3-emoji-picker:
         specifier: ^1.1.8
         version: 1.1.8(typescript@5.5.4)
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
     devDependencies:
       '@nuxt/eslint':
         specifier: ^0.5.0
@@ -5403,6 +5409,9 @@ packages:
   zip-stream@6.0.1:
     resolution: {integrity: sha512-zK7YHHz4ZXpW89AHXUPbQVGKI7uvkd3hzusTdotCg1UxyaVtg0zFJSTfW/Dq5f7OBBVnq6cZIaC8Ti4hb6dtCA==}
     engines: {node: '>= 14'}
+
+  zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
 
 snapshots:
 
@@ -11315,3 +11324,5 @@ snapshots:
       archiver-utils: 5.0.2
       compress-commons: 6.0.2
       readable-stream: 4.5.2
+
+  zod@3.23.8: {}
