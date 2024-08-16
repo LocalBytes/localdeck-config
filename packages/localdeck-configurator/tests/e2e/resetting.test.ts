@@ -3,18 +3,9 @@ import * as fs from 'node:fs/promises';
 
 import { beforeEach, describe, expect, test } from 'vitest';
 import { createPage } from '@nuxt/test-utils/e2e';
-import { setupNuxt } from '~~/tests/utils';
+import { setButton, setupNuxt } from '~~/tests/utils';
 
 const FILENAME = 'test-resetting.yaml';
-type NuxtPage = Awaited<ReturnType<typeof createPage>>;
-
-async function setButton(page: NuxtPage, keynum: number, { name, entity }) {
-  console.log(`Setting Button ${keynum} to ${name} (${entity})`);
-  await page.click(`div[data-keynum="${keynum}"]`);
-
-  await page.getByRole('textbox', { name: 'Entity' }).fill(entity);
-  await page.getByPlaceholder('Type here').fill(name);
-}
 
 describe('Resetting Workflow', async () => {
   await setupNuxt();
