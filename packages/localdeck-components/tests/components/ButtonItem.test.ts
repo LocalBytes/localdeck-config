@@ -5,7 +5,7 @@ import { DeckButtonItem } from '#components';
 
 const CLASS_PRINTMODE = 'printmode';
 
-const newButton = (id: number, overrides: Record<string, any> = {}) => {
+const newButton = (id: number, overrides: Record<string, object> = {}) => {
   return zConfiguredButtonOpts.parse({
     keyNum: id,
     component: { num: id },
