@@ -1,8 +1,17 @@
 import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
-import DeckButtonItem from '~/components/DeckButtonItem.vue';
+import { zConfiguredButtonOpts } from '@localbytes/localdeck-codegen/dist/virtuals';
+import { DeckButtonItem } from '#components';
 
 const CLASS_PRINTMODE = 'printmode';
+
+const newButton = (id: number, overrides: Record<string, any> = {}) => {
+  return zConfiguredButtonOpts.parse({
+    keyNum: id,
+    component: { num: id },
+    ...overrides,
+  });
+};
 
 describe('Button Item', () => {
   it('Shows relevant labels', async () => {

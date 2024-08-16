@@ -22,7 +22,7 @@ export const zConfiguredButtonOptsComponent = z.object({
     num: zButtonNumber,
     expose: z.boolean().default(true),
     blip_on_press: z.boolean().default(true),
-    ha_entity: z.string().default(""),
+    ha_entity: z.string().nullish(),
     toggle: z.boolean().default(true),
     follow_state: z.boolean().default(true),
     follow_brightness: z.boolean().default(true),

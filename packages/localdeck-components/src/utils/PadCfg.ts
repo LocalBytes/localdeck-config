@@ -20,12 +20,18 @@ export const zEditContainer = zConfiguredButtonOpts;
 export type EditContainer = ConfiguredButtonOpts;
 
 export const newPadEditor = (): PadEditor => {
-  return ({
-    title: 'LocalDeck',
-    buttons: BUTTON_NUMBERS.reduce((acc, num) => {
-      acc[num] = zEditContainer.parse({ keyNum: num, component: { num }, label: {} });
-      return acc;
-    }, {} as Record<number, ConfiguredButtonOpts>,
-    ),
-  });
+  try {
+    return ({
+      title: 'LocalDeck',
+      buttons: BUTTON_NUMBERS.reduce((acc, num) => {
+        acc[num] = zEditContainer.parse({ keyNum: num, component: { num }, label: {} });
+        return acc;
+      }, {} as Record<number, ConfiguredButtonOpts>,
+      ),
+    });
+  }
+  catch (e) {
+    if (e instanceof z.ZodError) console.error(e.issues);
+    throw e;
+  }
 };
