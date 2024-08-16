@@ -1,3 +1,6 @@
+import typography from '@tailwindcss/typography';
+import rippleui from 'rippleui';
+
 const colors = {
   primary: '#152637',
   secondary: '#0090CD',
@@ -11,8 +14,8 @@ export default {
     './src/**/*.{html,js,vue,md}',
   ],
   plugins: [
-    require('@tailwindcss/typography'),
-    require('rippleui'),
+    typography,
+    rippleui,
   ],
   theme: {
     extend: { colors },

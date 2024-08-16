@@ -25,7 +25,6 @@ export function decompress<T extends z.ZodTypeAny>(
   const deflated = decode(chars);
   const inflated = pako.inflate(deflated, { to: 'string' });
   const parsed = JSON.parse(inflated);
-  console.log({ parsed });
   return schema ? schema.parse(parsed) as z.infer<T> : parsed;
 }
 

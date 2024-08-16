@@ -1,12 +1,10 @@
 import {
   BUTTON_NUMBERS,
   type ConfiguredButtonOpts,
-  newConfiguredButtonOpts,
   zButtonNumber,
   zConfiguredButtonOpts,
 } from '@localbytes/localdeck-codegen/dist/virtuals';
-import { z } from 'zod';
-import type { DeepPartial } from './types';
+import { z, ZodError } from 'zod';
 
 // Zod has deprecated the deepPartial method, with not replacement
 // GH: https://github.com/colinhacks/zod/issues/2854
@@ -21,20 +19,13 @@ export type PadEditor = z.infer<typeof zPadEditor>;
 export const zEditContainer = zConfiguredButtonOpts;
 export type EditContainer = ConfiguredButtonOpts;
 
-export const newButton = (
-  num: number,
-  options: DeepPartial<EditContainer> = {},
-): EditContainer => Object.assign({
-  keyNum: num,
-  component: newConfiguredButtonOpts({ num }),
-  label: { icon: '', text: '', fontSize: 12 },
-}, options);
-
-export const newPadEditor = (): PadEditor => ({
-  title: 'LocalDeck',
-  buttons: BUTTON_NUMBERS.reduce((acc, num) => {
-    acc[num] = newButton(num);
-    return acc;
-  }, {} as Record<number, ConfiguredButtonOpts>,
-  ),
-});
+export const newPadEditor = (): PadEditor => {
+  return ({
+    title: 'LocalDeck',
+    buttons: BUTTON_NUMBERS.reduce((acc, num) => {
+      acc[num] = zEditContainer.parse({ keyNum: num, component: { num }, label: {} });
+      return acc;
+    }, {} as Record<number, ConfiguredButtonOpts>,
+    ),
+  });
+};
