@@ -4,7 +4,7 @@ import {
   zButtonNumber,
   zConfiguredButtonOpts,
 } from '@localbytes/localdeck-codegen/dist/virtuals';
-import { z, ZodError } from 'zod';
+import { z } from 'zod';
 
 // Zod has deprecated the deepPartial method, with not replacement
 // GH: https://github.com/colinhacks/zod/issues/2854
