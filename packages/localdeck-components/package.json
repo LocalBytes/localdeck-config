@@ -14,11 +14,11 @@
     "test": "vitest --run"
   },
   "devDependencies": {
-    "@nuxt/eslint": "^0.4.0",
+    "@nuxt/eslint": "^0.5.0",
     "@nuxt/test-utils": "^3.14.1",
     "@types/pako": "^2.0.3",
-    "@vueuse/core": "^10.11.1",
-    "@vueuse/nuxt": "^10.11.1",
+    "@vueuse/core": "^11.0.0",
+    "@vueuse/nuxt": "^11.0.0",
     "maska": "^3.0.0",
     "nuxt": "^3.12.4",
     "sass": "^1.77.8",
@@ -27,8 +27,8 @@
   },
   "dependencies": {
     "@localbytes/localdeck-codegen": "workspace:^",
-    "@material-symbols/metadata": "^0.21.3",
-    "material-symbols": "^0.21.3",
+    "@material-symbols/metadata": "^0.22.0",
+    "material-symbols": "^0.22.0",
     "pako": "^2.1.0",
     "vue3-emoji-picker": "^1.1.8"
   }
