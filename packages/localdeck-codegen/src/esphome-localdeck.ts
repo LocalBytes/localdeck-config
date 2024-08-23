@@ -116,13 +116,7 @@ function newConfig(opts: newConfigOpts = {
     const keypad = (new MatrixKeypad({
         id: "keypad",
         keys: KEYS,
-        // @ts-expect-error - Pin doesn't allow object yet
-        rows: PINS_ROWS.map(pin => ({
-            pin: {
-                number: `GPIO${pin}`,
-                allow_other_uses: true
-            }
-        })),
+        rows: PINS_ROWS.map(pin => ({pin:`GPIO${pin}`})),
         // @ts-expect-error - Pin doesn't allow object yet
         columns: PINS_COLS.map(pin => ({
             pin: {
@@ -131,14 +125,6 @@ function newConfig(opts: newConfigOpts = {
             }
         })),
     })).addTo(config);
-
-    config.addComponent([
-        ...PINS_ROWS
-    ].map((pin) => new GpioBinarySensor({
-        id: `keypad_row_${pin.toString().padStart(2, "0")}`,
-        //@ts-expect-error - pin is a string according to the schema
-        pin: {number: `GPIO${pin}`, allow_other_uses: true},
-    })));
 
     config.addComponent([
         scriptBlipLight,
