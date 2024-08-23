@@ -6,7 +6,6 @@ import {
     Esp32Improv,
     Esp32RmtLedStripLight,
     Esphome,
-    GpioBinarySensor,
     ImprovSerial,
     MatrixKeypad,
     TemplateOutput,
