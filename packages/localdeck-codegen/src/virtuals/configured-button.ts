@@ -6,6 +6,7 @@ import {
     PartitionLight
 } from "esphome-config-ts/dist/components/index.js";
 import {lambda} from "esphome-config-ts/dist/yaml/index.js";
+import {z} from "zod";
 
 export const KEYS = "ABCDEFGHIJKLMNOPQRSTUVWX";
 export const BUTTON_NUMBERS = [
@@ -15,45 +16,34 @@ export const BUTTON_NUMBERS = [
     1, 2, 3, 4, 5, 6,
 ];
 
-export interface ConfiguredButtonOptsComponent {
-    num: number;
+export const zButtonNumber = z.coerce.number().min(1).max(24);
 
-    expose: boolean;
-    blip_on_press: boolean;
-
-    ha_entity: string | null;
-    toggle: boolean;
-    follow_state: boolean;
-    follow_brightness: boolean;
-    follow_color: boolean;
-}
-
-type newConfiguredButtonOptsOpts = Partial<ConfiguredButtonOptsComponent> & Pick<ConfiguredButtonOptsComponent, 'num'>
-export const newConfiguredButtonOpts = (opts: newConfiguredButtonOptsOpts): ConfiguredButtonOptsComponent => ({
-    num: opts.num,
-
-    expose: opts.expose ?? true,
-    blip_on_press: opts.blip_on_press ?? true,
-
-    ha_entity: opts.ha_entity ?? null,
-    toggle: opts.toggle ?? true,
-    follow_state: opts.toggle ?? true,
-    follow_brightness: opts.follow_brightness ?? true,
-    follow_color: opts.follow_color ?? true,
+export const zConfiguredButtonOptsComponent = z.object({
+    num: zButtonNumber,
+    expose: z.boolean().default(true),
+    blip_on_press: z.boolean().default(true),
+    ha_entity: z.string().nullish().default(""),
+    toggle: z.boolean().default(true),
+    follow_state: z.boolean().default(true),
+    follow_brightness: z.boolean().default(true),
+    follow_color: z.boolean().default(true),
 });
 
+export const zConfiguredButtonOptsLabel = z.object({
+    text: z.string().nullish().default(""),
+    icon: z.string().nullish().default(""),
+    fontSize: z.coerce.number().default(12),
+});
 
-export interface ConfiguredButtonOpts {
-    keyNum: number;
-    component: ConfiguredButtonOptsComponent;
-    label: ConfiguredButtonOptsLabel;
-}
+export type ConfiguredButtonOptsLabel = z.infer<typeof zConfiguredButtonOptsLabel>;
 
-export interface ConfiguredButtonOptsLabel {
-    text: string;
-    icon: string | null;
-    fontSize: number;
-}
+export const zConfiguredButtonOpts = z.object({
+    keyNum: zButtonNumber,
+    component: zConfiguredButtonOptsComponent,
+    label: zConfiguredButtonOptsLabel,
+});
+
+export type ConfiguredButtonOpts = z.infer<typeof zConfiguredButtonOpts>;
 
 export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
     synth() {
@@ -114,22 +104,14 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
             }
 
             sensor.config.on_press?.push({
-                "homeassistant.service": {
-                    service: service,
-                    data: {entity_id: c.ha_entity}
-                }
+                "homeassistant.service": {service: service, data: {entity_id: c.ha_entity}}
             });
         }
         if (c.ha_entity && c.follow_state) {
             stack.push(new HomeassistantTextSensor({
                 id: `keypad_button_${c.num}_hass`,
                 entity_id: c.ha_entity,
-                on_value: [{
-                    "light.control": {
-                        id: lightId,
-                        state: lambda('return x == "on";'),
-                    }
-                }]
+                on_value: [{"light.control": {id: lightId, state: lambda('return x == "on";')}}]
             }));
         } else if (c.blip_on_press) {
             sensor.config.on_press?.push({'script.execute': {id: 'blip_light', led_index: c.num - 1}});

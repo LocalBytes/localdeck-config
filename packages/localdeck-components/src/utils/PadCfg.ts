@@ -1,31 +1,37 @@
 import {
   BUTTON_NUMBERS,
   type ConfiguredButtonOpts,
-  newConfiguredButtonOpts,
+  zButtonNumber,
+  zConfiguredButtonOpts,
 } from '@localbytes/localdeck-codegen/dist/virtuals';
-import type { DeepPartial } from './types';
+import { z } from 'zod';
 
-export interface PadEditor {
-  title: string;
-  buttons: Record<number, ConfiguredButtonOpts>;
-}
+// Zod has deprecated the deepPartial method, with not replacement
+// GH: https://github.com/colinhacks/zod/issues/2854
+// noinspection JSDeprecatedSymbols
+export const zPadEditor = z.object({
+  title: z.string().default('LocalDeck'),
+  buttons: z.record(zButtonNumber, zConfiguredButtonOpts.deepPartial()).default({}),
+});
 
+export type PadEditor = z.infer<typeof zPadEditor>;
+
+export const zEditContainer = zConfiguredButtonOpts;
 export type EditContainer = ConfiguredButtonOpts;
 
-export const newButton = (
-  num: number,
-  options: DeepPartial<EditContainer> = {},
-): EditContainer => Object.assign({
-  keyNum: num,
-  component: newConfiguredButtonOpts({ num }),
-  label: { icon: '', text: '', fontSize: 12 },
-}, options);
-
-export const newPadEditor = (): PadEditor => ({
-  title: 'LocalDeck',
-  buttons: BUTTON_NUMBERS.reduce((acc, num) => {
-    acc[num] = newButton(num);
-    return acc;
-  }, {} as Record<number, ConfiguredButtonOpts>,
-  ),
-});
+export const newPadEditor = (): PadEditor => {
+  try {
+    return ({
+      title: 'LocalDeck',
+      buttons: BUTTON_NUMBERS.reduce((acc, num) => {
+        acc[num] = zEditContainer.parse({ keyNum: num, component: { num }, label: {} });
+        return acc;
+      }, {} as Record<number, ConfiguredButtonOpts>,
+      ),
+    });
+  }
+  catch (e) {
+    if (e instanceof z.ZodError) console.error(e.issues);
+    throw e;
+  }
+};

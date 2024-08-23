@@ -1,5 +1,5 @@
 import * as MaterialVersions from '@material-symbols/metadata/versions.json';
-import { type Emoji } from 'vue3-emoji-picker';
+import type { Emoji } from 'vue3-emoji-picker';
 
 export const mdIcons = Object.keys(MaterialVersions);
 export const mdIconsGroups = mdIcons.map((icon) => {

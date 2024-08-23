@@ -1,7 +1,7 @@
 import * as fs from 'fs/promises';
 
 import { decompress } from '@localbytes/localdeck-components/src/utils/compression';
-import type { PadEditor } from '@localbytes/localdeck-components/src/utils/PadCfg';
+import { zPadEditor } from '@localbytes/localdeck-components/src/utils/PadCfg';
 
 export default defineEventHandler(async (event) => {
   const { filesDir } = useRuntimeConfig();
@@ -10,7 +10,9 @@ export default defineEventHandler(async (event) => {
   const configMatch = content.match(/configurator\?config=(.*)/);
   const configStr = configMatch ? decodeURIComponent(configMatch[1]) : null;
 
-  const config = configStr ? decompress<PadEditor>(configStr) : { title: 'LocalDeck', buttons: {} };
+  const config = configStr
+    ? decompress(configStr, zPadEditor)
+    : zPadEditor.parse({});
 
   const matchName = content.match(/name: (.*)/);
   if (matchName) config.title = matchName[1];

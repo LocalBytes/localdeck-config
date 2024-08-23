@@ -1,5 +1,5 @@
 import newConfig from "@/esphome-localdeck.js";
-import {BUTTON_NUMBERS, ConfiguredButton, newConfiguredButtonOpts} from "@/virtuals/index.js";
+import {BUTTON_NUMBERS, ConfiguredButton, zConfiguredButtonOpts} from "@/virtuals/index.js";
 import {DashboardImport} from "esphome-config-ts/dist/components/index.js";
 
 import _ from "lodash";
@@ -22,12 +22,11 @@ esphomeComponent.config = _.merge(esphomeComponent.config, {
     ]
 });
 
-BUTTON_NUMBERS.sort().forEach((num) => {
-    config.addComponent(new ConfiguredButton({
-        component: newConfiguredButtonOpts({num}),
+BUTTON_NUMBERS
+    .sort()
+    .forEach((num) => config.addComponent(new ConfiguredButton(zConfiguredButtonOpts.parse({
         keyNum: num,
-        label: {icon: "", text: "", fontSize: 12},
-    }));
-})
+        component: {num}
+    }))));
 
 console.log(config.synthYaml());

@@ -1,4 +1,5 @@
 import pako from 'pako';
+import type { z } from 'zod';
 
 export function encode(uint8array: Uint8Array) {
   const output = [];
@@ -18,10 +19,13 @@ export function compress<T extends object>(editor: T) {
   return encode(deflated);
 }
 
-export function decompress<T extends object>(chars: string) {
+export function decompress<T extends z.ZodTypeAny>(
+  chars: string, schema?: T,
+): T extends z.ZodTypeAny ? z.infer<T> : object {
   const deflated = decode(chars);
   const inflated = pako.inflate(deflated, { to: 'string' });
-  return JSON.parse(inflated) as T;
+  const parsed = JSON.parse(inflated);
+  return schema ? schema.parse(parsed) as z.infer<T> : parsed;
 }
 
 export function getEditorUrl(editor: object, printmode: boolean = false) {
