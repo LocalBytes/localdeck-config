@@ -3,11 +3,13 @@
 ## [Unreleased](https://github.com/LocalBytes/localdeck-config/compare/v0.5...main)
 
 ### Added
+
 - Change log for the configurator in #37
 
 ### Fixed
 
 - Entity spacing when no input to the entity box in 2a30c92
+- The MatrixKeypad component correctly sets up the keymap, as such we've removed the log spam in #38 
 
 ## [v0.5](https://github.com/LocalBytes/localdeck-config/releases/tag/v0.5)
 
@@ -22,7 +24,7 @@
 ## [v0.4](https://github.com/LocalBytes/localdeck-config/releases/tag/v0.4)
 
 ### Fixed
- 
+
 - Added mitigation for the flashing LEDs issue in #28
 
 ### Changed
@@ -43,6 +45,7 @@
 - Overhauled the build process in #20
 
 ### New Contributors
+
 - @AKTheKnight made their first contribution in #18
 
 ## [v0.2](https://github.com/LocalBytes/localdeck-config/releases/tag/v0.2)
