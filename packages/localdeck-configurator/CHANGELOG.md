@@ -6,11 +6,12 @@
 
 - Change log for the configurator in #37
 - Use native `repeat` action for the `blip_light` effect in #39
+- The brightness slider now scales boolean values (such as switch entities) in #40
 
 ### Fixed
 
 - Entity spacing when no input to the entity box in 2a30c92
-- The MatrixKeypad component correctly sets up the keymap, as such we've removed the log spam in #38 
+- The MatrixKeypad component correctly sets up the keymap, as such we've removed the log spam in #38
 
 ## [v0.5](https://github.com/LocalBytes/localdeck-config/releases/tag/v0.5)
 
