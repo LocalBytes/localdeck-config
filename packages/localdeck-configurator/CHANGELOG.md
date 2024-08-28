@@ -5,6 +5,7 @@
 ### Added
 
 - Change log for the configurator in #37
+- Use native `repeat` action for the `blip_light` effect in #39
 
 ### Fixed
 
