@@ -111,7 +111,13 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
             stack.push(new HomeassistantTextSensor({
                 id: `keypad_button_${c.num}_hass`,
                 entity_id: c.ha_entity,
-                on_value: [{"light.control": {id: lightId, state: lambda('return x == "on";')}}]
+                on_value: [{
+                    "light.control": {
+                        id: lightId,
+                        state: lambda('return x == "on";'),
+                        brightness: lambda('return id(brightness);'),
+                    }
+                }]
             }));
         } else if (c.blip_on_press) {
             sensor.config.on_press?.push({'script.execute': {id: 'blip_light', led_index: c.num - 1}});
