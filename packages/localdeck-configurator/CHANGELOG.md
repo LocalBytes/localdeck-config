@@ -2,6 +2,8 @@
 
 ## [Unreleased](https://github.com/LocalBytes/localdeck-config/compare/v0.5...main)
 
+## [v0.6](https://github.com/LocalBytes/localdeck-config/releases/tag/v0.6)
+
 ### Added
 
 - Change log for the configurator in #37
