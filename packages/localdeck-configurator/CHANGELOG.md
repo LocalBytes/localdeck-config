@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased](https://github.com/LocalBytes/localdeck-config/compare/v0.5...main)
+## [Unreleased](https://github.com/LocalBytes/localdeck-config/compare/v0.6...main)
 
 ## [v0.6](https://github.com/LocalBytes/localdeck-config/releases/tag/v0.6)
 
