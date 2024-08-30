@@ -11,7 +11,7 @@ import { z } from 'zod';
 // noinspection JSDeprecatedSymbols
 export const zPadEditor = z.object({
   title: z.string().default('LocalDeck'),
-  buttons: z.preprocess((arg, ctx) => Object.fromEntries(Object.entries(arg as Record<string, unknown>).filter(([key]) => zButtonNumber.safeParse(key).success)), z.record(zButtonNumber, zConfiguredButtonOpts.deepPartial())).default({}),
+  buttons: z.preprocess(val => Object.fromEntries(Object.entries(val as Record<string, unknown>).filter(([key]) => zButtonNumber.safeParse(key).success)), z.record(zButtonNumber, zConfiguredButtonOpts.deepPartial())).default({}),
 });
 
 export type PadEditor = z.infer<typeof zPadEditor>;
