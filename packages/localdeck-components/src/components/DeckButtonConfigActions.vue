@@ -95,6 +95,7 @@
 </template>
 
 <script lang="ts" setup>
+import type Fuse from 'fuse.js';
 import type { EditContainer } from '../utils/PadCfg';
 import type { HassEntity } from '../utils/types';
 
@@ -102,12 +103,9 @@ defineModel<EditContainer>({
   required: true,
 });
 
-defineProps({
-  typeahead: {
-    type: Array as PropType<HassEntity[]>,
-    default: null,
-  },
-});
+defineProps<{
+  typeahead: Fuse<HassEntity>;
+}>();
 
 const hassOpen = ref(true);
 </script>

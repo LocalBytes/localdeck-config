@@ -42,6 +42,7 @@
     "@nuxtjs/color-mode": "^3.4.2",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "esphome-config-ts": "github:localbytes/esphome-config-ts",
+    "fuse.js": "^7.0.0",
     "lodash": "^4.17.21",
     "rippleui": "^1.12.1",
     "tailwindcss": "^3.4.10"
