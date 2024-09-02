@@ -49,10 +49,7 @@ const modelValue = defineModel<string>();
 
 const filtered = computed(() => {
   if (!modelValue.value) return props.typeahead?.getIndex().docs;
-  return props.typeahead?.search(modelValue.value).map((ta) => {
-    console.log(ta);
-    return ta.item;
-  });
+  return props.typeahead?.search(modelValue.value).map(({ item }) => item);
 });
 
 const select = (item: HassEntity) => {
