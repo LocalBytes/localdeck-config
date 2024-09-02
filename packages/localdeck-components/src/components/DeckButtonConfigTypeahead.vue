@@ -36,20 +36,21 @@
 </template>
 
 <script lang="ts" setup>
+import type Fuse from 'fuse.js';
 import type { HassEntity } from '~/utils/types';
 
 const props = defineProps<{
-  typeahead: HassEntity[];
+  typeahead: Fuse<HassEntity>;
 }>();
 
 const inputRef = ref();
 const isOpen = ref(false);
 const modelValue = defineModel<string>();
 
-const filtered = computed(() => props.typeahead?.filter(e =>
-  e.id.includes(modelValue.value ?? '')
-  || e.name.includes(modelValue.value ?? ''),
-));
+const filtered = computed(() => {
+  if (!modelValue.value) return props.typeahead?.getIndex().docs;
+  return props.typeahead?.search(modelValue.value).map(({ item }) => item);
+});
 
 const select = (item: HassEntity) => {
   modelValue.value = item.id;
@@ -68,7 +69,7 @@ const renderString = (item: string, query: string) => {
   if (!text || !query) return h('div', [text]);
 
   const index = text.toLowerCase().indexOf(query?.toLowerCase());
-  if (index < 0) return () => text;
+  if (index < 0) return h('div', [text]);
 
   return h('div', [
     h('span', text.substring(0, index)),

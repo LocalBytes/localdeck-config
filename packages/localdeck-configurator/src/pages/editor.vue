@@ -106,10 +106,15 @@
 </template>
 
 <script lang="ts" setup>
+import Fuse from 'fuse.js';
+
 const router = useRouter();
 const route = useRoute();
 const { data, status } = await useFetch('/api/editor', { query: { filename: route.query.filename as string } });
-const { data: entities } = await useFetch('/api/entities', { server: false });
+const { data: entities } = await useFetch('/api/entities', {
+  server: false,
+  transform: data => new Fuse(data, { keys: ['id', { name: 'name', weight: 2 }] }),
+});
 
 enum SavingStatus {
   SAVING, DONE, IDLE,
