@@ -62,7 +62,7 @@ describe('Import Workflow', async () => {
     console.log('Saving File');
     await page.getByRole('button', { name: 'Save' }).click();
 
-    await page.getByText('Your changes have been saved').waitFor('visible');
+    await page.getByText('Your changes have been saved').waitFor({ state: 'visible' });
 
     // Check the output file
     console.log('Checking Output File');

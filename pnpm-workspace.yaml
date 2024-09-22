@@ -5,3 +5,6 @@ packages:
   - 'components/**'
   # exclude packages that are inside test directories
   - '!**/test/**'
+
+catalog:
+  typescript: ~5.5.4

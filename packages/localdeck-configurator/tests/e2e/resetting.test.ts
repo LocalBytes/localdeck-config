@@ -31,13 +31,16 @@ describe('Resetting Workflow', async () => {
     await page.locator('.modal', { hasText: 'Saving' }).getByText('✕').click();
 
     await page.getByRole('button', { name: 'Reset' }).click();
-    await page.locator('.modal', { hasText: 'Are you sure?' }).getByRole('button', { name: 'Reset' }).click();
+
+    const reset = page.locator('.modal', { hasText: 'Are you sure?' }).getByRole('button', { name: 'Reset' });
+    await reset.waitFor({ state: 'visible' });
+    await reset.click();
+
     await page.getByRole('button', { name: 'Save' }).click();
 
     console.log('Checking Reset in Network');
-    const response = page.waitForResponse(r => r.url().includes('/api/editor'));
     await page.reload();
-    const responseJson = await response.then(r => r.json());
-    expect(responseJson.config).toMatchObject({ title: 'LocalDeck', buttons: {} });
+    const rawData = await page.getByTestId('editor-data').innerText();
+    expect(JSON.parse(rawData ?? '').config).toMatchObject({ title: 'LocalDeck', buttons: {} });
   });
 });
