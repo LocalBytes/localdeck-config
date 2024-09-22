@@ -8,7 +8,6 @@
       v-for="container in orderedButtons"
       :key="container.keyNum"
       :container="container"
-      :data-keynum="container.keyNum"
       :editing="editing?.keyNum === container.keyNum && !isPrinting"
       class="pad-grid-item"
       @click="click(container)"
@@ -77,6 +76,6 @@ provide(fontSizesSymbol, sizes);
 }
 
 .pad-grid-item {
-  @apply bg-gray-200 rounded-lg text-black;
+  @apply bg-gray-200 rounded-lg text-black cursor-pointer;
 }
 </style>

@@ -1,7 +1,7 @@
 import * as path from 'node:path';
 import * as fs from 'node:fs/promises';
 
-import { beforeEach, describe, test } from 'vitest';
+import { beforeEach, describe, expect, test } from 'vitest';
 import { createPage } from '@nuxt/test-utils/e2e';
 import { setButton, setupNuxt } from '~~/tests/utils';
 
@@ -56,11 +56,14 @@ describe('Hail Mary', async () => {
 
     console.log('Saving');
     await page.getByRole('button', { name: 'Save' }).click();
-    await page.reload();
+    await page.reload({ waitUntil: 'networkidle' });
 
     console.log('Checking');
     for (const button of buttons) {
-      await page.getByText(button.name).isVisible();
+      expect(await page.locator('div.pad-grid')
+        .getByText(button.name)
+        .isVisible(),
+      ).toBe(true);
     }
   });
 });

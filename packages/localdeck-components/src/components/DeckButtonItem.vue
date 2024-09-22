@@ -1,7 +1,10 @@
 <template>
   <div
     ref="padGridItem"
+    :aria-label="`DeckButton ${container.keyNum.toFixed(0).padStart(2, '0')}`"
     :class="{ 'shadow-lg shadow-yellow-300': editing, 'printmode': print }"
+    :data-keynum="container.keyNum"
+    role="button"
     class="pad-grid-item"
   >
     <p
@@ -28,8 +31,8 @@
 </template>
 
 <script lang="ts" setup>
-import { useFontSizes, useIsPrinting } from '../utils/hooks';
-import type { EditContainer } from '../utils/PadCfg';
+import { useFontSizes, useIsPrinting } from '~/utils/hooks';
+import type { EditContainer } from '~/utils/PadCfg';
 
 const padGridItem = ref<HTMLDivElement>();
 const print = useIsPrinting();
