@@ -11,8 +11,7 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "test": "vitest --run",
-    "test:browser": "vitest --workspace=vitest.workspace.ts"
+    "test": "nuxt test"
   },
   "devDependencies": {
     "@nuxt/eslint": "^0.5.7",

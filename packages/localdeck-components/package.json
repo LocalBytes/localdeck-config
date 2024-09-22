@@ -11,7 +11,7 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "postinstall": "nuxt prepare",
-    "test": "vitest --run"
+    "test": "nuxt test"
   },
   "devDependencies": {
     "@nuxt/eslint": "^0.5.7",

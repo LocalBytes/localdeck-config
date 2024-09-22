@@ -1,0 +1,14 @@
+# Waiting on upstream fix
+# https://github.com/nuxt/test-utils/issues/818
+diff --git a/dist/shared/test-utils.CaqvQLs_.mjs b/dist/shared/test-utils.CaqvQLs_.mjs
+index 218ce6c64a57cc0520a73883a71a24ec67b0a5a4..be9cc954ab1637822d29bd0e63b072b7d9f3be32 100644
+--- a/dist/shared/test-utils.CaqvQLs_.mjs
++++ b/dist/shared/test-utils.CaqvQLs_.mjs
+@@ -199,6 +199,6 @@ async function setup(options = {}) {
+   await setupFn(hooks);
+ }
+
+-const distDir = dirname(fileURLToPath(import.meta.url));
++const distDir = dirname(fileURLToPath(import.meta.url+'/../'));
+
+ export { createPage as a, buildFixture as b, createBrowser as c, distDir as d, createTest as e, setup as f, getBrowser as g, loadFixture as l, setupMaps as s, waitForHydration as w };
