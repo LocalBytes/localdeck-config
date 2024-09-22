@@ -115,9 +115,6 @@ importers:
       nuxt:
         specifier: ^3.13.2
         version: 3.13.2(@parcel/watcher@2.4.1)(@types/node@22.5.5)(eslint@9.11.0(jiti@1.21.6))(ioredis@5.4.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.22.4)(sass@1.79.3)(terser@5.33.0)(typescript@5.6.2)(vite@5.4.7(@types/node@22.5.5)(sass@1.79.3)(terser@5.33.0))
-      sass:
-        specifier: ^1.79.3
-        version: 1.79.3
       typescript:
         specifier: ^5.6.2
         version: 5.6.2
@@ -7693,6 +7690,7 @@ snapshots:
   chokidar@4.0.1:
     dependencies:
       readdirp: 4.0.1
+    optional: true
 
   chownr@2.0.0: {}
 
@@ -8776,7 +8774,8 @@ snapshots:
 
   image-meta@0.2.1: {}
 
-  immutable@4.3.7: {}
+  immutable@4.3.7:
+    optional: true
 
   import-fresh@3.3.0:
     dependencies:
@@ -10133,7 +10132,8 @@ snapshots:
     dependencies:
       picomatch: 2.3.1
 
-  readdirp@4.0.1: {}
+  readdirp@4.0.1:
+    optional: true
 
   rechoir@0.6.2:
     dependencies:
@@ -10261,6 +10261,7 @@ snapshots:
       chokidar: 4.0.1
       immutable: 4.3.7
       source-map-js: 1.2.1
+    optional: true
 
   scslre@0.3.0:
     dependencies:
