@@ -6,8 +6,8 @@ export async function setButton(page: NuxtPage, keynum: number, { name, entity }
   console.log(`Setting Button ${keynum} to ${name} (${entity})`);
   await page.click(`div[data-keynum="${keynum}"]`);
 
-  await page.getByRole('textbox', { name: 'Entity' }).fill(entity);
-  await page.getByPlaceholder('Type here').fill(name);
+  await page.getByRole('textbox', { name: 'entity' }).fill(entity);
+  await page.getByRole('textbox', { name: 'label_text' }).fill(name);
 }
 
 export const setupNuxt = (options?: Partial<TestOptions>) => {

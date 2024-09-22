@@ -31,7 +31,11 @@ describe('Resetting Workflow', async () => {
     await page.locator('.modal', { hasText: 'Saving' }).getByText('✕').click();
 
     await page.getByRole('button', { name: 'Reset' }).click();
-    await page.locator('.modal', { hasText: 'Are you sure?' }).getByRole('button', { name: 'Reset' }).click();
+
+    const reset = page.locator('.modal', {hasText: 'Are you sure?'}).getByRole('button', {name: 'Reset'});
+    await reset.waitFor({state: 'visible'});
+    await reset.click();
+
     await page.getByRole('button', { name: 'Save' }).click();
 
     console.log('Checking Reset in Network');
