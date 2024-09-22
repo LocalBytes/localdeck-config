@@ -32,8 +32,8 @@ describe('Resetting Workflow', async () => {
 
     await page.getByRole('button', { name: 'Reset' }).click();
 
-    const reset = page.locator('.modal', {hasText: 'Are you sure?'}).getByRole('button', {name: 'Reset'});
-    await reset.waitFor({state: 'visible'});
+    const reset = page.locator('.modal', { hasText: 'Are you sure?' }).getByRole('button', { name: 'Reset' });
+    await reset.waitFor({ state: 'visible' });
     await reset.click();
 
     await page.getByRole('button', { name: 'Save' }).click();
