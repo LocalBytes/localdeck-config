@@ -102,12 +102,18 @@
         </p>
       </div>
     </RippleUiModal>
+    <pre
+      v-if="isDev"
+      id="raw_data"
+      class="hidden"
+    >{{ data }}</pre>
   </div>
 </template>
 
 <script lang="ts" setup>
 import Fuse from 'fuse.js';
 
+const isDev = import.meta.dev;
 const router = useRouter();
 const route = useRoute();
 const { data, status } = await useFetch('/api/editor', { query: { filename: route.query.filename as string } });

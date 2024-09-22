@@ -35,9 +35,8 @@ describe('Resetting Workflow', async () => {
     await page.getByRole('button', { name: 'Save' }).click();
 
     console.log('Checking Reset in Network');
-    const response = page.waitForResponse(r => r.url().includes('/api/editor'));
     await page.reload();
-    const responseJson = await response.then(r => r.json());
-    expect(responseJson.config).toMatchObject({ title: 'LocalDeck', buttons: {} });
+    const rawData = await page.locator('pre#raw_data').textContent();
+    expect(JSON.parse(rawData!).config).toMatchObject({ title: 'LocalDeck', buttons: {} });
   });
 });
