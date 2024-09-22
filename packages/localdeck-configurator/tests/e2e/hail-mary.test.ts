@@ -60,7 +60,7 @@ describe('Hail Mary', async () => {
 
     console.log('Checking');
     for (const button of buttons) {
-      await page.getByText(button.name).isVisible();
+      await page.getByText(button.name, { exact: true }).isVisible();
     }
   });
 });

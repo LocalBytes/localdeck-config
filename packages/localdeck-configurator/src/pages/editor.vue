@@ -104,7 +104,7 @@
     </RippleUiModal>
     <pre
       v-if="isDev"
-      id="raw_data"
+      data-testid="editor-data"
       class="hidden"
     >{{ data }}</pre>
   </div>
