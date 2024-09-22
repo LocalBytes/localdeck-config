@@ -51,12 +51,13 @@ jobs:
           sed -i "s/VERSION/${{ env.version }}/g" ./packages/localdeck-configurator/homeassistant/config.yaml
           pnpm build
           
-          mkdir -p .temp
-          cp -r ./packages/localdeck-configurator/{.output,homeassistant}/* ./.temp
+          mkdir -p ./packages/artifact
+          cp -r ./packages/localdeck-configurator/{.output,homeassistant}/* ./packages/artifact
+          ls -al ./packages/artifact
       - uses: actions/upload-artifact@v4
         with:
           name: localdeck-configurator
-          path: .temp
+          path: ./packages/artifact
 
       - uses: actions/upload-artifact@v4
         with:
