@@ -1,11 +1,6 @@
 substitutions:
   name: localdeck-test
   friendly_name: LocalDeck TEST
-esp32:
-  board: esp32-c3-devkitm-1
-  framework:
-    type: esp-idf
-    sdkconfig_options: { }
 esphome:
   name: ${name}
   friendly_name: ${friendly_name}
@@ -17,6 +12,11 @@ esphome:
         id: ledstrip
         brightness: 25%
         effect: Addressable Rainbow
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: esp-idf
+    sdkconfig_options: { }
 light:
   - platform: esp32_rmt_led_strip
     name: Ledstrip

@@ -1,13 +1,3 @@
-wifi:
-  ap:
-    ssid: ${friendly_name}
-captive_portal: {}
-logger:
-  logs: {}
-web_server: {}
-api: {}
-ota:
-  - platform: esphome
 substitutions:
   name: localdeck
   friendly_name: LocalBytes LocalDeck
@@ -33,6 +23,16 @@ esp32:
   framework:
     type: esp-idf
     sdkconfig_options: {}
+wifi:
+  ap:
+    ssid: ${friendly_name}
+captive_portal: { }
+ota:
+  - platform: esphome
+logger:
+  logs: { }
+api: { }
+web_server: { }
 output:
   - platform: template
     id: improv_status
@@ -70,6 +70,19 @@ light:
       - id: ledstrip
         from: 0
         to: 0
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
   - platform: partition
     id: keypad_button_10_light
     name: Button 10 Light
@@ -78,6 +91,19 @@ light:
       - id: ledstrip
         from: 9
         to: 9
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
   - platform: partition
     id: keypad_button_11_light
     name: Button 11 Light
@@ -86,6 +112,19 @@ light:
       - id: ledstrip
         from: 10
         to: 10
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
   - platform: partition
     id: keypad_button_12_light
     name: Button 12 Light
@@ -94,6 +133,19 @@ light:
       - id: ledstrip
         from: 11
         to: 11
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
   - platform: partition
     id: keypad_button_13_light
     name: Button 13 Light
@@ -102,6 +154,19 @@ light:
       - id: ledstrip
         from: 12
         to: 12
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
   - platform: partition
     id: keypad_button_14_light
     name: Button 14 Light
@@ -110,6 +175,19 @@ light:
       - id: ledstrip
         from: 13
         to: 13
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
   - platform: partition
     id: keypad_button_15_light
     name: Button 15 Light
@@ -118,6 +196,19 @@ light:
       - id: ledstrip
         from: 14
         to: 14
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
   - platform: partition
     id: keypad_button_16_light
     name: Button 16 Light
@@ -126,6 +217,19 @@ light:
       - id: ledstrip
         from: 15
         to: 15
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
   - platform: partition
     id: keypad_button_17_light
     name: Button 17 Light
@@ -134,6 +238,19 @@ light:
       - id: ledstrip
         from: 16
         to: 16
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
   - platform: partition
     id: keypad_button_18_light
     name: Button 18 Light
@@ -142,6 +259,19 @@ light:
       - id: ledstrip
         from: 17
         to: 17
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
   - platform: partition
     id: keypad_button_19_light
     name: Button 19 Light
@@ -150,6 +280,19 @@ light:
       - id: ledstrip
         from: 18
         to: 18
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
   - platform: partition
     id: keypad_button_02_light
     name: Button 02 Light
@@ -158,6 +301,19 @@ light:
       - id: ledstrip
         from: 1
         to: 1
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
   - platform: partition
     id: keypad_button_20_light
     name: Button 20 Light
@@ -166,6 +322,19 @@ light:
       - id: ledstrip
         from: 19
         to: 19
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
   - platform: partition
     id: keypad_button_21_light
     name: Button 21 Light
@@ -174,6 +343,19 @@ light:
       - id: ledstrip
         from: 20
         to: 20
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
   - platform: partition
     id: keypad_button_22_light
     name: Button 22 Light
@@ -182,6 +364,19 @@ light:
       - id: ledstrip
         from: 21
         to: 21
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
   - platform: partition
     id: keypad_button_23_light
     name: Button 23 Light
@@ -190,6 +385,19 @@ light:
       - id: ledstrip
         from: 22
         to: 22
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
   - platform: partition
     id: keypad_button_24_light
     name: Button 24 Light
@@ -198,6 +406,19 @@ light:
       - id: ledstrip
         from: 23
         to: 23
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
   - platform: partition
     id: keypad_button_03_light
     name: Button 03 Light
@@ -206,6 +427,19 @@ light:
       - id: ledstrip
         from: 2
         to: 2
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
   - platform: partition
     id: keypad_button_04_light
     name: Button 04 Light
@@ -214,6 +448,19 @@ light:
       - id: ledstrip
         from: 3
         to: 3
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
   - platform: partition
     id: keypad_button_05_light
     name: Button 05 Light
@@ -222,6 +469,19 @@ light:
       - id: ledstrip
         from: 4
         to: 4
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
   - platform: partition
     id: keypad_button_06_light
     name: Button 06 Light
@@ -230,6 +490,19 @@ light:
       - id: ledstrip
         from: 5
         to: 5
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
   - platform: partition
     id: keypad_button_07_light
     name: Button 07 Light
@@ -238,6 +511,19 @@ light:
       - id: ledstrip
         from: 6
         to: 6
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
   - platform: partition
     id: keypad_button_08_light
     name: Button 08 Light
@@ -246,6 +532,19 @@ light:
       - id: ledstrip
         from: 7
         to: 7
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
   - platform: partition
     id: keypad_button_09_light
     name: Button 09 Light
@@ -254,50 +553,114 @@ light:
       - id: ledstrip
         from: 8
         to: 8
+    effects:
+      - pulse: { }
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: { }
+      - flicker: { }
 matrix_keypad:
   id: keypad
   keys: ABCDEFGHIJKLMNOPQRSTUVWX
   rows:
-    - pin:
-        number: GPIO21
-        allow_other_uses: true
-    - pin:
-        number: GPIO20
-        allow_other_uses: true
-    - pin:
-        number: GPIO3
-        allow_other_uses: true
-    - pin:
-        number: GPIO7
-        allow_other_uses: true
+    - pin: GPIO21
+    - pin: GPIO20
+    - pin: GPIO3
+    - pin: GPIO7
   columns:
-    - pin: GPIO0
-    - pin: GPIO1
-    - pin: GPIO10
-    - pin: GPIO4
-    - pin: GPIO5
-    - pin: GPIO6
+    - pin:
+        number: GPIO0
+        drive_strength: 5mA
+    - pin:
+        number: GPIO1
+        drive_strength: 5mA
+    - pin:
+        number: GPIO10
+        drive_strength: 5mA
+    - pin:
+        number: GPIO4
+        drive_strength: 5mA
+    - pin:
+        number: GPIO5
+        drive_strength: 5mA
+    - pin:
+        number: GPIO6
+        drive_strength: 5mA
+script:
+  - id: blip_light
+    parameters:
+      led_index: int
+    mode: parallel
+    then:
+      - repeat:
+          count: '20'
+          then:
+            - light.addressable_set:
+                id: ledstrip
+                range_from: !lambda return led_index;
+                range_to: !lambda return led_index;
+                red: !lambda return 1.0 - ((float)iteration / 20);
+                green: !lambda return 1.0 - ((float)iteration / 20);
+                blue: !lambda return 1.0 - ((float)iteration / 20);
+                white: !lambda return 1.0 - ((float)iteration / 20);
+            - delay: 25ms
+  - id: set_led_rgb
+    parameters:
+      color: string
+      entity: string
+    mode: queued
+    then:
+      - lambda: |-
+          ESP_LOGD("set_led_rgb", "Entity %s, Input: %s", entity.c_str(), color.c_str());
+
+          if (color.length() < 7) return;
+
+          int firstComma = color.find(',');
+          int secondComma = color.find(',', firstComma + 1);
+
+          ESP_LOGV("set_led_rgb", "Commas are: %d, %d", firstComma, secondComma);
+
+          float r = stoi(color.substr(1, firstComma));
+          float g = stoi(color.substr(firstComma + 1, secondComma));
+          float b = stoi(color.substr(secondComma + 1, color.length() - 1));
+
+          ESP_LOGD("set_led_rgb", "%d, %d, %d", r,g,b);
+
+          for (auto *light : App.get_lights()){
+            ESP_LOGV("set_led_rgb", "Checking light %s", light->get_object_id().c_str());
+            if (light->get_object_id().c_str() == entity){
+                ESP_LOGD("set_led_rgb", "Setting light %s", light->get_object_id().c_str());
+                auto call = light->make_call();
+                call.set_rgb(r/255, g/255, b/255);
+                call.perform();
+            }
+          }
+globals:
+  id: brightness
+  type: float
+  initial_value: '1'
+  restore_value: true
+number:
+  - platform: template
+    name: Brightness
+    set_action:
+      - globals.set:
+          id: brightness
+          value: !lambda return x;
+    max_value: '1'
+    min_value: '0'
+    step: '0.01'
+    lambda: !lambda return id(brightness);
+dashboard_import:
+  package_import_url: github://LocalBytes/localdeck-config/packages/localdeck-codegen/esphome-localdeck.yaml
 binary_sensor:
-  - platform: gpio
-    id: keypad_row_21
-    pin:
-      number: GPIO21
-      allow_other_uses: true
-  - platform: gpio
-    id: keypad_row_20
-    pin:
-      number: GPIO20
-      allow_other_uses: true
-  - platform: gpio
-    id: keypad_row_03
-    pin:
-      number: GPIO3
-      allow_other_uses: true
-  - platform: gpio
-    id: keypad_row_07
-    pin:
-      number: GPIO7
-      allow_other_uses: true
   - platform: matrix_keypad
     id: keypad_button_01
     name: Button 01
@@ -320,7 +683,7 @@ binary_sensor:
               data:
                 button: '1'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 1
                 type: single
       - timing:
           - ON for at most 1s
@@ -332,7 +695,7 @@ binary_sensor:
               data:
                 button: '1'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 1
                 type: double
   - platform: matrix_keypad
     id: keypad_button_10
@@ -356,7 +719,7 @@ binary_sensor:
               data:
                 button: '10'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 10
                 type: single
       - timing:
           - ON for at most 1s
@@ -368,7 +731,7 @@ binary_sensor:
               data:
                 button: '10'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 10
                 type: double
   - platform: matrix_keypad
     id: keypad_button_11
@@ -392,7 +755,7 @@ binary_sensor:
               data:
                 button: '11'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 11
                 type: single
       - timing:
           - ON for at most 1s
@@ -404,7 +767,7 @@ binary_sensor:
               data:
                 button: '11'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 11
                 type: double
   - platform: matrix_keypad
     id: keypad_button_12
@@ -428,7 +791,7 @@ binary_sensor:
               data:
                 button: '12'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 12
                 type: single
       - timing:
           - ON for at most 1s
@@ -440,7 +803,7 @@ binary_sensor:
               data:
                 button: '12'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 12
                 type: double
   - platform: matrix_keypad
     id: keypad_button_13
@@ -464,7 +827,7 @@ binary_sensor:
               data:
                 button: '13'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 13
                 type: single
       - timing:
           - ON for at most 1s
@@ -476,7 +839,7 @@ binary_sensor:
               data:
                 button: '13'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 13
                 type: double
   - platform: matrix_keypad
     id: keypad_button_14
@@ -500,7 +863,7 @@ binary_sensor:
               data:
                 button: '14'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 14
                 type: single
       - timing:
           - ON for at most 1s
@@ -512,7 +875,7 @@ binary_sensor:
               data:
                 button: '14'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 14
                 type: double
   - platform: matrix_keypad
     id: keypad_button_15
@@ -536,7 +899,7 @@ binary_sensor:
               data:
                 button: '15'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 15
                 type: single
       - timing:
           - ON for at most 1s
@@ -548,7 +911,7 @@ binary_sensor:
               data:
                 button: '15'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 15
                 type: double
   - platform: matrix_keypad
     id: keypad_button_16
@@ -572,7 +935,7 @@ binary_sensor:
               data:
                 button: '16'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 16
                 type: single
       - timing:
           - ON for at most 1s
@@ -584,7 +947,7 @@ binary_sensor:
               data:
                 button: '16'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 16
                 type: double
   - platform: matrix_keypad
     id: keypad_button_17
@@ -608,7 +971,7 @@ binary_sensor:
               data:
                 button: '17'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 17
                 type: single
       - timing:
           - ON for at most 1s
@@ -620,7 +983,7 @@ binary_sensor:
               data:
                 button: '17'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 17
                 type: double
   - platform: matrix_keypad
     id: keypad_button_18
@@ -644,7 +1007,7 @@ binary_sensor:
               data:
                 button: '18'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 18
                 type: single
       - timing:
           - ON for at most 1s
@@ -656,7 +1019,7 @@ binary_sensor:
               data:
                 button: '18'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 18
                 type: double
   - platform: matrix_keypad
     id: keypad_button_19
@@ -680,7 +1043,7 @@ binary_sensor:
               data:
                 button: '19'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 19
                 type: single
       - timing:
           - ON for at most 1s
@@ -692,7 +1055,7 @@ binary_sensor:
               data:
                 button: '19'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 19
                 type: double
   - platform: matrix_keypad
     id: keypad_button_02
@@ -716,7 +1079,7 @@ binary_sensor:
               data:
                 button: '2'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 2
                 type: single
       - timing:
           - ON for at most 1s
@@ -728,7 +1091,7 @@ binary_sensor:
               data:
                 button: '2'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 2
                 type: double
   - platform: matrix_keypad
     id: keypad_button_20
@@ -752,7 +1115,7 @@ binary_sensor:
               data:
                 button: '20'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 20
                 type: single
       - timing:
           - ON for at most 1s
@@ -764,7 +1127,7 @@ binary_sensor:
               data:
                 button: '20'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 20
                 type: double
   - platform: matrix_keypad
     id: keypad_button_21
@@ -788,7 +1151,7 @@ binary_sensor:
               data:
                 button: '21'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 21
                 type: single
       - timing:
           - ON for at most 1s
@@ -800,7 +1163,7 @@ binary_sensor:
               data:
                 button: '21'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 21
                 type: double
   - platform: matrix_keypad
     id: keypad_button_22
@@ -824,7 +1187,7 @@ binary_sensor:
               data:
                 button: '22'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 22
                 type: single
       - timing:
           - ON for at most 1s
@@ -836,7 +1199,7 @@ binary_sensor:
               data:
                 button: '22'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 22
                 type: double
   - platform: matrix_keypad
     id: keypad_button_23
@@ -860,7 +1223,7 @@ binary_sensor:
               data:
                 button: '23'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 23
                 type: single
       - timing:
           - ON for at most 1s
@@ -872,7 +1235,7 @@ binary_sensor:
               data:
                 button: '23'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 23
                 type: double
   - platform: matrix_keypad
     id: keypad_button_24
@@ -896,7 +1259,7 @@ binary_sensor:
               data:
                 button: '24'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 24
                 type: single
       - timing:
           - ON for at most 1s
@@ -908,7 +1271,7 @@ binary_sensor:
               data:
                 button: '24'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 24
                 type: double
   - platform: matrix_keypad
     id: keypad_button_03
@@ -932,7 +1295,7 @@ binary_sensor:
               data:
                 button: '3'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 3
                 type: single
       - timing:
           - ON for at most 1s
@@ -944,7 +1307,7 @@ binary_sensor:
               data:
                 button: '3'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 3
                 type: double
   - platform: matrix_keypad
     id: keypad_button_04
@@ -968,7 +1331,7 @@ binary_sensor:
               data:
                 button: '4'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 4
                 type: single
       - timing:
           - ON for at most 1s
@@ -980,7 +1343,7 @@ binary_sensor:
               data:
                 button: '4'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 4
                 type: double
   - platform: matrix_keypad
     id: keypad_button_05
@@ -1004,7 +1367,7 @@ binary_sensor:
               data:
                 button: '5'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 5
                 type: single
       - timing:
           - ON for at most 1s
@@ -1016,7 +1379,7 @@ binary_sensor:
               data:
                 button: '5'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 5
                 type: double
   - platform: matrix_keypad
     id: keypad_button_06
@@ -1040,7 +1403,7 @@ binary_sensor:
               data:
                 button: '6'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 6
                 type: single
       - timing:
           - ON for at most 1s
@@ -1052,7 +1415,7 @@ binary_sensor:
               data:
                 button: '6'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 6
                 type: double
   - platform: matrix_keypad
     id: keypad_button_07
@@ -1076,7 +1439,7 @@ binary_sensor:
               data:
                 button: '7'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 7
                 type: single
       - timing:
           - ON for at most 1s
@@ -1088,7 +1451,7 @@ binary_sensor:
               data:
                 button: '7'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 7
                 type: double
   - platform: matrix_keypad
     id: keypad_button_08
@@ -1112,7 +1475,7 @@ binary_sensor:
               data:
                 button: '8'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 8
                 type: single
       - timing:
           - ON for at most 1s
@@ -1124,7 +1487,7 @@ binary_sensor:
               data:
                 button: '8'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 8
                 type: double
   - platform: matrix_keypad
     id: keypad_button_09
@@ -1148,7 +1511,7 @@ binary_sensor:
               data:
                 button: '9'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 9
                 type: single
       - timing:
           - ON for at most 1s
@@ -1160,249 +1523,6 @@ binary_sensor:
               data:
                 button: '9'
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: ''
+                label: Button 9
                 type: double
-script:
-  - id: blip_light
-    parameters:
-      led_index: int
-    mode: parallel
-    then:
-      - light.addressable_set:
-          id: ledstrip
-          range_from: !lambda return led_index;
-          range_to: !lambda return led_index;
-          red: 100%
-          green: 100%
-          blue: 100%
-          white: 100%
-      - delay: 25ms
-      - light.addressable_set:
-          id: ledstrip
-          range_from: !lambda return led_index;
-          range_to: !lambda return led_index;
-          red: 95%
-          green: 95%
-          blue: 95%
-          white: 95%
-      - delay: 25ms
-      - light.addressable_set:
-          id: ledstrip
-          range_from: !lambda return led_index;
-          range_to: !lambda return led_index;
-          red: 90%
-          green: 90%
-          blue: 90%
-          white: 90%
-      - delay: 25ms
-      - light.addressable_set:
-          id: ledstrip
-          range_from: !lambda return led_index;
-          range_to: !lambda return led_index;
-          red: 85%
-          green: 85%
-          blue: 85%
-          white: 85%
-      - delay: 25ms
-      - light.addressable_set:
-          id: ledstrip
-          range_from: !lambda return led_index;
-          range_to: !lambda return led_index;
-          red: 80%
-          green: 80%
-          blue: 80%
-          white: 80%
-      - delay: 25ms
-      - light.addressable_set:
-          id: ledstrip
-          range_from: !lambda return led_index;
-          range_to: !lambda return led_index;
-          red: 75%
-          green: 75%
-          blue: 75%
-          white: 75%
-      - delay: 25ms
-      - light.addressable_set:
-          id: ledstrip
-          range_from: !lambda return led_index;
-          range_to: !lambda return led_index;
-          red: 70%
-          green: 70%
-          blue: 70%
-          white: 70%
-      - delay: 25ms
-      - light.addressable_set:
-          id: ledstrip
-          range_from: !lambda return led_index;
-          range_to: !lambda return led_index;
-          red: 65%
-          green: 65%
-          blue: 65%
-          white: 65%
-      - delay: 25ms
-      - light.addressable_set:
-          id: ledstrip
-          range_from: !lambda return led_index;
-          range_to: !lambda return led_index;
-          red: 60%
-          green: 60%
-          blue: 60%
-          white: 60%
-      - delay: 25ms
-      - light.addressable_set:
-          id: ledstrip
-          range_from: !lambda return led_index;
-          range_to: !lambda return led_index;
-          red: 55%
-          green: 55%
-          blue: 55%
-          white: 55%
-      - delay: 25ms
-      - light.addressable_set:
-          id: ledstrip
-          range_from: !lambda return led_index;
-          range_to: !lambda return led_index;
-          red: 50%
-          green: 50%
-          blue: 50%
-          white: 50%
-      - delay: 25ms
-      - light.addressable_set:
-          id: ledstrip
-          range_from: !lambda return led_index;
-          range_to: !lambda return led_index;
-          red: 45%
-          green: 45%
-          blue: 45%
-          white: 45%
-      - delay: 25ms
-      - light.addressable_set:
-          id: ledstrip
-          range_from: !lambda return led_index;
-          range_to: !lambda return led_index;
-          red: 40%
-          green: 40%
-          blue: 40%
-          white: 40%
-      - delay: 25ms
-      - light.addressable_set:
-          id: ledstrip
-          range_from: !lambda return led_index;
-          range_to: !lambda return led_index;
-          red: 35%
-          green: 35%
-          blue: 35%
-          white: 35%
-      - delay: 25ms
-      - light.addressable_set:
-          id: ledstrip
-          range_from: !lambda return led_index;
-          range_to: !lambda return led_index;
-          red: 30%
-          green: 30%
-          blue: 30%
-          white: 30%
-      - delay: 25ms
-      - light.addressable_set:
-          id: ledstrip
-          range_from: !lambda return led_index;
-          range_to: !lambda return led_index;
-          red: 25%
-          green: 25%
-          blue: 25%
-          white: 25%
-      - delay: 25ms
-      - light.addressable_set:
-          id: ledstrip
-          range_from: !lambda return led_index;
-          range_to: !lambda return led_index;
-          red: 20%
-          green: 20%
-          blue: 20%
-          white: 20%
-      - delay: 25ms
-      - light.addressable_set:
-          id: ledstrip
-          range_from: !lambda return led_index;
-          range_to: !lambda return led_index;
-          red: 15%
-          green: 15%
-          blue: 15%
-          white: 15%
-      - delay: 25ms
-      - light.addressable_set:
-          id: ledstrip
-          range_from: !lambda return led_index;
-          range_to: !lambda return led_index;
-          red: 10%
-          green: 10%
-          blue: 10%
-          white: 10%
-      - delay: 25ms
-      - light.addressable_set:
-          id: ledstrip
-          range_from: !lambda return led_index;
-          range_to: !lambda return led_index;
-          red: 5%
-          green: 5%
-          blue: 5%
-          white: 5%
-      - delay: 25ms
-  - id: set_led_rgb
-    parameters:
-      led_index: int
-      color: string
-    mode: queued
-    then:
-      - lambda: >
-          ESP_LOGD("set_led_rgb", "Index %d, Input: %s", led_index,
-          color.c_str());
-
-
-          int firstComma = color.find(',');
-
-          int secondComma = color.find(',', firstComma + 1);
-
-
-          ESP_LOGD("set_led_rgb", "Commas are: %d, %d", firstComma,
-          secondComma);
-
-
-          auto rs = color.substr(1, firstComma);
-
-          auto gs = color.substr(firstComma + 1, secondComma);
-
-          auto bs = color.substr(secondComma + 1, color.length() - 1);
-
-
-          ESP_LOGD("set_led_rgb", "%s-%s-%s", rs.c_str(), gs.c_str(),
-          bs.c_str());
-
-          ESP_LOGD("set_led_rgb", "%d, %d, %d", stoi(rs), stoi(gs), stoi(bs));
-
-
-          auto light = ((AddressableLight*)id(ledstrip).get_output());
-
-          light->get(led_index).set(Color(stoi(rs), stoi(gs), stoi(bs)));
-
-          light->schedule_show();
-globals:
-  id: brightness
-  type: float
-  initial_value: '1'
-  restore_value: true
-number:
-  - platform: template
-    name: Brightness
-    set_action:
-      - globals.set:
-          id: brightness
-          value: !lambda return x;
-    max_value: '1'
-    min_value: '0'
-    step: '0.01'
-    lambda: !lambda return id(brightness);
-dashboard_import:
-  package_import_url: >-
-    github://LocalBytes/localdeck-config/packages/localdeck-codegen/esphome-localdeck.yaml
 

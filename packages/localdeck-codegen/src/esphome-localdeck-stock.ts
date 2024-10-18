@@ -26,6 +26,7 @@ BUTTON_NUMBERS
     .sort()
     .forEach((num) => config.addComponent(new ConfiguredButton(zConfiguredButtonOpts.parse({
         keyNum: num,
+        label: {text: `Button ${num}`},
         component: {num}
     }))));
 
