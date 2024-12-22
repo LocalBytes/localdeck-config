@@ -1,8 +1,8 @@
 import * as path from 'node:path';
 import * as fs from 'node:fs/promises';
 
-import {setup, createPage} from '@nuxt/test-utils/e2e';
-import {describe, expect, test} from 'vitest';
+import { setup, createPage } from '@nuxt/test-utils/e2e';
+import { describe, expect, test } from 'vitest';
 
 import espHomeYaml from 'esphome-config-ts/dist/yaml';
 
