@@ -1,5 +1,4 @@
-import * as path from 'node:path';
-
+// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
     '@vueuse/nuxt',
@@ -9,9 +8,6 @@ export default defineNuxtConfig({
 
   srcDir: "./src",
   compatibilityDate: '2024-11-01',
-
-  // https://github.com/nuxt/nuxt/discussions/26739
-  // nitro: { experimental: { legacyExternals: true } },
 
   // eslint: { config: { stylistic: { semi: true } } },
 
