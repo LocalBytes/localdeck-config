@@ -1,10 +1,10 @@
 import * as path from 'node:path';
 import * as fs from 'node:fs/promises';
 
-import { describe, expect, test } from 'vitest';
-import { createPage } from '@nuxt/test-utils/e2e';
+import {setup, createPage} from '@nuxt/test-utils/e2e';
+import {describe, it, expect, test} from 'vitest';
+
 import espHomeYaml from 'esphome-config-ts/dist/yaml';
-import { setupNuxt } from '~~/tests/utils';
 
 const preImportExample = `
 substitutions:
@@ -27,9 +27,11 @@ wifi:
 const FILENAME = 'test-import.yaml';
 
 describe('Import Workflow', async () => {
-  await setupNuxt();
+  console.log('Starting Tests');
+  await setup();
 
   test('Parse the original file', async () => {
+    console.log('Parsing Original File');
     const content = espHomeYaml.parse(preImportExample) as object;
     expect(content).toBeDefined();
   });
