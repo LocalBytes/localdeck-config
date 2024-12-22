@@ -14,36 +14,36 @@
     "test": "nuxt test"
   },
   "devDependencies": {
-    "@nuxt/eslint": "^0.5.7",
-    "@nuxt/test-utils": "^3.14.3",
+    "@nuxt/eslint": "^0.7.4",
+    "@nuxt/test-utils": "^3.15.1",
     "@tailwindcss/typography": "^0.5.15",
     "@testing-library/vue": "^8.1.0",
-    "@types/lodash": "^4.17.10",
+    "@types/lodash": "^4.17.13",
     "@types/pako": "^2.0.3",
-    "@vitejs/plugin-vue": "^5.1.4",
-    "@vitest/browser": "^2.1.2",
-    "@vitest/ui": "^2.1.2",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitest/browser": "^2.1.8",
+    "@vitest/ui": "^2.1.8",
     "@vue/test-utils": "^2.4.6",
     "autoprefixer": "^10.4.20",
-    "happy-dom": "^15.7.4",
-    "nuxt": "^3.13.2",
-    "playwright": "^1.47.2",
-    "playwright-core": "^1.47.2",
-    "postcss": "^8.4.47",
-    "typescript": "^5.6.2",
-    "vitest": "^2.1.2"
+    "happy-dom": "^15.11.7",
+    "nuxt": "^3.14.1592",
+    "playwright": "^1.49.1",
+    "playwright-core": "^1.49.1",
+    "postcss": "^8.4.49",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
   },
   "dependencies": {
     "@fontsource-variable/open-sans": "^5.1.0",
     "@fontsource/poppins": "^5.1.0",
     "@localbytes/localdeck-codegen": "workspace:^",
     "@localbytes/localdeck-components": "workspace:^",
-    "@nuxtjs/color-mode": "^3.5.1",
-    "@nuxtjs/tailwindcss": "^6.12.1",
+    "@nuxtjs/color-mode": "^3.5.2",
+    "@nuxtjs/tailwindcss": "^6.12.2",
     "esphome-config-ts": "github:localbytes/esphome-config-ts",
     "fuse.js": "^7.0.0",
     "lodash": "^4.17.21",
     "rippleui": "^1.12.1",
-    "tailwindcss": "^3.4.13"
+    "tailwindcss": "^3.4.17"
   }
 }

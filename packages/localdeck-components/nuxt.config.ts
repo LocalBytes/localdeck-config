@@ -1,11 +1,18 @@
-export default defineNuxtConfig({
-  srcDir: 'src',
-  modules: ['@vueuse/nuxt', '@nuxt/eslint', '@nuxt/test-utils/module'],
-  compatibilityDate: '2024-07-15',
+import * as path from 'node:path';
 
-  eslint: { config: { stylistic: { semi: true } } },
+export default defineNuxtConfig({
+  modules: [
+    '@vueuse/nuxt',
+    '@nuxt/eslint',
+    '@nuxt/test-utils/module',
+  ],
+
+  srcDir: "./src",
+  compatibilityDate: '2024-11-01',
 
   // https://github.com/nuxt/nuxt/discussions/26739
-  nitro: { experimental: { legacyExternals: true } },
+  // nitro: { experimental: { legacyExternals: true } },
+
+  // eslint: { config: { stylistic: { semi: true } } },
 
 });

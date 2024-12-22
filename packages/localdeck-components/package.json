@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "main": "./nuxt.config.ts",
   "scripts": {
-    "dev": "nuxi dev ",
+    "dev": "nuxi dev",
     "build": "nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
@@ -14,23 +14,22 @@
     "test": "nuxt test"
   },
   "devDependencies": {
-    "@nuxt/eslint": "^0.5.7",
-    "@nuxt/test-utils": "^3.14.3",
+    "@nuxt/eslint": "^0.7.4",
+    "@nuxt/test-utils": "^3.15.1",
     "@types/pako": "^2.0.3",
-    "@vueuse/core": "^11.1.0",
-    "@vueuse/nuxt": "^11.1.0",
-    "maska": "^3.0.3",
-    "nuxt": "^3.13.2",
-    "typescript": "^5.6.2",
-    "vitest": "^2.1.2"
+    "@vueuse/nuxt": "^12.1.0",
+    "maska": "^3.0.4",
+    "nuxt": "^3.14.1592",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
   },
   "dependencies": {
     "@localbytes/localdeck-codegen": "workspace:^",
-    "@material-symbols/metadata": "^0.23.0",
+    "@material-symbols/metadata": "^0.27.2",
     "fuse.js": "^7.0.0",
-    "material-symbols": "^0.23.0",
+    "material-symbols": "^0.27.2",
     "pako": "^2.1.0",
     "vue3-emoji-picker": "^1.1.8",
-    "zod": "^3.23.8"
+    "zod": "^3.24.1"
   }
 }

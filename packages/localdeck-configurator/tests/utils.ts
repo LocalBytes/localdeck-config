@@ -11,7 +11,7 @@ export async function setButton(page: NuxtPage, keynum: number, { name, entity }
 }
 
 export const setupNuxt = (options?: Partial<TestOptions>) => {
-  if (process.env.CI) return setup();
+  if (1 || process.env.CI) return setup();
   else return setup({
     host: 'http://localhost:3000',
     build: false,
