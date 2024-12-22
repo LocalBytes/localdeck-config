@@ -34,9 +34,6 @@ export default defineNuxtConfig({
     },
   },
 
-  // https://github.com/nuxt/nuxt/discussions/26739
-  nitro: { experimental: { legacyExternals: true } },
-
   modules: [
     '@nuxt/test-utils/module',
     '@nuxtjs/tailwindcss',
@@ -45,5 +42,5 @@ export default defineNuxtConfig({
   ],
 
   css: ['~/assets/css/global.css'],
-  compatibilityDate: '2024-07-13',
+  compatibilityDate: '2024-12-01',
 });
