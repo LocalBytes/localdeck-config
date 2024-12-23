@@ -24,6 +24,7 @@
       name="label_text"
       placeholder="Type here"
       rows="3"
+      title="Label text"
       type="text"
     />
 
@@ -53,7 +54,7 @@
 </template>
 
 <script lang="ts" setup>
-import type {EditContainer} from '~/utils/PadCfg';
+import type { EditContainer } from '~/utils/PadCfg';
 
 const modelValue = defineModel<EditContainer>({ required: true });
 </script>
