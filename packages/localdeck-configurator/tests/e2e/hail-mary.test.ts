@@ -61,8 +61,8 @@ describe('Hail Mary', async () => {
     console.log('Checking');
     for (const button of buttons) {
       expect(await page
-        .getByLabel(`DeckButton ${button.keynum.toFixed(0).padStart(2, '0')}`)
         .locator('div.pad-grid')
+        .getByLabel(`DeckButton ${button.keynum.toFixed(0).padStart(2, '0')}`)
         .getByText(button.name)
         .isVisible(),
       ).toBe(true);
