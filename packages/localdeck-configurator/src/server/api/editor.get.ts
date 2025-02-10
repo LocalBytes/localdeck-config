@@ -16,8 +16,9 @@ export default defineEventHandler(async (event) => {
 
   for await (const line of rl) {
     configMatch ??= line.match(/localdeck-configurator\?config=(.*)/);
-    matchName ??= line.match(/ name:? ?"(.*)?"/);
-    matchFriendly ??= line.match(/ friendly_name:? ?"(.*)?"/);
+    matchName ??= line.match(/name: "?(.*)"?/);
+    matchFriendly ??= line.match(/friendly_name: "?(.*)"?/);
+
     // noinspection PointlessBooleanExpressionJS
     if (configMatch) break;
   }
