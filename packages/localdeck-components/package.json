@@ -19,15 +19,15 @@
     "@types/pako": "^2.0.3",
     "@vueuse/core": "^11.3.0",
     "@vueuse/nuxt": "^11.3.0",
-    "maska": "^3.0.4",
+    "maska": "^3.1.0",
     "nuxt": "catalog:",
     "typescript": "catalog:",
-    "vitest": "^2.1.8"
+    "vitest": "^2.1.9"
   },
   "dependencies": {
     "@localbytes/localdeck-codegen": "workspace:^",
     "@material-symbols/metadata": "^0.22.2",
-    "fuse.js": "^7.0.0",
+    "fuse.js": "^7.1.0",
     "material-symbols": "^0.22.2",
     "pako": "^2.1.0",
     "vue3-emoji-picker": "^1.1.8",
