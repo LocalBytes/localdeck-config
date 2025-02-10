@@ -153,4 +153,6 @@ const reset = () => {
   config.resetChanges();
   resetting.value = false;
 };
+
+preloadComponents(['DeckButtonConfigLabel', 'DeckIconPicker']);
 </script>
