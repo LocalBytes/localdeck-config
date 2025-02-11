@@ -1,4 +1,4 @@
-import * as fs from 'fs/promises';
+import * as fs from 'node:fs/promises';
 import _ from 'lodash';
 import { FileType, type IndexFile } from '~/utilities/types';
 
@@ -17,24 +17,27 @@ export default defineEventHandler(async (event) => {
     .filter(filename => filename.endsWith('.yaml') || filename.endsWith('.yml'))
     .map(async (filename) => {
       const path = `${filesDir}/${filename}`;
-      const content = await fs.readFile(path, 'utf8');
-      let name = filename
-        .replace('.yaml', '')
-        .replace('.yml', '');
+      const fileHandle = await fs.open(path, 'r');
 
       let type = FileType.Other;
+      let matchConfig: RegExpMatchArray | null = null;
+      let matchName: RegExpMatchArray | null = null;
+      let matchFriendly: RegExpMatchArray | null = null;
+      let matchPackage: RegExpMatchArray | null = null;
 
-      if (
-        content.includes('packages:')
-        && content.includes('localbytes.localdeck')
-      ) type = FileType.Import;
+      for await (const line of fileHandle.readLines()) {
+        matchConfig ??= line.match(/localdeck-configurator\?config=(.*)/);
+        matchName ??= line.match(/name: ?("?)(.*)\1/);
+        matchFriendly ??= line.match(/friendly_name: ?("?)(.*)\1/);
+        matchPackage ??= line.match(/localbytes.localdeck: github:\/\//);
 
-      if (content.includes('localdeck-configurator?config=')) type = FileType.LocalDeck;
+        // noinspection PointlessBooleanExpressionJS
+        if (matchConfig && matchName && matchFriendly && matchPackage) break;
+      }
 
-      const matchName = content.match(/name: (.*)/);
-      if (matchName) name = matchName[1];
-      const matchFriendly = content.match(/friendly_name: (.*)/);
-      if (matchFriendly) name = matchFriendly[1];
+      const name = matchFriendly?.[2] ?? matchName?.[2] ?? (filename.replace(/\.ya?ml/, ''));
+      if (matchPackage) type = FileType.Import;
+      if (matchConfig) type = FileType.LocalDeck;
 
       return { path, filename, type, name } satisfies IndexFile;
     });
