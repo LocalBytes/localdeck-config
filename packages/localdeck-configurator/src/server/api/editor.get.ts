@@ -1,5 +1,4 @@
-import * as fs from 'node:fs';
-import * as readline from 'node:readline';
+import * as fs from 'node:fs/promises';
 
 import { decompress } from '@localbytes/localdeck-components/src/utils/compression';
 import { zPadEditor } from '@localbytes/localdeck-components/src/utils/PadCfg';
@@ -7,17 +6,16 @@ import { zPadEditor } from '@localbytes/localdeck-components/src/utils/PadCfg';
 export default defineEventHandler(async (event) => {
   const { filesDir } = useRuntimeConfig();
   const { filename } = getQuery(event);
-  const content = fs.createReadStream(`${filesDir}/${filename}`, 'utf8');
-  const rl = readline.createInterface({ input: content, crlfDelay: Infinity });
+  const file = await fs.open(`${filesDir}/${filename}`, 'r');
 
   let configMatch = null;
   let matchName = null;
   let matchFriendly = null;
 
-  for await (const line of rl) {
+  for await (const line of file.readLines()) {
     configMatch ??= line.match(/localdeck-configurator\?config=(.*)/);
-    matchName ??= line.match(/name: "?(.*)"?/);
-    matchFriendly ??= line.match(/friendly_name: "?(.*)"?/);
+    matchName ??= line.match(/name: ?("?)(.*)\1/);
+    matchFriendly ??= line.match(/friendly_name: ?("?)(.*)\1/);
 
     // noinspection PointlessBooleanExpressionJS
     if (configMatch) break;
@@ -29,7 +27,7 @@ export default defineEventHandler(async (event) => {
     ? decompress(configStr, zPadEditor)
     : zPadEditor.parse({});
 
-  config.title = matchFriendly?.[1] ?? matchName?.[1] ?? config.title ?? 'My LocalDeck';
+  config.title = matchFriendly?.[2] ?? matchName?.[2] ?? config.title ?? 'My LocalDeck';
   config.buttons ??= {};
 
   return { configStr, config };
