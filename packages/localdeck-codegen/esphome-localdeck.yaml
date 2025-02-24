@@ -26,13 +26,13 @@ esp32:
 wifi:
   ap:
     ssid: ${friendly_name}
-captive_portal: { }
+captive_portal: {}
 ota:
   - platform: esphome
 logger:
-  logs: { }
-api: { }
-web_server: { }
+  logs: {}
+api: {}
+web_server: {}
 output:
   - platform: template
     id: improv_status
@@ -55,7 +55,6 @@ light:
     id: ledstrip
     rgb_order: GRB
     pin: GPIO8
-    rmt_channel: 0
     num_leds: 24
     chipset: SK6812
     restore_mode: RESTORE_AND_OFF
@@ -71,7 +70,7 @@ light:
         from: 0
         to: 0
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -81,8 +80,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
   - platform: partition
     id: keypad_button_10_light
     name: Button 10 Light
@@ -92,7 +91,7 @@ light:
         from: 9
         to: 9
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -102,8 +101,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
   - platform: partition
     id: keypad_button_11_light
     name: Button 11 Light
@@ -113,7 +112,7 @@ light:
         from: 10
         to: 10
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -123,8 +122,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
   - platform: partition
     id: keypad_button_12_light
     name: Button 12 Light
@@ -134,7 +133,7 @@ light:
         from: 11
         to: 11
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -144,8 +143,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
   - platform: partition
     id: keypad_button_13_light
     name: Button 13 Light
@@ -155,7 +154,7 @@ light:
         from: 12
         to: 12
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -165,8 +164,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
   - platform: partition
     id: keypad_button_14_light
     name: Button 14 Light
@@ -176,7 +175,7 @@ light:
         from: 13
         to: 13
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -186,8 +185,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
   - platform: partition
     id: keypad_button_15_light
     name: Button 15 Light
@@ -197,7 +196,7 @@ light:
         from: 14
         to: 14
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -207,8 +206,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
   - platform: partition
     id: keypad_button_16_light
     name: Button 16 Light
@@ -218,7 +217,7 @@ light:
         from: 15
         to: 15
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -228,8 +227,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
   - platform: partition
     id: keypad_button_17_light
     name: Button 17 Light
@@ -239,7 +238,7 @@ light:
         from: 16
         to: 16
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -249,8 +248,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
   - platform: partition
     id: keypad_button_18_light
     name: Button 18 Light
@@ -260,7 +259,7 @@ light:
         from: 17
         to: 17
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -270,8 +269,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
   - platform: partition
     id: keypad_button_19_light
     name: Button 19 Light
@@ -281,7 +280,7 @@ light:
         from: 18
         to: 18
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -291,8 +290,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
   - platform: partition
     id: keypad_button_02_light
     name: Button 02 Light
@@ -302,7 +301,7 @@ light:
         from: 1
         to: 1
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -312,8 +311,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
   - platform: partition
     id: keypad_button_20_light
     name: Button 20 Light
@@ -323,7 +322,7 @@ light:
         from: 19
         to: 19
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -333,8 +332,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
   - platform: partition
     id: keypad_button_21_light
     name: Button 21 Light
@@ -344,7 +343,7 @@ light:
         from: 20
         to: 20
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -354,8 +353,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
   - platform: partition
     id: keypad_button_22_light
     name: Button 22 Light
@@ -365,7 +364,7 @@ light:
         from: 21
         to: 21
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -375,8 +374,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
   - platform: partition
     id: keypad_button_23_light
     name: Button 23 Light
@@ -386,7 +385,7 @@ light:
         from: 22
         to: 22
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -396,8 +395,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
   - platform: partition
     id: keypad_button_24_light
     name: Button 24 Light
@@ -407,7 +406,7 @@ light:
         from: 23
         to: 23
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -417,8 +416,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
   - platform: partition
     id: keypad_button_03_light
     name: Button 03 Light
@@ -428,7 +427,7 @@ light:
         from: 2
         to: 2
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -438,8 +437,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
   - platform: partition
     id: keypad_button_04_light
     name: Button 04 Light
@@ -449,7 +448,7 @@ light:
         from: 3
         to: 3
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -459,8 +458,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
   - platform: partition
     id: keypad_button_05_light
     name: Button 05 Light
@@ -470,7 +469,7 @@ light:
         from: 4
         to: 4
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -480,8 +479,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
   - platform: partition
     id: keypad_button_06_light
     name: Button 06 Light
@@ -491,7 +490,7 @@ light:
         from: 5
         to: 5
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -501,8 +500,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
   - platform: partition
     id: keypad_button_07_light
     name: Button 07 Light
@@ -512,7 +511,7 @@ light:
         from: 6
         to: 6
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -522,8 +521,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
   - platform: partition
     id: keypad_button_08_light
     name: Button 08 Light
@@ -533,7 +532,7 @@ light:
         from: 7
         to: 7
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -543,8 +542,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
   - platform: partition
     id: keypad_button_09_light
     name: Button 09 Light
@@ -554,7 +553,7 @@ light:
         from: 8
         to: 8
     effects:
-      - pulse: { }
+      - pulse: {}
       - pulse:
           name: Fast Pulse
           transition_length: 0.5s
@@ -564,8 +563,8 @@ light:
       - pulse:
           name: Slow Pulse
           update_interval: 2s
-      - random: { }
-      - flicker: { }
+      - random: {}
+      - flicker: {}
 matrix_keypad:
   id: keypad
   keys: ABCDEFGHIJKLMNOPQRSTUVWX
