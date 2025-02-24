@@ -97,13 +97,12 @@ function newConfig(opts: newConfigOpts = {
         }
     }));
 
+    //@ts-expect-error - RMT Channel is not a required parameter
     const ledstrip = (new Esp32RmtLedStripLight({
         name: "Ledstrip",
         id: "ledstrip",
         rgb_order: "GRB",
         pin: "GPIO8",
-        //@ts-expect-error - RMT channel is a string according to the schema
-        rmt_channel: 0,
         num_leds: 24,
         chipset: "SK6812",
         restore_mode: "RESTORE_AND_OFF",
