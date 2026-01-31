@@ -4,12 +4,13 @@ packages:
   - '!**/test/**'
 
 catalog:
-  '@nuxt/test-utils': 3.14.4
-  nuxt: ^3.13.2
-  typescript: ^5.5.4
+  '@nuxt/test-utils': 3.23.0
+  nuxt: ^4.3.0
+  typescript: ^5.9.0
 
 onlyBuiltDependencies:
   - '@parcel/watcher'
   - esbuild
   - msw
+  - unrs-resolver
   - vue-demi
