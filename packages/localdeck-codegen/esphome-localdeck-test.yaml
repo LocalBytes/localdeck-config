@@ -10,8 +10,9 @@ esphome:
   on_boot:
     - light.turn_on:
         id: ledstrip
-        brightness: 25%
+        brightness: 100%
         effect: Addressable Rainbow
+logger: {}
 esp32:
   board: esp32-c3-devkitm-1
   framework:
