@@ -1,4 +1,7 @@
 import { describe, expect, it } from 'vitest';
+import { ObjectUtil, ConfigUtil } from '../../src/utils/config-util';
+import { newPadEditor } from '../../src/utils/PadCfg';
+import type { DeepPartial } from '../../src/utils/types';
 
 describe('ObjectUtil', () => {
   it('should return the value at the given path', () => {

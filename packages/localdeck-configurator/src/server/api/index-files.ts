@@ -1,6 +1,6 @@
 import * as fs from 'node:fs/promises';
+import { FileType, type IndexFile } from '~~/src/utilities/types';
 import _ from 'lodash';
-import { FileType, type IndexFile } from '~/utilities/types';
 
 export default defineEventHandler(async (event) => {
   const { filesDir } = useRuntimeConfig(event) as unknown as { filesDir: string };
@@ -36,6 +36,7 @@ export default defineEventHandler(async (event) => {
       }
 
       const name = matchFriendly?.[2] ?? matchName?.[2] ?? (filename.replace(/\.ya?ml/, ''));
+
       if (matchPackage) type = FileType.Import;
       if (matchConfig) type = FileType.LocalDeck;
 

@@ -14,15 +14,15 @@
     "test": "vitest --run"
   },
   "devDependencies": {
-    "@nuxt/eslint": "^0.5.7",
+    "@nuxt/eslint": "^1.13.0",
     "@nuxt/test-utils": "catalog:",
     "@types/pako": "^2.0.3",
     "@vueuse/core": "^11.3.0",
     "@vueuse/nuxt": "^11.3.0",
     "maska": "^3.1.0",
+    "vitest": "^4.0.0",
     "nuxt": "catalog:",
-    "typescript": "catalog:",
-    "vitest": "^2.1.9"
+    "typescript": "catalog:"
   },
   "dependencies": {
     "@localbytes/localdeck-codegen": "workspace:^",

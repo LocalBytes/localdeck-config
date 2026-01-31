@@ -1,8 +1,9 @@
 export default defineNuxtConfig({
-  srcDir: 'src',
-  modules: ['@vueuse/nuxt', '@nuxt/eslint', '@nuxt/test-utils/module'],
+  modules: ['@vueuse/nuxt', '@nuxt/eslint'],
 
-  eslint: { config: { stylistic: { semi: true } } },
+  srcDir: 'src', // https://github.com/nuxt/nuxt/issues/32965
 
   compatibilityDate: '2024-12-01',
+
+  eslint: { config: { stylistic: { semi: true } } },
 });
