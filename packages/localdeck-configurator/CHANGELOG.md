@@ -2,6 +2,9 @@
 
 ## [Unreleased](https://github.com/LocalBytes/localdeck-config/compare/v0.7...main)
 
+### Changed
+- Major update to dependencies including Nuxt 4
+
 ## [v0.7](https://github.com/LocalBytes/localdeck-config/releases/tag/v0.7)
 
 ### Added

@@ -1,7 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   extends: ['@localbytes/localdeck-components'],
-
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxtjs/color-mode',
@@ -29,6 +28,10 @@ export default defineNuxtConfig({
     },
   },
 
+  colorMode: {
+    classSuffix: '-mode',
+  },
+
   runtimeConfig: {
     public: { baseUrl: '' },
 
@@ -47,7 +50,7 @@ export default defineNuxtConfig({
   srcDir: 'src',
   serverDir: 'src/server',
 
-  compatibilityDate: '2024-12-01',
+  compatibilityDate: '2026-01-01',
 
   eslint: { config: { stylistic: { semi: true } } },
 });

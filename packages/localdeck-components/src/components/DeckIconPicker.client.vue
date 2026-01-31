@@ -10,7 +10,7 @@
       <EmojiPicker
         :additional-groups="{ material: mdIconsGroups }"
         :native="true"
-        :theme="colorMode.value as ('light'|'dark')"
+        :theme="colorMode"
         class="dropdown-menu dropdown-menu-bottom-center picker"
         @select="onSelectEmoji"
       />

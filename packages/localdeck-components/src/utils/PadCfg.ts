@@ -13,7 +13,8 @@ export const zPadEditor = z.object({
   title: z.string().default('LocalDeck'),
   buttons: z.preprocess(
     val => Object.fromEntries(Object.entries(val as Record<string, unknown>).filter(([key]) => zButtonNumber.safeParse(key).success)),
-    z.record(zButtonNumber, zConfiguredButtonOpts.deepPartial()),
+    z.record(zButtonNumber, // FIXME: Zod v4 removed .deepPartial() and offers no replacement (see https://github.com/colinhacks/zod/issues/2854)
+      zConfiguredButtonOpts.partial()),
   ).default({}),
 });
 
