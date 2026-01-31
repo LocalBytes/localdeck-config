@@ -29,7 +29,7 @@ config.updateComponent(new Esphome({
         {
             'light.turn_on': {
                 id: 'ledstrip',
-                brightness: '25%',
+                brightness: '50%',
                 effect: 'Addressable Rainbow'
             }
         },
