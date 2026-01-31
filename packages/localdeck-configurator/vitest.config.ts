@@ -4,7 +4,7 @@ export default defineVitestConfig({
 // There's a frustrating issue somewhere which means nuxt is loading readably slow during tests.
 // As such, we keep running into timeout issues
   test: {
-    testTimeout: 120_000,
+    testTimeout: 300_000,
     environment: 'nuxt',
   },
 });
