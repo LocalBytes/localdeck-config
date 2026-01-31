@@ -3,8 +3,10 @@ export default defineNuxtConfig({
   extends: ['@localbytes/localdeck-components'],
   modules: [
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/color-mode',
     '@nuxt/eslint',
+
+    // @nuxtjs/color-mode is conditionally loaded for test workaround (see https://github.com/nuxt-modules/color-mode/issues/335)
+    ...(!import.meta.env.TEST ? ['@nuxtjs/color-mode'] : []),
   ],
   ssr: false,
 

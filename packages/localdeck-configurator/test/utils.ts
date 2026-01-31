@@ -1,4 +1,4 @@
-import { type createPage, setup, type TestOptions } from '@nuxt/test-utils/e2e';
+import type { createPage } from '@nuxt/test-utils/e2e';
 
 type NuxtPage = Awaited<ReturnType<typeof createPage>>;
 
@@ -13,20 +13,3 @@ export async function setButton(page: NuxtPage, keynum: number, { name, entity }
   await page.getByRole('textbox', { name: 'Entity' }).fill(entity);
   await page.getByRole('textbox', { name: 'Label Text' }).fill(name);
 }
-
-export const setupNuxt = (options?: Partial<TestOptions>) => {
-  if (process.env.CI) return setup();
-  else return setup({
-    host: 'http://localhost:3000',
-    build: false,
-    buildDir: '.output',
-    nuxtConfig: {
-      nitro: {
-        output: {
-          dir: '.output',
-        },
-      },
-    },
-    ...(options ?? {}),
-  });
-};

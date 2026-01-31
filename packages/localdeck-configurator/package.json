@@ -16,7 +16,6 @@
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.13.0",
-    "vitest": "^4.0.18",
     "@tailwindcss/typography": "^0.5.16",
     "@testing-library/vue": "^8.1.0",
     "@types/lodash": "^4.17.23",
@@ -30,7 +29,8 @@
     "playwright": "^1.58.1",
     "playwright-core": "^1.58.1",
     "postcss": "^8.5.1",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "^4.0.18"
   },
   "dependencies": {
     "@fontsource-variable/open-sans": "^5.2.7",

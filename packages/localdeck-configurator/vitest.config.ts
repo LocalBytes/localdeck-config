@@ -1,4 +1,5 @@
-import { defineVitestConfig } from '@nuxt/test-utils/config';
+
+import { defineVitestConfig } from '@nuxt/test-utils/config'
 
 export default defineVitestConfig({
 // There's a frustrating issue somewhere which means nuxt is loading readably slow during tests.
@@ -7,4 +8,4 @@ export default defineVitestConfig({
     testTimeout: 300_000,
     environment: 'nuxt',
   },
-});
+})

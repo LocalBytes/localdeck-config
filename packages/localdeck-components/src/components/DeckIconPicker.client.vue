@@ -10,7 +10,7 @@
       <EmojiPicker
         :additional-groups="{ material: mdIconsGroups }"
         :native="true"
-        :theme="colorMode"
+        :theme="emojiTheme"
         class="dropdown-menu dropdown-menu-bottom-center picker"
         @select="onSelectEmoji"
       />
@@ -27,7 +27,19 @@ import { mdIconsGroups } from '~/utils/material';
 import '../assets/material.css';
 
 const modelValue = defineModel<ConfiguredButtonOptsLabel>({ required: true });
-const colorMode = useColorMode();
+
+console.log(import.meta);
+console.log("CURRENT MODE", import.meta.env.MODE)
+
+// See: https://github.com/nuxt-modules/color-mode/issues/335
+let colorMode = null;
+if (!import.meta.env.TEST) colorMode = useColorMode();
+
+const emojiTheme = computed(() => {
+  if (!colorMode) return 'light';
+  return colorMode.value === 'dark' ? 'dark' : 'light';
+});
+
 
 const onSelectEmoji = (emoji: EmojiExt) => {
   const MdIcon = emoji.n.find(s => s.startsWith('mdi:'));
