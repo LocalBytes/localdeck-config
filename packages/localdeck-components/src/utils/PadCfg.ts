@@ -5,7 +5,7 @@ import {
   zConfiguredButtonOpts,
 } from '@localbytes/localdeck-codegen/dist/virtuals';
 import { z } from 'zod';
-import { zx } from '@traversable/zod'
+import { zx } from '@traversable/zod';
 
 export const zPadEditor = z.object({
   title: z.string().default('LocalDeck'),

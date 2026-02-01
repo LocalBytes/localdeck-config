@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
 
     // @nuxtjs/color-mode is conditionally loaded for test workaround (see https://github.com/nuxt-modules/color-mode/issues/335)
-    ...(!import.meta.env.TEST ? ['@nuxtjs/color-mode'] : []),
+    ...(!(process.env.TEST || process.env.VITEST) ? ['@nuxtjs/color-mode'] : []),
   ],
   ssr: false,
 

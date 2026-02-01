@@ -28,11 +28,8 @@ import '../assets/material.css';
 
 const modelValue = defineModel<ConfiguredButtonOptsLabel>({ required: true });
 
-console.log(import.meta);
-console.log("CURRENT MODE", import.meta.env.MODE)
-
 // See: https://github.com/nuxt-modules/color-mode/issues/335
-let colorMode = null;
+let colorMode: ReturnType<typeof useColorMode> | null = null;
 if (!import.meta.env.TEST) colorMode = useColorMode();
 
 const emojiTheme = computed(() => {
