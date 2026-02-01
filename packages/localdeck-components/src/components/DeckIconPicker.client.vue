@@ -37,7 +37,6 @@ const emojiTheme = computed(() => {
   return colorMode.value === 'dark' ? 'dark' : 'light';
 });
 
-
 const onSelectEmoji = (emoji: EmojiExt) => {
   const MdIcon = emoji.n.find(s => s.startsWith('mdi:'));
   return modelValue.value.icon = MdIcon ?? emoji.i;
