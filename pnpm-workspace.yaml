@@ -11,6 +11,7 @@ catalog:
 onlyBuiltDependencies:
   - '@parcel/watcher'
   - esbuild
+  - "esphome-config-ts"
   - msw
   - unrs-resolver
   - vue-demi
