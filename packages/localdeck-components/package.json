@@ -18,7 +18,7 @@
     "@types/pako": "^2.0.3",
     "@vueuse/core": "^14.2.0",
     "@vueuse/nuxt": "^14.2.0",
-    "eslint": "~9.39.2",
+    "eslint": "catalog:",
     "vitest": "^4.0.18",
     "maska": "^3.1.0",
     "nuxt": "catalog:",
