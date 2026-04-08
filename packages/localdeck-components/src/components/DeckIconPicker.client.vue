@@ -24,12 +24,9 @@ import EmojiPicker from 'vue3-emoji-picker';
 import type { ConfiguredButtonOptsLabel } from '@localbytes/localdeck-codegen/dist/virtuals';
 import 'vue3-emoji-picker/css';
 import { mdIconsGroups } from '~/utils/material';
-import '../assets/material.css';
+import '../assets/fonts.css';
 
 const modelValue = defineModel<ConfiguredButtonOptsLabel>({ required: true });
-
-console.log(import.meta);
-console.log("CURRENT MODE", import.meta.env.MODE)
 
 // See: https://github.com/nuxt-modules/color-mode/issues/335
 let colorMode = null;
@@ -39,7 +36,6 @@ const emojiTheme = computed(() => {
   if (!colorMode) return 'light';
   return colorMode.value === 'dark' ? 'dark' : 'light';
 });
-
 
 const onSelectEmoji = (emoji: EmojiExt) => {
   const MdIcon = emoji.n.find(s => s.startsWith('mdi:'));

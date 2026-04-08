@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.13.0",
-    "@tailwindcss/typography": "^0.5.16",
+    "@tailwindcss/typography": "^0.5.19",
     "@testing-library/vue": "^8.1.0",
     "@types/lodash": "^4.17.23",
     "@types/pako": "^2.0.3",
@@ -30,7 +30,7 @@
     "playwright-core": "^1.58.1",
     "postcss": "^8.5.1",
     "typescript": "catalog:",
-    "vitest": "^4.0.18"
+    "vitest": "catalog:"
   },
   "dependencies": {
     "@fontsource-variable/open-sans": "^5.2.7",
@@ -38,11 +38,11 @@
     "@localbytes/localdeck-codegen": "workspace:^",
     "@localbytes/localdeck-components": "workspace:^",
     "@nuxtjs/color-mode": "^4.0.0",
-    "@nuxtjs/tailwindcss": "^6.14.0",
+    "@tailwindcss/vite": "^4.2.2",
+    "daisyui": "^5.5.19",
     "esphome-config-ts": "github:localbytes/esphome-config-ts",
     "fuse.js": "^7.1.0",
     "lodash": "^4.17.23",
-    "rippleui": "^1.12.1",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^4.2.2"
   }
 }

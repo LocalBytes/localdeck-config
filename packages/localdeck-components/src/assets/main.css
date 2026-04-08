@@ -1,0 +1,33 @@
+@import "tailwindcss";
+@import "./fonts.css";
+
+@plugin "@tailwindcss/typography";
+
+@plugin "daisyui" {
+    themes: light --default, dark --prefersdark;
+}
+
+@theme{
+    --font-display: "Poppins", sans-serif, "BabelStone Flags";
+    --font-body: "Open Sans", sans-serif, "BabelStone Flags";
+}
+
+@plugin "daisyui/theme" {
+    name: "light";
+    default: true;
+
+    --color-primary: #152637;
+    --color-secondary: #0090CD;
+    --color-accent: #3DBBAA;
+
+    --color-primary-grad: linear-gradient(225deg, #111728 0%, #162B3C 100%);
+}
+
+@plugin "daisyui/theme" {
+    name: "dark";
+
+    --color-primary: #152637;
+    --color-secondary: #0090CD;
+    --color-accent: #3DBBAA;
+    --color-primary-grad: linear-gradient(225deg, #111728 0%, #162B3C 100%);
+}
