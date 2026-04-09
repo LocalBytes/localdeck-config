@@ -1,37 +1,40 @@
 <template>
   <div
-    ref="inputRef"
-    :class="{ 'dropdown dropdown-open': isOpen }"
-    class="w-full"
-    @focusout="isOpen=false"
-    @focusin.once="isOpen=true"
+    ref="container"
+    :class="{ 'dropdown-open': isOpen }"
+    class="dropdown w-full"
+    @focusout="onFocusOut"
   >
     <input
       v-model="modelValue"
       class="input w-full"
       type="text"
+      @focus="isOpen=true"
       @input="isOpen=true"
     >
-    <div class="dropdown-menu dropdown-menu-bottom-right gap-1 w-auto max-h-[400px] overflow-y-auto">
-      <div
+    <ul class="menu dropdown-content z-1 mt-1 w-full max-h-100 overflow-y-auto rounded-box bg-base-100 p-2 shadow-sm">
+      <li
         v-for="item in filtered"
         :key="item.id"
-        class="dropdown-item"
-        @click="select(item)"
       >
-        <component
-          :is="renderString(item.name, modelValue)"
-          class="text-lg"
-        />
-        <component :is="renderString(item.id, modelValue)" />
-      </div>
-      <div
+        <button
+          type="button"
+          @click="select(item)"
+        >
+          <component
+            :is="renderString(item.name, modelValue)"
+            class="text-lg"
+          />
+          <component :is="renderString(item.id, modelValue)" />
+        </button>
+      </li>
+      <li
         v-if="filtered.length==0"
-        class="dropdown-item disabled"
+        class="disabled"
       >
         <span class="text-lg">No results</span>
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -43,18 +46,27 @@ const props = defineProps<{
   typeahead: Fuse<HassEntity>;
 }>();
 
-const inputRef = ref();
 const isOpen = ref(false);
-const modelValue = defineModel<string>();
+const container = ref<HTMLElement | null>(null);
+const modelValue = defineModel<string>({
+  required: true,
+});
 
 const filtered = computed(() => {
-  if (!modelValue.value) return props.typeahead?.getIndex().docs;
-  return props.typeahead?.search(modelValue.value).map(({ item }) => item);
+  if (!modelValue.value) return props.typeahead?.getIndex().docs ?? [];
+  return props.typeahead?.search(modelValue.value).map(({ item }) => item) ?? [];
 });
 
 const select = (item: HassEntity) => {
   modelValue.value = item.id;
   isOpen.value = false;
+};
+
+const onFocusOut = (event: FocusEvent) => {
+  const nextTarget = event.relatedTarget as Node | null;
+  if (!nextTarget || !container.value?.contains(nextTarget)) {
+    isOpen.value = false;
+  }
 };
 
 const renderString = (item: string, query: string) => {

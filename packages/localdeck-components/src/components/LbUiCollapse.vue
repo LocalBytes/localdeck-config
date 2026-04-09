@@ -1,6 +1,7 @@
 <template>
   <div
-    class="collapse collapse-arrow border border-base-300 bg-base-100 shadow"
+    class="collapse collapse-arrow border border-primary shadow"
+    :class="isOpen && 'overflow-visible'"
   >
     <input
       v-model="isOpen"
@@ -10,7 +11,9 @@
       <slot
         name="title"
         :title="title"
-      >{{ title }}</slot>
+      >
+        {{ title }}
+      </slot>
     </div>
     <div class="collapse-content">
       <div class="min-h-0">
@@ -30,12 +33,8 @@ defineSlots<{
   title(props: { title: string }): unknown;
 }>();
 
-const model = defineModel({
+const isOpen = defineModel({
   type: Boolean,
   default: false,
 });
-const isOpen = ref(model.value);
-
-watch(model, v => isOpen.value = v);
-watch(isOpen, v => model.value = v);
 </script>
