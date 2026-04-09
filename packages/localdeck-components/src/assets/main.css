@@ -1,33 +1,68 @@
-@import "tailwindcss";
+@import "tailwindcss" source("./..");
 @import "./fonts.css";
 
 @plugin "@tailwindcss/typography";
 
 @plugin "daisyui" {
-    themes: light --default, dark --prefersdark;
+    themes: light, dark;
 }
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @theme{
     --font-display: "Poppins", sans-serif, "BabelStone Flags";
     --font-body: "Open Sans", sans-serif, "BabelStone Flags";
+
+    --color-lb-primary: #152637;
+    --color-lb-primary-50: oklch(0.956 0.014 258.36);
+    --color-lb-primary-100: oklch(0.914 0.027 255.09);
+    --color-lb-primary-200: oklch(0.826 0.057 252.58);
+    --color-lb-primary-300: oklch(0.74 0.091 248.65);
+    --color-lb-primary-400: oklch(0.653 0.093 247.55);
+    --color-lb-primary-500: oklch(0.568 0.081 247.2);
+    --color-lb-primary-600: oklch(0.48 0.069 248.08);
+    --color-lb-primary-700: oklch(0.395 0.056 247.63);
+    --color-lb-primary-800: oklch(0.309 0.044 247.02);
+    --color-lb-primary-900: var(--color-lb-primary); /* BASE */
+    --color-lb-primary-950: oklch(0.177 0.024 246.45);
+
+    --color-lb-secondary: #0090CD;
+    --color-lb-secondary-50: oklch(0.966 0.017 247.99);
+    --color-lb-secondary-100: oklch(0.922 0.039 249.43);
+    --color-lb-secondary-200: oklch(0.851 0.078 245.92);
+    --color-lb-secondary-300: oklch(0.772 0.129 240.48);
+    --color-lb-secondary-400: oklch(0.693 0.152 237.21);
+    --color-lb-secondary-500: var(--color-lb-primary);
+    --color-lb-secondary-600: oklch(0.521 0.115 237.83);
+    --color-lb-secondary-700: oklch(0.427 0.094 237.85);
+    --color-lb-secondary-800: oklch(0.334 0.073 237.13);
+    --color-lb-secondary-900: oklch(0.231 0.051 237.66);
+    --color-lb-secondary-950: oklch(0.186 0.041 238.24);
+
+    --color-lb-accent: #3DBBAA;
 }
 
 @plugin "daisyui/theme" {
     name: "light";
     default: true;
 
-    --color-primary: #152637;
-    --color-secondary: #0090CD;
-    --color-accent: #3DBBAA;
+    --color-primary: var(--color-lb-primary);
+    --color-secondary: var(--color-lb-secondary);
+    --color-accent: var(--color-lb-accent);
 
     --color-primary-grad: linear-gradient(225deg, #111728 0%, #162B3C 100%);
 }
 
 @plugin "daisyui/theme" {
     name: "dark";
+    default: true;
 
-    --color-primary: #152637;
-    --color-secondary: #0090CD;
-    --color-accent: #3DBBAA;
+    --color-primary: var(--color-lb-secondary);
+    --color-secondary: var(--color-lb-accent);
+    --color-accent: var(--color-lb-primary);
+
+    --color-base-100: var(--color-lb-primary-900);
+    --color-base-200: var(--color-lb-primary-800);
+    --color-base-300: var(--color-lb-primary-700);
+
     --color-primary-grad: linear-gradient(225deg, #111728 0%, #162B3C 100%);
 }

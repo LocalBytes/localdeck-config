@@ -30,7 +30,7 @@ export default defineNuxtConfig({
   },
 
   colorMode: {
-    classSuffix: '-mode',
+    dataValue: 'theme',
   },
 
   runtimeConfig: {
