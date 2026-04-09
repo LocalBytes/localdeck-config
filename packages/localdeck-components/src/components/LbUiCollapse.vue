@@ -1,24 +1,18 @@
 <template>
   <div
-    :class="isOpen && 'overflow-visible'"
-    class="accordion shadow "
+    class="collapse collapse-arrow border border-base-300 bg-base-100 shadow"
   >
     <input
-      :id="id"
       v-model="isOpen"
-      class="accordion-toggle"
       type="checkbox"
     >
-    <label
-      :for="id"
-      class="accordion-title px-4 bg-transparent"
-    >
-      <slot name="title">{{ title }}</slot>
-    </label>
-    <div
-      :class="isOpen && 'overflow-visible'"
-      class="accordion-content"
-    >
+    <div class="collapse-title px-4 font-semibold">
+      <slot
+        name="title"
+        :title="title"
+      >{{ title }}</slot>
+    </div>
+    <div class="collapse-content">
       <div class="min-h-0">
         <slot />
       </div>
@@ -44,6 +38,4 @@ const isOpen = ref(model.value);
 
 watch(model, v => isOpen.value = v);
 watch(isOpen, v => model.value = v);
-
-const id = useId();
 </script>
