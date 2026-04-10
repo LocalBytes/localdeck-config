@@ -1,16 +1,15 @@
 import * as fs from 'node:fs/promises';
 
-import {decompress} from '@localbytes/localdeck-components/src/utils/compression';
-import {zPadEditor} from '@localbytes/localdeck-components/src/utils/PadCfg';
-
+import { decompress } from '@localbytes/localdeck-components/src/utils/compression';
+import { zPadEditor } from '@localbytes/localdeck-components/src/utils/PadCfg';
 
 function capture(line: string, pattern: RegExp, group = 1): string | null {
   return line.match(pattern)?.[group] ?? null;
 }
 
 export default defineEventHandler(async (event) => {
-  const {filesDir} = useRuntimeConfig();
-  const {filename} = getQuery(event);
+  const { filesDir } = useRuntimeConfig();
+  const { filename } = getQuery(event);
   const file = await fs.open(`${filesDir}/${filename}`, 'r');
 
   let encodedConfig: string | null = null;
@@ -36,5 +35,5 @@ export default defineEventHandler(async (event) => {
   config.title = friendlyName ?? name ?? config.title ?? 'My LocalDeck';
   config.buttons ??= {};
 
-  return {configStr, config};
+  return { configStr, config };
 });

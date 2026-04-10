@@ -1,7 +1,7 @@
 <template>
   <nuxt-link
     class="link-unstyled card bg-base-100 shadow-sm border border-primary"
-    :to="link"
+    :to="{ name: 'editor', query: { filename: file.filename } }"
   >
     <div class="card-body">
       <h2 class="card-title">
@@ -15,16 +15,7 @@
 <script lang="ts" setup>
 import type { IndexFile } from '~/utilities/types';
 
-const props = defineProps<{
+defineProps<{
   file: IndexFile;
 }>();
-
-const router = useRouter();
-
-const link = computed(() => ({
-  name: 'editor',
-  query: {
-    filename: props.file.filename,
-  },
-}));
 </script>
