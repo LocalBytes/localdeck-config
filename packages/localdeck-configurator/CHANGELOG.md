@@ -4,6 +4,7 @@
 
 ### Changed
 - Major update to dependencies including Nuxt 4
+- Moved from RippleUI to DaisyUI for the UI components - Unblocks Tailwind upgrades
 
 ## [v0.7](https://github.com/LocalBytes/localdeck-config/releases/tag/v0.7)
 
