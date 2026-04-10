@@ -12,6 +12,8 @@
     --font-display: "Poppins", sans-serif, "BabelStone Flags";
     --font-body: "Open Sans", sans-serif, "BabelStone Flags";
 
+    --color-lb-primary-grad: linear-gradient(225deg, #111728 0%, #162B3C 100%);
+
     --color-lb-primary: #152637;
     --color-lb-primary-50: oklch(0.956 0.014 258.36);
     --color-lb-primary-100: oklch(0.914 0.027 255.09);
@@ -48,8 +50,6 @@
     --color-primary: var(--color-lb-primary);
     --color-secondary: var(--color-lb-secondary);
     --color-accent: var(--color-lb-accent);
-
-    --color-primary-grad: linear-gradient(225deg, #111728 0%, #162B3C 100%);
 }
 
 @plugin "daisyui/theme" {
@@ -63,6 +63,18 @@
     --color-base-100: var(--color-lb-primary-900);
     --color-base-200: var(--color-lb-primary-800);
     --color-base-300: var(--color-lb-primary-700);
+}
 
-    --color-primary-grad: linear-gradient(225deg, #111728 0%, #162B3C 100%);
+body {
+    position: relative;
+    background: transparent;
+}
+
+:root[data-theme="dark"] body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: var(--color-lb-primary-grad);
 }

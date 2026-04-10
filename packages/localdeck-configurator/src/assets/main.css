@@ -1,15 +1,6 @@
 @import "@localbytes/localdeck-components/src/assets/main.css";
+
 @source "./..";
-
-#__nuxt {
-    min-height: 100vh;
-    min-width: 100vw;
-}
-
-:where(:root, [data-theme='dark']) {
-    --root-bg: var(--color-primary-grad);
-    --page-scroll-bg: var(--color-primary-grad);
-}
 
 @layer base {
     h1, .h1 {
