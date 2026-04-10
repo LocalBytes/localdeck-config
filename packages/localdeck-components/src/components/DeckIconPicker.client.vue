@@ -32,7 +32,6 @@ import EmojiPicker from 'vue3-emoji-picker';
 import type { ConfiguredButtonOptsLabel } from '@localbytes/localdeck-codegen/dist/virtuals';
 import 'vue3-emoji-picker/css';
 import { mdIconsGroups } from '~/utils/material';
-import '../assets/fonts.css';
 
 const modelValue = defineModel<ConfiguredButtonOptsLabel>({ required: true });
 const uid = useId();
