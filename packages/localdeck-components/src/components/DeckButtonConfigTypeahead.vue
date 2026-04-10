@@ -9,32 +9,38 @@
       v-model="modelValue"
       class="input w-full"
       type="text"
-      @focus="isOpen=true"
-      @input="isOpen=true"
+      @focus="openDropdown"
+      @input="openDropdown"
+      @keydown.esc="closeDropdown"
     >
-    <ul class="menu dropdown-content z-1 mt-1 w-full max-h-100 overflow-y-auto rounded-box bg-base-100 p-2 shadow-sm">
-      <li
+    <div
+      v-show="isOpen"
+      class="dropdown-content z-1 mt-1 max-h-100 w-full overflow-y-auto bg-base-100 menu flex flex-col flex-nowrap p-0"
+    >
+      <button
         v-for="item in filtered"
         :key="item.id"
+        class="w-full px-3 py-2 text-left hover:bg-base-200"
+        type="button"
+        @mousedown.prevent
+        @click="select(item)"
       >
-        <button
-          type="button"
-          @click="select(item)"
-        >
-          <component
-            :is="renderString(item.name, modelValue)"
-            class="text-lg"
-          />
-          <component :is="renderString(item.id, modelValue)" />
-        </button>
-      </li>
-      <li
-        v-if="filtered.length==0"
-        class="disabled"
+        <component
+          :is="renderString(item.name, modelValue)"
+          class="block"
+        />
+        <component
+          :is="renderString(item.id, modelValue)"
+          class="block"
+        />
+      </button>
+      <div
+        v-if="filtered.length === 0"
+        class="px-3 py-2"
       >
-        <span class="text-lg">No results</span>
-      </li>
-    </ul>
+        No results
+      </div>
+    </div>
   </div>
 </template>
 
@@ -46,8 +52,9 @@ const props = defineProps<{
   typeahead: Fuse<HassEntity>;
 }>();
 
-const isOpen = ref(false);
 const container = ref<HTMLElement | null>(null);
+const isOpen = ref(false);
+
 const modelValue = defineModel<string>({
   required: true,
 });
@@ -57,15 +64,23 @@ const filtered = computed(() => {
   return props.typeahead?.search(modelValue.value).map(({ item }) => item) ?? [];
 });
 
+const closeDropdown = () => {
+  isOpen.value = false;
+};
+
+const openDropdown = () => {
+  isOpen.value = true;
+};
+
 const select = (item: HassEntity) => {
   modelValue.value = item.id;
-  isOpen.value = false;
+  closeDropdown();
 };
 
 const onFocusOut = (event: FocusEvent) => {
   const nextTarget = event.relatedTarget as Node | null;
   if (!nextTarget || !container.value?.contains(nextTarget)) {
-    isOpen.value = false;
+    closeDropdown();
   }
 };
 
@@ -78,12 +93,12 @@ const renderString = (item: string, query: string) => {
     '\'': '&#39;',
   })[m] ?? m);
 
-  if (!text || !query) return h('div', [text]);
+  if (!text || !query) return h('span', [text]);
 
   const index = text.toLowerCase().indexOf(query?.toLowerCase());
-  if (index < 0) return h('div', [text]);
+  if (index < 0) return h('span', [text]);
 
-  return h('div', [
+  return h('span', [
     h('span', text.substring(0, index)),
     h('span', { class: 'font-extrabold' }, text.substring(index, index + query.length)),
     h('span', text.substring(index + query.length)),
