@@ -1,29 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   extends: ['@localbytes/localdeck-components'],
-  ssr: false,
+  modules: [
+    '@nuxt/eslint',
 
-  router: {
-    options: {
-      hashMode: true,
-    },
-  },
+    // @nuxtjs/color-mode is conditionally loaded for test workaround (see https://github.com/nuxt-modules/color-mode/issues/335)
+    ...(!import.meta.env.TEST ? ['@nuxtjs/color-mode'] : []),
+  ],
+  ssr: false,
 
   devtools: {
     enabled: false, // Conflicts with devtools for chrome
-  },
-
-  eslint: { config: { stylistic: { semi: true } } },
-
-  srcDir: './src',
-
-  runtimeConfig: {
-    public: { baseUrl: '' },
-
-    api_token: '',
-    api_url: '', // Allow this to be overridden by env
-
-    filesDir: '/homeassistant/esphome',
   },
 
   app: {
@@ -34,13 +21,38 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: [
-    '@nuxt/test-utils/module',
-    '@nuxtjs/tailwindcss',
-    '@nuxtjs/color-mode',
-    '@nuxt/eslint',
-  ],
+  css: ['./src/assets/main.css'],
 
-  css: ['~/assets/css/global.css'],
-  compatibilityDate: '2024-12-01',
+  router: {
+    options: {
+      hashMode: true,
+    },
+  },
+
+  colorMode: {
+    dataValue: 'theme',
+  },
+
+  runtimeConfig: {
+    public: { baseUrl: '' },
+
+    api_token: '',
+    api_url: '', // Allow this to be overridden by env
+
+    filesDir: '/homeassistant/esphome',
+  },
+
+  // // https://github.com/nuxt/nuxt/issues/32965
+  dir: {
+    public: 'src/public',
+    modules: 'src/modules',
+    shared: 'src/shared',
+  },
+  srcDir: 'src',
+  serverDir: 'src/server',
+
+  compatibilityDate: '2026-01-01',
+
+  eslint: { config: { stylistic: { semi: true } } },
+
 });

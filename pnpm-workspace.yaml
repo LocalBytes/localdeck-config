@@ -1,13 +1,18 @@
 packages:
-  # all packages in direct subdirs of packages/
-  - 'packages/*'
-  # all packages in subdirs of components/
-  - 'components/**'
-  # exclude packages that are inside test directories
+  - packages/*
+  - components/**
   - '!**/test/**'
 
 catalog:
-  typescript: ^5.5.4
-  nuxt: ^3.13.2
-  "@nuxt/test-utils": 3.14.4
+  '@nuxt/test-utils': ^4.0.0
+  nuxt: ^4.4.2
+  typescript: ^5.9.0
+  vitest: ^4.0.0
 
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - core-js
+  - esbuild
+  - msw
+  - unrs-resolver
+  - vue-demi

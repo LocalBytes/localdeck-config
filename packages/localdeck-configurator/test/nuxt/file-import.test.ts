@@ -1,10 +1,10 @@
 import * as path from 'node:path';
 import * as fs from 'node:fs/promises';
 
+import { createPage, setup } from '@nuxt/test-utils/e2e';
 import { describe, expect, test } from 'vitest';
-import { createPage } from '@nuxt/test-utils/e2e';
-import espHomeYaml from 'esphome-config-ts/dist/yaml';
-import { setupNuxt } from '~~/tests/utils';
+import espHomeYaml from 'esphome-config-ts/dist/yaml/index.js';
+import { useRuntimeConfig } from 'nuxt/app';
 
 const preImportExample = `
 substitutions:
@@ -27,7 +27,7 @@ wifi:
 const FILENAME = 'test-import.yaml';
 
 describe('Import Workflow', async () => {
-  await setupNuxt();
+  await setup();
 
   test('Parse the original file', async () => {
     const content = espHomeYaml.parse(preImportExample) as object;
@@ -39,6 +39,7 @@ describe('Import Workflow', async () => {
     console.log('Creating New File');
     const runtimeConfig = useRuntimeConfig();
     const filePath = path.join(runtimeConfig.filesDir, FILENAME);
+    await fs.mkdir(path.dirname(filePath), { recursive: true });
     await fs.writeFile(filePath, preImportExample);
 
     // Load the page

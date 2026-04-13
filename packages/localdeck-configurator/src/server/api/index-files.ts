@@ -1,6 +1,10 @@
 import * as fs from 'node:fs/promises';
+import { FileType, type IndexFile } from '~~/src/utilities/types';
 import _ from 'lodash';
-import { FileType, type IndexFile } from '~/utilities/types';
+
+function capture(line: string, pattern: RegExp, group = 1): string | null {
+  return line.match(pattern)?.[group] ?? null;
+}
 
 export default defineEventHandler(async (event) => {
   const { filesDir } = useRuntimeConfig(event) as unknown as { filesDir: string };
@@ -20,26 +24,29 @@ export default defineEventHandler(async (event) => {
       const fileHandle = await fs.open(path, 'r');
 
       let type = FileType.Other;
-      let matchConfig: RegExpMatchArray | null = null;
-      let matchName: RegExpMatchArray | null = null;
-      let matchFriendly: RegExpMatchArray | null = null;
-      let matchPackage: RegExpMatchArray | null = null;
+      let hasConfig = false;
+      let name: string | null = null;
+      let friendlyName: string | null = null;
+      let hasPackage = false;
 
       for await (const line of fileHandle.readLines()) {
-        matchConfig ??= line.match(/localdeck-configurator\?config=(.*)/);
-        matchName ??= line.match(/name: ?("?)(.*)\1/);
-        matchFriendly ??= line.match(/friendly_name: ?("?)(.*)\1/);
-        matchPackage ??= line.match(/localbytes.localdeck: github:\/\//);
+        hasConfig ||= capture(line, /localdeck-configurator\?config=(.*)/) !== null;
+        name ??= capture(line, /name: ?("?)(.*)\1/, 2);
+        friendlyName ??= capture(line, /friendly_name: ?("?)(.*)\1/, 2);
+        hasPackage ||= capture(line, /localbytes.localdeck: github:\/\//) !== null;
 
         // noinspection PointlessBooleanExpressionJS
-        if (matchConfig && matchName && matchFriendly && matchPackage) break;
+        if (hasConfig && name && friendlyName && hasPackage) break;
       }
 
-      const name = matchFriendly?.[2] ?? matchName?.[2] ?? (filename.replace(/\.ya?ml/, ''));
-      if (matchPackage) type = FileType.Import;
-      if (matchConfig) type = FileType.LocalDeck;
+      await fileHandle.close();
 
-      return { path, filename, type, name } satisfies IndexFile;
+      const resolvedName = friendlyName ?? name ?? filename.replace(/\.ya?ml/, '');
+
+      if (hasPackage) type = FileType.Import;
+      if (hasConfig) type = FileType.LocalDeck;
+
+      return { path, filename, type, name: resolvedName } satisfies IndexFile;
     });
 
   return {

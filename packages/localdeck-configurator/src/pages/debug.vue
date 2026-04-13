@@ -28,7 +28,7 @@ const decompressed = computed(() => {
   try {
     const url: URL = new URL(configUrl.value);
     const extracted = url.searchParams.get('config');
-    return decompress(extracted);
+    return decompress(extracted!);
   }
   catch (e) {
     return e;

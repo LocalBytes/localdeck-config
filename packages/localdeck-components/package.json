@@ -14,23 +14,25 @@
     "test": "vitest --run"
   },
   "devDependencies": {
-    "@nuxt/eslint": "^0.5.7",
-    "@nuxt/test-utils": "catalog:",
+    "@nuxt/eslint": "^1.13.0",
     "@types/pako": "^2.0.3",
-    "@vueuse/core": "^11.3.0",
-    "@vueuse/nuxt": "^11.3.0",
+    "@vueuse/core": "^14.2.0",
+    "@vueuse/nuxt": "^14.2.0",
     "maska": "^3.1.0",
     "nuxt": "catalog:",
     "typescript": "catalog:",
-    "vitest": "^2.1.9"
+    "vitest": "catalog:"
   },
   "dependencies": {
+    "@fontsource-variable/open-sans": "^5.2.7",
+    "@fontsource/poppins": "^5.2.7",
     "@localbytes/localdeck-codegen": "workspace:^",
-    "@material-symbols/metadata": "^0.22.2",
+    "@material-symbols/metadata": "^0.40.2",
+    "@traversable/zod": "^0.0.57",
     "fuse.js": "^7.1.0",
-    "material-symbols": "^0.22.2",
+    "material-symbols": "^0.40.2",
     "pako": "^2.1.0",
     "vue3-emoji-picker": "^1.1.8",
-    "zod": "^3.24.1"
+    "zod": "^4.3.6"
   }
 }

@@ -9,10 +9,10 @@
     <h1 class="mb-2">
       LocalDeck Configurator
     </h1>
-    <div class="form-control my-2">
+    <div class="form-control my-2 *:m-1">
       <input
         v-model="editor.title"
-        class="input border-secondary inline-block"
+        class="input border-primary inline-block"
         pattern="[a-zA-Z0-9]+"
         placeholder="Project Name"
         type="text"
@@ -32,7 +32,7 @@
         Reset
       </button>
       <button
-        class="btn btn-outline-primary"
+        class="btn btn-outline btn-primary"
         type="button"
         @click="print"
       >
@@ -61,7 +61,7 @@
       />
     </div>
 
-    <RippleUiModal
+    <LbUiModal
       v-model="resetting"
       title="Are you sure?"
     >
@@ -71,7 +71,7 @@
       </p>
       <div class="flex justify-end gap-2">
         <button
-          class="btn btn-outline-error"
+          class="btn btn-error btn-outline"
           @click="reset"
         >
           Reset
@@ -83,8 +83,8 @@
           Cancel
         </button>
       </div>
-    </RippleUiModal>
-    <RippleUiModal
+    </LbUiModal>
+    <LbUiModal
       :is-dismissible="saving==SavingStatus.DONE"
       :model-value="saving!=SavingStatus.IDLE"
       title="Saving..."
@@ -101,7 +101,7 @@
           Your changes have been saved, please go to ESPHome to install!
         </p>
       </div>
-    </RippleUiModal>
+    </LbUiModal>
   </div>
 </template>
 

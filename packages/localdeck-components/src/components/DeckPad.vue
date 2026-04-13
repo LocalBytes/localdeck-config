@@ -55,7 +55,9 @@ useResizeObserver(gridRef, () => {
 provide(fontSizesSymbol, sizes);
 </script>
 
-<style scoped>
+<style>
+@reference "./../assets/main.css";
+
 .pad-grid {
   display: grid;
   grid-template-columns: repeat(6, 4rem);

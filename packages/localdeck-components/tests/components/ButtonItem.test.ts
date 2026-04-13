@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { zConfiguredButtonOpts } from '@localbytes/localdeck-codegen/dist/virtuals';
-import { DeckButtonItem } from '#components';
+import DeckButtonItem from '../../src/components/DeckButtonItem.vue';
 
 const CLASS_PRINTMODE = 'printmode';
 

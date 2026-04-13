@@ -15,35 +15,34 @@
     "test:browser": "vitest --workspace=vitest.workspace.ts"
   },
   "devDependencies": {
-    "@nuxt/eslint": "^0.5.7",
-    "@nuxt/test-utils": "catalog:",
-    "@tailwindcss/typography": "^0.5.16",
+    "@nuxt/eslint": "^1.13.0",
+    "@tailwindcss/typography": "^0.5.19",
     "@testing-library/vue": "^8.1.0",
-    "@types/lodash": "^4.17.15",
+    "@types/lodash": "^4.17.23",
     "@types/pako": "^2.0.3",
-    "@vitejs/plugin-vue": "^5.2.1",
-    "@vitest/browser": "^2.1.9",
-    "@vitest/ui": "^2.1.9",
+    "@vitejs/plugin-vue": "^6.0.3",
+    "@vitest/browser": "^4.0.0",
+    "@vitest/ui": "^4.0.0",
     "autoprefixer": "^10.4.20",
-    "happy-dom": "^14.12.3",
+    "happy-dom": "^20.4.0",
     "nuxt": "catalog:",
-    "playwright": "^1.50.1",
-    "playwright-core": "^1.50.1",
+    "playwright": "^1.58.1",
+    "playwright-core": "^1.58.1",
     "postcss": "^8.5.1",
     "typescript": "catalog:",
-    "vitest": "^2.1.9"
+    "vitest": "catalog:"
   },
   "dependencies": {
-    "@fontsource-variable/open-sans": "^5.1.1",
-    "@fontsource/poppins": "^5.1.1",
+    "@fontsource-variable/open-sans": "^5.2.7",
+    "@fontsource/poppins": "^5.2.7",
     "@localbytes/localdeck-codegen": "workspace:^",
     "@localbytes/localdeck-components": "workspace:^",
-    "@nuxtjs/color-mode": "^3.5.2",
-    "@nuxtjs/tailwindcss": "^6.13.1",
+    "@nuxtjs/color-mode": "^4.0.0",
+    "@tailwindcss/vite": "^4.2.2",
+    "daisyui": "^5.5.19",
     "esphome-config-ts": "github:localbytes/esphome-config-ts",
     "fuse.js": "^7.1.0",
-    "lodash": "^4.17.21",
-    "rippleui": "^1.12.1",
-    "tailwindcss": "^3.4.17"
+    "lodash": "^4.17.23",
+    "tailwindcss": "^4.2.2"
   }
 }
