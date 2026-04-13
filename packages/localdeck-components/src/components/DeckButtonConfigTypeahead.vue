@@ -1,35 +1,44 @@
 <template>
   <div
-    ref="inputRef"
-    :class="{ 'dropdown dropdown-open': isOpen }"
-    class="w-full"
-    @focusout="isOpen=false"
-    @focusin.once="isOpen=true"
+    ref="container"
+    :class="{ 'dropdown-open': isOpen }"
+    class="dropdown w-full"
+    @focusout="onFocusOut"
   >
     <input
       v-model="modelValue"
       class="input w-full"
       type="text"
-      @input="isOpen=true"
+      @focus="openDropdown"
+      @input="openDropdown"
+      @keydown.esc="closeDropdown"
     >
-    <div class="dropdown-menu dropdown-menu-bottom-right gap-1 w-auto max-h-[400px] overflow-y-auto">
-      <div
+    <div
+      v-show="isOpen"
+      class="dropdown-content z-1 mt-1 max-h-100 w-full overflow-y-auto bg-base-100 menu flex flex-col flex-nowrap p-0"
+    >
+      <button
         v-for="item in filtered"
         :key="item.id"
-        class="dropdown-item"
+        class="w-full px-3 py-2 text-left hover:bg-base-200"
+        type="button"
+        @mousedown.prevent
         @click="select(item)"
       >
         <component
           :is="renderString(item.name, modelValue)"
-          class="text-lg"
+          class="block"
         />
-        <component :is="renderString(item.id, modelValue)" />
-      </div>
+        <component
+          :is="renderString(item.id, modelValue)"
+          class="block"
+        />
+      </button>
       <div
-        v-if="filtered.length==0"
-        class="dropdown-item disabled"
+        v-if="filtered.length === 0"
+        class="px-3 py-2"
       >
-        <span class="text-lg">No results</span>
+        No results
       </div>
     </div>
   </div>
@@ -43,18 +52,36 @@ const props = defineProps<{
   typeahead: Fuse<HassEntity>;
 }>();
 
-const inputRef = ref();
+const container = ref<HTMLElement | null>(null);
 const isOpen = ref(false);
-const modelValue = defineModel<string>();
+
+const modelValue = defineModel<string>({
+  required: true,
+});
 
 const filtered = computed(() => {
-  if (!modelValue.value) return props.typeahead?.getIndex().docs;
-  return props.typeahead?.search(modelValue.value).map(({ item }) => item);
+  if (!modelValue.value) return props.typeahead?.getIndex().docs ?? [];
+  return props.typeahead?.search(modelValue.value).map(({ item }) => item) ?? [];
 });
+
+const closeDropdown = () => {
+  isOpen.value = false;
+};
+
+const openDropdown = () => {
+  isOpen.value = true;
+};
 
 const select = (item: HassEntity) => {
   modelValue.value = item.id;
-  isOpen.value = false;
+  closeDropdown();
+};
+
+const onFocusOut = (event: FocusEvent) => {
+  const nextTarget = event.relatedTarget as Node | null;
+  if (!nextTarget || !container.value?.contains(nextTarget)) {
+    closeDropdown();
+  }
 };
 
 const renderString = (item: string, query: string) => {
@@ -66,12 +93,12 @@ const renderString = (item: string, query: string) => {
     '\'': '&#39;',
   })[m] ?? m);
 
-  if (!text || !query) return h('div', [text]);
+  if (!text || !query) return h('span', [text]);
 
   const index = text.toLowerCase().indexOf(query?.toLowerCase());
-  if (index < 0) return h('div', [text]);
+  if (index < 0) return h('span', [text]);
 
-  return h('div', [
+  return h('span', [
     h('span', text.substring(0, index)),
     h('span', { class: 'font-extrabold' }, text.substring(index, index + query.length)),
     h('span', text.substring(index + query.length)),

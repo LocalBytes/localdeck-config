@@ -21,7 +21,7 @@
       <span>Flash LED on press</span>
     </label>
 
-    <RippleUiCollapse
+    <LbUiCollapse
       v-model="hassOpen"
       title="HomeAssistant Integration"
     >
@@ -90,7 +90,7 @@
           <span>Follow Color</span>
         </label>
       </div>
-    </RippleUiCollapse>
+    </LbUiCollapse>
   </div>
 </template>
 

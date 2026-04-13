@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded p-2 shadow grow flex flex-col gap-2 ">
+  <div class="p-2 grow flex flex-col gap-2 ">
     <h3 class="pb-2">
       Label
     </h3>
@@ -7,7 +7,7 @@
     <div class="flex">
       <LazyDeckIconPicker
         v-model="modelValue.label"
-        class="flex-grow"
+        class="grow"
       />
       <button
         v-if="modelValue.label.icon"
@@ -25,7 +25,6 @@
       placeholder="Type here"
       rows="3"
       title="Label text"
-      type="text"
     />
 
     <label>
@@ -34,7 +33,7 @@
         <input
           v-model="modelValue.label.fontSize"
           :disabled="!modelValue.label.text"
-          class="input"
+          class="input range"
           max="20"
           min="4"
           type="range"
@@ -42,7 +41,7 @@
         <input
           v-model="modelValue.label.fontSize"
           :disabled="!modelValue.label.text"
-          class="input w-[5rem]"
+          class="input w-20"
           max="20"
           min="4"
 

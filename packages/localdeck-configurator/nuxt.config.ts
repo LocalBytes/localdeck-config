@@ -2,7 +2,6 @@
 export default defineNuxtConfig({
   extends: ['@localbytes/localdeck-components'],
   modules: [
-    '@nuxtjs/tailwindcss',
     '@nuxt/eslint',
 
     // @nuxtjs/color-mode is conditionally loaded for test workaround (see https://github.com/nuxt-modules/color-mode/issues/335)
@@ -22,7 +21,7 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ['~/assets/css/global.css'],
+  css: ['./src/assets/main.css'],
 
   router: {
     options: {
@@ -31,7 +30,7 @@ export default defineNuxtConfig({
   },
 
   colorMode: {
-    classSuffix: '-mode',
+    dataValue: 'theme',
   },
 
   runtimeConfig: {
@@ -55,4 +54,5 @@ export default defineNuxtConfig({
   compatibilityDate: '2026-01-01',
 
   eslint: { config: { stylistic: { semi: true } } },
+
 });
