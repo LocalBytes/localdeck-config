@@ -22,6 +22,6 @@ const input = defineModel<EditContainer>({
 });
 
 defineProps<{
-  typeahead: Fuse<HassEntity>;
+  typeahead?: Fuse<HassEntity>;
 }>();
 </script>

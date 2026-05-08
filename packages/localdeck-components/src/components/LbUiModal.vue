@@ -64,7 +64,7 @@ watch(isOpen, (open) => {
   if (!dialog) return;
 
   if (open && !dialog.open) {
-    dialog.showModal();
+    dialog.show();
     return;
   }
 
