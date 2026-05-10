@@ -1,6 +1,5 @@
 <template>
   <div
-    ref="padGridItem"
     :aria-label="`DeckButton ${container.keyNum.toFixed(0).padStart(2, '0')}`"
     :class="{ 'shadow-lg shadow-yellow-300': editing, 'printmode': print }"
     :data-keynum="container.keyNum"
@@ -21,7 +20,6 @@
       {{ container.label.icon.replace("mdi:", "") }}
     </p>
     <p
-      ref="labelRef"
       :style="{ fontSize: (print?fontSize:fontSizeScaled) + 'px' }"
       class="label-bottom"
     >
@@ -34,7 +32,6 @@
 import { useFontSizes, useIsPrinting } from '~/utils/hooks';
 import type { EditContainer } from '~/utils/PadCfg';
 
-const padGridItem = ref<HTMLDivElement>();
 const print = useIsPrinting();
 
 const props = defineProps({

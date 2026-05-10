@@ -4,7 +4,8 @@ import * as fs from 'node:fs/promises';
 import { createPage, setup } from '@nuxt/test-utils/e2e';
 import { describe, expect, test } from 'vitest';
 import espHomeYaml from 'esphome-config-ts/dist/yaml/index.js';
-import { useRuntimeConfig } from 'nuxt/app';
+
+import { getTestFilesDir } from '../utils';
 
 const preImportExample = `
 substitutions:
@@ -25,6 +26,7 @@ wifi:
 `;
 
 const FILENAME = 'test-import.yaml';
+const filesDir = getTestFilesDir();
 
 describe('Import Workflow', async () => {
   await setup();
@@ -37,14 +39,13 @@ describe('Import Workflow', async () => {
   test('Import a new file', async () => {
     // Create New File
     console.log('Creating New File');
-    const runtimeConfig = useRuntimeConfig();
-    const filePath = path.join(runtimeConfig.filesDir, FILENAME);
+    const filePath = path.join(filesDir, FILENAME);
     await fs.mkdir(path.dirname(filePath), { recursive: true });
     await fs.writeFile(filePath, preImportExample);
 
     // Load the page
     console.log('Loading Page');
-    const page = (await createPage('/'));
+    const page = await createPage('/');
 
     const responsePromise = page.waitForResponse(r => r.url().includes('/api/editor'));
 

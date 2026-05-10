@@ -2,6 +2,15 @@ import type { createPage } from '@nuxt/test-utils/e2e';
 
 type NuxtPage = Awaited<ReturnType<typeof createPage>>;
 
+export function getTestFilesDir() {
+  const filesDir = process.env.LOCALDECK_CONFIGURATOR_FILES_DIR;
+  if (!filesDir) {
+    throw new Error('Missing LOCALDECK_CONFIGURATOR_FILES_DIR');
+  }
+
+  return filesDir;
+}
+
 export function buttonLabel(keynum: number) {
   return `DeckButton ${keynum.toFixed(0).padStart(2, '0')}`;
 }
