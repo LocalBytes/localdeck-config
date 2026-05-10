@@ -24,6 +24,7 @@
     "@vitest/browser": "^4.0.0",
     "@vitest/ui": "^4.0.0",
     "autoprefixer": "^10.4.20",
+    "eslint": "~9.39.2",
     "happy-dom": "^20.4.0",
     "nuxt": "catalog:",
     "playwright": "^1.58.1",
