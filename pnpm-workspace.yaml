@@ -11,6 +11,7 @@ catalog:
 
 onlyBuiltDependencies:
   - '@parcel/watcher'
+  - esphome-config-ts
   - core-js
   - esbuild
   - msw
