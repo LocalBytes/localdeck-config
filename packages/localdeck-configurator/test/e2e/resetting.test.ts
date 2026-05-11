@@ -1,20 +1,20 @@
 import * as path from 'node:path';
 import * as fs from 'node:fs/promises';
 
-import { createPage, setup } from '@nuxt/test-utils/e2e';
 import { beforeEach, describe, expect, test } from 'vitest';
-import { useRuntimeConfig } from 'nuxt/app';
 
-import { buttonLabel, setButton } from '../utils';
+import { createPage, setup } from '@nuxt/test-utils/e2e';
+
+import { buttonLabel, getTestFilesDir, setButton } from '../utils';
 
 const FILENAME = 'test-resetting.yaml';
+const filesDir = getTestFilesDir();
 
 describe('Resetting Workflow', async () => {
   await setup();
 
   beforeEach(async () => {
-    const runtimeConfig = useRuntimeConfig();
-    const filePath = path.join(runtimeConfig.filesDir, FILENAME);
+    const filePath = path.join(filesDir, FILENAME);
     await fs.mkdir(path.dirname(filePath), { recursive: true });
     await fs.writeFile(filePath, '');
   });

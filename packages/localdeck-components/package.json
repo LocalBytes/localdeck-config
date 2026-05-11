@@ -15,12 +15,18 @@
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.13.0",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.2.2",
     "@types/pako": "^2.0.3",
     "@vueuse/core": "^14.2.0",
     "@vueuse/nuxt": "^14.2.0",
+    "daisyui": "^5.5.19",
+    "eslint": "~9.39.2",
     "maska": "^3.1.0",
     "nuxt": "catalog:",
+    "tailwindcss": "^4.2.2",
     "typescript": "catalog:",
+    "vite": "catalog:",
     "vitest": "catalog:"
   },
   "dependencies": {

@@ -4,13 +4,15 @@ packages:
   - '!**/test/**'
 
 catalog:
-  '@nuxt/test-utils': ^4.0.0
+  '@nuxt/test-utils': ^4.0.3
   nuxt: ^4.4.2
   typescript: ^5.9.0
+  vite: ^8.0.0
   vitest: ^4.0.0
 
 onlyBuiltDependencies:
   - '@parcel/watcher'
+  - esphome-config-ts
   - core-js
   - esbuild
   - msw
