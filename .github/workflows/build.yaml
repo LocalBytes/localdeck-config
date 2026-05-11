@@ -55,12 +55,12 @@ jobs:
           mkdir -p ./packages/artifact
           cp -r ./packages/localdeck-configurator/{.output,homeassistant}/* ./packages/artifact
           ls -al ./packages/artifact
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: localdeck-configurator
           path: ./packages/artifact
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: localdeck-configurator-hass
           path: ./packages/localdeck-configurator/homeassistant
@@ -88,7 +88,7 @@ jobs:
           username: ${{ env.ghcr_user }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: localdeck-configurator
           path: localdeck-configurator
@@ -113,7 +113,7 @@ jobs:
       version: ${{ needs.build-js.outputs.version }}
 
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: localdeck-configurator-hass
           path: localdeck-configurator
