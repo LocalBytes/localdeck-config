@@ -82,7 +82,7 @@ jobs:
       - name: Setup Env
         run: echo "ghcr_user=${GITHUB_REPOSITORY_OWNER@L}" >> "${GITHUB_ENV}"
 
-      - uses: docker/login-action@v3.7.0
+      - uses: docker/login-action@v4.1.0
         with:
           registry: ghcr.io
           username: ${{ env.ghcr_user }}
