@@ -22,7 +22,7 @@
     "@nuxt/test-utils": "catalog:",
     "@vue/language-server": "^3.2.6",
     "playwright": "^1.58.1",
-    "shx": "^0.3.4",
+    "shx": "^0.4.0",
     "typescript": "^5.9.3",
     "vitest": "^4.1.3"
   },
