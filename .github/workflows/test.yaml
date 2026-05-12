@@ -23,13 +23,12 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v6
         with:
-          run_install: false
+          cache: true
 
       - name: Install Node.js & Cache Dependencies
         uses: actions/setup-node@v6
         with:
           node-version: 'lts/*'
-          cache: 'pnpm'
 
       - name: Install dependencies
         run: |

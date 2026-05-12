@@ -4,6 +4,7 @@
     "./src/**/*"
   ],
   "compilerOptions": {
+    "types": ["node"],
     "declaration": true,
     "declarationMap": true,
     "rootDir": "./src",

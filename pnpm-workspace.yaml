@@ -6,15 +6,12 @@ packages:
 catalog:
   '@nuxt/test-utils': ^4.0.3
   nuxt: ^4.4.2
-  typescript: ^5.9.0
+  typescript: ^6.0.3
   vite: ^8.0.0
   vitest: ^4.0.0
 
-onlyBuiltDependencies:
-  - '@parcel/watcher'
-  - esphome-config-ts
-  - core-js
-  - esbuild
-  - msw
-  - unrs-resolver
-  - vue-demi
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  esphome-config-ts: true
+  unrs-resolver: true
