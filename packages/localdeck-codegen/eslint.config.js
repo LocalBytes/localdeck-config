@@ -1,13 +1,17 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-import tseslint from "typescript-eslint";
-import stylistic from "@stylistic/eslint-plugin";
+import js from '@eslint/js'
+import {defineConfig} from 'eslint/config'
+import tseslint from 'typescript-eslint'
+import stylistic from '@stylistic/eslint-plugin'
 
-
-export default [
-    {files: ["**/*.{js,mjs,cjs,ts}"]},
-    {languageOptions: {globals: {...globals.browser, ...globals.node}}},
-    pluginJs.configs.recommended,
-    ...tseslint.configs.recommended,
-    {plugins: {'@stylistic': stylistic}},
-];
+export default defineConfig(
+    js.configs.recommended,
+    tseslint.configs.recommendedTypeChecked,
+    {
+        plugins: {'@stylistic': stylistic},
+        languageOptions: {
+            parserOptions: {
+                projectService: true,
+            },
+        },
+    },
+)
