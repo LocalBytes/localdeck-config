@@ -62,7 +62,7 @@ importers:
         version: 4.18.1
       zod:
         specifier: ^4.3.6
-        version: 4.3.6
+        version: 4.4.1
     devDependencies:
       '@eslint/js':
         specifier: ^10.0.0
@@ -114,7 +114,7 @@ importers:
         version: 0.44.6
       '@traversable/zod':
         specifier: ^0.0.57
-        version: 0.0.57(zod@4.3.6)
+        version: 0.0.57(zod@4.4.1)
       fuse.js:
         specifier: ^7.1.0
         version: 7.3.0
@@ -129,7 +129,7 @@ importers:
         version: 1.1.8(typescript@6.0.3)
       zod:
         specifier: ^4.3.6
-        version: 4.3.6
+        version: 4.4.1
     devDependencies:
       '@nuxt/eslint':
         specifier: ^1.13.0
@@ -6964,8 +6964,8 @@ packages:
     resolution: {integrity: sha512-zK7YHHz4ZXpW89AHXUPbQVGKI7uvkd3hzusTdotCg1UxyaVtg0zFJSTfW/Dq5f7OBBVnq6cZIaC8Ti4hb6dtCA==}
     engines: {node: '>= 14'}
 
-  zod@4.3.6:
-    resolution: {integrity: sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==}
+  zod@4.4.1:
+    resolution: {integrity: sha512-a6ENMBBGZBsnlSebQ/eKCguSBeGKSf4O7BPnqVPmYGtpBYI7VSqoVqw+QcB7kPRjbqPwhYTpFbVj/RqNz/CT0Q==}
 
 snapshots:
 
@@ -9514,18 +9514,18 @@ snapshots:
 
   '@traversable/registry@0.0.49': {}
 
-  '@traversable/zod-types@0.0.30(@traversable/json@0.0.52(@traversable/registry@0.0.49))(@traversable/registry@0.0.49)(zod@4.3.6)':
+  '@traversable/zod-types@0.0.30(@traversable/json@0.0.52(@traversable/registry@0.0.49))(@traversable/registry@0.0.49)(zod@4.4.1)':
     dependencies:
       '@traversable/json': 0.0.52(@traversable/registry@0.0.49)
       '@traversable/registry': 0.0.49
-      zod: 4.3.6
+      zod: 4.4.1
 
-  '@traversable/zod@0.0.57(zod@4.3.6)':
+  '@traversable/zod@0.0.57(zod@4.4.1)':
     dependencies:
       '@traversable/json': 0.0.52(@traversable/registry@0.0.49)
       '@traversable/registry': 0.0.49
-      '@traversable/zod-types': 0.0.30(@traversable/json@0.0.52(@traversable/registry@0.0.49))(@traversable/registry@0.0.49)(zod@4.3.6)
-      zod: 4.3.6
+      '@traversable/zod-types': 0.0.30(@traversable/json@0.0.52(@traversable/registry@0.0.49))(@traversable/registry@0.0.49)(zod@4.4.1)
+      zod: 4.4.1
     transitivePeerDependencies:
       - fast-check
 
@@ -15157,4 +15157,4 @@ snapshots:
       compress-commons: 6.0.2
       readable-stream: 4.7.0
 
-  zod@4.3.6: {}
+  zod@4.4.1: {}
