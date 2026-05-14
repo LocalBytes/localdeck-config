@@ -21,20 +21,20 @@
   "dependencies": {
     "esphome-config-ts": "github:LocalBytes/esphome-config-ts",
     "js-yaml": "^4.1.1",
-    "lodash": "^4.17.23",
-    "zod": "^4.3.6"
+    "lodash": "^4.18.1",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.0",
-    "@stylistic/eslint-plugin": "^5.7.1",
+    "@eslint/js": "^10.0.1",
+    "@stylistic/eslint-plugin": "^5.10.0",
     "@tsconfig/node-lts": "^24.0.0",
     "@types/js-yaml": "^4.0.9",
-    "@types/lodash": "^4.17.23",
-    "@types/node": "^25.1.0",
+    "@types/lodash": "^4.17.24",
+    "@types/node": "^25.7.0",
     "eslint": "^10.3.0",
     "ts-node": "^10.9.2",
-    "ts-patch": "^3.3.0",
-    "typescript-eslint": "^8.54.0",
-    "typescript-transform-paths": "^3.5.3"
+    "ts-patch": "^4.0.1",
+    "typescript-eslint": "^8.59.3",
+    "typescript-transform-paths": "^3.5.6"
   }
 }
