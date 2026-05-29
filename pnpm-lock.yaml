@@ -120,7 +120,7 @@ importers:
         version: 7.3.0
       material-symbols:
         specifier: ^0.44.6
-        version: 0.44.7
+        version: 0.44.8
       pako:
         specifier: ^2.1.0
         version: 2.1.0
@@ -4271,8 +4271,8 @@ packages:
   maska@3.2.0:
     resolution: {integrity: sha512-zSmSgs5/q9vMSmrdZT3rKOv9uLznNWR/niuuAdBZDTvB3SMKOX9vhMtDijFyExz+B4UClu2rvksylUh/ea1bLA==}
 
-  material-symbols@0.44.7:
-    resolution: {integrity: sha512-I+XYA867M5PVrgKLUS7DERGAhuqhUWF7uyI+xnI2lbNJEbYUS9Ha4YUhD4Rqn9FdWVes++WEG7yl364mNpikCQ==}
+  material-symbols@0.44.8:
+    resolution: {integrity: sha512-drWG88gPlJXmvQrpSc3zKxjzysuvD7ayoGDJecUTr5tt0l4URh3XhDqKjKjCC773oYfTi39ljEzk+CZ6ereikg==}
 
   math-intrinsics@1.1.0:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
@@ -10395,7 +10395,7 @@ snapshots:
 
   maska@3.2.0: {}
 
-  material-symbols@0.44.7: {}
+  material-symbols@0.44.8: {}
 
   math-intrinsics@1.1.0: {}
 
