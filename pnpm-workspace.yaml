@@ -5,10 +5,10 @@ packages:
 
 catalog:
   '@nuxt/test-utils': ^4.0.3
-  nuxt: ^4.4.2
+  nuxt: ^4.4.6
   typescript: ^6.0.3
   vite: ^8.0.0
-  vitest: ^4.0.0
+  vitest: ^4.1.8
 
 allowBuilds:
   '@parcel/watcher': true
