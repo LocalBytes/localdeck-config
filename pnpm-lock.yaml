@@ -15,6 +15,9 @@ catalogs:
     typescript:
       specifier: ^6.0.3
       version: 6.0.3
+    vite:
+      specifier: ^8.0.0
+      version: 8.0.14
     vitest:
       specifier: ^4.1.8
       version: 4.1.8
@@ -111,7 +114,7 @@ importers:
         version: link:../localdeck-codegen
       '@material-symbols/metadata':
         specifier: ^0.44.6
-        version: 0.44.8
+        version: 0.44.9
       '@traversable/zod':
         specifier: ^0.0.57
         version: 0.0.57(zod@4.4.3)
@@ -978,8 +981,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  '@material-symbols/metadata@0.44.8':
-    resolution: {integrity: sha512-uRXahp7V28ayxZGRGfFs/8sSCv+QpM92PR4oDHYvWAQQ4aWJSgBMMNWVKXGUvjmwc1tu5q0IaIKAx4ireC+qIQ==}
+  '@material-symbols/metadata@0.44.9':
+    resolution: {integrity: sha512-iYbViENZolxzCNtleGsBcQKy4mYSinx22Fkh1BYf4GoGpJmJFWRvueehMhr2xd+EHFpb28MjYuDughwBNrgFcA==}
 
   '@napi-rs/wasm-runtime@0.2.12':
     resolution: {integrity: sha512-ZVWUcfwY4E/yPitQJl481FjFo3K22D6qF0DuFH6Y/nbnE11GY5uguDxZMGXPQ8WQ0128MXQD7TnfHyK4oWoIJQ==}
@@ -6693,7 +6696,7 @@ snapshots:
       - encoding
       - supports-color
 
-  '@material-symbols/metadata@0.44.8': {}
+  '@material-symbols/metadata@0.44.9': {}
 
   '@napi-rs/wasm-runtime@0.2.12':
     dependencies:
