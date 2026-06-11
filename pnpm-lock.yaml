@@ -114,7 +114,7 @@ importers:
         version: link:../localdeck-codegen
       '@material-symbols/metadata':
         specifier: ^0.44.6
-        version: 0.44.9
+        version: 0.44.10
       '@traversable/zod':
         specifier: ^0.0.57
         version: 0.0.57(zod@4.4.3)
@@ -981,8 +981,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  '@material-symbols/metadata@0.44.9':
-    resolution: {integrity: sha512-iYbViENZolxzCNtleGsBcQKy4mYSinx22Fkh1BYf4GoGpJmJFWRvueehMhr2xd+EHFpb28MjYuDughwBNrgFcA==}
+  '@material-symbols/metadata@0.44.10':
+    resolution: {integrity: sha512-eny2MhcZxPi8vEnWi3EG/n/VsQnd3W/HNerBng03/NMguoV2UzOt6ZffWLYTnJEOpxgj4nzZE2XZwwTsEBuRSw==}
 
   '@napi-rs/wasm-runtime@0.2.12':
     resolution: {integrity: sha512-ZVWUcfwY4E/yPitQJl481FjFo3K22D6qF0DuFH6Y/nbnE11GY5uguDxZMGXPQ8WQ0128MXQD7TnfHyK4oWoIJQ==}
@@ -6696,7 +6696,7 @@ snapshots:
       - encoding
       - supports-color
 
-  '@material-symbols/metadata@0.44.9': {}
+  '@material-symbols/metadata@0.44.10': {}
 
   '@napi-rs/wasm-runtime@0.2.12':
     dependencies:
