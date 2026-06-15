@@ -120,7 +120,7 @@ importers:
         version: 0.0.57(zod@4.4.3)
       fuse.js:
         specifier: ^7.3.0
-        version: 7.3.0
+        version: 7.4.0
       material-symbols:
         specifier: ^0.44.6
         version: 0.44.10
@@ -205,7 +205,7 @@ importers:
         version: https://codeload.github.com/localbytes/esphome-config-ts/tar.gz/65889baa8e94d627b3e490e8554c1136a9513758
       fuse.js:
         specifier: ^7.3.0
-        version: 7.3.0
+        version: 7.4.0
       lodash:
         specifier: ^4.18.1
         version: 4.18.1
@@ -3684,12 +3684,12 @@ packages:
   functions-have-names@1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
 
-  fuse.js@7.3.0:
-    resolution: {integrity: sha512-plz8RVjfcDedTGfVngWH1jmJvBvAwi1v2jecfDerbEnMcmOYUEEwKFTHbNoCiYyzaK2Ws8lABkTCcRSqCY1q4w==}
-    engines: {node: '>=10'}
-
   fuse.js@7.4.0:
     resolution: {integrity: sha512-3UqmoSFwzX1sNB1YSk+Co0EdH29XCW2p9g48OAiy93cjKqzuABsqw2VIgSN3CmsT/wo6pIJ3F0Jxeiiby8rhIQ==}
+    engines: {node: '>=10'}
+
+  fuse.js@7.4.2:
+    resolution: {integrity: sha512-LVbzjD4WA6UP5B1UnP8wuaXJiLnqMdM/E4fiJXTJ5haJ5b/MBNsK29h2fm6swEoQaVQjvYFWKLE2RanyZIoRVQ==}
     engines: {node: '>=10'}
 
   fzf@0.5.2:
@@ -6745,7 +6745,7 @@ snapshots:
       debug: 4.4.3
       defu: 6.1.7
       exsolve: 1.0.8
-      fuse.js: 7.4.0
+      fuse.js: 7.4.2
       fzf: 0.5.2
       giget: 3.2.0
       jiti: 2.7.0
@@ -9824,9 +9824,9 @@ snapshots:
 
   functions-have-names@1.2.3: {}
 
-  fuse.js@7.3.0: {}
-
   fuse.js@7.4.0: {}
+
+  fuse.js@7.4.2: {}
 
   fzf@0.5.2: {}
 
