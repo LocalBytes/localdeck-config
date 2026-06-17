@@ -11,7 +11,7 @@ import {
     Wifi,
     WifiInfoTextSensor
 } from "esphome-config-ts/dist/components/index.js";
-import {scriptBlipLight, scriptSetLedRgb} from "@/scripts/index.js";
+import {scriptBlipLight, globalApplyRgbColor} from "@/scripts/index.js";
 
 export const PINS_ROWS = [21, 20, 3, 7];
 export const PINS_COLS = [0, 1, 10, 4, 5, 6];
@@ -126,7 +126,7 @@ function newConfig(opts: newConfigOpts = {
 
     config.addComponent([
         scriptBlipLight,
-        scriptSetLedRgb
+        globalApplyRgbColor,
     ])
 
     const brightness = (new SliderNumber({

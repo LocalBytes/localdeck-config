@@ -6,6 +6,7 @@ import {
     PartitionLight
 } from "esphome-config-ts/dist/components/index.js";
 import {lambda} from "esphome-config-ts/dist/yaml/index.js";
+import {APPLY_RGB_COLOR_ID} from "@/scripts/index.js";
 import {z} from "zod";
 
 export const KEYS = "ABCDEFGHIJKLMNOPQRSTUVWX";
@@ -143,11 +144,7 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
                 entity_id: c.ha_entity,
                 attribute: "rgb_color",
                 on_value: [{
-                    "script.execute": {
-                        id: "set_led_rgb",
-                        color: lambda('return x;'),
-                        entity: lightName.split(" ").join("_").toLowerCase(),
-                    }
+                    lambda: `id(${APPLY_RGB_COLOR_ID})(x, &id(${lightId}));`
                 }]
             }));
         }
