@@ -1,5 +1,4 @@
 import {Configuration} from "esphome-config-ts/dist/lib/index.js";
-import {lambda} from "esphome-config-ts/dist/yaml/index.js";
 import {KEYS, SliderNumber, Substitutions} from "@/virtuals/index.js";
 import {
     Esp32,
@@ -72,9 +71,10 @@ function newConfig(opts: newConfigOpts = {
                 type: "binary",
                 write_action: [
                     {
-                        'light.control': {
-                            id: 'keypad_button_01_light',
-                            state: lambda('return state;')
+                        'if': {
+                            condition: [{lambda: 'return state;'}],
+                            then: [{'light.turn_on': {id: 'keypad_button_01_light'}}],
+                            else: [{'light.turn_off': {id: 'keypad_button_01_light'}}],
                         }
                     }
                 ]
