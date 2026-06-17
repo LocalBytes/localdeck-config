@@ -122,6 +122,8 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
             }));
         } else if (c.blip_on_press) {
             sensor.config.on_press?.push({'script.execute': {id: 'blip_light', led_index: c.num - 1}});
+            sensor.config.on_press?.push({'delay': '500ms'});
+            sensor.config.on_press?.push({lambda: `id(${lightId}).make_call().perform();`});
         }
 
         if (c.ha_entity && c.follow_brightness) {
