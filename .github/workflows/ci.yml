@@ -129,6 +129,18 @@ jobs:
 
       - uses: astral-sh/setup-uv@v6
 
+      - name: Get date
+        id: date
+        run: echo "date=$(date +%Y-%m-%d)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.local/share/uv/tools
+            ~/.platformio
+          key: esphome-${{ steps.date.outputs.date }}
+          restore-keys: esphome-
+
       - name: Generate test config
         working-directory: packages/localdeck-codegen
         run: node ./dist/esphome-localdeck-test.js > ./esphome-localdeck-test.yaml
@@ -136,6 +148,12 @@ jobs:
       - name: Compile with ESPHome
         working-directory: packages/localdeck-codegen
         run: uvx esphome compile ./esphome-localdeck-test.yaml
+
+      - name: Report ESPHome version
+        if: always()
+        run: |
+          version=$(uvx esphome version 2>/dev/null | grep -oP '[\d.]+' | head -1)
+          echo "### ESPHome ${version}" >> $GITHUB_STEP_SUMMARY
 
   docker:
     name: Docker
