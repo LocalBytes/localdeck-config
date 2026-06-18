@@ -6,6 +6,7 @@ import {
     PartitionLight
 } from "esphome-config-ts/dist/components/index.js";
 import {lambda} from "esphome-config-ts/dist/yaml/index.js";
+import {APPLY_RGB_COLOR_ID} from "@/scripts/index.js";
 import {z} from "zod";
 
 export const KEYS = "ABCDEFGHIJKLMNOPQRSTUVWX";
@@ -121,6 +122,8 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
             }));
         } else if (c.blip_on_press) {
             sensor.config.on_press?.push({'script.execute': {id: 'blip_light', led_index: c.num - 1}});
+            sensor.config.on_press?.push({'delay': '500ms'});
+            sensor.config.on_press?.push({lambda: `id(${lightId}).make_call().perform();`});
         }
 
         if (c.ha_entity && c.follow_brightness) {
@@ -128,10 +131,11 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
                 id: `keypad_button_${c.num}_hass_brightness`,
                 entity_id: c.ha_entity,
                 attribute: "brightness",
+                filters: [{filter_out: "nan"}],
                 on_value: [{
                     "light.control": {
                         id: lightId,
-                        brightness: lambda('if (x>=0) return (x/255) * id(brightness); else return 0;'),
+                        brightness: lambda('return x >= 0 ? (x / 255.0f) * id(brightness) : 0;'),
                     }
                 }]
             }));
@@ -143,11 +147,7 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
                 entity_id: c.ha_entity,
                 attribute: "rgb_color",
                 on_value: [{
-                    "script.execute": {
-                        id: "set_led_rgb",
-                        color: lambda('return x;'),
-                        entity: lightName.split(" ").join("_").toLowerCase(),
-                    }
+                    lambda: `id(${APPLY_RGB_COLOR_ID})(x, id(${lightId}));`
                 }]
             }));
         }
