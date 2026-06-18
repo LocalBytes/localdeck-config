@@ -7,7 +7,7 @@
 - Moved from RippleUI to DaisyUI for the UI components in b43e45e
 
 ### Fixed
-- LED state is now restored after a button press (blip animation no longer leaves the light off) in #144. See: [forum#285:7](https://forum.mylocalbytes.com/d/285/7)
+- LED state is now restored after a button press (blip animation no longer leaves the light off) in #144. See: #61, [forum#285:7](https://forum.mylocalbytes.com/d/285/7)
 - Button LEDs now correctly reflect colour and brightness from Home Assistant entities in #144
 - Suppressed a spurious boot warning for the LED strip pin in #144
 - Fixed provisioning indicator (button 01 LED) broken by ESPHome 2026.5 in #143
