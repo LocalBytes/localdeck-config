@@ -97,12 +97,12 @@ function newConfig(opts: newConfigOpts = {
         }
     }));
 
-    //@ts-expect-error - RMT Channel is not a required parameter
     const ledstrip = (new Esp32RmtLedStripLight({
         name: "Ledstrip",
         id: "ledstrip",
         rgb_order: "GRB",
-        pin: "GPIO8",
+        // @ts-expect-error - Pin doesn't allow object yet; ignore_strapping_warning suppresses ESP32-C3 boot warning
+        pin: {number: "GPIO8", ignore_strapping_warning: true},
         num_leds: 24,
         chipset: "SK6812",
         restore_mode: "RESTORE_AND_OFF",
