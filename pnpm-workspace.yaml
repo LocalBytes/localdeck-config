@@ -11,7 +11,9 @@ catalog:
   vitest: ^4.1.9
 
 overrides:
+  # Nuxt ships Vite 7 internally; force Vite 8 across the workspace.
   vite: ^8.0.0
+  vitest: ^4.1.9
 
 allowBuilds:
   '@parcel/watcher': true
