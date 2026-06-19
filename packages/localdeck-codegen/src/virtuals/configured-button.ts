@@ -19,11 +19,14 @@ export const BUTTON_NUMBERS = [
 
 export const zButtonNumber = z.coerce.number().min(1).max(24);
 
+const emptyToNullable = <T extends z.ZodString>(schema: T) =>
+    z.preprocess(val => val === '' ? null : val, schema.nullable());
+
 export const zConfiguredButtonOptsComponent = z.object({
     num: zButtonNumber,
     expose: z.boolean().default(true),
     blip_on_press: z.boolean().default(true),
-    ha_entity: z.string().nullish().default(""),
+    ha_entity: z.string().apply(emptyToNullable).default(null),
     toggle: z.boolean().default(true),
     follow_state: z.boolean().default(true),
     follow_brightness: z.boolean().default(true),
@@ -31,8 +34,8 @@ export const zConfiguredButtonOptsComponent = z.object({
 });
 
 export const zConfiguredButtonOptsLabel = z.object({
-    text: z.string().nullish().default(""),
-    icon: z.string().nullish().default(""),
+    text: z.string().apply(emptyToNullable).default(null),
+    icon: z.string().apply(emptyToNullable).default(null),
     fontSize: z.coerce.number().default(12),
 });
 

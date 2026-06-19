@@ -30,12 +30,12 @@
           <span class="label-text">Entity</span>
           <DeckButtonConfigTypeahead
             v-if="typeahead"
-            v-model="modelValue.component.ha_entity"
+            v-model="haEntity"
             :typeahead="typeahead"
           />
           <input
             v-else
-            v-model="modelValue.component.ha_entity"
+            v-model="haEntity"
             v-maska
             class="input input-bordered"
             data-maska="D.E"
@@ -98,8 +98,9 @@
 import type Fuse from 'fuse.js';
 import type { EditContainer } from '../utils/PadCfg';
 import type { HassEntity } from '../utils/types';
+import { useNullableModel } from '../utils/hooks';
 
-defineModel<EditContainer>({
+const modelValue = defineModel<EditContainer>({
   required: true,
 });
 
@@ -108,4 +109,5 @@ defineProps<{
 }>();
 
 const hassOpen = ref(true);
+const haEntity = useNullableModel(modelValue.value.component, 'ha_entity');
 </script>
