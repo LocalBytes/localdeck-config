@@ -120,7 +120,7 @@ importers:
         version: 0.0.57(zod@4.4.3)
       fuse.js:
         specifier: ^7.3.0
-        version: 7.4.0
+        version: 7.4.1
       material-symbols:
         specifier: ^0.44.6
         version: 0.44.10
@@ -205,7 +205,7 @@ importers:
         version: https://codeload.github.com/localbytes/esphome-config-ts/tar.gz/65889baa8e94d627b3e490e8554c1136a9513758
       fuse.js:
         specifier: ^7.3.0
-        version: 7.4.0
+        version: 7.4.1
       lodash:
         specifier: ^4.18.1
         version: 4.18.1
@@ -3701,8 +3701,8 @@ packages:
   functions-have-names@1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
 
-  fuse.js@7.4.0:
-    resolution: {integrity: sha512-3UqmoSFwzX1sNB1YSk+Co0EdH29XCW2p9g48OAiy93cjKqzuABsqw2VIgSN3CmsT/wo6pIJ3F0Jxeiiby8rhIQ==}
+  fuse.js@7.4.1:
+    resolution: {integrity: sha512-AY7lKAXK71hi3WgUvDy6oZL67UEHOOtvCAwVdOXHyJd6ZzftBy7QqxuXt4HxmmAhYjmp/YCuOELZtIvAdlZ+fw==}
     engines: {node: '>=10'}
 
   fuse.js@7.4.2:
@@ -9907,7 +9907,7 @@ snapshots:
 
   functions-have-names@1.2.3: {}
 
-  fuse.js@7.4.0: {}
+  fuse.js@7.4.1: {}
 
   fuse.js@7.4.2: {}
 
