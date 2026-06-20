@@ -27,8 +27,6 @@
     "eslint": "^10.3.0",
     "happy-dom": "^20.9.0",
     "nuxt": "catalog:",
-    "playwright": "^1.60.0",
-    "playwright-core": "^1.60.0",
     "postcss": "^8.5.12",
     "typescript": "catalog:",
     "vite": "catalog:",
