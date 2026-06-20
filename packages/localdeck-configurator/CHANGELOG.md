@@ -4,6 +4,7 @@
 
 ### Changed
 - Major update to dependencies including Nuxt 4 in b43e45e
+- Upgraded to Vite 8 and Vitest 4; e2e tests now share a single dev server, reducing test time significantly in #155
 - Moved from RippleUI to DaisyUI for the UI components in b43e45e
 
 ### Fixed

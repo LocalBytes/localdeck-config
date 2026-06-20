@@ -3,16 +3,14 @@ import * as fs from 'node:fs/promises';
 
 import { beforeEach, describe, expect, test } from 'vitest';
 
-import { createPage, setup } from '@nuxt/test-utils/e2e';
+import { createPage } from '@nuxt/test-utils/e2e';
 
 import { buttonLabel, getTestFilesDir, setButton } from '../utils';
 
 const FILENAME = 'test-resetting.yaml';
 const filesDir = getTestFilesDir();
 
-describe('Resetting Workflow', async () => {
-  await setup();
-
+describe('Resetting Workflow', () => {
   beforeEach(async () => {
     const filePath = path.join(filesDir, FILENAME);
     await fs.mkdir(path.dirname(filePath), { recursive: true });

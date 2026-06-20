@@ -93,13 +93,13 @@ jobs:
       - name: Run linter
         run: pnpm run lint
 
-      - uses: actions/cache@v4
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ~/.cache/ms-playwright
-          key: playwright-chromium-${{ hashFiles('**/package.json') }}
+          key: playwright-${{ hashFiles('**/package.json') }}
+          restore-keys: playwright-
 
       - name: Install Playwright
-        continue-on-error: true
         timeout-minutes: 10
         working-directory: ./packages/localdeck-configurator
         run: pnpm exec playwright install --with-deps chromium
@@ -127,13 +127,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install -r
 
-      - uses: astral-sh/setup-uv@v6
+      - uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8.2.0
 
       - name: Get date
         id: date
         run: echo "date=$(date +%Y-%m-%d)" >> $GITHUB_OUTPUT
 
-      - uses: actions/cache@v4
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: |
             ~/.local/share/uv/tools

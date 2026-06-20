@@ -1,7 +1,7 @@
 import * as path from 'node:path';
 import * as fs from 'node:fs/promises';
 
-import { createPage, setup } from '@nuxt/test-utils/e2e';
+import { createPage } from '@nuxt/test-utils/e2e';
 import { describe, expect, test } from 'vitest';
 import espHomeYaml from 'esphome-config-ts/dist/yaml/index.js';
 
@@ -28,9 +28,7 @@ wifi:
 const FILENAME = 'test-import.yaml';
 const filesDir = getTestFilesDir();
 
-describe('Import Workflow', async () => {
-  await setup();
-
+describe('Import Workflow', () => {
   test('Parse the original file', async () => {
     const content = espHomeYaml.parse(preImportExample) as object;
     expect(content).toBeDefined();

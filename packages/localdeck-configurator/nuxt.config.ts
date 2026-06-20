@@ -21,7 +21,7 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ['./src/assets/main.css'],
+  css: ['~/assets/main.css'],
 
   router: {
     options: {

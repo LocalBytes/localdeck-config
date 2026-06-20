@@ -3,16 +3,14 @@ import * as fs from 'node:fs/promises';
 
 import { beforeEach, describe, expect, test } from 'vitest';
 
-import { createPage, setup } from '@nuxt/test-utils/e2e';
+import { createPage } from '@nuxt/test-utils/e2e';
 
 import { getTestFilesDir, setButton } from '../utils';
 
 const FILENAME = 'test-hailmary.yaml';
 const filesDir = getTestFilesDir();
 
-describe('Hail Mary', async () => {
-  await setup();
-
+describe('Hail Mary', () => {
   beforeEach(async () => {
     const filePath = path.join(filesDir, FILENAME);
     await fs.mkdir(path.dirname(filePath), { recursive: true });
