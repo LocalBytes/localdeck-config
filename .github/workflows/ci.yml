@@ -1,6 +1,16 @@
 name: CI
 
 on:
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: Publish channel
+        type: choice
+        options:
+          - ci
+          - dev
+          - release
+        default: dev
   pull_request:
   push:
     branches:
@@ -14,12 +24,32 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
+  setup:
+    name: Setup
+    runs-on: ubuntu-latest
+    outputs:
+      channel: ${{ steps.channel.outputs.channel }}
+    steps:
+      - id: channel
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "channel=${{ inputs.channel }}" >> "$GITHUB_OUTPUT"
+          elif [[ "${{ github.event_name }}" == "release" ]]; then
+            echo "channel=release" >> "$GITHUB_OUTPUT"
+          elif [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "channel=dev" >> "$GITHUB_OUTPUT"
+          else
+            echo "channel=ci" >> "$GITHUB_OUTPUT"
+          fi
+
   build:
     name: Build
+    needs: setup
     runs-on: ubuntu-latest
-
     outputs:
       version: ${{ env.version }}
+      image: ${{ env.image }}
+      channel: ${{ needs.setup.outputs.channel }}
 
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
@@ -36,16 +66,17 @@ jobs:
           node-version: 'lts/*'
           cache: 'pnpm'
 
-      - name: Install dependencies
-        run: pnpm install -r
+      - run: pnpm install -r
 
-      - name: Get version
+      - name: Setup env vars
         run: |
-          version=$(git describe --tags | sed 's/^v//')
-          if [ "${GITHUB_EVENT_NAME}" = "release" ]; then
+          if [[ "${{ needs.setup.outputs.channel }}" == "release" ]]; then
             version=$(node -p -e 'require("./packages/localdeck-configurator/package.json").version')
+          else
+            version=$(git describe --tags | sed 's/^v//')
           fi
           echo "version=${version}" >> "${GITHUB_ENV}"
+          echo "image=ghcr.io/${GITHUB_REPOSITORY_OWNER@L}/hass-localdeck-configurator" >> "${GITHUB_ENV}"
 
       - name: Build
         run: |
@@ -69,7 +100,6 @@ jobs:
     name: Test
     needs: build
     runs-on: ubuntu-latest
-
     env:
       NUXT_FILES_DIR: /tmp/esphome
 
@@ -85,13 +115,9 @@ jobs:
           node-version: 'lts/*'
           cache: 'pnpm'
 
-      - name: Install dependencies
-        run: |
-          pnpm install -r
-          mkdir -p ${{ env.NUXT_FILES_DIR }}
+      - run: pnpm install -r && mkdir -p ${{ env.NUXT_FILES_DIR }}
 
-      - name: Run linter
-        run: pnpm run lint
+      - run: pnpm run lint
 
       - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
@@ -99,16 +125,14 @@ jobs:
           key: playwright-${{ hashFiles('**/package.json') }}
           restore-keys: playwright-
 
-      - name: Install Playwright
-        timeout-minutes: 10
+      - timeout-minutes: 10
         working-directory: ./packages/localdeck-configurator
         run: pnpm exec playwright install --with-deps chromium
 
-      - name: Run tests
-        run: pnpm run test
+      - run: pnpm run test
 
-  esphome-compile:
-    name: Validate ESPHome YAML
+  esphome:
+    name: ESPHome
     needs: build
     runs-on: ubuntu-latest
 
@@ -124,13 +148,11 @@ jobs:
           node-version: 'lts/*'
           cache: 'pnpm'
 
-      - name: Install dependencies
-        run: pnpm install -r
+      - run: pnpm install -r
 
       - uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8.2.0
 
-      - name: Get date
-        id: date
+      - id: date
         run: echo "date=$(date +%Y-%m-%d)" >> $GITHUB_OUTPUT
 
       - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
@@ -145,9 +167,8 @@ jobs:
         working-directory: packages/localdeck-codegen
         run: node ./dist/esphome-localdeck-test.js > ./esphome-localdeck-test.yaml
 
-      - name: Compile with ESPHome
+      - run: uvx esphome compile ./esphome-localdeck-test.yaml
         working-directory: packages/localdeck-codegen
-        run: uvx esphome compile ./esphome-localdeck-test.yaml
 
       - name: Report ESPHome version
         if: always()
@@ -156,70 +177,105 @@ jobs:
           echo "### ESPHome ${version}" >> $GITHUB_STEP_SUMMARY
 
   docker:
-    name: Docker
+    name: Docker / ${{ matrix.arch }}
     needs: build
-    runs-on: ubuntu-latest
-
+    runs-on: ${{ matrix.os }}
     permissions:
       contents: read
       id-token: write
       packages: write
-
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            os: ubuntu-latest
+          - arch: aarch64
+            os: ubuntu-24.04-arm
     env:
       version: ${{ needs.build.outputs.version }}
-
+      image: ${{ needs.build.outputs.image }}
+      channel: ${{ needs.build.outputs.channel }}
     steps:
-      - name: Setup env
-        run: echo "ghcr_user=${GITHUB_REPOSITORY_OWNER@L}" >> "${GITHUB_ENV}"
-
-      - uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee # v4.2.0
-        with:
-          registry: ghcr.io
-          username: ${{ env.ghcr_user }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: localdeck-configurator
           path: localdeck-configurator
 
-      - uses: home-assistant/builder@2024.03.5
+      - uses: home-assistant/builder/actions/build-image@4de35182ce1e329181bffcbcc84d33db5e2c7e10 # 2026.06.0
         with:
-          args: |
-            ${{ (github.event_name == 'pull_request' || startsWith(github.ref, 'refs/heads/renovate/')) && '--amd64' || '--all' }} \
-            --target localdeck-configurator \
-            --docker-hub "ghcr.io/${{ env.ghcr_user }}" \
-            --cosign \
-            ${{ (github.event_name == 'pull_request' || startsWith(github.ref, 'refs/heads/renovate/')) && '--test' || '' }} \
-            ${{ github.event_name != 'release' && '--no-latest' || '' }}
+          arch: ${{ matrix.arch }}
+          image: ${{ env.image }}
+          image-tags: ${{ env.version }}-${{ matrix.arch }}
+          push: ${{ env.channel != 'ci' }}
+          version: ${{ env.version }}
+          context: localdeck-configurator
+          build-args: BUILD_FROM=homeassistant/${{ matrix.arch }}-base:latest
+          container-registry-password: ${{ secrets.GITHUB_TOKEN }}
 
   publish:
-    name: Publish
-    if: github.event_name == 'push' || github.event_name == 'release'
-    needs: docker
+    name: Docker / Publish
+    needs: [build, docker]
+    if: needs.build.outputs.channel != 'ci'
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
+      id-token: write
+      packages: write
+    env:
+      version: ${{ needs.build.outputs.version }}
+      image: ${{ needs.build.outputs.image }}
+      channel: ${{ needs.build.outputs.channel }}
     steps:
+      - uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
+
+      - uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee # v4.2.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: docker/setup-buildx-action@d7f5e7f509e45cec5c76c4d5afdd7de93d0b3df5 # v4.1.0
+
+      - name: Create and sign manifest
+        run: |
+          docker_tag=$([[ "${{ env.channel }}" == "release" ]] && echo "latest" || echo "dev")
+          metadata_file=$(mktemp)
+
+          docker buildx imagetools create \
+            --metadata-file "${metadata_file}" \
+            --tag "${{ env.image }}:${{ env.version }}" \
+            --tag "${{ env.image }}:${docker_tag}" \
+            "${{ env.image }}:${{ env.version }}-amd64" \
+            "${{ env.image }}:${{ env.version }}-aarch64"
+
+          digest=$(jq -r '.["containerimage.descriptor"].digest' "${metadata_file}")
+          cosign sign --yes "${{ env.image }}@${digest}"
+
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: localdeck-configurator-hass
           path: localdeck-configurator
 
-      - name: Update config
-        if: github.event_name != 'release'
+      - name: Configure dev channel
+        if: env.channel != 'release'
         run: |
           sed -i 's/"LocalDeck Configurator"/"LocalDeck Configurator (Dev)"/' ./localdeck-configurator/config.yaml
           sed -i 's/"localdeck-configurator"/"localdeck-configurator-dev"/' ./localdeck-configurator/config.yaml
 
-      - name: Push to addon repo
-        uses: cpina/github-action-push-to-another-repository@55306faa4ed53b815ae49e564af8cfb359d32ae2 # main
+      - run: |
+          echo "addon_path=$([[ "${{ env.channel }}" == "release" ]] && echo "localdeck-configurator" || echo "localdeck-configurator-dev")" >> "$GITHUB_ENV"
+          echo "short_sha=${GITHUB_SHA:0:7}" >> "$GITHUB_ENV"
+
+      - uses: cpina/github-action-push-to-another-repository@55306faa4ed53b815ae49e564af8cfb359d32ae2 # main
         env:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_LOCALBYTES_HELLO }}
         with:
           source-directory: 'localdeck-configurator'
-          target-directory: ${{ github.event_name == 'release' && 'localdeck-configurator' || 'localdeck-configurator-dev' }}
+          target-directory: ${{ env.addon_path }}
           destination-github-username: '${{ github.repository_owner }}'
           destination-repository-name: 'hass-addons'
           user-name: "LocalBytes Bot"
           user-email: "hello@mylocalbytes.com"
           target-branch: main
+          commit-message: "Update `${{ env.addon_path }}` to `${{ env.version }}` (${{ github.repository }}@${{ env.short_sha }})"
