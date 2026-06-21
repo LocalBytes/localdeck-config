@@ -1,3 +1,10 @@
+export function useNullableModel<T extends object, K extends keyof T>(obj: T, key: K) {
+  return computed<string>({
+    get: () => (obj[key] as string | null) ?? '',
+    set: (val) => { obj[key] = (val || null) as T[K]; },
+  });
+}
+
 export const isPrintingSymbol = Symbol('isPrinting');
 export const useIsPrinting = () => (inject(isPrintingSymbol, ref(false)) as Ref<boolean>);
 

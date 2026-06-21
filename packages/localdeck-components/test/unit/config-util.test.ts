@@ -113,12 +113,12 @@ describe('ConfigUtil', () => {
     const util = new ConfigUtil();
     const editor = util.editor();
 
-    expect(editor.buttons[1].label.text).toEqual('');
+    expect(editor.buttons[1].label.text).toEqual(null);
 
     editor.buttons[1].label.text = 'test';
     util.resetChanges('buttons.1.label');
 
-    expect(editor.buttons[1].label.text).toEqual('');
+    expect(editor.buttons[1].label.text).toEqual(null);
   });
 
   it('should allow setting changes', () => {
