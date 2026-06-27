@@ -12,7 +12,7 @@ import { ConfiguredButton, zConfiguredButtonOpts } from '@localbytes/localdeck-c
 type Explode<T extends string[]> = T[number];
 
 export default defineEventHandler(async (event) => {
-  const { filesDir } = useRuntimeConfig();
+  const { esphomeDir } = useRuntimeConfig();
   const { filename } = getQuery(event);
   const body = await readBody(event) satisfies { editor: DeepPartial<PadEditor> };
 
@@ -28,7 +28,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const path = `${filesDir}/${filename}`;
+  const path = `${esphomeDir}/${filename}`;
 
   let originalContent = '';
   let fileContent = '';

@@ -8,9 +8,9 @@ function capture(line: string, pattern: RegExp, group = 1): string | null {
 }
 
 export default defineEventHandler(async (event) => {
-  const { filesDir } = useRuntimeConfig();
+  const { esphomeDir } = useRuntimeConfig();
   const { filename } = getQuery(event);
-  const file = await fs.open(`${filesDir}/${filename}`, 'r');
+  const file = await fs.open(`${esphomeDir}/${filename}`, 'r');
 
   let encodedConfig: string | null = null;
   let name: string | null = null;

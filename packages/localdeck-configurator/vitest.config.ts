@@ -8,7 +8,7 @@ import { defineConfig, defineProject } from 'vitest/config';
 const rootDir = path.resolve(fileURLToPath(import.meta.url), '..');
 const filesDir = fs.mkdtempSync(path.join(os.tmpdir(), 'localdeck-configurator-'));
 process.env.LOCALDECK_CONFIGURATOR_FILES_DIR = filesDir;
-process.env.NUXT_FILES_DIR = filesDir;
+process.env.LB_ESPHOME_DIR = filesDir;
 process.env.NUXT_TEST_OPTIONS = JSON.stringify({ rootDir, dev: true, browser: false });
 
 process.once('exit', () => {
