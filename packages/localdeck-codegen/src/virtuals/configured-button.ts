@@ -58,6 +58,7 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
             id: `keypad_button_${c.num.toString().padStart(2, "0")}`,
             name: `Button ${c.num.toString().padStart(2, "0")}`,
             internal: !c.expose,
+            filters: [{ delayed_off: '125ms' }],
             keypad_id: 'keypad',
             key: KEYS[c.num - 1],
             on_press: [],
