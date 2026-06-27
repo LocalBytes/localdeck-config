@@ -33,6 +33,7 @@ export default defineNuxtConfig({
     dataValue: 'theme',
   },
 
+  /** @see ./src/server/plugins/startup-warnings.ts */
   runtimeConfig: {
     esphomeDir: process.env.LB_ESPHOME_DIR ?? process.env.NUXT_FILES_DIR ?? '/homeassistant/esphome',
 
