@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-import { BUTTON_NUMBERS } from '@localbytes/localdeck-codegen/dist/virtuals';
+import { BUTTON_NUMBERS } from '@localbytes/localdeck-codegen/virtuals';
 import { useResizeObserver } from '@vueuse/core';
 import type { EditContainer, PadEditor } from '~/utils/PadCfg';
 import { type FontSizes, fontSizesSymbol } from '~/utils/hooks';

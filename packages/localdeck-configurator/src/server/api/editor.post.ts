@@ -1,13 +1,13 @@
 import * as fs from 'fs/promises';
 import _ from 'lodash';
-import newConfig from '@localbytes/localdeck-codegen/dist/esphome-localdeck';
+import newConfig from '@localbytes/localdeck-codegen/esphome-localdeck';
 import espHomeYaml from 'esphome-config-ts/dist/yaml/index.js';
 
 import { type PadEditor, zPadEditor } from '@localbytes/localdeck-components/src/utils/PadCfg';
 import { ConfigUtil } from '@localbytes/localdeck-components/src/utils/config-util';
 import { getEditorUrl } from '@localbytes/localdeck-components/src/utils/compression';
 import type { DeepPartial } from '@localbytes/localdeck-components/src/utils/types';
-import { ConfiguredButton, zConfiguredButtonOpts } from '@localbytes/localdeck-codegen/dist/virtuals';
+import { ConfiguredButton, zConfiguredButtonOpts } from '@localbytes/localdeck-codegen/virtuals';
 
 type Explode<T extends string[]> = T[number];
 

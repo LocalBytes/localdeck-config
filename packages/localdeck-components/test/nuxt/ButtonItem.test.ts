@@ -1,8 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { mount } from '@vue/test-utils';
-import { zConfiguredButtonOpts } from '@localbytes/localdeck-codegen/dist/virtuals';
-import DeckButtonItem from '../../src/components/DeckButtonItem.vue';
-import { isPrintingSymbol } from '../../src/utils/hooks';
+import { zConfiguredButtonOpts } from '@localbytes/localdeck-codegen/virtuals';
+import { mountSuspended } from '@nuxt/test-utils/runtime';
+import { DeckButtonItem } from '#components';
 
 const CLASS_PRINTMODE = 'printmode';
 
@@ -16,7 +15,7 @@ const newButton = (id: number, overrides: Record<string, object> = {}) => {
 
 describe('Button Item', () => {
   it('Shows relevant labels', async () => {
-    const wrapper = mount(DeckButtonItem, {
+    const wrapper = await mountSuspended(DeckButtonItem, {
       props: { container: newButton(1, { label: { text: 'Button' } }) },
     });
 
@@ -26,7 +25,7 @@ describe('Button Item', () => {
   });
 
   it('Hides label in print mode', async () => {
-    const wrapper = mount(DeckButtonItem, {
+    const wrapper = await mountSuspended(DeckButtonItem, {
       global: { provide: { [isPrintingSymbol]: true } },
       props: { container: newButton(1, { label: { text: 'Button' } }) },
     });

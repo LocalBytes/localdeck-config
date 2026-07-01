@@ -29,7 +29,7 @@
 <script lang="ts" setup>
 import type { EmojiExt } from 'vue3-emoji-picker';
 import EmojiPicker from 'vue3-emoji-picker';
-import type { ConfiguredButtonOptsLabel } from '@localbytes/localdeck-codegen/dist/virtuals';
+import type { ConfiguredButtonOptsLabel } from '@localbytes/localdeck-codegen/virtuals';
 import 'vue3-emoji-picker/css';
 import { mdIconsGroups } from '~/utils/material';
 
