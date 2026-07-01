@@ -163,18 +163,14 @@ jobs:
           key: esphome-${{ steps.date.outputs.date }}
           restore-keys: esphome-
 
-      - name: Generate test config
-        working-directory: packages/localdeck-codegen
-        run: node ./dist/esphome-localdeck-test.js > ./esphome-localdeck-test.yaml
-
-      - run: uvx esphome compile ./esphome-localdeck-test.yaml
-        working-directory: packages/localdeck-codegen
-
-      - name: Report ESPHome version
-        if: always()
+      - name: Install ESPHome
         run: |
-          version=$(uvx esphome version 2>/dev/null | grep -oP '[\d.]+' | head -1)
+          uv tool install esphome
+          version=$(esphome version 2>/dev/null | grep -oP '[\d.]+' | head -1)
           echo "### ESPHome ${version}" >> $GITHUB_STEP_SUMMARY
+
+      - name: Check ESPHome compiles
+        run: pnpm --filter=@localbytes/localdeck-codegen run make
 
   docker:
     name: Docker / ${{ matrix.arch }}

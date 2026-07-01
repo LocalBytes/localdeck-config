@@ -1,5 +1,4 @@
 import {Configuration} from "esphome-config-ts/dist/lib/index.js";
-import {KEYS, SliderNumber, Substitutions} from "@/virtuals/index.js";
 import {
     Esp32,
     Esp32Improv,
@@ -11,7 +10,8 @@ import {
     Wifi,
     WifiInfoTextSensor
 } from "esphome-config-ts/dist/components/index.js";
-import {scriptBlipLight, globalApplyRgbColor} from "@/scripts/index.js";
+import {globalApplyRgbColor, scriptBlipLight} from "./scripts/index.js";
+import {KEYS, SliderNumber, Substitutions} from "./virtuals/index.js";
 
 export const PINS_ROWS = [21, 20, 3, 7];
 export const PINS_COLS = [0, 1, 10, 4, 5, 6];
@@ -20,7 +20,6 @@ export interface newConfigOpts {
     withDefaults?: boolean;
     stopBeforeCustom?: boolean;
 }
-
 
 function newConfig(opts: newConfigOpts = {
     withDefaults: true,

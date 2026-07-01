@@ -1,6 +1,6 @@
+import {Substitutions} from "./virtuals/index.js";
 import {Configuration} from "esphome-config-ts/dist/lib/index.js";
 import {Esp32, Esp32RmtLedStripLight, Esphome} from "esphome-config-ts/dist/components/index.js";
-import {Substitutions} from "@/virtuals/index.js";
 
 const config = new Configuration();
 
@@ -17,7 +17,7 @@ config.updateComponent(new Esp32({
     }
 }));
 
-//@ts-expect-error - Build Path is claiming to be required but it is not
+//@ts-expect-error - Build Path is claiming to be required, but it is not
 config.updateComponent(new Esphome({
     name: "${name}",
     friendly_name: "${friendly_name}",

@@ -3,21 +3,31 @@
   "version": "0.1.0",
   "description": "",
   "type": "module",
-  "scripts": {
-    "prepare": "ts-patch install && tsc",
-    "prepare:watch": "ts-patch install && tsc -w",
-    "make": "pnpm run prepare && pnpm run make:test && pnpm run make:prod",
-    "make:prod": "node ./dist/esphome-localdeck-stock.js > ./esphome-localdeck.yaml && esphome compile ./esphome-localdeck.yaml",
-    "make:test": "node ./dist/esphome-localdeck-test.js > ./esphome-localdeck-test.yaml && esphome compile ./esphome-localdeck-test.yaml",
-    "generate": "tsx ./lib/esphome-localdeck-stock.ts > ./esphome-localdeck.yaml",
-    "start": "npm run generate && esphome run ./esphome-localdeck.yaml",
-    "compile": "npm run generate && esphome compile ./esphome-localdeck.yaml",
-    "lint": "eslint src",
-    "lint:fix": "eslint src --fix"
+  "exports": {
+    "./virtuals": {
+      "types": "./src/virtuals/index.ts",
+      "default": "./src/virtuals/index.ts"
+    },
+    "./esphome-localdeck": {
+      "types": "./src/esphome-localdeck.ts",
+      "default": "./src/esphome-localdeck.ts"
+    },
+    "./scripts": {
+      "types": "./src/scripts/index.ts",
+      "default": "./src/scripts/index.ts"
+    }
   },
-  "author": "",
-  "private": true,
-  "license": "ISC",
+  "scripts": {
+    "make": "pnpm run make:stock && pnpm run make:test",
+    "make:stock": "pnpm run make:stock:yaml && esphome compile ./esphome-localdeck.yaml",
+    "make:stock:yaml": "tsx ./src/esphome-localdeck-stock.ts > ./esphome-localdeck.yaml",
+    "make:stock:run": "pnpm run make:stock:yaml && esphome run ./esphome-localdeck.yaml",
+    "make:test": "pnpm run make:test:yaml && esphome compile ./esphome-localdeck-test.yaml",
+    "make:test:yaml": "tsx ./src/esphome-localdeck-test.ts > ./esphome-localdeck-test.yaml",
+    "make:test:run": "pnpm run make:test:yaml && esphome run ./esphome-localdeck-test.yaml",
+    "lint": "tsc --noEmit && eslint src",
+    "lint:fix": "tsc --noEmit && eslint src --fix"
+  },
   "dependencies": {
     "esphome-config-ts": "github:LocalBytes/esphome-config-ts",
     "js-yaml": "^4.1.1",
@@ -33,9 +43,7 @@
     "@types/lodash": "^4.17.24",
     "@types/node": "^25.7.0",
     "eslint": "^10.3.0",
-    "ts-node": "^10.9.2",
-    "ts-patch": "^4.0.1",
-    "typescript-eslint": "^8.59.3",
-    "typescript-transform-paths": "^4.0.0"
+    "tsx": "^4.19.4",
+    "typescript-eslint": "^8.59.3"
   }
 }

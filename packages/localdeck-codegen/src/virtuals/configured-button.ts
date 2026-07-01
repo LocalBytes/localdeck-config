@@ -6,8 +6,8 @@ import {
     PartitionLight
 } from "esphome-config-ts/dist/components/index.js";
 import {lambda} from "esphome-config-ts/dist/yaml/index.js";
-import {APPLY_RGB_COLOR_ID} from "@/scripts/index.js";
 import {z} from "zod";
+import {APPLY_RGB_COLOR_ID} from "../scripts/index.js";
 
 export const KEYS = "ABCDEFGHIJKLMNOPQRSTUVWX";
 export const BUTTON_NUMBERS = [

@@ -1,8 +1,8 @@
-import newConfig from "@/esphome-localdeck.js";
-import {BUTTON_NUMBERS, ConfiguredButton, zConfiguredButtonOpts} from "@/virtuals/index.js";
 import {DashboardImport} from "esphome-config-ts/dist/components/index.js";
 
 import _ from "lodash";
+import newConfig from "./esphome-localdeck.js";
+import {BUTTON_NUMBERS, ConfiguredButton, zConfiguredButtonOpts} from "./virtuals/index.js";
 
 const {config} = newConfig();
 
