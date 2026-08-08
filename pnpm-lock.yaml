@@ -53,8 +53,8 @@ importers:
         specifier: github:LocalBytes/esphome-config-ts
         version: https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/ae436e4b3b6f9f31243f48c7d7b607f9921a12a4
       js-yaml:
-        specifier: ^4.1.1
-        version: 4.3.1
+        specifier: ^5.0.0
+        version: 5.2.3
       lodash:
         specifier: ^4.18.1
         version: 4.18.1
@@ -3648,6 +3648,10 @@ packages:
 
   js-yaml@4.3.1:
     resolution: {integrity: sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ==}
+    hasBin: true
+
+  js-yaml@5.2.3:
+    resolution: {integrity: sha512-n+mUVyUX5bVv7G/G2zyIHOhdxfuU1dY2NOFzTQUWiMUbFss8b57NFlgCCaggU78wSw5KVS9cllzeLyzyR+n5nw==}
     hasBin: true
 
   jsdoc-type-pratt-parser@7.2.0:
@@ -9827,6 +9831,10 @@ snapshots:
   js-tokens@9.0.1: {}
 
   js-yaml@4.3.1:
+    dependencies:
+      argparse: 2.0.1
+
+  js-yaml@5.2.3:
     dependencies:
       argparse: 2.0.1
 
