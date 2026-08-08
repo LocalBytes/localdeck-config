@@ -54,7 +54,7 @@ importers:
         version: https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/ae436e4b3b6f9f31243f48c7d7b607f9921a12a4
       js-yaml:
         specifier: ^4.1.1
-        version: 4.3.0
+        version: 4.3.1
       lodash:
         specifier: ^4.18.1
         version: 4.18.1
@@ -3646,8 +3646,8 @@ packages:
   js-tokens@9.0.1:
     resolution: {integrity: sha512-mxa9E9ITFOt0ban3j6L5MpjwegGz6lBQmM1IJkWeBZGcMxto50+eWdjC/52xDbS2vy0k7vIMK0Fe2wfL9OQSpQ==}
 
-  js-yaml@4.3.0:
-    resolution: {integrity: sha512-1td788aAnnZ5qs7V2QIRl1owjtYpbKt749Y3xauqQgwIIGF/xXWz1wMTEBx5O3LK3lXLVuqXPdPxj2BoFHaW9Q==}
+  js-yaml@4.3.1:
+    resolution: {integrity: sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ==}
     hasBin: true
 
   jsdoc-type-pratt-parser@7.2.0:
@@ -5723,7 +5723,7 @@ snapshots:
   '@apidevtools/json-schema-ref-parser@14.2.1(@types/json-schema@7.0.15)':
     dependencies:
       '@types/json-schema': 7.0.15
-      js-yaml: 4.3.0
+      js-yaml: 4.3.1
 
   '@babel/code-frame@7.29.7':
     dependencies:
@@ -9236,11 +9236,11 @@ snapshots:
 
   esphome-config-ts@https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/ae436e4b3b6f9f31243f48c7d7b607f9921a12a4:
     dependencies:
-      js-yaml: 4.3.0
+      js-yaml: 4.3.1
 
   esphome-config-ts@https://codeload.github.com/localbytes/esphome-config-ts/tar.gz/ae436e4b3b6f9f31243f48c7d7b607f9921a12a4:
     dependencies:
-      js-yaml: 4.3.0
+      js-yaml: 4.3.1
 
   espree@10.4.0:
     dependencies:
@@ -9826,7 +9826,7 @@ snapshots:
 
   js-tokens@9.0.1: {}
 
-  js-yaml@4.3.0:
+  js-yaml@4.3.1:
     dependencies:
       argparse: 2.0.1
 
