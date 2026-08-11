@@ -38,9 +38,15 @@ output:
     id: improv_status
     type: binary
     write_action:
-      - light.control:
-          id: keypad_button_01_light
-          state: !lambda return state;
+      - if:
+          condition:
+            - lambda: return state;
+          then:
+            - light.turn_on:
+                id: keypad_button_01_light
+          else:
+            - light.turn_off:
+                id: keypad_button_01_light
 esp32_improv:
   status_indicator: improv_status
   authorizer: keypad_button_01
@@ -54,7 +60,9 @@ light:
     name: Ledstrip
     id: ledstrip
     rgb_order: GRB
-    pin: GPIO8
+    pin:
+      number: GPIO8
+      ignore_strapping_warning: true
     num_leds: 24
     chipset: SK6812
     restore_mode: RESTORE_AND_OFF
@@ -619,33 +627,50 @@ script:
       - lambda: |-
           ESP_LOGD("set_led_rgb", "Entity %s, Input: %s", entity.c_str(), color.c_str());
 
-          if (color.length() < 7) return;
-
-          int firstComma = color.find(',');
-          int secondComma = color.find(',', firstComma + 1);
-
-          ESP_LOGV("set_led_rgb", "Commas are: %d, %d", firstComma, secondComma);
-
-          float r = stoi(color.substr(1, firstComma));
-          float g = stoi(color.substr(firstComma + 1, secondComma));
-          float b = stoi(color.substr(secondComma + 1, color.length() - 1));
-
-          ESP_LOGD("set_led_rgb", "%d, %d, %d", r,g,b);
-
-          for (auto *light : App.get_lights()){
-            ESP_LOGV("set_led_rgb", "Checking light %s", light->get_object_id().c_str());
-            if (light->get_object_id().c_str() == entity){
-                ESP_LOGD("set_led_rgb", "Setting light %s", light->get_object_id().c_str());
-                auto call = light->make_call();
-                call.set_rgb(r/255, g/255, b/255);
-                call.perform();
-            }
-          }
+          esphome::light::LightState *light = nullptr;
+          if (entity == "ledstrip") light = id(ledstrip);
+          else if (entity == "button_01_light") light = id(keypad_button_01_light);
+          else if (entity == "button_02_light") light = id(keypad_button_02_light);
+          else if (entity == "button_03_light") light = id(keypad_button_03_light);
+          else if (entity == "button_04_light") light = id(keypad_button_04_light);
+          else if (entity == "button_05_light") light = id(keypad_button_05_light);
+          else if (entity == "button_06_light") light = id(keypad_button_06_light);
+          else if (entity == "button_07_light") light = id(keypad_button_07_light);
+          else if (entity == "button_08_light") light = id(keypad_button_08_light);
+          else if (entity == "button_09_light") light = id(keypad_button_09_light);
+          else if (entity == "button_10_light") light = id(keypad_button_10_light);
+          else if (entity == "button_11_light") light = id(keypad_button_11_light);
+          else if (entity == "button_12_light") light = id(keypad_button_12_light);
+          else if (entity == "button_13_light") light = id(keypad_button_13_light);
+          else if (entity == "button_14_light") light = id(keypad_button_14_light);
+          else if (entity == "button_15_light") light = id(keypad_button_15_light);
+          else if (entity == "button_16_light") light = id(keypad_button_16_light);
+          else if (entity == "button_17_light") light = id(keypad_button_17_light);
+          else if (entity == "button_18_light") light = id(keypad_button_18_light);
+          else if (entity == "button_19_light") light = id(keypad_button_19_light);
+          else if (entity == "button_20_light") light = id(keypad_button_20_light);
+          else if (entity == "button_21_light") light = id(keypad_button_21_light);
+          else if (entity == "button_22_light") light = id(keypad_button_22_light);
+          else if (entity == "button_23_light") light = id(keypad_button_23_light);
+          else if (entity == "button_24_light") light = id(keypad_button_24_light);
+          if (light == nullptr) return;
+          id(apply_rgb_color)(color, light);
 globals:
-  id: brightness
-  type: float
-  initial_value: '1'
-  restore_value: true
+  - id: apply_rgb_color
+    type: const std::function<void(std::string, esphome::light::LightState*)>
+    initial_value: |-
+      [](std::string color, esphome::light::LightState* light) {
+        if (color == "None") return;
+        int r, g, b;
+        if (sscanf(color.c_str(), "(%d, %d, %d)", &r, &g, &b) != 3) return;
+        auto call = light->make_call();
+        call.set_rgb(r/255.0f, g/255.0f, b/255.0f);
+        call.perform();
+      }
+  - id: brightness
+    type: float
+    initial_value: '1'
+    restore_value: true
 number:
   - platform: template
     name: Brightness
@@ -670,6 +695,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 0
+      - delay: 500ms
+      - lambda: id(keypad_button_01_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
@@ -706,6 +733,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 9
+      - delay: 500ms
+      - lambda: id(keypad_button_10_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
@@ -742,6 +771,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 10
+      - delay: 500ms
+      - lambda: id(keypad_button_11_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
@@ -778,6 +809,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 11
+      - delay: 500ms
+      - lambda: id(keypad_button_12_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
@@ -814,6 +847,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 12
+      - delay: 500ms
+      - lambda: id(keypad_button_13_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
@@ -850,6 +885,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 13
+      - delay: 500ms
+      - lambda: id(keypad_button_14_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
@@ -886,6 +923,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 14
+      - delay: 500ms
+      - lambda: id(keypad_button_15_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
@@ -922,6 +961,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 15
+      - delay: 500ms
+      - lambda: id(keypad_button_16_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
@@ -958,6 +999,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 16
+      - delay: 500ms
+      - lambda: id(keypad_button_17_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
@@ -994,6 +1037,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 17
+      - delay: 500ms
+      - lambda: id(keypad_button_18_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
@@ -1030,6 +1075,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 18
+      - delay: 500ms
+      - lambda: id(keypad_button_19_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
@@ -1066,6 +1113,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 1
+      - delay: 500ms
+      - lambda: id(keypad_button_02_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
@@ -1102,6 +1151,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 19
+      - delay: 500ms
+      - lambda: id(keypad_button_20_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
@@ -1138,6 +1189,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 20
+      - delay: 500ms
+      - lambda: id(keypad_button_21_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
@@ -1174,6 +1227,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 21
+      - delay: 500ms
+      - lambda: id(keypad_button_22_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
@@ -1210,6 +1265,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 22
+      - delay: 500ms
+      - lambda: id(keypad_button_23_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
@@ -1246,6 +1303,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 23
+      - delay: 500ms
+      - lambda: id(keypad_button_24_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
@@ -1282,6 +1341,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 2
+      - delay: 500ms
+      - lambda: id(keypad_button_03_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
@@ -1318,6 +1379,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 3
+      - delay: 500ms
+      - lambda: id(keypad_button_04_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
@@ -1354,6 +1417,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 4
+      - delay: 500ms
+      - lambda: id(keypad_button_05_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
@@ -1390,6 +1455,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 5
+      - delay: 500ms
+      - lambda: id(keypad_button_06_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
@@ -1426,6 +1493,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 6
+      - delay: 500ms
+      - lambda: id(keypad_button_07_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
@@ -1462,6 +1531,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 7
+      - delay: 500ms
+      - lambda: id(keypad_button_08_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
@@ -1498,6 +1569,8 @@ binary_sensor:
       - script.execute:
           id: blip_light
           led_index: 8
+      - delay: 500ms
+      - lambda: id(keypad_button_09_light).make_call().perform();
     on_click: []
     on_double_click: []
     on_multi_click:
