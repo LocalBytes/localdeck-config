@@ -21,13 +21,6 @@ export default defineEventHandler(async (event) => {
 
   const editor: PadEditor = configUtil.editor();
 
-  if (!editor) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'No editor found',
-    });
-  }
-
   const path = `${filesDir}/${filename}`;
 
   let originalContent = '';

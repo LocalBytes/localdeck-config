@@ -21,7 +21,7 @@ describe('Button Item', () => {
     });
 
     expect(wrapper.text()).toContain('1');
-    expect(wrapper.element.classList).not.toContain(CLASS_PRINTMODE);
+    expect(wrapper.classes(CLASS_PRINTMODE)).toBe(false);
     expect(wrapper.text()).toContain('Button');
   });
 
@@ -32,7 +32,7 @@ describe('Button Item', () => {
     });
 
     expect(wrapper.text()).not.toContain('1');
-    expect(wrapper.element.classList).toContain(CLASS_PRINTMODE);
+    expect(wrapper.classes(CLASS_PRINTMODE)).toBe(true);
     expect(wrapper.text()).toContain('Button');
   });
 });

@@ -32,8 +32,7 @@ export default defineEventHandler(async (event) => {
     ? decompress(configStr, zPadEditor)
     : zPadEditor.parse({});
 
-  config.title = friendlyName ?? name ?? config.title ?? 'My LocalDeck';
-  config.buttons ??= {};
+  config.title = friendlyName ?? name ?? config.title;
 
   return { configStr, config };
 });

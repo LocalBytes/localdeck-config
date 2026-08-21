@@ -28,8 +28,6 @@ const editing = defineModel<EditContainer>('editing', { type: Object });
 
 const isPrinting = useIsPrinting();
 
-if (!editor.value) throw new Error('Pad model is required');
-
 const orderedButtons = computed(() => {
   const buttons = Object.values(editor.value.buttons);
   buttons.sort((a, b) => BUTTON_NUMBERS.indexOf(a.keyNum) - BUTTON_NUMBERS.indexOf(b.keyNum));
