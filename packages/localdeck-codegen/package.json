@@ -6,9 +6,9 @@
   "scripts": {
     "prepare": "tsdown",
     "dev": "tsdown --watch",
-    "make": "pnpm run prepare && pnpm run make:test && pnpm run make:prod",
-    "make:prod": "node ./dist/esphome-localdeck-stock.mjs > ./esphome-localdeck.yaml && esphome compile ./esphome-localdeck.yaml",
-    "make:test": "node ./dist/esphome-localdeck-test.mjs > ./esphome-localdeck-test.yaml && esphome compile ./esphome-localdeck-test.yaml",
+    "make": "pnpm run prepare && just make",
+    "make:prod": "pnpm run prepare && just make-prod",
+    "make:test": "pnpm run prepare && just make-test",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix"
   },
