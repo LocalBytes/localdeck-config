@@ -53,6 +53,6 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2026-01-01',
 
-  eslint: { config: { stylistic: { semi: true } } },
+  eslint: { config: { stylistic: { semi: true }, typescript: { tsconfigPath: './tsconfig.json' } } },
 
 });
