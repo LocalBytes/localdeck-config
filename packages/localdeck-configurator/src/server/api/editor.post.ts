@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
 
   const editor: PadEditor = configUtil.editor();
 
-  const path = `${filesDir}/${filename}`;
+  const path = `${filesDir}/${filename as string}`;
 
   let originalContent = '';
   let fileContent = '';

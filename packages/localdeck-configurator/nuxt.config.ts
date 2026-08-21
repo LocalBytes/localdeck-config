@@ -1,11 +1,15 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+// import.meta.env isn't typed in this node-context config file, so narrow it explicitly.
+const isTest = Boolean((import.meta as { env?: { TEST?: boolean } }).env?.TEST);
+
 export default defineNuxtConfig({
   extends: ['@localbytes/localdeck-components'],
   modules: [
     '@nuxt/eslint',
 
     // @nuxtjs/color-mode is conditionally loaded for test workaround (see https://github.com/nuxt-modules/color-mode/issues/335)
-    ...(!import.meta.env.TEST ? ['@nuxtjs/color-mode'] : []),
+    ...(!isTest ? ['@nuxtjs/color-mode'] : []),
   ],
   ssr: false,
 

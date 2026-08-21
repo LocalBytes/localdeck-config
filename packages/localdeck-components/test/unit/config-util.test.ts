@@ -30,7 +30,7 @@ describe('ObjectUtil', () => {
     const path = ['a', 'b', 'd', 'e'];
     ObjectUtil.set(obj, path, 2);
 
-    expect(obj?.a?.b?.d?.e).toEqual(2);
+    expect(obj.a?.b?.d?.e).toEqual(2);
   });
 
   it('should handle symbol keys when getting a value', () => {

@@ -52,7 +52,7 @@ const onSelectEmoji = (emoji: EmojiExt) => {
   modelValue.value.icon = MdIcon ?? emoji.i;
 
   // Close popover after selection to match previous dropdown behavior.
-  const popover = document.getElementById(popoverId) as (HTMLElement & { hidePopover?: () => void }) | null;
-  popover?.hidePopover?.();
+  const popover = document.getElementById(popoverId);
+  popover?.hidePopover();
 };
 </script>

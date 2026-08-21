@@ -29,7 +29,7 @@ const FILENAME = 'test-import.yaml';
 const filesDir = getTestFilesDir();
 
 describe('Import Workflow', () => {
-  test('Parse the original file', async () => {
+  test('Parse the original file', () => {
     const content = parseEsphomeYaml(preImportExample) as object;
     expect(content).toBeDefined();
   });
@@ -50,7 +50,7 @@ describe('Import Workflow', () => {
     console.log('Clicking');
     await page.getByText(FILENAME).click();
 
-    const response = await responsePromise.then(r => r.json());
+    const response = await responsePromise.then(r => r.json() as Promise<{ configStr: string | null; config: object }>);
     expect(response.configStr).toBeNull();
     expect(response.config).toMatchObject({ title: 'LocalBytes LocalDeck 9751c4', buttons: {} });
 

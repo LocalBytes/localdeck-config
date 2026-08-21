@@ -13,7 +13,7 @@ const applyRgbColorImpl = /* cpp */`[](std::string color, esphome::light::LightS
 }`;
 
 export const globalApplyRgbColor: GlobalsPlatform = new GlobalsPlatform({
-    id: APPLY_RGB_COLOR_ID,
+  id: APPLY_RGB_COLOR_ID,
   type: 'const std::function<void(std::string, esphome::light::LightState*)>',
-    initial_value: applyRgbColorImpl,
+  initial_value: applyRgbColorImpl,
 });

@@ -60,8 +60,8 @@ const modelValue = defineModel<string>({
 });
 
 const filtered = computed(() => {
-  if (!modelValue.value) return props.typeahead?.getIndex().docs ?? [];
-  return props.typeahead?.search(modelValue.value).map(({ item }) => item) ?? [];
+  if (!modelValue.value) return props.typeahead.getIndex().docs;
+  return props.typeahead.search(modelValue.value).map(({ item }) => item);
 });
 
 const closeDropdown = () => {
@@ -85,7 +85,7 @@ const onFocusOut = (event: FocusEvent) => {
 };
 
 const renderString = (item: string, query: string) => {
-  const text = item?.replace(/[&<>"']/g, m => ({
+  const text = item.replace(/[&<>"']/g, m => ({
     '&': '&amp;',
     '<': '&lt;',
     '>': '&gt;',
@@ -95,7 +95,7 @@ const renderString = (item: string, query: string) => {
 
   if (!text || !query) return h('span', [text]);
 
-  const index = text.toLowerCase().indexOf(query?.toLowerCase());
+  const index = text.toLowerCase().indexOf(query.toLowerCase());
   if (index < 0) return h('span', [text]);
 
   return h('span', [

@@ -25,9 +25,10 @@ export default defineEventHandler(async () => {
   let response: typeof example;
 
   if (api_url && api_token) {
+    // Home Assistant's actual response shape can't be verified at compile time.
     response = await fetch(api_url + '/states', {
       headers: { authorization: `Bearer ${api_token}` },
-    }).then(response => response.json());
+    }).then(response => response.json() as Promise<typeof example>);
   }
   else {
     response = example;
@@ -37,8 +38,8 @@ export default defineEventHandler(async () => {
     .map((state): HassEntity => {
       const id = state.entity_id;
       const name = state.attributes.friendly_name
-        ?? id.split('.')[1]
-          .split('_').map((word: string) => word[0].toUpperCase() + word.slice(1))
+        ?? (id.split('.')[1] ?? id)
+          .split('_').map(word => (word[0] ?? '').toUpperCase() + word.slice(1))
           .join(' ');
 
       return ({ name, id });

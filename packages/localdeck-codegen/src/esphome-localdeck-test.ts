@@ -9,7 +9,7 @@ config.updateComponent(new SubstitutionsPlatform({
 }));
 config.updateComponent(new Esp32Platform({
   board: 'esp32-c3-devkitm-1',
-    framework: {
+  framework: {
     type: 'esp-idf',
     sdkconfig_options: {},
   },
@@ -18,18 +18,18 @@ config.updateComponent(new Esp32Platform({
 config.updateComponent(new EsphomePlatform({
   name: '${name}',
   friendly_name: '${friendly_name}',
-    name_add_mac_suffix: true,
-    platformio_options: {
+  name_add_mac_suffix: true,
+  platformio_options: {
     'board_build.flash_mode': 'dio',
-    },
-    on_boot: [
-        {
-            'light.turn_on': {
-                id: 'ledstrip',
-                brightness: '50%',
+  },
+  on_boot: [
+    {
+      'light.turn_on': {
+        id: 'ledstrip',
+        brightness: '50%',
         effect: 'Addressable Rainbow',
       },
-        },
+    },
   ],
 }));
 
@@ -38,10 +38,10 @@ config.addComponent(new Esp32RmtLedStripLight({
   id: 'ledstrip',
   rgb_order: 'GRB',
   pin: 'GPIO8',
-    num_leds: 24,
+  num_leds: 24,
   chipset: 'SK6812',
   restore_mode: 'RESTORE_AND_OFF',
-    effects: [
+  effects: [
     { addressable_rainbow: { name: 'Addressable Rainbow' } },
   ],
 }));

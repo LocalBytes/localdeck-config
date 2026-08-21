@@ -24,10 +24,10 @@ export const newPadEditor = (): PadEditor => {
   try {
     return ({
       title: 'LocalDeck',
-      buttons: BUTTON_NUMBERS.reduce((acc, num) => {
+      buttons: BUTTON_NUMBERS.reduce<Record<number, ConfiguredButtonOpts>>((acc, num) => {
         acc[num] = zEditContainer.parse({ keyNum: num, component: { num }, label: {} });
         return acc;
-      }, {} as Record<number, ConfiguredButtonOpts>,
+      }, {},
       ),
     });
   }
