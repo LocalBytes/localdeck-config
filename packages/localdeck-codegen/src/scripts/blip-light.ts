@@ -1,5 +1,5 @@
-import {Script} from "esphome-config-ts/dist/components/index.js";
-import {lambda} from "esphome-config-ts/dist/yaml/index.js";
+import { ScriptPlatform } from 'esphome-config-ts/components';
+import { lambda } from 'esphome-config-ts/yaml';
 
 // How many steps to take when dimming the lights
 const iterations = '20';
@@ -8,16 +8,16 @@ const iterations = '20';
 // https://esphome.io/automations/actions.html#repeat-action
 const brightness = lambda(`return 1.0 - ((float)iteration / ${iterations});`);
 
-export const scriptBlipLight = new Script({
-    id: "blip_light",
+export const scriptBlipLight: ScriptPlatform = new ScriptPlatform({
+  id: 'blip_light',
     parameters: { led_index: 'int' },
-    mode: "parallel",
+  mode: 'parallel',
+  then: [{
+    repeat: {
+      count: iterations,
     then: [{
-        'repeat': {
-            'count': iterations,
-            'then': [{
                 'light.addressable_set': {
-                    id: "ledstrip",
+          id: 'ledstrip',
                     range_from: lambda('return led_index;'),
                     range_to: lambda('return led_index;'),
                     red: brightness,
@@ -26,8 +26,8 @@ export const scriptBlipLight = new Script({
                     white: brightness,
                 },
             }, {
-                'delay': '25ms'
-            }]
-        }
-    }]
+        delay: '25ms',
+      }],
+    },
+  }],
 });
