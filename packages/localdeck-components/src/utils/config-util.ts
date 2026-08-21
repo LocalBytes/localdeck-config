@@ -3,35 +3,40 @@ import type { DeepPartial } from './types';
 
 export const configUtilSymbol = Symbol('configUtil');
 
+type DynamicObject = Record<PropertyKey, unknown>;
+
 export const ObjectUtil = {
-  get: (obj: object, path: (string | symbol)[]) => {
-    let val = obj;
+  get: (obj: DynamicObject, path: (string | symbol)[]): unknown => {
+    let val: unknown = obj;
     for (const p of path) {
-      val = val[p];
-      if (typeof val == 'undefined') return;
+      if (typeof val !== 'object' || val === null) return undefined;
+      val = (val as DynamicObject)[p];
+      if (typeof val === 'undefined') return;
     }
     return val;
   },
 
-  set: (obj: object, path: (string | symbol)[], value: unknown) => {
+  set: (obj: DynamicObject, path: (string | symbol)[], value: unknown) => {
     let val = obj;
     for (const p of path.slice(0, -1)) {
       if (typeof val[p] == 'undefined' || val[p] == null) val[p] = {};
-      val = val[p];
+      val = val[p] as DynamicObject;
     }
-    val[path[path.length - 1]] = value;
+    const key = path.at(-1);
+    if (key !== undefined) val[key] = value;
   },
 
-  unset: (obj: object, path: (string | symbol)[]) => {
+  unset: (obj: DynamicObject, path: (string | symbol)[]) => {
     const key = path[0];
+    if (key === undefined) return;
+
     if (path.length === 1) {
-      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
       delete obj[key];
     }
     else {
-      ObjectUtil.unset(obj[key], path.slice(1));
-      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-      if (Object.keys(obj[key]).length === 0) delete obj[key];
+      ObjectUtil.unset(obj[key] as DynamicObject, path.slice(1));
+
+      if (Object.keys(obj[key] as DynamicObject).length === 0) delete obj[key];
     }
   },
 };
@@ -42,7 +47,7 @@ const proxyHandler = (
   notify: ((path: (string | symbol)[]) => void),
 ) => ({
   path,
-  get(target, key) {
+  get(target: DynamicObject, key: string | symbol) {
     if (key == 'isProxy') return true;
 
     const prop = target[key];
@@ -51,14 +56,14 @@ const proxyHandler = (
     if (typeof prop == 'undefined') return;
 
     // set value as proxy if object
-    if (typeof prop === 'object' && prop != null && !prop.isProxy) target[key] = new Proxy(prop, proxyHandler([...path, key], configUtil, notify));
+    if (typeof prop === 'object' && prop != null && !(prop as DynamicObject).isProxy) target[key] = new Proxy(prop, proxyHandler([...path, key], configUtil, notify));
 
     if (typeof prop === 'object' && prop != null) return target[key];
 
     return ObjectUtil.get(configUtil.changes, [...path, key]) ?? target[key];
   },
 
-  set(target, key, value) {
+  set(target: DynamicObject, key: string | symbol, value: unknown) {
     ObjectUtil.set(configUtil.changes, [...path, key], value);
     notify(path);
     return true;

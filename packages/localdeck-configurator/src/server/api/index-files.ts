@@ -10,13 +10,6 @@ export default defineEventHandler(async (event) => {
   const { filesDir } = useRuntimeConfig(event) as unknown as { filesDir: string };
   const fileNames = await fs.readdir(filesDir);
 
-  if (!fileNames) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'No files found',
-    });
-  }
-
   const filesPromise = fileNames
     .filter(filename => filename.endsWith('.yaml') || filename.endsWith('.yml'))
     .map(async (filename) => {

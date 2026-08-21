@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
-import { zConfiguredButtonOpts } from '@localbytes/localdeck-codegen/dist/virtuals';
+import { zConfiguredButtonOpts } from '@localbytes/localdeck-codegen/virtuals/configured-button';
 import DeckButtonItem from '../../src/components/DeckButtonItem.vue';
 import { isPrintingSymbol } from '../../src/utils/hooks';
 
@@ -15,24 +15,24 @@ const newButton = (id: number, overrides: Record<string, object> = {}) => {
 };
 
 describe('Button Item', () => {
-  it('Shows relevant labels', async () => {
+  it('Shows relevant labels', () => {
     const wrapper = mount(DeckButtonItem, {
       props: { container: newButton(1, { label: { text: 'Button' } }) },
     });
 
     expect(wrapper.text()).toContain('1');
-    expect(wrapper.element.classList).not.toContain(CLASS_PRINTMODE);
+    expect(wrapper.classes(CLASS_PRINTMODE)).toBe(false);
     expect(wrapper.text()).toContain('Button');
   });
 
-  it('Hides label in print mode', async () => {
+  it('Hides label in print mode', () => {
     const wrapper = mount(DeckButtonItem, {
       global: { provide: { [isPrintingSymbol]: true } },
       props: { container: newButton(1, { label: { text: 'Button' } }) },
     });
 
     expect(wrapper.text()).not.toContain('1');
-    expect(wrapper.element.classList).toContain(CLASS_PRINTMODE);
+    expect(wrapper.classes(CLASS_PRINTMODE)).toBe(true);
     expect(wrapper.text()).toContain('Button');
   });
 });

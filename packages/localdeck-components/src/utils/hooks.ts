@@ -1,12 +1,12 @@
-export function useNullableModel<T extends object, K extends keyof T>(obj: T, key: K) {
+export function useNullableModel<T extends object>(obj: T, key: keyof T) {
   return computed<string>({
     get: () => (obj[key] as string | null) ?? '',
-    set: (val) => { obj[key] = (val || null) as T[K]; },
+    set: (val) => { obj[key] = (val || null) as T[keyof T]; },
   });
 }
 
 export const isPrintingSymbol = Symbol('isPrinting');
-export const useIsPrinting = () => (inject(isPrintingSymbol, ref(false)) as Ref<boolean>);
+export const useIsPrinting = () => (inject(isPrintingSymbol, ref(false)));
 
 export interface FontSizes {
   devicePixelRatio: number;
@@ -19,4 +19,4 @@ export const useFontSizes = () => (inject(fontSizesSymbol, reactive({
   devicePixelRatio: 1,
   rootFontSize: 14,
   scaleFactor: 1,
-})) as FontSizes);
+})));

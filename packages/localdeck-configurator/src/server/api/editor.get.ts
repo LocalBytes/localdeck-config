@@ -10,7 +10,7 @@ function capture(line: string, pattern: RegExp, group = 1): string | null {
 export default defineEventHandler(async (event) => {
   const { filesDir } = useRuntimeConfig();
   const { filename } = getQuery(event);
-  const file = await fs.open(`${filesDir}/${filename}`, 'r');
+  const file = await fs.open(`${filesDir}/${filename as string}`, 'r');
 
   let encodedConfig: string | null = null;
   let name: string | null = null;
@@ -32,8 +32,7 @@ export default defineEventHandler(async (event) => {
     ? decompress(configStr, zPadEditor)
     : zPadEditor.parse({});
 
-  config.title = friendlyName ?? name ?? config.title ?? 'My LocalDeck';
-  config.buttons ??= {};
+  config.title = friendlyName ?? name ?? config.title;
 
   return { configStr, config };
 });
