@@ -99,13 +99,14 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
     }));
 
     if (c.ha_entity && c.toggle) {
-      let service = 'homeassistant.toggle';
+      let action = 'homeassistant.toggle';
       if (c.ha_entity.startsWith('scene.')) {
-        service = 'scene.turn_on';
+        action = 'scene.turn_on';
       }
 
-      sensor.config.on_press?.push({
-        'homeassistant.service': { service: service, data: { entity_id: c.ha_entity } },
+      sensor.config.on_press ??= [];
+      sensor.config.on_press.push({
+        'homeassistant.action': { action, data: { entity_id: c.ha_entity } },
       });
     }
     if (c.ha_entity && c.follow_state) {
