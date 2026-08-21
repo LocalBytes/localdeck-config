@@ -1,4 +1,4 @@
-import pako from 'pako';
+import * as pako from 'pako';
 import type { z } from 'zod';
 
 export function encode(uint8array: Uint8Array) {
@@ -23,7 +23,7 @@ export function decompress<T extends z.ZodType>(
   chars: string, schema?: T,
 ): T extends z.ZodType ? z.infer<T> : object {
   const deflated = decode(chars);
-  const inflated = pako.inflate(deflated, { to: 'string' });
+  const inflated = pako.inflate(deflated, { toText: true });
   const parsed: unknown = JSON.parse(inflated);
   return (schema ? schema.parse(parsed) : parsed) as T extends z.ZodType ? z.infer<T> : object;
 }
