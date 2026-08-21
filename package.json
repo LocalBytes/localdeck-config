@@ -4,14 +4,13 @@
   "scripts": {
     "build": "pnpm run -r build",
     "build:configurator": "pnpm --filter=localdeck-configurator build",
-    "deploy:configurator": "shx rm -rf ./dist/localdeck-configurator && shx mkdir ./dist/localdeck-configurator && shx cp -r ./packages/localdeck-configurator/{.output,homeassistant}/* ./dist/localdeck-configurator",
-    "configurator": "pnpm run build:configurator && pnpm run deploy:configurator",
+    "configurator": "just configurator",
     "lint": "pnpm run --no-bail -r lint",
     "lint:fix": "pnpm run --no-bail -r lint:fix",
     "test": "pnpm run --no-bail --parallel -r test",
     "dev": "pnpm run --parallel -w \"/^dev:.*/\"",
     "dev:configurator": "pnpm --filter=localdeck-configurator dev",
-    "dev:codegen": "pnpm --filter=localdeck-codegen prepare:watch"
+    "dev:codegen": "pnpm --filter=localdeck-codegen dev"
   },
   "workspaces": [
     "packages/localdeck-config",

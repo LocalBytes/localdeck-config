@@ -165,7 +165,7 @@ jobs:
 
       - name: Generate test config
         working-directory: packages/localdeck-codegen
-        run: node ./dist/esphome-localdeck-test.js > ./esphome-localdeck-test.yaml
+        run: node ./dist/esphome-localdeck-test.mjs > ./esphome-localdeck-test.yaml
 
       - run: uvx esphome compile ./esphome-localdeck-test.yaml
         working-directory: packages/localdeck-codegen
