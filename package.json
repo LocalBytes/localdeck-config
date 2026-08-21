@@ -20,14 +20,15 @@
   ],
   "devDependencies": {
     "@nuxt/test-utils": "catalog:",
-    "@vue/language-server": "^3.3.5",
-    "playwright": "^1.61.0",
+    "@vue/language-server": "^3.3.10",
+    "playwright": "^1.62.1",
     "shx": "^0.4.0",
     "typescript": "catalog:",
-    "vitest": "catalog:"
+    "vitest": "^4.1.11"
   },
-  "packageManager": "pnpm@11.5.2+sha512.71c631e382066efc25625d5cf029075de07b61b37f6e27350fbd84b1bda5864c8c1967adc280776b45c30a715c0359a3be08fef42d5bb09e2b99029979692916",
+  "packageManager": "pnpm@11.22.0",
   "dependencies": {
+    "esphome-config-ts": "link:..\\esphome-config-ts",
     "nuxt": "catalog:"
   }
 }
