@@ -5,9 +5,10 @@ import stylistic from '@stylistic/eslint-plugin'
 
 export default defineConfig(
     js.configs.recommended,
-    tseslint.configs.recommendedTypeChecked,
+    tseslint.configs.strictTypeChecked,
+    tseslint.configs.stylisticTypeChecked,
+    stylistic.configs.customize({semi: true}),
     {
-        plugins: {'@stylistic': stylistic},
         languageOptions: {
             parserOptions: {
                 projectService: true,
