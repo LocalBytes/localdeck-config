@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
-import { zConfiguredButtonOpts } from '@localbytes/localdeck-codegen/dist/virtuals';
+import { zConfiguredButtonOpts } from '@localbytes/localdeck-codegen/virtuals/configured-button';
 import DeckButtonConfigActions from '../../src/components/DeckButtonConfigActions.vue';
 
 const newButton = (componentOverrides: Record<string, unknown> = {}) =>

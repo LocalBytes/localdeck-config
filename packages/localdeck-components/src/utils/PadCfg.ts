@@ -3,7 +3,7 @@ import {
   type ConfiguredButtonOpts,
   zButtonNumber,
   zConfiguredButtonOpts,
-} from '@localbytes/localdeck-codegen/dist/virtuals';
+} from '@localbytes/localdeck-codegen/virtuals/configured-button';
 import { z } from 'zod';
 import { zx } from '@traversable/zod';
 

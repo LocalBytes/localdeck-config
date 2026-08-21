@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
-import { zConfiguredButtonOpts } from '@localbytes/localdeck-codegen/dist/virtuals';
+import { zConfiguredButtonOpts } from '@localbytes/localdeck-codegen/virtuals/configured-button';
 import DeckButtonItem from '../../src/components/DeckButtonItem.vue';
 import { isPrintingSymbol } from '../../src/utils/hooks';
 
