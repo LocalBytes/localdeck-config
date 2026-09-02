@@ -51,7 +51,7 @@ importers:
     dependencies:
       esphome-config-ts:
         specifier: github:LocalBytes/esphome-config-ts
-        version: https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/ae436e4b3b6f9f31243f48c7d7b607f9921a12a4
+        version: https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/73883a5a91e6e101623be83dd7f828013e7f490a
       js-yaml:
         specifier: ^4.1.1
         version: 4.3.1
@@ -123,8 +123,8 @@ importers:
         specifier: ^0.44.6
         version: 0.44.12
       pako:
-        specifier: ^2.1.0
-        version: 2.1.0
+        specifier: ^3.0.0
+        version: 3.0.1
       vue3-emoji-picker:
         specifier: ^1.1.8
         version: 1.1.8(typescript@6.0.3)
@@ -142,8 +142,8 @@ importers:
         specifier: ^4.3.0
         version: 4.3.0(vite@8.2.1(@types/node@26.0.0)(esbuild@0.27.7)(jiti@2.7.0)(terser@5.49.2)(yaml@2.9.0))
       '@types/pako':
-        specifier: ^2.0.4
-        version: 2.0.4
+        specifier: ^3.0.0
+        version: 3.0.0
       '@vueuse/core':
         specifier: ^14.3.0
         version: 14.3.0(vue@3.5.41(typescript@6.0.3))
@@ -200,7 +200,7 @@ importers:
         version: 5.5.23
       esphome-config-ts:
         specifier: github:localbytes/esphome-config-ts
-        version: https://codeload.github.com/localbytes/esphome-config-ts/tar.gz/ae436e4b3b6f9f31243f48c7d7b607f9921a12a4
+        version: https://codeload.github.com/localbytes/esphome-config-ts/tar.gz/73883a5a91e6e101623be83dd7f828013e7f490a
       fuse.js:
         specifier: ^7.3.0
         version: 7.5.0
@@ -224,8 +224,8 @@ importers:
         specifier: ^4.17.24
         version: 4.17.24
       '@types/pako':
-        specifier: ^2.0.4
-        version: 2.0.4
+        specifier: ^3.0.0
+        version: 3.0.0
       '@vitejs/plugin-vue':
         specifier: ^6.0.6
         version: 6.0.8(vite@8.2.1(@types/node@26.0.0)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.49.2)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))
@@ -1772,8 +1772,9 @@ packages:
   '@types/node@26.0.0':
     resolution: {integrity: sha512-vf2YFi1iY9lHGwNJMs01biZFbKJkrZR1T6/MlzjhJLPdntOHLhTrDSnSVcdtvjihi4VQNlrFRIxLsDBlQpAipA==}
 
-  '@types/pako@2.0.4':
-    resolution: {integrity: sha512-VWDCbrLeVXJM9fihYodcLiIv0ku+AlOa/TQ1SvYOaBuyrSKgEcro95LJyIsJ4vSo6BXIxOKxiJAat04CmST9Fw==}
+  '@types/pako@3.0.0':
+    resolution: {integrity: sha512-MtIzg1Ul1GxhHZLq6oSKvWQENKqmfK1fdaW+SDcPJe7+YcJVo6AbmkW0BvGFH6+559+hEuCwdXZZe8F85lBPkA==}
+    deprecated: This is a stub types definition. pako provides its own type definitions, so you do not need this installed.
 
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
@@ -3063,12 +3064,12 @@ packages:
       jiti:
         optional: true
 
-  esphome-config-ts@https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/ae436e4b3b6f9f31243f48c7d7b607f9921a12a4:
-    resolution: {gitHosted: true, integrity: sha512-WrukAs0dCUyWzPT27y36Vh/ojXM+VnKu+Krju3e0VgQ6OfEVUdY9MGRPRGxCjuLpHHBivpk5d/RgSen54nflCQ==, tarball: https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/ae436e4b3b6f9f31243f48c7d7b607f9921a12a4}
+  esphome-config-ts@https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/73883a5a91e6e101623be83dd7f828013e7f490a:
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/73883a5a91e6e101623be83dd7f828013e7f490a}
     version: 0.1.0
 
-  esphome-config-ts@https://codeload.github.com/localbytes/esphome-config-ts/tar.gz/ae436e4b3b6f9f31243f48c7d7b607f9921a12a4:
-    resolution: {gitHosted: true, integrity: sha512-WrukAs0dCUyWzPT27y36Vh/ojXM+VnKu+Krju3e0VgQ6OfEVUdY9MGRPRGxCjuLpHHBivpk5d/RgSen54nflCQ==, tarball: https://codeload.github.com/localbytes/esphome-config-ts/tar.gz/ae436e4b3b6f9f31243f48c7d7b607f9921a12a4}
+  esphome-config-ts@https://codeload.github.com/localbytes/esphome-config-ts/tar.gz/73883a5a91e6e101623be83dd7f828013e7f490a:
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/localbytes/esphome-config-ts/tar.gz/73883a5a91e6e101623be83dd7f828013e7f490a}
     version: 0.1.0
 
   espree@10.4.0:
@@ -3650,6 +3651,10 @@ packages:
     resolution: {integrity: sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ==}
     hasBin: true
 
+  js-yaml@5.4.1:
+    resolution: {integrity: sha512-28R/k+NAjeuf7+CKlTxWZVExJGwVVLwY06DgEnOMz2gEpfNkDcD7QvyiVPT0xy0XXhU8vHsd4Ot42OOPdJG7dQ==}
+    hasBin: true
+
   jsdoc-type-pratt-parser@7.2.0:
     resolution: {integrity: sha512-dh140MMgjyg3JhJZY/+iEzW+NO5xR2gpbDFKHqotCmexElVntw7GjWjt511+C/Ef02RU5TKYrJo/Xlzk+OLaTw==}
     engines: {node: '>=20.0.0'}
@@ -4223,8 +4228,8 @@ packages:
   package-manager-detector@1.6.0:
     resolution: {integrity: sha512-61A5ThoTiDG/C8s8UMZwSorAGwMJ0ERVGj2OjoW5pAalsNOg15+iQiPzrLJ4jhZ1HJzmC2PIHT2oEiH3R5fzNA==}
 
-  pako@2.1.0:
-    resolution: {integrity: sha512-w+eufiZ1WuJYgPXbV/PO3NCMEc3xqylkKHzp8bxp1uW4qaSNQUkwmLLEc3kKsfz8lpV1F8Ht3U1Cm+9Srog2ug==}
+  pako@3.0.1:
+    resolution: {integrity: sha512-GupotUUI0mlhugKjUs4bjOwLt3nrehy9Ys2dxC0GtgVef5cnKggkDMmf2bq2poCCuVXopWPmqsc9VDT2iJUy+w==}
 
   parse-imports-exports@0.2.4:
     resolution: {integrity: sha512-4s6vd6dx1AotCx/RCI2m7t7GCh5bDRUtGNvRfHSP2wbBQdMi67pPe7mtzmgwcaQ8VKK/6IB7Glfyu3qdZJPybQ==}
@@ -7632,7 +7637,9 @@ snapshots:
       undici-types: 8.3.0
     optional: true
 
-  '@types/pako@2.0.4': {}
+  '@types/pako@3.0.0':
+    dependencies:
+      pako: 3.0.1
 
   '@types/resolve@1.20.2': {}
 
@@ -9234,13 +9241,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  esphome-config-ts@https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/ae436e4b3b6f9f31243f48c7d7b607f9921a12a4:
+  esphome-config-ts@https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/73883a5a91e6e101623be83dd7f828013e7f490a:
     dependencies:
-      js-yaml: 4.3.1
+      js-yaml: 5.4.1
 
-  esphome-config-ts@https://codeload.github.com/localbytes/esphome-config-ts/tar.gz/ae436e4b3b6f9f31243f48c7d7b607f9921a12a4:
+  esphome-config-ts@https://codeload.github.com/localbytes/esphome-config-ts/tar.gz/73883a5a91e6e101623be83dd7f828013e7f490a:
     dependencies:
-      js-yaml: 4.3.1
+      js-yaml: 5.4.1
 
   espree@10.4.0:
     dependencies:
@@ -9827,6 +9834,10 @@ snapshots:
   js-tokens@9.0.1: {}
 
   js-yaml@4.3.1:
+    dependencies:
+      argparse: 2.0.1
+
+  js-yaml@5.4.1:
     dependencies:
       argparse: 2.0.1
 
@@ -10781,7 +10792,7 @@ snapshots:
 
   package-manager-detector@1.6.0: {}
 
-  pako@2.1.0: {}
+  pako@3.0.1: {}
 
   parse-imports-exports@0.2.4:
     dependencies:
