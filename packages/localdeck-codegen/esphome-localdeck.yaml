@@ -630,7 +630,7 @@ script:
           float g = stoi(color.substr(firstComma + 1, secondComma));
           float b = stoi(color.substr(secondComma + 1, color.length() - 1));
 
-          ESP_LOGD("set_led_rgb", "%d, %d, %d", r,g,b);
+          ESP_LOGD("set_led_rgb", "%f, %f, %f", r,g,b);
 
           for (auto *light : App.get_lights()){
             ESP_LOGV("set_led_rgb", "Checking light %s", light->get_object_id().c_str());
