@@ -16,7 +16,7 @@ export function buttonLabel(keynum: number) {
 }
 
 export async function setButton(page: NuxtPage, keynum: number, { name, entity }: { name: string; entity: string }) {
-  console.log(`Setting Button ${keynum} to ${name} (${entity})`);
+  console.log(`Setting Button ${keynum.toString()} to ${name} (${entity})`);
 
   await page.getByLabel(buttonLabel(keynum)).click();
   await page.getByRole('textbox', { name: 'Entity' }).fill(entity);

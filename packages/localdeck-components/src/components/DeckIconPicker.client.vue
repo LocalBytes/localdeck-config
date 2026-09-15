@@ -29,7 +29,7 @@
 <script lang="ts" setup>
 import type { EmojiExt } from 'vue3-emoji-picker';
 import EmojiPicker from 'vue3-emoji-picker';
-import type { ConfiguredButtonOptsLabel } from '@localbytes/localdeck-codegen/dist/virtuals';
+import type { ConfiguredButtonOptsLabel } from '@localbytes/localdeck-codegen/virtuals/configured-button';
 import 'vue3-emoji-picker/css';
 import { mdIconsGroups } from '~/utils/material';
 
@@ -52,7 +52,7 @@ const onSelectEmoji = (emoji: EmojiExt) => {
   modelValue.value.icon = MdIcon ?? emoji.i;
 
   // Close popover after selection to match previous dropdown behavior.
-  const popover = document.getElementById(popoverId) as (HTMLElement & { hidePopover?: () => void }) | null;
-  popover?.hidePopover?.();
+  const popover = document.getElementById(popoverId);
+  popover?.hidePopover();
 };
 </script>

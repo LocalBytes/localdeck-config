@@ -14,18 +14,18 @@ export function decode(encoded: string) {
   return Uint8Array.from(chars, c => c.charCodeAt(0));
 }
 
-export function compress<T extends object>(editor: T) {
+export function compress(editor: object) {
   const deflated = pako.deflate(JSON.stringify(editor));
   return encode(deflated);
 }
 
-export function decompress<T extends z.ZodTypeAny>(
+export function decompress<T extends z.ZodType>(
   chars: string, schema?: T,
-): T extends z.ZodTypeAny ? z.infer<T> : object {
+): T extends z.ZodType ? z.infer<T> : object {
   const deflated = decode(chars);
   const inflated = pako.inflate(deflated, { to: 'string' });
-  const parsed = JSON.parse(inflated);
-  return schema ? schema.parse(parsed) as z.infer<T> : parsed;
+  const parsed: unknown = JSON.parse(inflated);
+  return (schema ? schema.parse(parsed) : parsed) as T extends z.ZodType ? z.infer<T> : object;
 }
 
 export function getEditorUrl(editor: object, printmode: boolean = false) {

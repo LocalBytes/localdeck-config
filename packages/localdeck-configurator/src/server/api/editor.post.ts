@@ -1,13 +1,13 @@
 import * as fs from 'fs/promises';
 import _ from 'lodash';
-import newConfig from '@localbytes/localdeck-codegen/dist/esphome-localdeck';
-import espHomeYaml from 'esphome-config-ts/dist/yaml/index.js';
+import newConfig from '@localbytes/localdeck-codegen/esphome-localdeck';
+import { dump as dumpEsphomeYaml, parse as parseEsphomeYaml } from 'esphome-config-ts/yaml';
 
 import { type PadEditor, zPadEditor } from '@localbytes/localdeck-components/src/utils/PadCfg';
 import { ConfigUtil } from '@localbytes/localdeck-components/src/utils/config-util';
 import { getEditorUrl } from '@localbytes/localdeck-components/src/utils/compression';
 import type { DeepPartial } from '@localbytes/localdeck-components/src/utils/types';
-import { ConfiguredButton, zConfiguredButtonOpts } from '@localbytes/localdeck-codegen/dist/virtuals';
+import { ConfiguredButton, zConfiguredButtonOpts } from '@localbytes/localdeck-codegen/virtuals/configured-button';
 
 type Explode<T extends string[]> = T[number];
 
@@ -21,14 +21,7 @@ export default defineEventHandler(async (event) => {
 
   const editor: PadEditor = configUtil.editor();
 
-  if (!editor) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'No editor found',
-    });
-  }
-
-  const path = `${filesDir}/${filename}`;
+  const path = `${filesDir}/${filename as string}`;
 
   let originalContent = '';
   let fileContent = '';
@@ -53,7 +46,7 @@ export default defineEventHandler(async (event) => {
     }).config.synth() as Record<string, unknown>;
 
     if (originalContent !== '') {
-      const content = espHomeYaml.parse(originalContent) as Record<string, unknown>;
+      const content = parseEsphomeYaml(originalContent) as Record<string, unknown>;
       const allowList = ['substitutions', 'wifi', 'captive_portal', 'logger', 'web_server', 'api', 'ota'];
 
       _(content)
@@ -62,7 +55,7 @@ export default defineEventHandler(async (event) => {
         .each(([key, value]: [Explode<typeof allowList>, unknown]) => newCfg[key] = value);
     }
 
-    fileContent += espHomeYaml.dump(newCfg);
+    fileContent += dumpEsphomeYaml(newCfg);
 
     fileContent += '\n# Anything below this line will be removed when saving.\n';
     fileContent += '# To change this, navigate to the LocalBytes LocalDeck Configurator.\n';

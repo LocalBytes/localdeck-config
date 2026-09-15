@@ -20,5 +20,5 @@ export default defineNuxtConfig({
     ],
   },
 
-  eslint: { config: { stylistic: { semi: true } } },
+  eslint: { config: { stylistic: { semi: true }, typescript: { tsconfigPath: './tsconfig.json' } } },
 });

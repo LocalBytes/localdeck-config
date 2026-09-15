@@ -41,7 +41,7 @@ const props = defineProps({
 
 const sizes = useFontSizes();
 
-const fontSize = computed(() => props.container?.label.fontSize ?? 14);
+const fontSize = computed(() => props.container.label.fontSize);
 const fontSizeScaled = computed(() => fontSize.value * sizes.scaleFactor);
 </script>
 

@@ -127,7 +127,9 @@ const resetting = ref(false);
 const editor = ref(config.editor());
 const editing = ref<EditContainer>();
 
-config.notify = () => triggerRef(editor);
+config.notify = () => {
+  triggerRef(editor);
+};
 
 watch(status, () => {
   if (status.value !== 'success') return;
@@ -154,5 +156,5 @@ const reset = () => {
   resetting.value = false;
 };
 
-preloadComponents(['DeckButtonConfigLabel', 'DeckIconPicker']);
+void preloadComponents(['DeckButtonConfigLabel', 'DeckIconPicker']);
 </script>

@@ -34,6 +34,10 @@ watch(status, () => {
   if (!data.value?.config) return;
 
   Object.assign(editor, data.value.config);
-  if (import.meta.client) setTimeout(() => window.print(), 1000);
+  if (import.meta.client) {
+    setTimeout(() => {
+      window.print();
+    }, 1000);
+  }
 }, { immediate: true });
 </script>

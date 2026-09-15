@@ -3,7 +3,7 @@ import * as fs from 'node:fs/promises';
 
 import { createPage } from '@nuxt/test-utils/e2e';
 import { describe, expect, test } from 'vitest';
-import espHomeYaml from 'esphome-config-ts/dist/yaml/index.js';
+import { parse as parseEsphomeYaml } from 'esphome-config-ts/yaml';
 
 import { getTestFilesDir } from '../utils';
 
@@ -29,8 +29,8 @@ const FILENAME = 'test-import.yaml';
 const filesDir = getTestFilesDir();
 
 describe('Import Workflow', () => {
-  test('Parse the original file', async () => {
-    const content = espHomeYaml.parse(preImportExample) as object;
+  test('Parse the original file', () => {
+    const content = parseEsphomeYaml(preImportExample) as object;
     expect(content).toBeDefined();
   });
 
@@ -50,7 +50,7 @@ describe('Import Workflow', () => {
     console.log('Clicking');
     await page.getByText(FILENAME).click();
 
-    const response = await responsePromise.then(r => r.json());
+    const response = await responsePromise.then(r => r.json() as Promise<{ configStr: string | null; config: object }>);
     expect(response.configStr).toBeNull();
     expect(response.config).toMatchObject({ title: 'LocalBytes LocalDeck 9751c4', buttons: {} });
 

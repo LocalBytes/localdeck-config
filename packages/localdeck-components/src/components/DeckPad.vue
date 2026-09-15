@@ -16,10 +16,10 @@
 </template>
 
 <script lang="ts" setup>
-import { BUTTON_NUMBERS } from '@localbytes/localdeck-codegen/dist/virtuals';
+import { BUTTON_NUMBERS } from '@localbytes/localdeck-codegen/virtuals/configured-button';
 import { useResizeObserver } from '@vueuse/core';
 import type { EditContainer, PadEditor } from '~/utils/PadCfg';
-import { type FontSizes, fontSizesSymbol } from '~/utils/hooks';
+import { fontSizesSymbol } from '~/utils/hooks';
 
 const gridRef = ref<HTMLDivElement>();
 
@@ -27,8 +27,6 @@ const editor = defineModel<PadEditor>({ type: Object, required: true });
 const editing = defineModel<EditContainer>('editing', { type: Object });
 
 const isPrinting = useIsPrinting();
-
-if (!editor.value) throw new Error('Pad model is required');
 
 const orderedButtons = computed(() => {
   const buttons = Object.values(editor.value.buttons);
@@ -45,11 +43,11 @@ const sizes = reactive({
   devicePixelRatio: 1,
   rootFontSize: 14,
   scaleFactor: 1,
-}) as FontSizes;
+});
 
 useResizeObserver(gridRef, () => {
-  sizes.devicePixelRatio = window?.devicePixelRatio ?? 1;
-  sizes.rootFontSize = Number(window?.getComputedStyle(document.body)?.getPropertyValue('font-size')?.replace('px', '') ?? 14);
+  sizes.devicePixelRatio = window.devicePixelRatio;
+  sizes.rootFontSize = Number(window.getComputedStyle(document.body).getPropertyValue('font-size').replace('px', ''));
   sizes.scaleFactor = (14 * sizes.devicePixelRatio * (96 / 25.4)) / (4 * sizes.rootFontSize);
 });
 provide(fontSizesSymbol, sizes);
