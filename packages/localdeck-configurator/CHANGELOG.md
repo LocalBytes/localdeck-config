@@ -12,6 +12,7 @@
 - Button LEDs now correctly reflect colour and brightness from Home Assistant entities in #144
 - Suppressed a spurious boot warning for the LED strip pin in #144
 - Fixed provisioning indicator (button 01 LED) broken by ESPHome 2026.5 in #143
+- Very short button presses now reliably reach Home Assistant in #163
 
 ## [v0.7](https://github.com/LocalBytes/localdeck-config/releases/tag/v0.7)
 
