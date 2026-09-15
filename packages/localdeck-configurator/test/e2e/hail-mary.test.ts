@@ -1,7 +1,7 @@
 import * as path from 'node:path';
 import * as fs from 'node:fs/promises';
 
-import { beforeEach, describe, expect, test } from 'vitest';
+import { beforeEach, describe, test } from 'vitest';
 
 import { createPage } from '@nuxt/test-utils/e2e';
 
@@ -57,16 +57,16 @@ describe('Hail Mary', () => {
 
     console.log('Saving');
     await page.getByRole('button', { name: 'Save' }).click();
+    await page.getByText('Your changes have been saved').waitFor({ state: 'visible' });
     await page.reload({ waitUntil: 'networkidle' });
 
     console.log('Checking');
     for (const button of buttons) {
-      expect(await page
+      await page
         .locator('div.pad-grid')
         .getByLabel(`DeckButton ${button.keynum.toFixed(0).padStart(2, '0')}`)
         .getByText(button.name)
-        .isVisible(),
-      ).toBe(true);
+        .waitFor({ state: 'visible' });
     }
   });
 });
