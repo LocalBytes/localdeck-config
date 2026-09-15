@@ -4,7 +4,7 @@ packages:
   - '!**/test/**'
 
 catalog:
-  '@nuxt/test-utils': ^4.1.0
+  '@nuxt/test-utils': ^4.3.2
   nuxt: ^4.5.2
   typescript: ^6.0.3
   vite: ^8.2.2

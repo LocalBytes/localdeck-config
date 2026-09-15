@@ -19,13 +19,13 @@
   ],
   "devDependencies": {
     "@nuxt/test-utils": "catalog:",
-    "@vue/language-server": "^3.3.10",
-    "playwright": "^1.62.1",
+    "@vue/language-server": "^3.3.11",
+    "playwright": "^1.63.0",
     "shx": "^0.4.0",
     "typescript": "catalog:",
     "vitest": "catalog:"
   },
-  "packageManager": "pnpm@11.22.0",
+  "packageManager": "pnpm@12.4.1",
   "dependencies": {
     "esphome-config-ts": "link:..\\esphome-config-ts",
     "nuxt": "catalog:"
