@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { zConfiguredButtonOpts } from '@localbytes/localdeck-codegen/virtuals/configured-button';
 import DeckButtonConfigActions from '../../src/components/DeckButtonConfigActions.vue';
@@ -7,7 +7,7 @@ const newButton = (componentOverrides: Record<string, unknown> = {}) =>
   zConfiguredButtonOpts.parse({ keyNum: 1, label: {}, component: { num: 1, ...componentOverrides } });
 
 describe('DeckButtonConfigActions', () => {
-  it('Flash LED on press is enabled after clearing ha_entity', async () => {
+  test('Flash LED on press is enabled after clearing ha_entity', async () => {
     const container = newButton({ ha_entity: 'light.living_room', follow_state: true });
 
     const wrapper = mount(DeckButtonConfigActions, {

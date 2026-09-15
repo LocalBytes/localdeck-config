@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { zConfiguredButtonOpts } from '@localbytes/localdeck-codegen/virtuals/configured-button';
 import DeckButtonItem from '../../src/components/DeckButtonItem.vue';
@@ -15,7 +15,7 @@ const newButton = (id: number, overrides: Record<string, object> = {}) => {
 };
 
 describe('Button Item', () => {
-  it('Shows relevant labels', () => {
+  test('Shows relevant labels', () => {
     const wrapper = mount(DeckButtonItem, {
       props: { container: newButton(1, { label: { text: 'Button' } }) },
     });
@@ -25,7 +25,7 @@ describe('Button Item', () => {
     expect(wrapper.text()).toContain('Button');
   });
 
-  it('Hides label in print mode', () => {
+  test('Hides label in print mode', () => {
     const wrapper = mount(DeckButtonItem, {
       global: { provide: { [isPrintingSymbol]: true } },
       props: { container: newButton(1, { label: { text: 'Button' } }) },
