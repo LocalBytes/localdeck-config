@@ -27,7 +27,6 @@
   },
   "packageManager": "pnpm@12.4.1",
   "dependencies": {
-    "esphome-config-ts": "link:..\\esphome-config-ts",
     "nuxt": "catalog:"
   }
 }
