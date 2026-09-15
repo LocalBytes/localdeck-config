@@ -37,13 +37,14 @@ export default defineNuxtConfig({
     dataValue: 'theme',
   },
 
+  /** @see ./src/server/plugins/startup-warnings.ts */
   runtimeConfig: {
-    public: { baseUrl: '' },
+    esphomeDir: process.env.LB_ESPHOME_DIR ?? process.env.NUXT_FILES_DIR ?? '/homeassistant/esphome',
 
-    api_token: '',
-    api_url: '', // Allow this to be overridden by env
+    haUrl: process.env.LB_HA_URL ?? process.env.NUXT_API_URL ?? '',
+    haToken: process.env.LB_HA_TOKEN ?? process.env.NUXT_API_TOKEN ?? '',
 
-    filesDir: '/homeassistant/esphome',
+    public: { baseUrl: process.env.LB_BASE_URL ?? process.env.NUXT_PUBLIC_BASE_URL ?? '' },
   },
 
   // // https://github.com/nuxt/nuxt/issues/32965

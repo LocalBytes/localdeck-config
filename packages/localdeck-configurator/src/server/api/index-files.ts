@@ -7,13 +7,13 @@ function capture(line: string, pattern: RegExp, group = 1): string | null {
 }
 
 export default defineEventHandler(async (event) => {
-  const { filesDir } = useRuntimeConfig(event) as unknown as { filesDir: string };
-  const fileNames = await fs.readdir(filesDir);
+  const { esphomeDir } = useRuntimeConfig(event) as unknown as { esphomeDir: string };
+  const fileNames = await fs.readdir(esphomeDir);
 
   const filesPromise = fileNames
     .filter(filename => filename.endsWith('.yaml') || filename.endsWith('.yml'))
     .map(async (filename) => {
-      const path = `${filesDir}/${filename}`;
+      const path = `${esphomeDir}/${filename}`;
       const fileHandle = await fs.open(path, 'r');
 
       let type = FileType.Other;

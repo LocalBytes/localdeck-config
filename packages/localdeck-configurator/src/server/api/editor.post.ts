@@ -12,7 +12,7 @@ import { ConfiguredButton, zConfiguredButtonOpts } from '@localbytes/localdeck-c
 type Explode<T extends string[]> = T[number];
 
 export default defineEventHandler(async (event) => {
-  const { filesDir } = useRuntimeConfig();
+  const { esphomeDir } = useRuntimeConfig();
   const { filename } = getQuery(event);
   const body = await readBody(event) satisfies { editor: DeepPartial<PadEditor> };
 
@@ -21,7 +21,14 @@ export default defineEventHandler(async (event) => {
 
   const editor: PadEditor = configUtil.editor();
 
-  const path = `${filesDir}/${filename as string}`;
+  if (!editor) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'No editor found',
+    });
+  }
+
+  const path = `${esphomeDir}/${filename as string}`;
 
   let originalContent = '';
   let fileContent = '';

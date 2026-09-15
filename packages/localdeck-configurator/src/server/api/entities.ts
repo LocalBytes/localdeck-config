@@ -21,13 +21,13 @@ const example = [
   { entity_id: 'scene.warm_glow', attributes: {} },
 ];
 export default defineEventHandler(async () => {
-  const { api_url, api_token } = useRuntimeConfig();
+  const { haUrl, haToken } = useRuntimeConfig();
   let response: typeof example;
 
-  if (api_url && api_token) {
+  if (haUrl && haToken) {
     // Home Assistant's actual response shape can't be verified at compile time.
-    response = await fetch(api_url + '/states', {
-      headers: { authorization: `Bearer ${api_token}` },
+    response = await fetch(haUrl + '/states', {
+      headers: { authorization: `Bearer ${haToken}` },
     }).then(response => response.json() as Promise<typeof example>);
   }
   else {
