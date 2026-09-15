@@ -12,14 +12,11 @@ catalog:
 
 overrides:
   # Nuxt ships Vite 7 internally; force Vite 8 across the workspace.
-  esphome-config-ts: link:../esphome-config-ts
   vite: ^8.0.0
   vitest: ^4.1.9
-
-pmOnFail: warn
 
 allowBuilds:
   '@parcel/watcher': true
   esbuild: true
-  esphome-config-ts: true
+  esphome-config-ts@git+https://github.com/LocalBytes/esphome-config-ts.git: true
   unrs-resolver: true

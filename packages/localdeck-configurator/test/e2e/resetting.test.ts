@@ -1,7 +1,7 @@
 import * as path from 'node:path';
 import * as fs from 'node:fs/promises';
 
-import { beforeEach, describe, expect, test } from 'vitest';
+import { beforeEach, describe, test } from 'vitest';
 
 import { createPage } from '@nuxt/test-utils/e2e';
 
@@ -31,8 +31,8 @@ describe('Resetting Workflow', () => {
     await page.getByRole('button', { name: 'Save' }).click();
     await page.locator('.modal', { hasText: 'Saving' }).getByText('✕').click();
 
-    expect(await page.getByLabel(buttonLabel(1)).getByText('Livingroom Bulb').isVisible()).toBe(true);
-    expect(await page.getByLabel(buttonLabel(2)).getByText('Kitchen Bulb').isVisible()).toBe(true);
+    await page.getByLabel(buttonLabel(1)).getByText('Livingroom Bulb').waitFor({ state: 'visible' });
+    await page.getByLabel(buttonLabel(2)).getByText('Kitchen Bulb').waitFor({ state: 'visible' });
 
     await page.getByRole('button', { name: 'Reset' }).click();
 
@@ -41,9 +41,10 @@ describe('Resetting Workflow', () => {
     await reset.click();
 
     await page.getByRole('button', { name: 'Save' }).click();
+    await page.getByText('Your changes have been saved').waitFor({ state: 'visible' });
     await page.reload();
 
-    expect(await page.getByLabel(buttonLabel(1)).getByText('Livingroom Bulb').isVisible()).toBe(false);
-    expect(await page.getByLabel(buttonLabel(2)).getByText('Kitchen Bulb').isVisible()).toBe(false);
+    await page.getByLabel(buttonLabel(1)).getByText('Livingroom Bulb').waitFor({ state: 'hidden' });
+    await page.getByLabel(buttonLabel(2)).getByText('Kitchen Bulb').waitFor({ state: 'hidden' });
   });
 });

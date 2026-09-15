@@ -1,31 +1,31 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import { ObjectUtil, ConfigUtil } from '../../src/utils/config-util';
 import { newPadEditor } from '../../src/utils/PadCfg';
 import type { DeepPartial } from '../../src/utils/types';
 
 describe('ObjectUtil', () => {
-  it('should return the value at the given path', () => {
+  test('should return the value at the given path', () => {
     const obj = { a: { b: { c: 1 } } };
     const path = ['a', 'b', 'c'];
     const result = ObjectUtil.get(obj, path);
     expect(result).toEqual(1);
   });
 
-  it('should return undefined if the path does not exist', () => {
+  test('should return undefined if the path does not exist', () => {
     const obj = { a: { b: { c: 1 } } };
     const path = ['a', 'b', 'd'];
     const result = ObjectUtil.get(obj, path);
     expect(result).toBeUndefined();
   });
 
-  it('should set the value at the given path', () => {
+  test('should set the value at the given path', () => {
     const obj = { a: { b: { c: 1 } } };
     const path = ['a', 'b', 'c'];
     ObjectUtil.set(obj, path, 2);
     expect(obj.a.b.c).toEqual(2);
   });
 
-  it('should create the path if it does not exist when setting a value', () => {
+  test('should create the path if it does not exist when setting a value', () => {
     const obj = { a: { b: { c: 1 } } } as DeepPartial<{ a: { b: { c: number; d: { e: number } } } }>;
     const path = ['a', 'b', 'd', 'e'];
     ObjectUtil.set(obj, path, 2);
@@ -33,7 +33,7 @@ describe('ObjectUtil', () => {
     expect(obj.a?.b?.d?.e).toEqual(2);
   });
 
-  it('should handle symbol keys when getting a value', () => {
+  test('should handle symbol keys when getting a value', () => {
     const key = Symbol('key');
     const obj = { [key]: 1 };
     const path = [key];
@@ -41,7 +41,7 @@ describe('ObjectUtil', () => {
     expect(result).toEqual(1);
   });
 
-  it('should handle symbol keys when setting a value', () => {
+  test('should handle symbol keys when setting a value', () => {
     const key = Symbol('key');
     const obj: Record<symbol, number> = {};
     const path = [key];
@@ -50,7 +50,7 @@ describe('ObjectUtil', () => {
     expect(obj[key]).toEqual(2);
   });
 
-  it('should remove the value at the given path', () => {
+  test('should remove the value at the given path', () => {
     const obj = { a: { b: { c: 1 } } };
     const path = ['a', 'b', 'c'];
     ObjectUtil.unset(obj, path);
@@ -59,14 +59,14 @@ describe('ObjectUtil', () => {
 });
 
 describe('ConfigUtil', () => {
-  it('should give a default config', () => {
+  test('should give a default config', () => {
     const util = new ConfigUtil();
 
     const editor = util.editor();
     expect(editor).toEqual(newPadEditor());
   });
 
-  it('should give a default config with changes', () => {
+  test('should give a default config with changes', () => {
     const util = new ConfigUtil();
 
     util.setChanges({ title: 'test' });
@@ -76,7 +76,7 @@ describe('ConfigUtil', () => {
     expect(editor.buttons).toEqual(newPadEditor().buttons);
   });
 
-  it('should smartly merge changes', () => {
+  test('should smartly merge changes', () => {
     const util = new ConfigUtil();
     const editor = util.editor();
 
@@ -89,7 +89,7 @@ describe('ConfigUtil', () => {
     expect(editor).toEqual(expectedOutput);
   });
 
-  it('should reset all changes', () => {
+  test('should reset all changes', () => {
     const util = new ConfigUtil();
     const editor = util.editor();
     editor.buttons[1].label.text = 'test';
@@ -97,7 +97,7 @@ describe('ConfigUtil', () => {
     expect(util['changes']).toEqual({});
   });
 
-  it('should handle nulls that have been changed', () => {
+  test('should handle nulls that have been changed', () => {
     const util = new ConfigUtil();
     const editor = util.editor();
     editor.buttons[1].component.ha_entity = 'test';
@@ -109,7 +109,7 @@ describe('ConfigUtil', () => {
     expect(editor).toEqual(expectedOutput);
   });
 
-  it('should reset changes at a path', () => {
+  test('should reset changes at a path', () => {
     const util = new ConfigUtil();
     const editor = util.editor();
 
@@ -121,7 +121,7 @@ describe('ConfigUtil', () => {
     expect(editor.buttons[1].label.text).toEqual(null);
   });
 
-  it('should allow setting changes', () => {
+  test('should allow setting changes', () => {
     const util = new ConfigUtil();
     const editor = util.editor();
 
