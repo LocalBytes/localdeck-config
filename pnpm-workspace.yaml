@@ -4,14 +4,15 @@ packages:
   - '!**/test/**'
 
 catalog:
-  '@nuxt/test-utils': ^4.0.3
-  nuxt: ^4.4.8
+  '@nuxt/test-utils': ^4.1.0
+  nuxt: ^4.5.2
   typescript: ^6.0.3
   vite: ^8.0.0
   vitest: ^4.1.9
 
 overrides:
   # Nuxt ships Vite 7 internally; force Vite 8 across the workspace.
+  esphome-config-ts: link:../esphome-config-ts
   vite: ^8.0.0
   vitest: ^4.1.9
 

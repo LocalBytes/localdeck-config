@@ -4,14 +4,11 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "prepare": "ts-patch install && tsc",
-    "prepare:watch": "ts-patch install && tsc -w",
+    "prepare": "tsdown",
+    "dev": "tsdown --watch",
     "make": "pnpm run prepare && pnpm run make:test && pnpm run make:prod",
-    "make:prod": "node ./dist/esphome-localdeck-stock.js > ./esphome-localdeck.yaml && esphome compile ./esphome-localdeck.yaml",
-    "make:test": "node ./dist/esphome-localdeck-test.js > ./esphome-localdeck-test.yaml && esphome compile ./esphome-localdeck-test.yaml",
-    "generate": "tsx ./lib/esphome-localdeck-stock.ts > ./esphome-localdeck.yaml",
-    "start": "npm run generate && esphome run ./esphome-localdeck.yaml",
-    "compile": "npm run generate && esphome compile ./esphome-localdeck.yaml",
+    "make:prod": "node ./dist/esphome-localdeck-stock.mjs > ./esphome-localdeck.yaml && esphome compile ./esphome-localdeck.yaml",
+    "make:test": "node ./dist/esphome-localdeck-test.mjs > ./esphome-localdeck-test.yaml && esphome compile ./esphome-localdeck-test.yaml",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix"
   },
@@ -22,20 +19,28 @@
     "esphome-config-ts": "github:LocalBytes/esphome-config-ts",
     "js-yaml": "^4.1.1",
     "lodash": "^4.18.1",
-    "zod": "^4.4.3",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
-    "@tsconfig/node-lts": "^24.0.0",
+    "@tsconfig/node-lts": "^24.0.1",
     "@types/js-yaml": "^4.0.9",
     "@types/lodash": "^4.17.24",
     "@types/node": "^25.7.0",
     "eslint": "^10.3.0",
-    "ts-node": "^10.9.2",
-    "ts-patch": "^4.0.1",
-    "typescript-eslint": "^8.59.3",
-    "typescript-transform-paths": "^4.0.0"
+    "tsdown": "^0.22.14",
+    "typescript-eslint": "^8.59.3"
+  },
+  "exports": {
+    "./esphome-localdeck": "./dist/esphome-localdeck.mjs",
+    "./esphome-localdeck-stock": "./dist/esphome-localdeck-stock.mjs",
+    "./esphome-localdeck-test": "./dist/esphome-localdeck-test.mjs",
+    "./scripts/apply-rgb-color": "./dist/scripts/apply-rgb-color.mjs",
+    "./scripts/blip-light": "./dist/scripts/blip-light.mjs",
+    "./virtuals/configured-button": "./dist/virtuals/configured-button.mjs",
+    "./virtuals/slider-number": "./dist/virtuals/slider-number.mjs",
+    "./package.json": "./package.json"
   }
 }
