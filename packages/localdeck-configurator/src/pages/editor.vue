@@ -110,8 +110,8 @@ import Fuse from 'fuse.js';
 
 const router = useRouter();
 const route = useRoute();
-const { data, status } = await useFetch('/api/editor', { query: { filename: route.query.filename as string } });
-const { data: entities } = await useFetch('/api/entities', {
+const { data, status } = await useServerFetch('/api/editor', { query: { filename: route.query.filename as string } });
+const { data: entities } = await useServerFetch('/api/entities', {
   server: false,
   transform: data => new Fuse(data, { keys: ['id', { name: 'name', weight: 2 }] }),
 });
@@ -138,7 +138,7 @@ watch(status, () => {
 
 const save = async () => {
   saving.value = SavingStatus.SAVING;
-  await $fetch('/api/editor', {
+  await serverFetch('/api/editor', {
     method: 'POST',
     body: { editor: config.getChanges() },
     query: { filename: route.query.filename as string },

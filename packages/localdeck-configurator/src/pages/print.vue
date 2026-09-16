@@ -23,7 +23,7 @@
 <script lang="ts" setup>
 const router = useRouter();
 const route = useRoute();
-const { data, status } = await useFetch('/api/editor', { query: { filename: route.query.filename as string } });
+const { data, status } = await useServerFetch('/api/editor', { query: { filename: route.query.filename as string } });
 
 const editor = reactive(newPadEditor());
 
