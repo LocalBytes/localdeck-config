@@ -1,8 +1,21 @@
 {
   "name": "@localbytes/localdeck-codegen",
   "version": "0.1.0",
+  "private": true,
   "description": "",
+  "license": "ISC",
+  "author": "",
   "type": "module",
+  "exports": {
+    "./esphome-localdeck": "./dist/esphome-localdeck.mjs",
+    "./esphome-localdeck-stock": "./dist/esphome-localdeck-stock.mjs",
+    "./esphome-localdeck-test": "./dist/esphome-localdeck-test.mjs",
+    "./scripts/apply-rgb-color": "./dist/scripts/apply-rgb-color.mjs",
+    "./scripts/blip-light": "./dist/scripts/blip-light.mjs",
+    "./virtuals/configured-button": "./dist/virtuals/configured-button.mjs",
+    "./virtuals/slider-number": "./dist/virtuals/slider-number.mjs",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "prepare": "tsdown",
     "dev": "tsdown --watch",
@@ -12,9 +25,6 @@
     "lint": "oxlint --type-aware --type-check . && oxfmt --check .",
     "lint:fix": "oxlint --type-aware --type-check --fix . && oxfmt ."
   },
-  "author": "",
-  "private": true,
-  "license": "ISC",
   "dependencies": {
     "esphome-config-ts": "github:LocalBytes/esphome-config-ts",
     "lodash": "^4.18.1",
@@ -27,15 +37,5 @@
     "@types/lodash": "^4.17.25",
     "@types/node": "^26.6.1",
     "tsdown": "^0.23.0"
-  },
-  "exports": {
-    "./esphome-localdeck": "./dist/esphome-localdeck.mjs",
-    "./esphome-localdeck-stock": "./dist/esphome-localdeck-stock.mjs",
-    "./esphome-localdeck-test": "./dist/esphome-localdeck-test.mjs",
-    "./scripts/apply-rgb-color": "./dist/scripts/apply-rgb-color.mjs",
-    "./scripts/blip-light": "./dist/scripts/blip-light.mjs",
-    "./virtuals/configured-button": "./dist/virtuals/configured-button.mjs",
-    "./virtuals/slider-number": "./dist/virtuals/slider-number.mjs",
-    "./package.json": "./package.json"
   }
 }

@@ -1,4 +1,4 @@
-import type { UseFetchOptions } from '#app';
+import type { UseFetchOptions } from "#app";
 
 export function useServerFetch<T = unknown>(url: string, opts: UseFetchOptions<T> = {}) {
   const config = useRuntimeConfig();

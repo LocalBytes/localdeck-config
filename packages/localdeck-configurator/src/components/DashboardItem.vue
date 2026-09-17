@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { IndexFile } from '~/utils/types';
+import type { IndexFile } from "~/utils/types";
 
 defineProps<{
   file: IndexFile;

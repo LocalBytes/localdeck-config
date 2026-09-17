@@ -1,6 +1,6 @@
-import * as fs from 'node:fs/promises';
-import { FileType, type IndexFile } from '~~/src/utils/types';
-import _ from 'lodash';
+import * as fs from "node:fs/promises";
+import { FileType, type IndexFile } from "~~/src/utils/types";
+import _ from "lodash";
 
 function capture(line: string, pattern: RegExp, group = 1): string | null {
   return line.match(pattern)?.[group] ?? null;
@@ -11,10 +11,10 @@ export default defineEventHandler(async (event) => {
   const fileNames = await fs.readdir(esphomeDir);
 
   const filesPromise = fileNames
-    .filter(filename => filename.endsWith('.yaml') || filename.endsWith('.yml'))
+    .filter((filename) => filename.endsWith(".yaml") || filename.endsWith(".yml"))
     .map(async (filename) => {
       const path = `${esphomeDir}/${filename}`;
-      const fileHandle = await fs.open(path, 'r');
+      const fileHandle = await fs.open(path, "r");
 
       let type = FileType.Other;
       let hasConfig = false;
@@ -34,7 +34,7 @@ export default defineEventHandler(async (event) => {
 
       await fileHandle.close();
 
-      const resolvedName = friendlyName ?? name ?? filename.replace(/\.ya?ml/, '');
+      const resolvedName = friendlyName ?? name ?? filename.replace(/\.ya?ml/, "");
 
       if (hasPackage) type = FileType.Import;
       if (hasConfig) type = FileType.LocalDeck;
@@ -44,8 +44,8 @@ export default defineEventHandler(async (event) => {
 
   return {
     files: _(await Promise.all(filesPromise))
-      .sortBy('type')
-      .groupBy('type')
+      .sortBy("type")
+      .groupBy("type")
       .value(),
   };
 });

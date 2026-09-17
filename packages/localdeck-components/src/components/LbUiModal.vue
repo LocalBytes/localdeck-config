@@ -1,10 +1,5 @@
 <template>
-  <dialog
-    ref="dialogEl"
-    class="modal"
-    @cancel="onCancel"
-    @close="onClose"
-  >
+  <dialog ref="dialogEl" class="modal" @cancel="onCancel" @close="onClose">
     <div class="modal-box">
       <div>
         <button
@@ -15,10 +10,7 @@
         >
           ✕
         </button>
-        <slot
-          :title="title"
-          name="title"
-        >
+        <slot :title="title" name="title">
           <h2 class="text-xl">
             {{ title }}
           </h2>
@@ -26,17 +18,8 @@
         <slot />
       </div>
     </div>
-    <form
-      v-if="isDismissible"
-      class="modal-backdrop"
-      method="dialog"
-    >
-      <button
-        aria-label="Close"
-        type="submit"
-      >
-        Close
-      </button>
+    <form v-if="isDismissible" class="modal-backdrop" method="dialog">
+      <button aria-label="Close" type="submit">Close</button>
     </form>
   </dialog>
 </template>
@@ -59,19 +42,23 @@ const isOpen = defineModel({
 
 const dialogEl = ref<HTMLDialogElement | null>(null);
 
-watch(isOpen, (open) => {
-  const dialog = dialogEl.value;
-  if (!dialog) return;
+watch(
+  isOpen,
+  (open) => {
+    const dialog = dialogEl.value;
+    if (!dialog) return;
 
-  if (open && !dialog.open) {
-    dialog.show();
-    return;
-  }
+    if (open && !dialog.open) {
+      dialog.show();
+      return;
+    }
 
-  if (!open && dialog.open) {
-    dialog.close();
-  }
-}, { immediate: true });
+    if (!open && dialog.open) {
+      dialog.close();
+    }
+  },
+  { immediate: true },
+);
 
 const requestClose = () => {
   if (!props.isDismissible) return;

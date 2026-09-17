@@ -3,15 +3,9 @@
     class="collapse collapse-arrow border border-primary shadow"
     :class="isOpen && 'overflow-visible'"
   >
-    <input
-      v-model="isOpen"
-      type="checkbox"
-    >
+    <input v-model="isOpen" type="checkbox" />
     <div class="collapse-title px-4 font-semibold">
-      <slot
-        name="title"
-        :title="title"
-      >
+      <slot name="title" :title="title">
         {{ title }}
       </slot>
     </div>

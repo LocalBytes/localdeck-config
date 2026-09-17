@@ -1,17 +1,17 @@
-import * as pako from 'pako';
-import type { z } from 'zod';
+import * as pako from "pako";
+import type { z } from "zod";
 
 export function encode(uint8array: Uint8Array) {
   const output = [];
   for (let i = 0, { length } = uint8array; i < length; i++) {
     output.push(String.fromCharCode(uint8array[i]));
   }
-  return btoa(output.join(''));
+  return btoa(output.join(""));
 }
 
 export function decode(encoded: string) {
   const chars = atob(encoded);
-  return Uint8Array.from(chars, c => c.charCodeAt(0));
+  return Uint8Array.from(chars, (c) => c.charCodeAt(0));
 }
 
 export function compress(editor: object) {
@@ -20,7 +20,8 @@ export function compress(editor: object) {
 }
 
 export function decompress<T extends z.ZodType>(
-  chars: string, schema?: T,
+  chars: string,
+  schema?: T,
 ): T extends z.ZodType ? z.infer<T> : object {
   const deflated = decode(chars);
   const inflated = pako.inflate(deflated, { toText: true });
@@ -29,5 +30,5 @@ export function decompress<T extends z.ZodType>(
 }
 
 export function getEditorUrl(editor: object, printmode: boolean = false) {
-  return `https://blog.mylocalbytes.com/tools/localdeck-configurator?config=${encodeURIComponent(compress(editor))}${printmode ? '&print=1' : ''}`;
+  return `https://blog.mylocalbytes.com/tools/localdeck-configurator?config=${encodeURIComponent(compress(editor))}${printmode ? "&print=1" : ""}`;
 }

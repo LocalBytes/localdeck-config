@@ -1,26 +1,23 @@
-import { VirtualComponent } from 'esphome-config-ts';
+import { VirtualComponent } from "esphome-config-ts";
 import {
   HomeassistantSensor,
   HomeassistantTextSensor,
   MatrixKeypadBinarySensor,
   PartitionLight,
-} from 'esphome-config-ts/components';
-import { lambda } from 'esphome-config-ts/yaml';
-import { z } from 'zod';
-import { APPLY_RGB_COLOR_ID } from '@/scripts/apply-rgb-color.ts';
+} from "esphome-config-ts/components";
+import { lambda } from "esphome-config-ts/yaml";
+import { z } from "zod";
+import { APPLY_RGB_COLOR_ID } from "@/scripts/apply-rgb-color.ts";
 
-export const KEYS = 'ABCDEFGHIJKLMNOPQRSTUVWX';
+export const KEYS = "ABCDEFGHIJKLMNOPQRSTUVWX";
 export const BUTTON_NUMBERS: number[] = [
-  19, 20, 21, 22, 23, 24,
-  13, 14, 15, 16, 17, 18,
-  7, 8, 9, 10, 11, 12,
-  1, 2, 3, 4, 5, 6,
+  19, 20, 21, 22, 23, 24, 13, 14, 15, 16, 17, 18, 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6,
 ];
 
 export const zButtonNumber: z.ZodType<number> = z.coerce.number().min(1).max(24);
 
 const emptyToNullable = <T extends z.ZodString>(schema: T) =>
-  z.preprocess(val => val === '' ? null : val, schema.nullable());
+  z.preprocess((val) => (val === "" ? null : val), schema.nullable());
 
 export const zConfiguredButtonOptsComponent = z.object({
   num: zButtonNumber,
@@ -55,108 +52,123 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
     const stack = [];
 
     const sensor = new MatrixKeypadBinarySensor({
-      id: `keypad_button_${c.num.toString().padStart(2, '0')}`,
-      name: `Button ${c.num.toString().padStart(2, '0')}`,
+      id: `keypad_button_${c.num.toString().padStart(2, "0")}`,
+      name: `Button ${c.num.toString().padStart(2, "0")}`,
       internal: !c.expose,
-      filters: [{ delayed_off: '125ms' }],
-      keypad_id: 'keypad',
+      filters: [{ delayed_off: "125ms" }],
+      keypad_id: "keypad",
       key: KEYS[c.num - 1],
     });
     stack.push(sensor);
 
-    const lightId = `keypad_button_${c.num.toString().padStart(2, '0')}_light`;
-    const lightName = `Button ${c.num.toString().padStart(2, '0')} Light`;
-    stack.push(new PartitionLight({
-      id: lightId,
-      name: lightName,
-      internal: !c.expose,
-      // @ts-expect-error - single_light_id is only required when NOT using id/from/to; the
-      // schema dump can't express "one or the other required", so it marks both Required
-      segments: [{
-        id: 'ledstrip',
-        from: c.num - 1,
-        to: c.num - 1,
-      }],
-      effects: [
-        { pulse: {} },
-        {
-          pulse: {
-            name: 'Fast Pulse',
-            transition_length: '0.5s',
-            update_interval: '0.5s',
-            min_brightness: 0,
-            max_brightness: 1,
+    const lightId = `keypad_button_${c.num.toString().padStart(2, "0")}_light`;
+    const lightName = `Button ${c.num.toString().padStart(2, "0")} Light`;
+    stack.push(
+      new PartitionLight({
+        id: lightId,
+        name: lightName,
+        internal: !c.expose,
+        // @ts-expect-error - single_light_id is only required when NOT using id/from/to; the
+        // schema dump can't express "one or the other required", so it marks both Required
+        segments: [
+          {
+            id: "ledstrip",
+            from: c.num - 1,
+            to: c.num - 1,
           },
-        }, {
-          pulse: {
-            name: 'Slow Pulse',
-            update_interval: '2s',
+        ],
+        effects: [
+          { pulse: {} },
+          {
+            pulse: {
+              name: "Fast Pulse",
+              transition_length: "0.5s",
+              update_interval: "0.5s",
+              min_brightness: 0,
+              max_brightness: 1,
+            },
           },
-        },
-        { random: {} },
-        { flicker: {} },
-
-      ],
-    }));
+          {
+            pulse: {
+              name: "Slow Pulse",
+              update_interval: "2s",
+            },
+          },
+          { random: {} },
+          { flicker: {} },
+        ],
+      }),
+    );
 
     if (c.ha_entity && c.toggle) {
-      let action = 'homeassistant.toggle';
-      if (c.ha_entity.startsWith('scene.')) {
-        action = 'scene.turn_on';
+      let action = "homeassistant.toggle";
+      if (c.ha_entity.startsWith("scene.")) {
+        action = "scene.turn_on";
       }
 
       sensor.config.on_press ??= [];
       sensor.config.on_press.push({
-        'homeassistant.action': { action, data: { entity_id: c.ha_entity } },
+        "homeassistant.action": { action, data: { entity_id: c.ha_entity } },
       });
     }
     if (c.ha_entity && c.follow_state) {
-      stack.push(new HomeassistantTextSensor({
-        id: `keypad_button_${c.num.toString()}_hass`,
-        entity_id: c.ha_entity,
-        on_value: [{
-          'light.control': {
-            id: lightId,
-            state: lambda('return x == "on";'),
-            brightness: lambda('return id(brightness);'),
-          },
-        }],
-      }));
-    }
-    else if (c.blip_on_press) {
+      stack.push(
+        new HomeassistantTextSensor({
+          id: `keypad_button_${c.num.toString()}_hass`,
+          entity_id: c.ha_entity,
+          on_value: [
+            {
+              "light.control": {
+                id: lightId,
+                state: lambda('return x == "on";'),
+                brightness: lambda("return id(brightness);"),
+              },
+            },
+          ],
+        }),
+      );
+    } else if (c.blip_on_press) {
       sensor.config.on_press ??= [];
-      sensor.config.on_press.push({ 'script.execute': { id: 'blip_light', led_index: c.num - 1 } });
-      sensor.config.on_press.push({ delay: '500ms' });
+      sensor.config.on_press.push({ "script.execute": { id: "blip_light", led_index: c.num - 1 } });
+      sensor.config.on_press.push({ delay: "500ms" });
       sensor.config.on_press.push({ lambda: `id(${lightId}).make_call().perform();` });
     }
 
     if (c.ha_entity && c.follow_brightness) {
-      stack.push(new HomeassistantSensor({
-        id: `keypad_button_${c.num.toString()}_hass_brightness`,
-        entity_id: c.ha_entity,
-        attribute: 'brightness',
-        filters: [{ filter_out: 'nan' }],
-        on_value: [{
-          'light.control': {
-            id: lightId,
-            brightness: lambda('return x >= 0 ? (x / 255.0f) * id(brightness) : 0;'),
-          },
-        }],
-      }));
+      stack.push(
+        new HomeassistantSensor({
+          id: `keypad_button_${c.num.toString()}_hass_brightness`,
+          entity_id: c.ha_entity,
+          attribute: "brightness",
+          filters: [{ filter_out: "nan" }],
+          on_value: [
+            {
+              "light.control": {
+                id: lightId,
+                brightness: lambda("return x >= 0 ? (x / 255.0f) * id(brightness) : 0;"),
+              },
+            },
+          ],
+        }),
+      );
     }
 
     if (c.ha_entity && c.follow_color) {
-      stack.push(new HomeassistantTextSensor({
-        id: `keypad_button_${c.num.toString()}_hass_color`,
-        entity_id: c.ha_entity,
-        attribute: 'rgb_color',
-        on_value: [{
-          lambda: `id(${APPLY_RGB_COLOR_ID})(x, id(${lightId}));`,
-        }],
-      }));
+      stack.push(
+        new HomeassistantTextSensor({
+          id: `keypad_button_${c.num.toString()}_hass_color`,
+          entity_id: c.ha_entity,
+          attribute: "rgb_color",
+          on_value: [
+            {
+              lambda: `id(${APPLY_RGB_COLOR_ID})(x, id(${lightId}));`,
+            },
+          ],
+        }),
+      );
     }
 
-    const lambdaIeee = lambda('return id(wifi_info_mac_address).state;');
+    const lambdaIeee = lambda("return id(wifi_info_mac_address).state;");
 
     const eventData = {
       button: c.num.toString(),
@@ -166,31 +178,28 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
 
     sensor.config.on_multi_click ??= [];
     sensor.config.on_multi_click.push({
-      timing: [
-        'ON for at most 1s',
-        'OFF for at least 0.5s',
-      ],
+      timing: ["ON for at most 1s", "OFF for at least 0.5s"],
       // oxlint-disable-next-line unicorn/no-thenable -- `then` is ESPHome's step-list key, not a real thenable
-      then: [{
-        'homeassistant.event': {
-          event: 'esphome.localdeck_button',
-          data: { ...eventData, type: 'single' },
+      then: [
+        {
+          "homeassistant.event": {
+            event: "esphome.localdeck_button",
+            data: { ...eventData, type: "single" },
+          },
         },
-      }],
+      ],
     });
     sensor.config.on_multi_click.push({
-      timing: [
-        'ON for at most 1s',
-        'OFF for at most 0.5s',
-        'ON for at most 1s',
-      ],
+      timing: ["ON for at most 1s", "OFF for at most 0.5s", "ON for at most 1s"],
       // oxlint-disable-next-line unicorn/no-thenable -- `then` is ESPHome's step-list key, not a real thenable
-      then: [{
-        'homeassistant.event': {
-          event: 'esphome.localdeck_button',
-          data: { ...eventData, type: 'double' },
+      then: [
+        {
+          "homeassistant.event": {
+            event: "esphome.localdeck_button",
+            data: { ...eventData, type: "double" },
+          },
         },
-      }],
+      ],
     });
 
     return stack;

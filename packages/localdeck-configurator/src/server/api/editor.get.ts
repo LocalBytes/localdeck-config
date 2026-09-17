@@ -1,7 +1,7 @@
-import * as fs from 'node:fs/promises';
+import * as fs from "node:fs/promises";
 
-import { decompress } from '@localbytes/localdeck-components/src/utils/compression';
-import { zPadEditor } from '@localbytes/localdeck-components/src/utils/PadCfg';
+import { decompress } from "@localbytes/localdeck-components/src/utils/compression";
+import { zPadEditor } from "@localbytes/localdeck-components/src/utils/PadCfg";
 
 function capture(line: string, pattern: RegExp, group = 1): string | null {
   return line.match(pattern)?.[group] ?? null;
@@ -10,7 +10,7 @@ function capture(line: string, pattern: RegExp, group = 1): string | null {
 export default defineEventHandler(async (event) => {
   const { esphomeDir } = useRuntimeConfig();
   const { filename } = getQuery(event);
-  const file = await fs.open(`${esphomeDir}/${filename as string}`, 'r');
+  const file = await fs.open(`${esphomeDir}/${filename as string}`, "r");
 
   let encodedConfig: string | null = null;
   let name: string | null = null;
@@ -28,9 +28,7 @@ export default defineEventHandler(async (event) => {
 
   const configStr = encodedConfig ? decodeURIComponent(encodedConfig) : null;
 
-  const config = configStr
-    ? decompress(configStr, zPadEditor)
-    : zPadEditor.parse({});
+  const config = configStr ? decompress(configStr, zPadEditor) : zPadEditor.parse({});
 
   config.title = friendlyName ?? name ?? config.title;
 

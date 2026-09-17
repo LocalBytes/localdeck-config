@@ -3,11 +3,7 @@
     <p>Actions</p>
 
     <label class="flex gap-2">
-      <input
-        v-model="modelValue.component.expose"
-        class="checkbox"
-        type="checkbox"
-      >
+      <input v-model="modelValue.component.expose" class="checkbox" type="checkbox" />
       <span>Expose to HomeAssistant</span>
     </label>
 
@@ -17,22 +13,15 @@
         :disabled="modelValue.component.ha_entity && modelValue.component.follow_state"
         class="checkbox"
         type="checkbox"
-      >
+      />
       <span>Flash LED on press</span>
     </label>
 
-    <LbUiCollapse
-      v-model="hassOpen"
-      title="HomeAssistant Integration"
-    >
+    <LbUiCollapse v-model="hassOpen" title="HomeAssistant Integration">
       <div class="flex flex-col gap-2">
         <label class="form-field">
           <span class="label-text">Entity</span>
-          <DeckButtonConfigTypeahead
-            v-if="typeahead"
-            v-model="haEntity"
-            :typeahead="typeahead"
-          />
+          <DeckButtonConfigTypeahead v-if="typeahead" v-model="haEntity" :typeahead="typeahead" />
           <input
             v-else
             v-model="haEntity"
@@ -42,8 +31,7 @@
             data-maska-tokens="D:[a-zA-Z0-9]:multiple|E:[a-zA-Z0-9_]:multiple"
             placeholder="eg: light.livingroom_light"
             type="text"
-          >
-
+          />
         </label>
 
         <label class="flex gap-2">
@@ -53,7 +41,7 @@
             :checked="true"
             class="checkbox"
             type="checkbox"
-          >
+          />
           <span>Toggle Entity</span>
         </label>
 
@@ -64,7 +52,7 @@
             :checked="true"
             class="checkbox"
             type="checkbox"
-          >
+          />
           <span>Follow State (On/Off)</span>
         </label>
 
@@ -75,7 +63,7 @@
             :checked="true"
             class="checkbox"
             type="checkbox"
-          >
+          />
           <span>Follow Brightness</span>
         </label>
 
@@ -86,7 +74,7 @@
             :checked="true"
             class="checkbox"
             type="checkbox"
-          >
+          />
           <span>Follow Color</span>
         </label>
       </div>
@@ -95,10 +83,10 @@
 </template>
 
 <script lang="ts" setup>
-import type Fuse from 'fuse.js';
-import type { EditContainer } from '../utils/PadCfg';
-import type { HassEntity } from '../utils/types';
-import { useNullableModel } from '../utils/hooks';
+import type Fuse from "fuse.js";
+import type { EditContainer } from "../utils/PadCfg";
+import type { HassEntity } from "../utils/types";
+import { useNullableModel } from "../utils/hooks";
 
 const modelValue = defineModel<EditContainer>({
   required: true,
@@ -109,5 +97,5 @@ defineProps<{
 }>();
 
 const hassOpen = ref(true);
-const haEntity = useNullableModel(modelValue.value.component, 'ha_entity');
+const haEntity = useNullableModel(modelValue.value.component, "ha_entity");
 </script>
