@@ -3,7 +3,7 @@
     <h3 class="pb-2">Label</h3>
 
     <div class="flex">
-      <LazyDeckIconPicker v-model="modelValue.label" class="grow" />
+      <DeckIconPicker v-model="modelValue.label" class="grow" />
       <button
         v-if="modelValue.label.icon"
         class="btn btn-outline-danger"

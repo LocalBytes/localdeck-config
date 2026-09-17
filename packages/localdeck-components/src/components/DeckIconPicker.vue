@@ -11,6 +11,7 @@
     </button>
     <div :id="popoverId" :style="{ 'position-anchor': anchorName }" class="dropdown z-1" popover>
       <EmojiPicker
+        v-if="ready"
         :additional-groups="{ material: mdIconsGroups }"
         :native="true"
         :theme="emojiTheme"
@@ -33,14 +34,14 @@ const uid = useId();
 const popoverId = `${uid}-popover`;
 const anchorName = `--${uid}-anchor`;
 
-// See: https://github.com/nuxt-modules/color-mode/issues/335
-let colorMode = null;
-if (!import.meta.env.TEST) colorMode = useColorMode();
+// Render the (large, hidden) emoji grid off the initial mount path so the button
+// itself appears instantly; it's still ready well before a user can click it.
+const ready = ref(false);
+onMounted(() => setTimeout(() => (ready.value = true)));
 
-const emojiTheme = computed(() => {
-  if (!colorMode) return "light";
-  return colorMode.value === "dark" ? "dark" : "light";
-});
+const colorMode = useColorMode();
+
+const emojiTheme = computed(() => (colorMode.value === "dark" ? "dark" : "light"));
 
 const onSelectEmoji = (emoji: EmojiExt) => {
   const MdIcon = emoji.n.find((s) => s.startsWith("mdi:"));
@@ -51,3 +52,10 @@ const onSelectEmoji = (emoji: EmojiExt) => {
   popover?.hidePopover();
 };
 </script>
+
+<style scoped>
+:deep(#material .v3-emojis > *:nth-child(n + 65)) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+</style>
