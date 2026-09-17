@@ -1,6 +1,6 @@
 <template>
   <nuxt-link
-    class="link-unstyled card bg-base-100 shadow-sm border border-primary"
+    class="link-unstyled card bg-base-200 shadow-sm border border-primary"
     :to="{ name: 'editor', query: { filename: file.filename } }"
   >
     <div class="card-body">
@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { IndexFile } from '~/utilities/types';
+import type { IndexFile } from '~/utils/types';
 
 defineProps<{
   file: IndexFile;

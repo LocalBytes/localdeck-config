@@ -5,6 +5,7 @@ panel_icon: "mdi:dialpad"
 
 image: ghcr.io/localbytes/hass-localdeck-configurator
 version: VERSION
+stage: stable
 arch: [ aarch64, amd64 ]
 init: false
 

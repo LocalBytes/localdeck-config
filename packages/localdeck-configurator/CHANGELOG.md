@@ -11,6 +11,7 @@
 - Moved from RippleUI to DaisyUI for the UI components in b43e45e
 
 ### Fixed
+- Files are now directly navigable, links to a specific file (and refreshing while on one) open that file instead of falling back to the file list.
 - LED state is now restored after a button press (blip animation no longer leaves the light off) in #144. See: #61, [forum#285:7](https://forum.mylocalbytes.com/d/285/7)
 - Button LEDs now correctly reflect colour and brightness from Home Assistant entities in #144
 - Suppressed a spurious boot warning for the LED strip pin in #144

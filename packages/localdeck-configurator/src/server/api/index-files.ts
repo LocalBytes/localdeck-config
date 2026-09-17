@@ -1,5 +1,5 @@
 import * as fs from 'node:fs/promises';
-import { FileType, type IndexFile } from '~~/src/utilities/types';
+import { FileType, type IndexFile } from '~~/src/utils/types';
 import _ from 'lodash';
 
 function capture(line: string, pattern: RegExp, group = 1): string | null {
@@ -45,6 +45,7 @@ export default defineEventHandler(async (event) => {
   return {
     files: _(await Promise.all(filesPromise))
       .sortBy('type')
-      .groupBy('type'),
+      .groupBy('type')
+      .value(),
   };
 });
