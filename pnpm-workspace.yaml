@@ -4,16 +4,10 @@ packages:
   - '!**/test/**'
 
 catalog:
-  '@nuxt/test-utils': ^4.3.2
   nuxt: ^4.5.2
   typescript: ^6.0.3
-  vite: ^8.2.2
-  vitest: ^4.1.11
-
-overrides:
-  # Nuxt ships Vite 7 internally; force Vite 8 across the workspace.
-  vite: ^8.0.0
-  vitest: ^4.1.9
+  vite: ^8.3.0
+  vitest: ^5.0.1
 
 allowBuilds:
   '@parcel/watcher': true

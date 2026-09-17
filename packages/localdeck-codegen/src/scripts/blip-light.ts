@@ -12,9 +12,11 @@ export const scriptBlipLight: ScriptPlatform = new ScriptPlatform({
   id: 'blip_light',
   parameters: { led_index: 'int' },
   mode: 'parallel',
+  // oxlint-disable-next-line unicorn/no-thenable -- `then` is ESPHome's step-list key, not a real thenable
   then: [{
     repeat: {
       count: iterations,
+      // oxlint-disable-next-line unicorn/no-thenable -- `then` is ESPHome's step-list key, not a real thenable
       then: [{
         'light.addressable_set': {
           id: 'ledstrip',

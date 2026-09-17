@@ -170,6 +170,7 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
         'ON for at most 1s',
         'OFF for at least 0.5s',
       ],
+      // oxlint-disable-next-line unicorn/no-thenable -- `then` is ESPHome's step-list key, not a real thenable
       then: [{
         'homeassistant.event': {
           event: 'esphome.localdeck_button',
@@ -183,6 +184,7 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
         'OFF for at most 0.5s',
         'ON for at most 1s',
       ],
+      // oxlint-disable-next-line unicorn/no-thenable -- `then` is ESPHome's step-list key, not a real thenable
       then: [{
         'homeassistant.event': {
           event: 'esphome.localdeck_button',

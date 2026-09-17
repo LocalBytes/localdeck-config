@@ -19,6 +19,4 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
   },
-
-  eslint: { config: { stylistic: { semi: true }, typescript: { tsconfigPath: './tsconfig.json' } } },
 });

@@ -6,8 +6,6 @@ const isTest = Boolean((import.meta as { env?: { TEST?: boolean } }).env?.TEST);
 export default defineNuxtConfig({
   extends: ['@localbytes/localdeck-components'],
   modules: [
-    '@nuxt/eslint',
-
     // @nuxtjs/color-mode is conditionally loaded for test workaround (see https://github.com/nuxt-modules/color-mode/issues/335)
     ...(!isTest ? ['@nuxtjs/color-mode'] : []),
   ],
@@ -50,7 +48,4 @@ export default defineNuxtConfig({
   serverDir: 'src/server',
 
   compatibilityDate: '2026-01-01',
-
-  eslint: { config: { stylistic: { semi: true }, typescript: { tsconfigPath: './tsconfig.json' } } },
-
 });

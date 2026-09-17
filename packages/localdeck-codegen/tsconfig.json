@@ -1,8 +1,9 @@
 {
-  "extends": "@tsconfig/node-lts",
+  "extends": ["@tsconfig/node26", "@tsconfig/node-ts"],
   "compilerOptions": {
+    "noEmit": true,
+    "rewriteRelativeImportExtensions": false,
     "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true,
     "paths": {
       "@/*": ["./src/*"]
     }

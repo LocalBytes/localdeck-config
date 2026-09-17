@@ -69,6 +69,7 @@ function newConfig(opts: newConfigOpts = {
           {
             if: {
               condition: [{ lambda: 'return state;' }],
+              // oxlint-disable-next-line unicorn/no-thenable -- `then` is ESPHome's step-list key, not a real thenable
               then: [{ 'light.turn_on': { id: 'keypad_button_01_light' } }],
               else: [{ 'light.turn_off': { id: 'keypad_button_01_light' } }],
             },
