@@ -24,7 +24,7 @@ esphomeComponent.config = _.merge(esphomeComponent.config, {
 });
 
 BUTTON_NUMBERS
-  .sort()
+  .toSorted((a, b) => a - b)
   .forEach(num => config.addComponent(new ConfiguredButton(zConfiguredButtonOpts.parse({
     keyNum: num,
     label: { text: `Button ${num.toString()}` },
