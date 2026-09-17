@@ -8,12 +8,12 @@ catalog:
   nuxt: ^4.4.8
   typescript: ^6.0.3
   vite: ^8.0.0
-  vitest: ^4.1.9
+  vitest: ^5.0.0
 
 overrides:
   # Nuxt ships Vite 7 internally; force Vite 8 across the workspace.
   vite: ^8.0.0
-  vitest: ^4.1.9
+  vitest: ^5.0.0
 
 pmOnFail: warn
 
