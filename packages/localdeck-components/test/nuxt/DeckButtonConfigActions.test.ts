@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
-import { mount } from "@vue/test-utils";
+import { reactive } from "vue";
+import { mountSuspended } from "@nuxt/test-utils/runtime";
 import { zConfiguredButtonOpts } from "@localbytes/localdeck-codegen/virtuals/configured-button";
 import DeckButtonConfigActions from "../../src/components/DeckButtonConfigActions.vue";
 
@@ -12,9 +13,12 @@ const newButton = (componentOverrides: Record<string, unknown> = {}) =>
 
 describe("DeckButtonConfigActions", () => {
   test("Flash LED on press is enabled after clearing ha_entity", async () => {
-    const container = newButton({ ha_entity: "light.living_room", follow_state: true });
+    // The real app always holds this container in a ref/reactive (editor.vue's
+    // `editing` ref), which is what makes nested mutations like clearing
+    // ha_entity trigger a re-render. Match that here, not a plain object.
+    const container = reactive(newButton({ ha_entity: "light.living_room", follow_state: true }));
 
-    const wrapper = mount(DeckButtonConfigActions, {
+    const wrapper = await mountSuspended(DeckButtonConfigActions, {
       props: { modelValue: container, typeahead: null as unknown as never },
     });
 

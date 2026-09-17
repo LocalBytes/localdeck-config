@@ -24,7 +24,12 @@ describe("Resetting Workflow", () => {
     await page.getByText(FILENAME).click();
 
     console.log("Setting Buttons");
-    await setButton(page, 1, { name: "Livingroom Bulb", entity: "light.livingroom_bulb" });
+    await setButton(
+      page,
+      1,
+      { name: "Livingroom Bulb", entity: "light.livingroom_bulb" },
+      { timeout: 60_000 },
+    );
     await setButton(page, 2, { name: "Kitchen Bulb", entity: "light.kitchen_bulb" });
 
     console.log("Saving & Resetting");

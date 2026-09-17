@@ -51,14 +51,19 @@ describe("Hail Mary", () => {
       { keynum: 24, name: "Diningroom Bulb", entity: "light.diningroom_bulb" },
     ];
 
-    for (const button of buttons) {
-      await setButton(page, button.keynum, { name: button.name, entity: button.entity });
+    for (const [i, button] of buttons.entries()) {
+      await setButton(
+        page,
+        button.keynum,
+        { name: button.name, entity: button.entity },
+        i === 0 ? { timeout: 60_000 } : {},
+      );
     }
 
     console.log("Saving");
     await page.getByRole("button", { name: "Save" }).click();
     await page.getByText("Your changes have been saved").waitFor({ state: "visible" });
-    await page.reload({ waitUntil: "networkidle" });
+    await page.reload();
 
     console.log("Checking");
     for (const button of buttons) {

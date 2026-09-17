@@ -6,10 +6,18 @@
       :popovertarget="popoverId"
       :style="{ 'anchor-name': anchorName }"
       type="button"
+      @focus="ready = true"
+      @mouseenter="ready = true"
     >
       {{ modelValue.icon?.replace("mdi:", "") || "+ Emoji" }}
     </button>
-    <div :id="popoverId" :style="{ 'position-anchor': anchorName }" class="dropdown z-1" popover>
+    <div
+      :id="popoverId"
+      :style="{ 'position-anchor': anchorName }"
+      class="dropdown z-1"
+      popover
+      @toggle="onToggle"
+    >
       <EmojiPicker
         v-if="ready"
         :additional-groups="{ material: mdIconsGroups }"
@@ -34,10 +42,14 @@ const uid = useId();
 const popoverId = `${uid}-popover`;
 const anchorName = `--${uid}-anchor`;
 
-// Render the (large, hidden) emoji grid off the initial mount path so the button
-// itself appears instantly; it's still ready well before a user can click it.
+// The emoji/icon grid is thousands of DOM nodes, so we don't mount it eagerly
+// for every button's panel. Instead pre-warm it on hover/focus of the trigger
+// (there's normally a beat before the actual click), falling back to mounting
+// on toggle for keyboard/touch users who skip straight to opening it.
 const ready = ref(false);
-onMounted(() => setTimeout(() => (ready.value = true)));
+const onToggle = (e: ToggleEvent) => {
+  if (e.newState === "open") ready.value = true;
+};
 
 const colorMode = useColorMode();
 

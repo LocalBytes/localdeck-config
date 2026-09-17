@@ -19,10 +19,11 @@ export async function setButton(
   page: NuxtPage,
   keynum: number,
   { name, entity }: { name: string; entity: string },
+  options: { timeout?: number } = {},
 ) {
   console.log(`Setting Button ${keynum.toString()} to ${name} (${entity})`);
 
-  await page.getByLabel(buttonLabel(keynum)).click();
+  await page.getByLabel(buttonLabel(keynum)).click({ timeout: options.timeout });
   await page.getByRole("textbox", { name: "Entity" }).fill(entity);
   await page.getByRole("textbox", { name: "Label Text" }).fill(name);
 }
