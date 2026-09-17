@@ -1,10 +1,10 @@
-import { describe, expect, test } from 'vitest';
-import { mount } from '@vue/test-utils';
-import { zConfiguredButtonOpts } from '@localbytes/localdeck-codegen/virtuals/configured-button';
-import DeckButtonItem from '../../src/components/DeckButtonItem.vue';
-import { isPrintingSymbol } from '../../src/utils/hooks';
+import { describe, expect, test } from "vitest";
+import { mount } from "@vue/test-utils";
+import { zConfiguredButtonOpts } from "@localbytes/localdeck-codegen/virtuals/configured-button";
+import DeckButtonItem from "../../src/components/DeckButtonItem.vue";
+import { isPrintingSymbol } from "../../src/utils/hooks";
 
-const CLASS_PRINTMODE = 'printmode';
+const CLASS_PRINTMODE = "printmode";
 
 const newButton = (id: number, overrides: Record<string, object> = {}) => {
   return zConfiguredButtonOpts.parse({
@@ -14,25 +14,25 @@ const newButton = (id: number, overrides: Record<string, object> = {}) => {
   });
 };
 
-describe('Button Item', () => {
-  test('Shows relevant labels', () => {
+describe("Button Item", () => {
+  test("Shows relevant labels", () => {
     const wrapper = mount(DeckButtonItem, {
-      props: { container: newButton(1, { label: { text: 'Button' } }) },
+      props: { container: newButton(1, { label: { text: "Button" } }) },
     });
 
-    expect(wrapper.text()).toContain('1');
+    expect(wrapper.text()).toContain("1");
     expect(wrapper.classes(CLASS_PRINTMODE)).toBe(false);
-    expect(wrapper.text()).toContain('Button');
+    expect(wrapper.text()).toContain("Button");
   });
 
-  test('Hides label in print mode', () => {
+  test("Hides label in print mode", () => {
     const wrapper = mount(DeckButtonItem, {
       global: { provide: { [isPrintingSymbol]: true } },
-      props: { container: newButton(1, { label: { text: 'Button' } }) },
+      props: { container: newButton(1, { label: { text: "Button" } }) },
     });
 
-    expect(wrapper.text()).not.toContain('1');
+    expect(wrapper.text()).not.toContain("1");
     expect(wrapper.classes(CLASS_PRINTMODE)).toBe(true);
-    expect(wrapper.text()).toContain('Button');
+    expect(wrapper.text()).toContain("Button");
   });
 });

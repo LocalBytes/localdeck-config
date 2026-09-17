@@ -1,6 +1,6 @@
-import { VirtualComponent } from 'esphome-config-ts';
-import { GlobalsPlatform, TemplateNumber } from 'esphome-config-ts/components';
-import { lambda } from 'esphome-config-ts/yaml';
+import { VirtualComponent } from "esphome-config-ts";
+import { GlobalsPlatform, TemplateNumber } from "esphome-config-ts/components";
+import { lambda } from "esphome-config-ts/yaml";
 
 interface SliderNumberOpts {
   id: string;
@@ -23,12 +23,12 @@ export class SliderNumber extends VirtualComponent<SliderNumberOpts> {
         restore_value: this.config.restore_value ?? true,
       }),
       new TemplateNumber({
-        name: 'Brightness',
-        set_action: [
-          { 'globals.set': { id: this.config.id, value: lambda('return x;') } },
-        ],
-        max_value: this.config.max, min_value: this.config.min, step: this.config.step,
-        lambda: lambda('return id(brightness);'),
+        name: "Brightness",
+        set_action: [{ "globals.set": { id: this.config.id, value: lambda("return x;") } }],
+        max_value: this.config.max,
+        min_value: this.config.min,
+        step: this.config.step,
+        lambda: lambda("return id(brightness);"),
       }),
     ];
   }

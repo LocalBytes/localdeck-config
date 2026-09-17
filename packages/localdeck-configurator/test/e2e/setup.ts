@@ -1,5 +1,5 @@
-import { afterAll, beforeAll } from 'vitest';
-import { createBrowser, recoverContextFromEnv, useTestContext } from '@nuxt/test-utils/e2e';
+import { afterAll, beforeAll } from "vitest";
+import { createBrowser, recoverContextFromEnv, useTestContext } from "@nuxt/test-utils/e2e";
 
 beforeAll(async () => {
   recoverContextFromEnv();

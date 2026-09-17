@@ -1,5 +1,5 @@
-import { createMemoryHistory, createWebHistory } from 'vue-router';
-import type { RouterConfig } from '@nuxt/schema';
+import { createMemoryHistory, createWebHistory } from "vue-router";
+import type { RouterConfig } from "@nuxt/schema";
 
 export default {
   history: (base) => {

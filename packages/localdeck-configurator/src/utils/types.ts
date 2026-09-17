@@ -1,7 +1,7 @@
 export enum FileType {
-  Import = 'import',
-  LocalDeck = 'localDeck',
-  Other = 'other',
+  Import = "import",
+  LocalDeck = "localDeck",
+  Other = "other",
 }
 
 export const FileTypes = [FileType.Import, FileType.LocalDeck, FileType.Other];
@@ -11,5 +11,4 @@ export interface IndexFile {
   filename: string;
   name: string;
   type: FileType;
-
 }

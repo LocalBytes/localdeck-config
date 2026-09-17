@@ -3,16 +3,23 @@ import {
   type ConfiguredButtonOpts,
   zButtonNumber,
   zConfiguredButtonOpts,
-} from '@localbytes/localdeck-codegen/virtuals/configured-button';
-import { z } from 'zod';
-import { zx } from '@traversable/zod';
+} from "@localbytes/localdeck-codegen/virtuals/configured-button";
+import { z } from "zod";
+import { zx } from "@traversable/zod";
 
 export const zPadEditor = z.object({
-  title: z.string().default('LocalDeck'),
-  buttons: z.preprocess(
-    val => Object.fromEntries(Object.entries(val as Record<string, unknown>).filter(([key]) => zButtonNumber.safeParse(key).success)),
-    z.record(zButtonNumber, zx.deepPartial(zConfiguredButtonOpts)),
-  ).default({}),
+  title: z.string().default("LocalDeck"),
+  buttons: z
+    .preprocess(
+      (val) =>
+        Object.fromEntries(
+          Object.entries(val as Record<string, unknown>).filter(
+            ([key]) => zButtonNumber.safeParse(key).success,
+          ),
+        ),
+      z.record(zButtonNumber, zx.deepPartial(zConfiguredButtonOpts)),
+    )
+    .default({}),
 });
 
 export type PadEditor = z.infer<typeof zPadEditor>;
@@ -22,16 +29,14 @@ export type EditContainer = ConfiguredButtonOpts;
 
 export const newPadEditor = (): PadEditor => {
   try {
-    return ({
-      title: 'LocalDeck',
+    return {
+      title: "LocalDeck",
       buttons: BUTTON_NUMBERS.reduce<Record<number, ConfiguredButtonOpts>>((acc, num) => {
         acc[num] = zEditContainer.parse({ keyNum: num, component: { num }, label: {} });
         return acc;
-      }, {},
-      ),
-    });
-  }
-  catch (e) {
+      }, {}),
+    };
+  } catch (e) {
     if (e instanceof z.ZodError) console.error(e.issues);
     throw e;
   }

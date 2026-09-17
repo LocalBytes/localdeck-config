@@ -1,15 +1,12 @@
 <template>
   <div
     :aria-label="`DeckButton ${container.keyNum.toFixed(0).padStart(2, '0')}`"
-    :class="{ 'shadow-lg shadow-yellow-300': editing, 'printmode': print }"
+    :class="{ 'shadow-lg shadow-yellow-300': editing, printmode: print }"
     :data-keynum="container.keyNum"
     role="button"
     class="pad-grid-item"
   >
-    <p
-      v-if="!print"
-      class="position-fixed keynum"
-    >
+    <p v-if="!print" class="position-fixed keynum">
       {{ container.keyNum }}
     </p>
     <p
@@ -19,18 +16,15 @@
     >
       {{ container.label.icon.replace("mdi:", "") }}
     </p>
-    <p
-      :style="{ fontSize: (print?fontSize:fontSizeScaled) + 'px' }"
-      class="label-bottom"
-    >
+    <p :style="{ fontSize: (print ? fontSize : fontSizeScaled) + 'px' }" class="label-bottom">
       {{ container.label.text }}
     </p>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useFontSizes, useIsPrinting } from '~/utils/hooks';
-import type { EditContainer } from '~/utils/PadCfg';
+import { useFontSizes, useIsPrinting } from "~/utils/hooks";
+import type { EditContainer } from "~/utils/PadCfg";
 
 const print = useIsPrinting();
 

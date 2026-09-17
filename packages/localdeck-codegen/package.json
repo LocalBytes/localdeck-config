@@ -1,36 +1,11 @@
 {
   "name": "@localbytes/localdeck-codegen",
   "version": "0.1.0",
-  "description": "",
-  "type": "module",
-  "scripts": {
-    "prepare": "tsdown",
-    "dev": "tsdown --watch",
-    "make": "pnpm run prepare && just make",
-    "make:prod": "pnpm run prepare && just make-prod",
-    "make:test": "pnpm run prepare && just make-test",
-    "lint": "eslint src",
-    "lint:fix": "eslint src --fix"
-  },
-  "author": "",
   "private": true,
+  "description": "",
   "license": "ISC",
-  "dependencies": {
-    "esphome-config-ts": "github:LocalBytes/esphome-config-ts",
-    "lodash": "^4.18.1",
-    "typescript": "catalog:",
-    "zod": "^4.4.3"
-  },
-  "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "@stylistic/eslint-plugin": "^5.10.0",
-    "@tsconfig/node-lts": "^24.0.1",
-    "@types/lodash": "^4.17.25",
-    "@types/node": "^26.2.0",
-    "eslint": "^10.8.1",
-    "tsdown": "^0.22.14",
-    "typescript-eslint": "^8.67.0"
-  },
+  "author": "",
+  "type": "module",
   "exports": {
     "./esphome-localdeck": "./dist/esphome-localdeck.mjs",
     "./esphome-localdeck-stock": "./dist/esphome-localdeck-stock.mjs",
@@ -40,5 +15,27 @@
     "./virtuals/configured-button": "./dist/virtuals/configured-button.mjs",
     "./virtuals/slider-number": "./dist/virtuals/slider-number.mjs",
     "./package.json": "./package.json"
+  },
+  "scripts": {
+    "prepare": "tsdown",
+    "dev": "tsdown --watch",
+    "make": "pnpm run prepare && just make",
+    "make:prod": "pnpm run prepare && just make-prod",
+    "make:test": "pnpm run prepare && just make-test",
+    "lint": "oxlint --type-aware --type-check . && oxfmt --check .",
+    "lint:fix": "oxlint --type-aware --type-check --fix . && oxfmt ."
+  },
+  "dependencies": {
+    "esphome-config-ts": "github:LocalBytes/esphome-config-ts",
+    "lodash": "^4.18.1",
+    "typescript": "catalog:",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@tsconfig/node-ts": "^23.6.4",
+    "@tsconfig/node26": "^26.0.1",
+    "@types/lodash": "^4.17.25",
+    "@types/node": "^26.6.1",
+    "tsdown": "^0.23.0"
   }
 }

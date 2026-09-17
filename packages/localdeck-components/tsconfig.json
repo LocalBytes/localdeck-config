@@ -1,9 +1,6 @@
 {
   "extends": "./.nuxt/tsconfig.node.json",
-  "include": [
-    "vitest.config.ts",
-    "test/unit/**/*.ts"
-  ],
+  "include": ["vitest.config.ts", "test/unit/**/*.ts"],
   "references": [
     {
       "path": "./.nuxt/tsconfig.app.json"

@@ -4,12 +4,10 @@
 const isTest = Boolean((import.meta as { env?: { TEST?: boolean } }).env?.TEST);
 
 export default defineNuxtConfig({
-  extends: ['@localbytes/localdeck-components'],
+  extends: ["@localbytes/localdeck-components"],
   modules: [
-    '@nuxt/eslint',
-
     // @nuxtjs/color-mode is conditionally loaded for test workaround (see https://github.com/nuxt-modules/color-mode/issues/335)
-    ...(!isTest ? ['@nuxtjs/color-mode'] : []),
+    ...(!isTest ? ["@nuxtjs/color-mode"] : []),
   ],
   devtools: {
     enabled: false, // Conflicts with devtools for chrome
@@ -17,40 +15,35 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      link: [
-        { rel: 'icon', type: 'image/svg', href: '/favicon.svg' },
-      ],
+      link: [{ rel: "icon", type: "image/svg", href: "/favicon.svg" }],
     },
   },
 
-  css: ['~/assets/main.css'],
+  css: ["~/assets/main.css"],
 
   colorMode: {
-    dataValue: 'theme',
+    dataValue: "theme",
   },
 
   runtimeConfig: {
-    esphomeDir: '/homeassistant/esphome',
+    esphomeDir: "/homeassistant/esphome",
 
-    haUrl: '',
-    haToken: '',
+    haUrl: "",
+    haToken: "",
 
-    public: { baseUrl: '' },
+    public: { baseUrl: "" },
 
-    nitro: { envPrefix: 'LB_' },
+    nitro: { envPrefix: "LB_" },
   },
 
   // // https://github.com/nuxt/nuxt/issues/32965
   dir: {
-    public: 'src/public',
-    modules: 'src/modules',
-    shared: 'src/shared',
+    public: "src/public",
+    modules: "src/modules",
+    shared: "src/shared",
   },
-  srcDir: 'src',
-  serverDir: 'src/server',
+  srcDir: "src",
+  serverDir: "src/server",
 
-  compatibilityDate: '2026-01-01',
-
-  eslint: { config: { stylistic: { semi: true }, typescript: { tsconfigPath: './tsconfig.json' } } },
-
+  compatibilityDate: "2026-01-01",
 });

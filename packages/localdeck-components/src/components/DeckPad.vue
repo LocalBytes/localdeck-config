@@ -1,9 +1,5 @@
 <template>
-  <div
-    ref="gridRef"
-    :class="{ printmode: isPrinting }"
-    class="pad-grid"
-  >
+  <div ref="gridRef" :class="{ printmode: isPrinting }" class="pad-grid">
     <DeckButtonItem
       v-for="container in orderedButtons"
       :key="container.keyNum"
@@ -16,15 +12,15 @@
 </template>
 
 <script lang="ts" setup>
-import { BUTTON_NUMBERS } from '@localbytes/localdeck-codegen/virtuals/configured-button';
-import { useResizeObserver } from '@vueuse/core';
-import type { EditContainer, PadEditor } from '~/utils/PadCfg';
-import { fontSizesSymbol } from '~/utils/hooks';
+import { BUTTON_NUMBERS } from "@localbytes/localdeck-codegen/virtuals/configured-button";
+import { useResizeObserver } from "@vueuse/core";
+import type { EditContainer, PadEditor } from "~/utils/PadCfg";
+import { fontSizesSymbol } from "~/utils/hooks";
 
 const gridRef = ref<HTMLDivElement>();
 
 const editor = defineModel<PadEditor>({ type: Object, required: true });
-const editing = defineModel<EditContainer>('editing', { type: Object });
+const editing = defineModel<EditContainer>("editing", { type: Object });
 
 const isPrinting = useIsPrinting();
 
@@ -35,7 +31,7 @@ const orderedButtons = computed(() => {
 });
 
 const click = (container: EditContainer | null) => {
-  if (!container || editing.value?.keyNum === container.keyNum) return editing.value = undefined;
+  if (!container || editing.value?.keyNum === container.keyNum) return (editing.value = undefined);
   editing.value = container;
 };
 
@@ -47,7 +43,9 @@ const sizes = reactive({
 
 useResizeObserver(gridRef, () => {
   sizes.devicePixelRatio = window.devicePixelRatio;
-  sizes.rootFontSize = Number(window.getComputedStyle(document.body).getPropertyValue('font-size').replace('px', ''));
+  sizes.rootFontSize = Number(
+    window.getComputedStyle(document.body).getPropertyValue("font-size").replace("px", ""),
+  );
   sizes.scaleFactor = (14 * sizes.devicePixelRatio * (96 / 25.4)) / (4 * sizes.rootFontSize);
 });
 provide(fontSizesSymbol, sizes);

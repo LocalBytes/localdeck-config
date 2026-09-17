@@ -1,44 +1,44 @@
 {
   "name": "@localbytes/localdeck-components",
-  "type": "module",
   "version": "0.0.1",
+  "type": "module",
   "main": "./nuxt.config.ts",
   "scripts": {
     "dev": "nuxi dev ",
     "build": "nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "lint": "eslint",
-    "lint:fix": "eslint --fix",
     "postinstall": "nuxt prepare",
-    "test": "vitest --run"
-  },
-  "devDependencies": {
-    "@nuxt/eslint": "^1.17.0",
-    "@tailwindcss/typography": "^0.5.20",
-    "@tailwindcss/vite": "^4.3.3",
-    "@vue/test-utils": "2.4.11",
-    "@vueuse/core": "^14.4.0",
-    "@vueuse/nuxt": "^14.4.0",
-    "daisyui": "^5.7.19",
-    "eslint": "^10.8.1",
-    "maska": "^3.2.0",
-    "nuxt": "catalog:",
-    "tailwindcss": "^4.3.3",
-    "typescript": "catalog:",
-    "vite": "catalog:",
-    "vitest": "catalog:"
+    "test": "vitest --run",
+    "lint": "oxlint . && eslint . && oxfmt --check .",
+    "lint:fix": "oxlint --fix . && eslint . --fix && oxfmt ."
   },
   "dependencies": {
     "@fontsource-variable/open-sans": "^5.3.0",
     "@fontsource/poppins": "^5.3.0",
     "@localbytes/localdeck-codegen": "workspace:^",
-    "@material-symbols/metadata": "^0.46.0",
+    "@material-symbols/metadata": "^0.47.3",
     "@traversable/zod": "^0.0.57",
     "fuse.js": "^7.5.0",
-    "material-symbols": "^0.46.0",
-    "pako": "^3.0.1",
+    "material-symbols": "^0.47.3",
+    "pako": "^3.0.2",
     "vue3-emoji-picker": "^1.1.8",
-    "zod": "^4.4.3"
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@nuxt/eslint": "^1.17.0",
+    "@tailwindcss/typography": "^0.5.20",
+    "@tailwindcss/vite": "^4.3.3",
+    "@vue/test-utils": "2.5.1",
+    "@vueuse/core": "^15.0.0",
+    "@vueuse/nuxt": "^15.0.0",
+    "daisyui": "^5.7.38",
+    "eslint": "^10.10.0",
+    "maska": "^3.2.1",
+    "nuxt": "catalog:",
+    "tailwindcss": "^4.3.3",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
   }
 }

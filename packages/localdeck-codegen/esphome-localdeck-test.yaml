@@ -29,4 +29,3 @@ light:
     effects:
       - addressable_rainbow:
           name: Addressable Rainbow
-

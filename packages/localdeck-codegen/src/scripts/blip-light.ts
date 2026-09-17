@@ -1,33 +1,40 @@
-import { ScriptPlatform } from 'esphome-config-ts/components';
-import { lambda } from 'esphome-config-ts/yaml';
+import { ScriptPlatform } from "esphome-config-ts/components";
+import { lambda } from "esphome-config-ts/yaml";
 
 // How many steps to take when dimming the lights
-const iterations = '20';
+const iterations = "20";
 
 // Brightness calculation. Note "iteration" is a counter the repeat action provides.
 // https://esphome.io/automations/actions.html#repeat-action
 const brightness = lambda(`return 1.0 - ((float)iteration / ${iterations});`);
 
 export const scriptBlipLight: ScriptPlatform = new ScriptPlatform({
-  id: 'blip_light',
-  parameters: { led_index: 'int' },
-  mode: 'parallel',
-  then: [{
-    repeat: {
-      count: iterations,
-      then: [{
-        'light.addressable_set': {
-          id: 'ledstrip',
-          range_from: lambda('return led_index;'),
-          range_to: lambda('return led_index;'),
-          red: brightness,
-          green: brightness,
-          blue: brightness,
-          white: brightness,
-        },
-      }, {
-        delay: '25ms',
-      }],
+  id: "blip_light",
+  parameters: { led_index: "int" },
+  mode: "parallel",
+  // oxlint-disable-next-line unicorn/no-thenable -- `then` is ESPHome's step-list key, not a real thenable
+  then: [
+    {
+      repeat: {
+        count: iterations,
+        // oxlint-disable-next-line unicorn/no-thenable -- `then` is ESPHome's step-list key, not a real thenable
+        then: [
+          {
+            "light.addressable_set": {
+              id: "ledstrip",
+              range_from: lambda("return led_index;"),
+              range_to: lambda("return led_index;"),
+              red: brightness,
+              green: brightness,
+              blue: brightness,
+              white: brightness,
+            },
+          },
+          {
+            delay: "25ms",
+          },
+        ],
+      },
     },
-  }],
+  ],
 });

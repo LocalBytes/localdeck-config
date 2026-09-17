@@ -607,7 +607,7 @@ script:
     mode: parallel
     then:
       - repeat:
-          count: '20'
+          count: "20"
           then:
             - light.addressable_set:
                 id: ledstrip
@@ -633,7 +633,7 @@ globals:
       }
   - id: brightness
     type: float
-    initial_value: '1'
+    initial_value: "1"
     restore_value: true
 number:
   - platform: template
@@ -642,9 +642,9 @@ number:
       - globals.set:
           id: brightness
           value: !lambda return x;
-    max_value: '1'
-    min_value: '0'
-    step: '0.01'
+    max_value: "1"
+    min_value: "0"
+    step: "0.01"
     lambda: !lambda return id(brightness);
 dashboard_import:
   package_import_url: github://LocalBytes/localdeck-config/packages/localdeck-codegen/esphome-localdeck.yaml
@@ -671,7 +671,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '1'
+                button: "1"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 1
                 type: single
@@ -683,7 +683,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '1'
+                button: "1"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 1
                 type: double
@@ -709,7 +709,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '10'
+                button: "10"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 10
                 type: single
@@ -721,7 +721,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '10'
+                button: "10"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 10
                 type: double
@@ -747,7 +747,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '11'
+                button: "11"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 11
                 type: single
@@ -759,7 +759,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '11'
+                button: "11"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 11
                 type: double
@@ -785,7 +785,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '12'
+                button: "12"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 12
                 type: single
@@ -797,7 +797,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '12'
+                button: "12"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 12
                 type: double
@@ -823,7 +823,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '13'
+                button: "13"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 13
                 type: single
@@ -835,7 +835,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '13'
+                button: "13"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 13
                 type: double
@@ -861,7 +861,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '14'
+                button: "14"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 14
                 type: single
@@ -873,7 +873,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '14'
+                button: "14"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 14
                 type: double
@@ -899,7 +899,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '15'
+                button: "15"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 15
                 type: single
@@ -911,7 +911,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '15'
+                button: "15"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 15
                 type: double
@@ -937,7 +937,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '16'
+                button: "16"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 16
                 type: single
@@ -949,7 +949,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '16'
+                button: "16"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 16
                 type: double
@@ -975,7 +975,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '17'
+                button: "17"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 17
                 type: single
@@ -987,7 +987,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '17'
+                button: "17"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 17
                 type: double
@@ -1013,7 +1013,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '18'
+                button: "18"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 18
                 type: single
@@ -1025,7 +1025,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '18'
+                button: "18"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 18
                 type: double
@@ -1051,7 +1051,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '19'
+                button: "19"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 19
                 type: single
@@ -1063,7 +1063,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '19'
+                button: "19"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 19
                 type: double
@@ -1089,7 +1089,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '2'
+                button: "2"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 2
                 type: single
@@ -1101,7 +1101,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '2'
+                button: "2"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 2
                 type: double
@@ -1127,7 +1127,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '20'
+                button: "20"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 20
                 type: single
@@ -1139,7 +1139,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '20'
+                button: "20"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 20
                 type: double
@@ -1165,7 +1165,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '21'
+                button: "21"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 21
                 type: single
@@ -1177,7 +1177,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '21'
+                button: "21"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 21
                 type: double
@@ -1203,7 +1203,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '22'
+                button: "22"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 22
                 type: single
@@ -1215,7 +1215,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '22'
+                button: "22"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 22
                 type: double
@@ -1241,7 +1241,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '23'
+                button: "23"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 23
                 type: single
@@ -1253,7 +1253,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '23'
+                button: "23"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 23
                 type: double
@@ -1279,7 +1279,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '24'
+                button: "24"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 24
                 type: single
@@ -1291,7 +1291,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '24'
+                button: "24"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 24
                 type: double
@@ -1317,7 +1317,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '3'
+                button: "3"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 3
                 type: single
@@ -1329,7 +1329,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '3'
+                button: "3"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 3
                 type: double
@@ -1355,7 +1355,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '4'
+                button: "4"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 4
                 type: single
@@ -1367,7 +1367,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '4'
+                button: "4"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 4
                 type: double
@@ -1393,7 +1393,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '5'
+                button: "5"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 5
                 type: single
@@ -1405,7 +1405,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '5'
+                button: "5"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 5
                 type: double
@@ -1431,7 +1431,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '6'
+                button: "6"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 6
                 type: single
@@ -1443,7 +1443,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '6'
+                button: "6"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 6
                 type: double
@@ -1469,7 +1469,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '7'
+                button: "7"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 7
                 type: single
@@ -1481,7 +1481,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '7'
+                button: "7"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 7
                 type: double
@@ -1507,7 +1507,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '8'
+                button: "8"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 8
                 type: single
@@ -1519,7 +1519,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '8'
+                button: "8"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 8
                 type: double
@@ -1545,7 +1545,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '9'
+                button: "9"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 9
                 type: single
@@ -1557,8 +1557,7 @@ binary_sensor:
           - homeassistant.event:
               event: esphome.localdeck_button
               data:
-                button: '9'
+                button: "9"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 9
                 type: double
-

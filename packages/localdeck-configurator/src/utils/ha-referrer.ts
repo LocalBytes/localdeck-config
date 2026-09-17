@@ -5,8 +5,8 @@ export function innerPathFromReferrer(referrer: string, ingressPrefix: string): 
     return url.pathname.slice(ingressPrefix.length) + url.search;
   }
 
-  const segments = url.pathname.split('/').filter(Boolean);
+  const segments = url.pathname.split("/").filter(Boolean);
   if (segments.length === 0) return null;
 
-  return '/' + segments.slice(1).join('/') + url.search;
+  return "/" + segments.slice(1).join("/") + url.search;
 }

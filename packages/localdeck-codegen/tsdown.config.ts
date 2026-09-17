@@ -1,8 +1,8 @@
-import {defineConfig} from "tsdown/config";
+import { defineConfig } from "tsdown/config";
 
 export default defineConfig({
-    dts: true,
-    entry: ["./src/**/*.ts"],
-    exports: true,
-    sourcemap: true,
+  dts: true,
+  entry: ["./src/**/*.ts"],
+  exports: true,
+  sourcemap: true,
 });

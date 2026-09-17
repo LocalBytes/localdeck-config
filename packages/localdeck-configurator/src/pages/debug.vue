@@ -4,12 +4,7 @@
 
     <label>
       Config URL
-      <input
-        v-model="configUrl"
-        class="input border-secondary inline-block"
-        type="text"
-      >
-
+      <input v-model="configUrl" class="input border-secondary inline-block" type="text" />
     </label>
 
     <div>
@@ -20,17 +15,16 @@
 </template>
 
 <script lang="ts" setup>
-import { decompress } from '@localbytes/localdeck-components/src/utils/compression';
+import { decompress } from "@localbytes/localdeck-components/src/utils/compression";
 
-const configUrl = ref<string>('');
+const configUrl = ref<string>("");
 
 const decompressed = computed(() => {
   try {
     const url: URL = new URL(configUrl.value);
-    const extracted = url.searchParams.get('config');
+    const extracted = url.searchParams.get("config");
     return decompress(extracted!);
-  }
-  catch (e) {
+  } catch (e) {
     return e;
   }
 });
