@@ -262,7 +262,7 @@ jobs:
         run: |
           sed -i 's/"LocalDeck Configurator"/"LocalDeck Configurator (Next)"/' ./localdeck-configurator/config.yaml
           sed -i 's/"localdeck-configurator"/"localdeck-configurator-next"/' ./localdeck-configurator/config.yaml
-          sed -i 's/stage: stable/stage: beta/' ./localdeck-configurator/config.yaml
+          sed -i 's/stage: stable/stage: experimental/' ./localdeck-configurator/config.yaml
 
       - run: |
           echo "addon_path=$([[ "${{ env.channel }}" == "release" ]] && echo "localdeck-configurator" || echo "localdeck-configurator-next")" >> "$GITHUB_ENV"
