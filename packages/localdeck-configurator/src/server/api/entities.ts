@@ -31,7 +31,7 @@ export default defineEventHandler(async () => {
     // Home Assistant's actual response shape can't be verified at compile time.
     response = await fetch(haUrl + "/states", {
       headers: { authorization: `Bearer ${haToken}` },
-    }).then((response) => response.json() as Promise<typeof example>);
+    }).then((res) => res.json() as Promise<typeof example>);
   } else {
     response = example;
   }

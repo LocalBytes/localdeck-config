@@ -67,7 +67,7 @@ const { data, status } = await useServerFetch("/api/editor", {
 });
 const { data: entities } = await useServerFetch("/api/entities", {
   server: false,
-  transform: (data) => new Fuse(data, { keys: ["id", { name: "name", weight: 2 }] }),
+  transform: (rows) => new Fuse(rows, { keys: ["id", { name: "name", weight: 2 }] }),
 });
 
 enum SavingStatus {
