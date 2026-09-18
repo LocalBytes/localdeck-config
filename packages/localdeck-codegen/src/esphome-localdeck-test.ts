@@ -46,7 +46,8 @@ config.addComponent(
     name: "Ledstrip",
     id: "ledstrip",
     channel_colors: "GRB",
-    pin: "GPIO8",
+    // ignore_strapping_warning suppresses ESP32-C3 boot warning
+    pin: { number: "GPIO8", ignore_strapping_warning: true },
     num_leds: 24,
     chipset: "SK6812",
     restore_mode: "RESTORE_AND_OFF",
