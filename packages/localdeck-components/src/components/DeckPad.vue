@@ -20,7 +20,7 @@ import { fontSizesSymbol } from "~/utils/hooks";
 const gridRef = ref<HTMLDivElement>();
 
 const editor = defineModel<PadEditor>({ type: Object, required: true });
-const editing = defineModel<EditContainer>("editing", { type: Object });
+const editing = defineModel<EditContainer>("editing", { type: Object, default: undefined });
 
 const isPrinting = useIsPrinting();
 

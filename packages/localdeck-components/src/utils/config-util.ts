@@ -31,11 +31,11 @@ export const ObjectUtil = {
     if (key === undefined) return;
 
     if (path.length === 1) {
-      delete obj[key];
+      Reflect.deleteProperty(obj, key);
     } else {
       ObjectUtil.unset(obj[key] as DynamicObject, path.slice(1));
 
-      if (Object.keys(obj[key] as DynamicObject).length === 0) delete obj[key];
+      if (Object.keys(obj[key] as DynamicObject).length === 0) Reflect.deleteProperty(obj, key);
     }
   },
 };
