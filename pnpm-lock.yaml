@@ -217,7 +217,7 @@ importers:
     dependencies:
       esphome-config-ts:
         specifier: github:LocalBytes/esphome-config-ts
-        version: https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/a835c4b1378113cf25d29081152800e8736bc2c6
+        version: https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/46e6f6a1e88e38e2e9bff050eb09f31cb2d09ed2
       lodash:
         specifier: ^4.18.1
         version: 4.18.1
@@ -345,7 +345,7 @@ importers:
         version: 5.7.38
       esphome-config-ts:
         specifier: github:LocalBytes/esphome-config-ts
-        version: https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/a835c4b1378113cf25d29081152800e8736bc2c6
+        version: https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/46e6f6a1e88e38e2e9bff050eb09f31cb2d09ed2
       fuse.js:
         specifier: ^7.5.0
         version: 7.5.0
@@ -3325,8 +3325,8 @@ packages:
       jiti:
         optional: true
 
-  esphome-config-ts@https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/a835c4b1378113cf25d29081152800e8736bc2c6:
-    resolution: {gitHosted: true, integrity: sha512-umKAbsFDMD9LbO2tM7Mal9EfsGUQDjye6VRrzg4b93y3hPSroeDrtOydL/s7gQRK3l2L8bnhATdlW2hI2PSFvg==, tarball: https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/a835c4b1378113cf25d29081152800e8736bc2c6}
+  esphome-config-ts@https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/46e6f6a1e88e38e2e9bff050eb09f31cb2d09ed2:
+    resolution: {gitHosted: true, integrity: sha512-J/5hTuRyT16/lk7LzWFr1ADqNJxWJS5Podrw2PzYo5Ji3fET9/sTPyfwnHP8KI+VHHPF0Z4RRggjiBFC6HOnnw==, tarball: https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/46e6f6a1e88e38e2e9bff050eb09f31cb2d09ed2}
     version: 0.2.1-next
 
   espree@10.4.0:
@@ -9365,7 +9365,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  esphome-config-ts@https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/a835c4b1378113cf25d29081152800e8736bc2c6:
+  esphome-config-ts@https://codeload.github.com/LocalBytes/esphome-config-ts/tar.gz/46e6f6a1e88e38e2e9bff050eb09f31cb2d09ed2:
     dependencies:
       js-yaml: 5.4.2
       unzipper: 0.12.5

@@ -29,9 +29,6 @@ config.updateComponent(
     name: "${name}",
     friendly_name: "${friendly_name}",
     name_add_mac_suffix: true,
-    platformio_options: {
-      "board_build.flash_mode": "dio",
-    },
     on_boot: [
       {
         "light.turn_on": {
@@ -48,8 +45,9 @@ config.addComponent(
   new Esp32RmtLedStripLight({
     name: "Ledstrip",
     id: "ledstrip",
-    rgb_order: "GRB",
-    pin: "GPIO8",
+    channel_colors: "GRB",
+    // ignore_strapping_warning suppresses ESP32-C3 boot warning
+    pin: { number: "GPIO8", ignore_strapping_warning: true },
     num_leds: 24,
     chipset: "SK6812",
     restore_mode: "RESTORE_AND_OFF",

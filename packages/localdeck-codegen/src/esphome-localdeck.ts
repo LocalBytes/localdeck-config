@@ -47,9 +47,6 @@ function newConfig(
           name: "${name}",
           friendly_name: "${friendly_name}",
           name_add_mac_suffix: false,
-          platformio_options: {
-            "board_build.flash_mode": "dio",
-          },
           on_boot: [
             {
               "light.turn_on": {
@@ -117,7 +114,7 @@ function newConfig(
   const ledstrip = new Esp32RmtLedStripLight({
     name: "Ledstrip",
     id: "ledstrip",
-    rgb_order: "GRB",
+    channel_colors: "GRB",
     // ignore_strapping_warning suppresses ESP32-C3 boot warning
     pin: { number: "GPIO8", ignore_strapping_warning: true },
     num_leds: 24,

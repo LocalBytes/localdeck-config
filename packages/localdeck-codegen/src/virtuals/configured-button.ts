@@ -68,9 +68,9 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
         id: lightId,
         name: lightName,
         internal: !c.expose,
-        // @ts-expect-error - single_light_id is only required when NOT using id/from/to; the
-        // schema dump can't express "one or the other required", so it marks both Required
         segments: [
+          // @ts-expect-error - single_light_id is only required when NOT using id/from/to; the
+          // schema dump can't express "one or the other required", so it marks both Required
           {
             id: "ledstrip",
             from: c.num - 1,
@@ -173,7 +173,8 @@ export class ConfiguredButton extends VirtualComponent<ConfiguredButtonOpts> {
     const eventData = {
       button: c.num.toString(),
       ieee_address: lambdaIeee,
-      label: this.config.label.text,
+      // homeassistant.event's data values must be strings; an unset label is null, not "".
+      label: this.config.label.text ?? "",
     };
 
     sensor.config.on_multi_click ??= [];
