@@ -47,9 +47,6 @@ function newConfig(
           name: "${name}",
           friendly_name: "${friendly_name}",
           name_add_mac_suffix: false,
-          platformio_options: {
-            "board_build.flash_mode": "dio",
-          },
           on_boot: [
             {
               "light.turn_on": {
