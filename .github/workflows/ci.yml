@@ -260,12 +260,12 @@ jobs:
       - name: Configure dev channel
         if: env.channel != 'release'
         run: |
-          sed -i 's/"LocalDeck Configurator"/"LocalDeck Configurator (Next)"/' ./localdeck-configurator/config.yaml
-          sed -i 's/"localdeck-configurator"/"localdeck-configurator-next"/' ./localdeck-configurator/config.yaml
+          sed -i 's/"LocalDeck Configurator"/"LocalDeck Configurator (Dev)"/' ./localdeck-configurator/config.yaml
+          sed -i 's/"localdeck-configurator"/"localdeck-configurator-dev"/' ./localdeck-configurator/config.yaml
           sed -i 's/stage: stable/stage: experimental/' ./localdeck-configurator/config.yaml
 
       - run: |
-          echo "addon_path=$([[ "${{ env.channel }}" == "release" ]] && echo "localdeck-configurator" || echo "localdeck-configurator-next")" >> "$GITHUB_ENV"
+          echo "addon_path=$([[ "${{ env.channel }}" == "release" ]] && echo "localdeck-configurator" || echo "localdeck-configurator-dev")" >> "$GITHUB_ENV"
           echo "short_sha=${GITHUB_SHA:0:7}" >> "$GITHUB_ENV"
 
       - uses: cpina/github-action-push-to-another-repository@55306faa4ed53b815ae49e564af8cfb359d32ae2 # main
