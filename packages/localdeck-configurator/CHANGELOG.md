@@ -1,16 +1,17 @@
 # Changelog
 
-## [Unreleased](https://github.com/LocalBytes/localdeck-config/compare/v0.7...main)
+## [Unreleased](https://github.com/LocalBytes/localdeck-config/compare/v0.8...main)
 
-### Added
-
-- Introduced `LB_*` environment variables for configurator configuration, with a `bashio` fallback and a deprecation warning for the old `NUXT_*` vars. Refs #22
+## [v0.8](https://github.com/LocalBytes/localdeck-config/releases/tag/v0.8)
 
 ### Changed
 
+- Replaced the previously-undocumented `NUXT_*` environment variables with `LB_*` ones, with a deprecation warning for the old vars. Refs #22
 - Major update to dependencies including Nuxt 4 in b43e45e
 - Upgraded to Vite 8 and Vitest 4; e2e tests now share a single dev server, reducing test time significantly in #155
 - Moved from RippleUI to DaisyUI for the UI components in b43e45e
+- Compatibility for ESPHome 2026.09 in e366bdf
+- The icon picker now opens instantly instead of blocking on ~5000 emoji/icon nodes in 98fdf5e, d2eedb1
 
 ### Fixed
 
@@ -21,6 +22,8 @@
 - Fixed the provisioning indicator (button 01 LED) broken by ESPHome 2026.5 in #143
 - Very short button presses now reliably reach Home Assistant in #163
 - Migrated to ESPHome's renamed `homeassistant.action` (from `.service`) and fixed a toggle action silently never firing in #173
+- Buttons are now force-updated after at least one `batch_delay` cycle, so presses are no longer dropped in 4905f48
+- Button numbers are now sorted numerically rather than lexicographically when generating config in d16e0be
 
 ## [v0.7](https://github.com/LocalBytes/localdeck-config/releases/tag/v0.7)
 

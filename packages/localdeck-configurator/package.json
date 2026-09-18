@@ -1,6 +1,6 @@
 {
   "name": "@localbytes/localdeck-configurator",
-  "version": "0.7.1",
+  "version": "0.8",
   "private": true,
   "type": "module",
   "scripts": {
