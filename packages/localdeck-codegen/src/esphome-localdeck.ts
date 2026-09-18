@@ -117,7 +117,7 @@ function newConfig(
   const ledstrip = new Esp32RmtLedStripLight({
     name: "Ledstrip",
     id: "ledstrip",
-    rgb_order: "GRB",
+    channel_colors: "GRB",
     // ignore_strapping_warning suppresses ESP32-C3 boot warning
     pin: { number: "GPIO8", ignore_strapping_warning: true },
     num_leds: 24,

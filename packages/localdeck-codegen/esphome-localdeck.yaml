@@ -59,7 +59,7 @@ light:
   - platform: esp32_rmt_led_strip
     name: Ledstrip
     id: ledstrip
-    rgb_order: GRB
+    channel_colors: GRB
     pin:
       number: GPIO8
       ignore_strapping_warning: true
@@ -77,6 +77,174 @@ light:
       - id: ledstrip
         from: 0
         to: 0
+    effects:
+      - pulse: {}
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: {}
+      - flicker: {}
+  - platform: partition
+    id: keypad_button_02_light
+    name: Button 02 Light
+    internal: false
+    segments:
+      - id: ledstrip
+        from: 1
+        to: 1
+    effects:
+      - pulse: {}
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: {}
+      - flicker: {}
+  - platform: partition
+    id: keypad_button_03_light
+    name: Button 03 Light
+    internal: false
+    segments:
+      - id: ledstrip
+        from: 2
+        to: 2
+    effects:
+      - pulse: {}
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: {}
+      - flicker: {}
+  - platform: partition
+    id: keypad_button_04_light
+    name: Button 04 Light
+    internal: false
+    segments:
+      - id: ledstrip
+        from: 3
+        to: 3
+    effects:
+      - pulse: {}
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: {}
+      - flicker: {}
+  - platform: partition
+    id: keypad_button_05_light
+    name: Button 05 Light
+    internal: false
+    segments:
+      - id: ledstrip
+        from: 4
+        to: 4
+    effects:
+      - pulse: {}
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: {}
+      - flicker: {}
+  - platform: partition
+    id: keypad_button_06_light
+    name: Button 06 Light
+    internal: false
+    segments:
+      - id: ledstrip
+        from: 5
+        to: 5
+    effects:
+      - pulse: {}
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: {}
+      - flicker: {}
+  - platform: partition
+    id: keypad_button_07_light
+    name: Button 07 Light
+    internal: false
+    segments:
+      - id: ledstrip
+        from: 6
+        to: 6
+    effects:
+      - pulse: {}
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: {}
+      - flicker: {}
+  - platform: partition
+    id: keypad_button_08_light
+    name: Button 08 Light
+    internal: false
+    segments:
+      - id: ledstrip
+        from: 7
+        to: 7
+    effects:
+      - pulse: {}
+      - pulse:
+          name: Fast Pulse
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0
+          max_brightness: 1
+      - pulse:
+          name: Slow Pulse
+          update_interval: 2s
+      - random: {}
+      - flicker: {}
+  - platform: partition
+    id: keypad_button_09_light
+    name: Button 09 Light
+    internal: false
+    segments:
+      - id: ledstrip
+        from: 8
+        to: 8
     effects:
       - pulse: {}
       - pulse:
@@ -301,27 +469,6 @@ light:
       - random: {}
       - flicker: {}
   - platform: partition
-    id: keypad_button_02_light
-    name: Button 02 Light
-    internal: false
-    segments:
-      - id: ledstrip
-        from: 1
-        to: 1
-    effects:
-      - pulse: {}
-      - pulse:
-          name: Fast Pulse
-          transition_length: 0.5s
-          update_interval: 0.5s
-          min_brightness: 0
-          max_brightness: 1
-      - pulse:
-          name: Slow Pulse
-          update_interval: 2s
-      - random: {}
-      - flicker: {}
-  - platform: partition
     id: keypad_button_20_light
     name: Button 20 Light
     internal: false
@@ -413,153 +560,6 @@ light:
       - id: ledstrip
         from: 23
         to: 23
-    effects:
-      - pulse: {}
-      - pulse:
-          name: Fast Pulse
-          transition_length: 0.5s
-          update_interval: 0.5s
-          min_brightness: 0
-          max_brightness: 1
-      - pulse:
-          name: Slow Pulse
-          update_interval: 2s
-      - random: {}
-      - flicker: {}
-  - platform: partition
-    id: keypad_button_03_light
-    name: Button 03 Light
-    internal: false
-    segments:
-      - id: ledstrip
-        from: 2
-        to: 2
-    effects:
-      - pulse: {}
-      - pulse:
-          name: Fast Pulse
-          transition_length: 0.5s
-          update_interval: 0.5s
-          min_brightness: 0
-          max_brightness: 1
-      - pulse:
-          name: Slow Pulse
-          update_interval: 2s
-      - random: {}
-      - flicker: {}
-  - platform: partition
-    id: keypad_button_04_light
-    name: Button 04 Light
-    internal: false
-    segments:
-      - id: ledstrip
-        from: 3
-        to: 3
-    effects:
-      - pulse: {}
-      - pulse:
-          name: Fast Pulse
-          transition_length: 0.5s
-          update_interval: 0.5s
-          min_brightness: 0
-          max_brightness: 1
-      - pulse:
-          name: Slow Pulse
-          update_interval: 2s
-      - random: {}
-      - flicker: {}
-  - platform: partition
-    id: keypad_button_05_light
-    name: Button 05 Light
-    internal: false
-    segments:
-      - id: ledstrip
-        from: 4
-        to: 4
-    effects:
-      - pulse: {}
-      - pulse:
-          name: Fast Pulse
-          transition_length: 0.5s
-          update_interval: 0.5s
-          min_brightness: 0
-          max_brightness: 1
-      - pulse:
-          name: Slow Pulse
-          update_interval: 2s
-      - random: {}
-      - flicker: {}
-  - platform: partition
-    id: keypad_button_06_light
-    name: Button 06 Light
-    internal: false
-    segments:
-      - id: ledstrip
-        from: 5
-        to: 5
-    effects:
-      - pulse: {}
-      - pulse:
-          name: Fast Pulse
-          transition_length: 0.5s
-          update_interval: 0.5s
-          min_brightness: 0
-          max_brightness: 1
-      - pulse:
-          name: Slow Pulse
-          update_interval: 2s
-      - random: {}
-      - flicker: {}
-  - platform: partition
-    id: keypad_button_07_light
-    name: Button 07 Light
-    internal: false
-    segments:
-      - id: ledstrip
-        from: 6
-        to: 6
-    effects:
-      - pulse: {}
-      - pulse:
-          name: Fast Pulse
-          transition_length: 0.5s
-          update_interval: 0.5s
-          min_brightness: 0
-          max_brightness: 1
-      - pulse:
-          name: Slow Pulse
-          update_interval: 2s
-      - random: {}
-      - flicker: {}
-  - platform: partition
-    id: keypad_button_08_light
-    name: Button 08 Light
-    internal: false
-    segments:
-      - id: ledstrip
-        from: 7
-        to: 7
-    effects:
-      - pulse: {}
-      - pulse:
-          name: Fast Pulse
-          transition_length: 0.5s
-          update_interval: 0.5s
-          min_brightness: 0
-          max_brightness: 1
-      - pulse:
-          name: Slow Pulse
-          update_interval: 2s
-      - random: {}
-      - flicker: {}
-  - platform: partition
-    id: keypad_button_09_light
-    name: Button 09 Light
-    internal: false
-    segments:
-      - id: ledstrip
-        from: 8
-        to: 8
     effects:
       - pulse: {}
       - pulse:
@@ -686,6 +686,310 @@ binary_sensor:
                 button: "1"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 1
+                type: double
+  - platform: matrix_keypad
+    id: keypad_button_02
+    name: Button 02
+    internal: false
+    filters:
+      - delayed_off: 125ms
+    keypad_id: keypad
+    key: B
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 1
+      - delay: 500ms
+      - lambda: id(keypad_button_02_light).make_call().perform();
+    on_multi_click:
+      - timing:
+          - ON for at most 1s
+          - OFF for at least 0.5s
+        then:
+          - homeassistant.event:
+              event: esphome.localdeck_button
+              data:
+                button: "2"
+                ieee_address: !lambda return id(wifi_info_mac_address).state;
+                label: Button 2
+                type: single
+      - timing:
+          - ON for at most 1s
+          - OFF for at most 0.5s
+          - ON for at most 1s
+        then:
+          - homeassistant.event:
+              event: esphome.localdeck_button
+              data:
+                button: "2"
+                ieee_address: !lambda return id(wifi_info_mac_address).state;
+                label: Button 2
+                type: double
+  - platform: matrix_keypad
+    id: keypad_button_03
+    name: Button 03
+    internal: false
+    filters:
+      - delayed_off: 125ms
+    keypad_id: keypad
+    key: C
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 2
+      - delay: 500ms
+      - lambda: id(keypad_button_03_light).make_call().perform();
+    on_multi_click:
+      - timing:
+          - ON for at most 1s
+          - OFF for at least 0.5s
+        then:
+          - homeassistant.event:
+              event: esphome.localdeck_button
+              data:
+                button: "3"
+                ieee_address: !lambda return id(wifi_info_mac_address).state;
+                label: Button 3
+                type: single
+      - timing:
+          - ON for at most 1s
+          - OFF for at most 0.5s
+          - ON for at most 1s
+        then:
+          - homeassistant.event:
+              event: esphome.localdeck_button
+              data:
+                button: "3"
+                ieee_address: !lambda return id(wifi_info_mac_address).state;
+                label: Button 3
+                type: double
+  - platform: matrix_keypad
+    id: keypad_button_04
+    name: Button 04
+    internal: false
+    filters:
+      - delayed_off: 125ms
+    keypad_id: keypad
+    key: D
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 3
+      - delay: 500ms
+      - lambda: id(keypad_button_04_light).make_call().perform();
+    on_multi_click:
+      - timing:
+          - ON for at most 1s
+          - OFF for at least 0.5s
+        then:
+          - homeassistant.event:
+              event: esphome.localdeck_button
+              data:
+                button: "4"
+                ieee_address: !lambda return id(wifi_info_mac_address).state;
+                label: Button 4
+                type: single
+      - timing:
+          - ON for at most 1s
+          - OFF for at most 0.5s
+          - ON for at most 1s
+        then:
+          - homeassistant.event:
+              event: esphome.localdeck_button
+              data:
+                button: "4"
+                ieee_address: !lambda return id(wifi_info_mac_address).state;
+                label: Button 4
+                type: double
+  - platform: matrix_keypad
+    id: keypad_button_05
+    name: Button 05
+    internal: false
+    filters:
+      - delayed_off: 125ms
+    keypad_id: keypad
+    key: E
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 4
+      - delay: 500ms
+      - lambda: id(keypad_button_05_light).make_call().perform();
+    on_multi_click:
+      - timing:
+          - ON for at most 1s
+          - OFF for at least 0.5s
+        then:
+          - homeassistant.event:
+              event: esphome.localdeck_button
+              data:
+                button: "5"
+                ieee_address: !lambda return id(wifi_info_mac_address).state;
+                label: Button 5
+                type: single
+      - timing:
+          - ON for at most 1s
+          - OFF for at most 0.5s
+          - ON for at most 1s
+        then:
+          - homeassistant.event:
+              event: esphome.localdeck_button
+              data:
+                button: "5"
+                ieee_address: !lambda return id(wifi_info_mac_address).state;
+                label: Button 5
+                type: double
+  - platform: matrix_keypad
+    id: keypad_button_06
+    name: Button 06
+    internal: false
+    filters:
+      - delayed_off: 125ms
+    keypad_id: keypad
+    key: F
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 5
+      - delay: 500ms
+      - lambda: id(keypad_button_06_light).make_call().perform();
+    on_multi_click:
+      - timing:
+          - ON for at most 1s
+          - OFF for at least 0.5s
+        then:
+          - homeassistant.event:
+              event: esphome.localdeck_button
+              data:
+                button: "6"
+                ieee_address: !lambda return id(wifi_info_mac_address).state;
+                label: Button 6
+                type: single
+      - timing:
+          - ON for at most 1s
+          - OFF for at most 0.5s
+          - ON for at most 1s
+        then:
+          - homeassistant.event:
+              event: esphome.localdeck_button
+              data:
+                button: "6"
+                ieee_address: !lambda return id(wifi_info_mac_address).state;
+                label: Button 6
+                type: double
+  - platform: matrix_keypad
+    id: keypad_button_07
+    name: Button 07
+    internal: false
+    filters:
+      - delayed_off: 125ms
+    keypad_id: keypad
+    key: G
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 6
+      - delay: 500ms
+      - lambda: id(keypad_button_07_light).make_call().perform();
+    on_multi_click:
+      - timing:
+          - ON for at most 1s
+          - OFF for at least 0.5s
+        then:
+          - homeassistant.event:
+              event: esphome.localdeck_button
+              data:
+                button: "7"
+                ieee_address: !lambda return id(wifi_info_mac_address).state;
+                label: Button 7
+                type: single
+      - timing:
+          - ON for at most 1s
+          - OFF for at most 0.5s
+          - ON for at most 1s
+        then:
+          - homeassistant.event:
+              event: esphome.localdeck_button
+              data:
+                button: "7"
+                ieee_address: !lambda return id(wifi_info_mac_address).state;
+                label: Button 7
+                type: double
+  - platform: matrix_keypad
+    id: keypad_button_08
+    name: Button 08
+    internal: false
+    filters:
+      - delayed_off: 125ms
+    keypad_id: keypad
+    key: H
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 7
+      - delay: 500ms
+      - lambda: id(keypad_button_08_light).make_call().perform();
+    on_multi_click:
+      - timing:
+          - ON for at most 1s
+          - OFF for at least 0.5s
+        then:
+          - homeassistant.event:
+              event: esphome.localdeck_button
+              data:
+                button: "8"
+                ieee_address: !lambda return id(wifi_info_mac_address).state;
+                label: Button 8
+                type: single
+      - timing:
+          - ON for at most 1s
+          - OFF for at most 0.5s
+          - ON for at most 1s
+        then:
+          - homeassistant.event:
+              event: esphome.localdeck_button
+              data:
+                button: "8"
+                ieee_address: !lambda return id(wifi_info_mac_address).state;
+                label: Button 8
+                type: double
+  - platform: matrix_keypad
+    id: keypad_button_09
+    name: Button 09
+    internal: false
+    filters:
+      - delayed_off: 125ms
+    keypad_id: keypad
+    key: I
+    on_press:
+      - script.execute:
+          id: blip_light
+          led_index: 8
+      - delay: 500ms
+      - lambda: id(keypad_button_09_light).make_call().perform();
+    on_multi_click:
+      - timing:
+          - ON for at most 1s
+          - OFF for at least 0.5s
+        then:
+          - homeassistant.event:
+              event: esphome.localdeck_button
+              data:
+                button: "9"
+                ieee_address: !lambda return id(wifi_info_mac_address).state;
+                label: Button 9
+                type: single
+      - timing:
+          - ON for at most 1s
+          - OFF for at most 0.5s
+          - ON for at most 1s
+        then:
+          - homeassistant.event:
+              event: esphome.localdeck_button
+              data:
+                button: "9"
+                ieee_address: !lambda return id(wifi_info_mac_address).state;
+                label: Button 9
                 type: double
   - platform: matrix_keypad
     id: keypad_button_10
@@ -1068,44 +1372,6 @@ binary_sensor:
                 label: Button 19
                 type: double
   - platform: matrix_keypad
-    id: keypad_button_02
-    name: Button 02
-    internal: false
-    filters:
-      - delayed_off: 125ms
-    keypad_id: keypad
-    key: B
-    on_press:
-      - script.execute:
-          id: blip_light
-          led_index: 1
-      - delay: 500ms
-      - lambda: id(keypad_button_02_light).make_call().perform();
-    on_multi_click:
-      - timing:
-          - ON for at most 1s
-          - OFF for at least 0.5s
-        then:
-          - homeassistant.event:
-              event: esphome.localdeck_button
-              data:
-                button: "2"
-                ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: Button 2
-                type: single
-      - timing:
-          - ON for at most 1s
-          - OFF for at most 0.5s
-          - ON for at most 1s
-        then:
-          - homeassistant.event:
-              event: esphome.localdeck_button
-              data:
-                button: "2"
-                ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: Button 2
-                type: double
-  - platform: matrix_keypad
     id: keypad_button_20
     name: Button 20
     internal: false
@@ -1294,270 +1560,4 @@ binary_sensor:
                 button: "24"
                 ieee_address: !lambda return id(wifi_info_mac_address).state;
                 label: Button 24
-                type: double
-  - platform: matrix_keypad
-    id: keypad_button_03
-    name: Button 03
-    internal: false
-    filters:
-      - delayed_off: 125ms
-    keypad_id: keypad
-    key: C
-    on_press:
-      - script.execute:
-          id: blip_light
-          led_index: 2
-      - delay: 500ms
-      - lambda: id(keypad_button_03_light).make_call().perform();
-    on_multi_click:
-      - timing:
-          - ON for at most 1s
-          - OFF for at least 0.5s
-        then:
-          - homeassistant.event:
-              event: esphome.localdeck_button
-              data:
-                button: "3"
-                ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: Button 3
-                type: single
-      - timing:
-          - ON for at most 1s
-          - OFF for at most 0.5s
-          - ON for at most 1s
-        then:
-          - homeassistant.event:
-              event: esphome.localdeck_button
-              data:
-                button: "3"
-                ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: Button 3
-                type: double
-  - platform: matrix_keypad
-    id: keypad_button_04
-    name: Button 04
-    internal: false
-    filters:
-      - delayed_off: 125ms
-    keypad_id: keypad
-    key: D
-    on_press:
-      - script.execute:
-          id: blip_light
-          led_index: 3
-      - delay: 500ms
-      - lambda: id(keypad_button_04_light).make_call().perform();
-    on_multi_click:
-      - timing:
-          - ON for at most 1s
-          - OFF for at least 0.5s
-        then:
-          - homeassistant.event:
-              event: esphome.localdeck_button
-              data:
-                button: "4"
-                ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: Button 4
-                type: single
-      - timing:
-          - ON for at most 1s
-          - OFF for at most 0.5s
-          - ON for at most 1s
-        then:
-          - homeassistant.event:
-              event: esphome.localdeck_button
-              data:
-                button: "4"
-                ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: Button 4
-                type: double
-  - platform: matrix_keypad
-    id: keypad_button_05
-    name: Button 05
-    internal: false
-    filters:
-      - delayed_off: 125ms
-    keypad_id: keypad
-    key: E
-    on_press:
-      - script.execute:
-          id: blip_light
-          led_index: 4
-      - delay: 500ms
-      - lambda: id(keypad_button_05_light).make_call().perform();
-    on_multi_click:
-      - timing:
-          - ON for at most 1s
-          - OFF for at least 0.5s
-        then:
-          - homeassistant.event:
-              event: esphome.localdeck_button
-              data:
-                button: "5"
-                ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: Button 5
-                type: single
-      - timing:
-          - ON for at most 1s
-          - OFF for at most 0.5s
-          - ON for at most 1s
-        then:
-          - homeassistant.event:
-              event: esphome.localdeck_button
-              data:
-                button: "5"
-                ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: Button 5
-                type: double
-  - platform: matrix_keypad
-    id: keypad_button_06
-    name: Button 06
-    internal: false
-    filters:
-      - delayed_off: 125ms
-    keypad_id: keypad
-    key: F
-    on_press:
-      - script.execute:
-          id: blip_light
-          led_index: 5
-      - delay: 500ms
-      - lambda: id(keypad_button_06_light).make_call().perform();
-    on_multi_click:
-      - timing:
-          - ON for at most 1s
-          - OFF for at least 0.5s
-        then:
-          - homeassistant.event:
-              event: esphome.localdeck_button
-              data:
-                button: "6"
-                ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: Button 6
-                type: single
-      - timing:
-          - ON for at most 1s
-          - OFF for at most 0.5s
-          - ON for at most 1s
-        then:
-          - homeassistant.event:
-              event: esphome.localdeck_button
-              data:
-                button: "6"
-                ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: Button 6
-                type: double
-  - platform: matrix_keypad
-    id: keypad_button_07
-    name: Button 07
-    internal: false
-    filters:
-      - delayed_off: 125ms
-    keypad_id: keypad
-    key: G
-    on_press:
-      - script.execute:
-          id: blip_light
-          led_index: 6
-      - delay: 500ms
-      - lambda: id(keypad_button_07_light).make_call().perform();
-    on_multi_click:
-      - timing:
-          - ON for at most 1s
-          - OFF for at least 0.5s
-        then:
-          - homeassistant.event:
-              event: esphome.localdeck_button
-              data:
-                button: "7"
-                ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: Button 7
-                type: single
-      - timing:
-          - ON for at most 1s
-          - OFF for at most 0.5s
-          - ON for at most 1s
-        then:
-          - homeassistant.event:
-              event: esphome.localdeck_button
-              data:
-                button: "7"
-                ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: Button 7
-                type: double
-  - platform: matrix_keypad
-    id: keypad_button_08
-    name: Button 08
-    internal: false
-    filters:
-      - delayed_off: 125ms
-    keypad_id: keypad
-    key: H
-    on_press:
-      - script.execute:
-          id: blip_light
-          led_index: 7
-      - delay: 500ms
-      - lambda: id(keypad_button_08_light).make_call().perform();
-    on_multi_click:
-      - timing:
-          - ON for at most 1s
-          - OFF for at least 0.5s
-        then:
-          - homeassistant.event:
-              event: esphome.localdeck_button
-              data:
-                button: "8"
-                ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: Button 8
-                type: single
-      - timing:
-          - ON for at most 1s
-          - OFF for at most 0.5s
-          - ON for at most 1s
-        then:
-          - homeassistant.event:
-              event: esphome.localdeck_button
-              data:
-                button: "8"
-                ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: Button 8
-                type: double
-  - platform: matrix_keypad
-    id: keypad_button_09
-    name: Button 09
-    internal: false
-    filters:
-      - delayed_off: 125ms
-    keypad_id: keypad
-    key: I
-    on_press:
-      - script.execute:
-          id: blip_light
-          led_index: 8
-      - delay: 500ms
-      - lambda: id(keypad_button_09_light).make_call().perform();
-    on_multi_click:
-      - timing:
-          - ON for at most 1s
-          - OFF for at least 0.5s
-        then:
-          - homeassistant.event:
-              event: esphome.localdeck_button
-              data:
-                button: "9"
-                ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: Button 9
-                type: single
-      - timing:
-          - ON for at most 1s
-          - OFF for at most 0.5s
-          - ON for at most 1s
-        then:
-          - homeassistant.event:
-              event: esphome.localdeck_button
-              data:
-                button: "9"
-                ieee_address: !lambda return id(wifi_info_mac_address).state;
-                label: Button 9
                 type: double

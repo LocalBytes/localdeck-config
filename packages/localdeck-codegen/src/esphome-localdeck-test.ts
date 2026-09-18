@@ -48,7 +48,7 @@ config.addComponent(
   new Esp32RmtLedStripLight({
     name: "Ledstrip",
     id: "ledstrip",
-    rgb_order: "GRB",
+    channel_colors: "GRB",
     pin: "GPIO8",
     num_leds: 24,
     chipset: "SK6812",
