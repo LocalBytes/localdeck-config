@@ -61,7 +61,7 @@ jobs:
         with:
           cache: true
 
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version: 'lts/*'
           cache: 'pnpm'
@@ -86,12 +86,12 @@ jobs:
           mkdir -p ./packages/artifact
           cp -r ./packages/localdeck-configurator/{.output,homeassistant}/* ./packages/artifact
 
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: localdeck-configurator
           path: ./packages/artifact
 
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: localdeck-configurator-hass
           path: ./packages/localdeck-configurator/homeassistant
@@ -110,7 +110,7 @@ jobs:
         with:
           cache: true
 
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version: 'lts/*'
           cache: 'pnpm'
@@ -143,14 +143,14 @@ jobs:
         with:
           cache: true
 
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version: 'lts/*'
           cache: 'pnpm'
 
       - run: pnpm install -r
 
-      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
 
       - id: date
         run: echo "date=$(date +%Y-%m-%d)" >> $GITHUB_OUTPUT
@@ -197,7 +197,7 @@ jobs:
       image: ${{ needs.build.outputs.image }}
       channel: ${{ needs.build.outputs.channel }}
     steps:
-      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
         with:
           name: localdeck-configurator
           path: localdeck-configurator
@@ -252,7 +252,7 @@ jobs:
           digest=$(jq -r '.["containerimage.descriptor"].digest' "${metadata_file}")
           cosign sign --yes "${{ env.image }}@${digest}"
 
-      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
         with:
           name: localdeck-configurator-hass
           path: localdeck-configurator
