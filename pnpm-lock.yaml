@@ -257,7 +257,7 @@ importers:
         version: link:../localdeck-codegen
       '@material-symbols/metadata':
         specifier: ^0.48.0
-        version: 0.48.2
+        version: 0.48.3
       '@traversable/zod':
         specifier: ^0.0.57
         version: 0.0.57(zod@4.6.7)
@@ -266,7 +266,7 @@ importers:
         version: 7.5.0
       material-symbols:
         specifier: ^0.48.0
-        version: 0.48.2
+        version: 0.48.3
       pako:
         specifier: ^3.0.2
         version: 3.0.3
@@ -922,8 +922,8 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  '@material-symbols/metadata@0.48.2':
-    resolution: {integrity: sha512-tCZW+Z0lGOrlmRJfF4MYchVTTlRlUV1lPKEXOc9Dx8H8DAM7+XhLVbLVzeSQEA/JCOQlfoHlDEnx0IafHvQ0pQ==}
+  '@material-symbols/metadata@0.48.3':
+    resolution: {integrity: sha512-1tuuM7wCEOERhazFutBvl9xYpdSHOz5ebhh1Y/Xe5ZoSDqxx6HLVgkzXWUCunQV/pO0HVdKSrAlYHSCW+s4u+w==}
 
   '@modelcontextprotocol/client@2.0.0':
     resolution: {integrity: sha512-8f1OghQ2rjzIOfqgUCP+8GiUWqRs89njoWLNqAe8kWmDePv3s1fZXseej+QXemssEuuOvLLmLO/kqM3IQHtISw==}
@@ -3990,8 +3990,8 @@ packages:
   maska@3.2.2:
     resolution: {integrity: sha512-qhhoeKXYLsDOxfB70nybuGJmB+XsNb/xhKBBQGMMnT5Hw4+lhdeQmgwlkHYoMIUcppcnLHW6LppPPpGewrv9WQ==}
 
-  material-symbols@0.48.2:
-    resolution: {integrity: sha512-HepjQnrny9CsxBuTofUJsHS1Il41l3oa9ZiLHTnrKJKZbIyDvXHZJBD1ffLEO/5lSKdb8v2filRW59IPsO65yA==}
+  material-symbols@0.48.3:
+    resolution: {integrity: sha512-usgMIp78cFFuxREnkNHRYBLAI152vJlnKqFCBiiwtNQfozlpIN2i00zrPBBkOxMLNTFaR7uPcJLWXlmMDOI+WA==}
 
   math-intrinsics@1.1.0:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
@@ -6242,7 +6242,7 @@ snapshots:
       - encoding
       - supports-color
 
-  '@material-symbols/metadata@0.48.2': {}
+  '@material-symbols/metadata@0.48.3': {}
 
   '@modelcontextprotocol/client@2.0.0':
     dependencies:
@@ -9446,7 +9446,7 @@ snapshots:
 
   maska@3.2.2: {}
 
-  material-symbols@0.48.2: {}
+  material-symbols@0.48.3: {}
 
   math-intrinsics@1.1.0: {}
 
