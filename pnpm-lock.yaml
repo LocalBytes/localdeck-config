@@ -271,8 +271,8 @@ importers:
         specifier: ^3.0.2
         version: 3.0.3
       vue3-emoji-picker:
-        specifier: ^1.1.8
-        version: 1.1.8(typescript@6.0.3)
+        specifier: ^2.0.0
+        version: 2.1.0(vue@3.5.44(typescript@6.0.3))
       zod:
         specifier: ^4.6.5
         version: 4.6.7
@@ -3559,9 +3559,6 @@ packages:
     resolution: {integrity: sha512-AXcZb6vzzrFAUE61HnN4mpLqd/cSIwNQjtNWR0euPm6y0iqx3G4gOXaIDdtdDwZmhwe82LA6+zinmW4UBWVePQ==}
     engines: {node: '>=16.17.0'}
 
-  idb@7.1.1:
-    resolution: {integrity: sha512-gchesWBzyvGHRO9W8tzUWFDycow5gwjvFKfyV9FF32Y7F50yZMp7mP+T2mJIWFx49zicqyC4uefHM17o6xKIVQ==}
-
   identifier-regex@1.1.0:
     resolution: {integrity: sha512-SLX4H/vtcYlYnL7XqnuJKHU7Z8517TgsW9nmQiGOgMCjQ8V/deLYu6bEmbGoXe7WMMhc9+EUGyFFneHja8KabA==}
     engines: {node: '>=18'}
@@ -5549,9 +5546,14 @@ packages:
       vite:
         optional: true
 
-  vue3-emoji-picker@1.1.8:
-    resolution: {integrity: sha512-k9tVHeQEBVLzVCLYAkFaI1nib3FJFQwdPhWD5khJkhks3ktg3g12z5wPGOSDpIuSLNtelRGvq1qdmZuJu5khfA==}
-    engines: {node: '>=16.0.0'}
+  vue3-emoji-picker@2.1.0:
+    resolution: {integrity: sha512-zalN3Z8vFAyf8i7SmZqC3FP0vlLZ+gluX/1iqGoPrM58F4X7tmWT3UOb7Yi9Gish3hiNBjcv5q9dTR84pRGu1Q==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      vue: ^3.2.23
+    peerDependenciesMeta:
+      vue:
+        optional: true
 
   vue@3.5.44:
     resolution: {integrity: sha512-dvvmaOCG7lAMkJTPqPwWeGMsPS6DIsFsfZDUgBp9V6mHf9b3+/wyVwYR4Es+WV6uJC0FKRxp81Obcq0ZwUcGFQ==}
@@ -9043,8 +9045,6 @@ snapshots:
 
   human-signals@5.0.0: {}
 
-  idb@7.1.1: {}
-
   identifier-regex@1.1.0:
     dependencies:
       reserved-identifiers: 1.2.0
@@ -11196,13 +11196,11 @@ snapshots:
       - unloader
       - webpack
 
-  vue3-emoji-picker@1.1.8(typescript@6.0.3):
+  vue3-emoji-picker@2.1.0(vue@3.5.44(typescript@6.0.3)):
     dependencies:
       '@popperjs/core': 2.11.8
-      idb: 7.1.1
+    optionalDependencies:
       vue: 3.5.44(typescript@6.0.3)
-    transitivePeerDependencies:
-      - typescript
 
   vue@3.5.44(typescript@6.0.3):
     dependencies:
