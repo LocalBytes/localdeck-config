@@ -22,7 +22,7 @@
     "fuse.js": "^7.5.0",
     "material-symbols": "^0.48.0",
     "pako": "^3.0.2",
-    "vue3-emoji-picker": "^1.1.8",
+    "vue3-emoji-picker": "^2.0.0",
     "zod": "^4.6.5"
   },
   "devDependencies": {
